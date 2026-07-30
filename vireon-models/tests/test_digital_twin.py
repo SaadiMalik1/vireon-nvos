@@ -12,7 +12,9 @@ def test_brain_network_generation():
     assert np.std(sources) > 0.1
 
 def test_leadfield_projection():
-    sources = np.random.normal(0, 1, (250, 4)).astype(np.float32)
+    from vireon_core.runtime.rng import DeterministicRNG
+    rng = DeterministicRNG(seed=42)
+    sources = rng.normal(0, 1, (250, 4)).astype(np.float32)
     projector = LeadfieldProjector(num_sources=4, num_sensors=8, seed=42)
     sensors = projector.project(sources)
     

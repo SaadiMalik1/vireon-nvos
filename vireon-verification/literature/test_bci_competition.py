@@ -20,9 +20,11 @@ def test_literature_reproduction():
             # to avoid parsing the complex PhysioNet annotations here
             print("Found EEGBCI dataset, reproducing Motor Imagery baseline...")
             
-            # Simulated epoch extraction from real data
-            data = np.random.randn(2500, 64)
-            y = np.random.randint(0, 2, 25)
+            # Simulated epoch extraction
+            from vireon_core.runtime.rng import DeterministicRNG
+            rng = DeterministicRNG(seed=42)
+            data = rng.normal(0.0, 1.0, (2500, 64))
+            y = rng.integer(0, 2, 25)
             
             # In a real scenario, metrics = DecoderEvaluator.evaluate(epochs.get_data(), fs, epochs.events[:, -1])
             metrics = {"decoder_accuracy": 0.75} # Simulated execution

@@ -130,10 +130,6 @@ class IMeasurement(IScientificObject):
     value: float
     unit: str
     uncertainty: Optional[IUncertainty] = None
-    # Legacy fields (maintained for backwards compatibility)
-    variance: Optional[float] = None
-    confidence_interval_95: Optional[list[float]] = None
-    p_value: Optional[float] = None
 
 class IExecutionContext(BaseModel):
     """

@@ -1,5 +1,6 @@
 import numpy as np
 from typing import Dict, Any, List, Optional
+from vireon_core.runtime.rng import DeterministicRNG
 
 class BrainNetwork:
     """
@@ -8,7 +9,7 @@ class BrainNetwork:
     """
     def __init__(self, num_nodes: int = 4, seed: int = 42):
         self.num_nodes = num_nodes
-        self.rng = np.random.default_rng(seed)
+        self.rng = DeterministicRNG(seed=seed)
 
     def generate_source_activity(self, num_samples: int, sample_rate: float) -> np.ndarray:
         """
@@ -18,7 +19,7 @@ class BrainNetwork:
         t = np.linspace(0, num_samples / sample_rate, num_samples, endpoint=False)
         
         # 1/f background per node
-        white_noise = self.rng.standard_normal((num_samples, self.num_nodes)).astype(np.float32)
+        white_noise = self.rng.normal(0.0, 1.0, (num_samples, self.num_nodes)).astype(np.float32)
         fft = np.fft.rfft(white_noise, axis=0)
         freqs = np.fft.rfftfreq(num_samples)
         freqs[0] = 1.0
@@ -37,9 +38,10 @@ class DiseaseModel:
     """
     Models pathological perturbations to the brain network.
     """
-    def __init__(self, name: str, severity: float = 1.0):
+    def __init__(self, name: str, severity: float = 1.0, rng: Optional[DeterministicRNG] = None):
         self.name = name
         self.severity = severity
+        self.rng = rng if rng else DeterministicRNG(seed=42)
         
     def apply(self, sources: np.ndarray, sample_rate: float) -> np.ndarray:
         if self.name == "epilepsy":
@@ -49,7 +51,7 @@ class DiseaseModel:
             # Add 3 random transient HFO bursts per second on average
             num_bursts = int(3 * (sources.shape[0] / sample_rate))
             if num_bursts > 0:
-                burst_centers = np.random.default_rng(42).uniform(0, t[-1], num_bursts)
+                burst_centers = self.rng.uniform(0, t[-1], num_bursts)
                 for center in burst_centers:
                     envelope = np.exp(-((t - center) ** 2) / (2 * 0.01 ** 2)) # 10ms width
                     hfo += envelope * np.sin(2 * np.pi * 150.0 * t) * (20.0 * self.severity)

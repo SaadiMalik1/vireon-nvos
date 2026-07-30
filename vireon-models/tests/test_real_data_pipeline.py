@@ -124,8 +124,8 @@ class TestRealDataPipeline(unittest.TestCase):
         metric_names = {m.metric_name for m in evidence.measurements}
         self.assertIn("false_activation_rate", metric_names)
 
-        # Should NOT have signal metrics (mock provider returns a string)
-        self.assertNotIn("snr_db", metric_names)
+        # Should have signal metrics (mock provider returns proper dict now)
+        self.assertIn("snr_db", metric_names)
 
 
 if __name__ == "__main__":

@@ -16,10 +16,14 @@ def test_csp_crossval():
         return
 
     # Generate synthetic 4-channel data
+    from vireon_core.runtime.rng import DeterministicRNG
+    rng = DeterministicRNG(seed=42)
     fs = 250.0
-    np.random.seed(42)
-    # 10 seconds of data, 4 channels
-    data = np.random.randn(2500, 4)
+    # Mock some data (2500 samples, 4 channels)
+    data = rng.normal(0.0, 1.0, (2500, 4))
+    
+    # Mock some labels (100 trials, 2 classes)
+    y = rng.integer(0, 2, 100)
     # Inject spatial pattern in class 1 (every odd second)
     for i in range(1, 10, 2):
         start = int(i * fs)

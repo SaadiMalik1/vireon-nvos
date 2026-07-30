@@ -99,9 +99,10 @@ class TestGenerateSignalMetrics(unittest.TestCase):
         # Verify uncertainty fields for SNR
         snr_metric = next(m for m in metrics if m.metric_name == "snr_db")
         self.assertIsInstance(snr_metric.value, float)
-        self.assertIsNotNone(snr_metric.variance)
-        self.assertIsNotNone(snr_metric.confidence_interval_95)
-        self.assertEqual(len(snr_metric.confidence_interval_95), 2)
+        self.assertIsNotNone(snr_metric.uncertainty)
+        self.assertIsNotNone(snr_metric.uncertainty.variance)
+        self.assertIsNotNone(snr_metric.uncertainty.confidence_interval)
+        self.assertEqual(len(snr_metric.uncertainty.confidence_interval), 2)
 
     def test_empty_for_non_numpy(self):
         metrics = generate_signal_metrics({"data": "mock_string"})

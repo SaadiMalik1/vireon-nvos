@@ -15,7 +15,11 @@ def test_interoperability():
 
     # Create dummy raw object
     info = mne.create_info(ch_names=['O1', 'O2'], sfreq=250.0, ch_types=['eeg', 'eeg'])
-    data = np.random.randn(2, 2500)
+    from vireon_core.runtime.rng import DeterministicRNG
+    rng = DeterministicRNG(seed=42)
+    
+    # 1. Create a dummy MNE raw object
+    data = rng.normal(0.0, 1.0, (2, 2500))
     raw = mne.io.RawArray(data, info)
     
     # 1. EDF Export/Import

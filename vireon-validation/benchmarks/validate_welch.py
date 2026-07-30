@@ -9,8 +9,10 @@ def benchmark_welch():
     # 1. Generate Synthetic Ground Truth
     fs = 250.0
     t = np.arange(0, 10, 1/fs)
+    from vireon_core.runtime.rng import DeterministicRNG
+    rng = DeterministicRNG(seed=42)
     # 10Hz alpha + 50Hz line noise + white noise
-    data = np.sin(2 * np.pi * 10 * t) + 0.5 * np.sin(2 * np.pi * 50 * t) + np.random.randn(len(t))
+    data = np.sin(2 * np.pi * 10 * t) + 0.5 * np.sin(2 * np.pi * 50 * t) + rng.normal(0.0, 1.0, len(t))
     
     signal = ISignal(sampling_rate=fs, data=data)
     

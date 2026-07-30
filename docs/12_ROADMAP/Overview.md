@@ -3,7 +3,9 @@
 Our primary objective is to transition VIREON from an academic validation framework into a recognized regulatory standard.
 
 ## 2026 Q3: The Knowledge Graph Stabilization
-- Finalize the core ontological structure in `vireon-knowledge`.
+- **`vireon-devices`**: Standardized hardware interface contracts and emulators. `[SPEC]`
+- **`vireon-corpus`**: Highly curated, fingerprinted canonical physiological datasets. `[SPEC]`
+- **`vireon-knowledge`**: Semantic graph capturing clinical logic and assertions. `[IMPLEMENTED]`
 - Map the 50 most common BCI assumptions to canonical literature.
 
 ## 2026 Q4: The Validation Corpus

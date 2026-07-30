@@ -146,13 +146,22 @@ def generate_signal_metrics(provider_data: Dict[str, Any], event_onset_sec: Opti
     def snr_statistic(sample):
         return compute_snr_raw(sample, None)
     
+    from vireon_core.contracts.base import IUncertainty
+    
     point_est, var, ci = compute_bootstrap_ci(data, snr_statistic, n_resamples=100)
+    uncertainty = IUncertainty(
+        mean=point_est,
+        variance=var,
+        distribution="bootstrap",
+        confidence_interval=ci,
+        sample_size=100,
+        method="bootstrap"
+    )
     metrics.append(IMeasurement(
         metric_name="snr_db", 
         value=point_est, 
         unit="dB", 
-        variance=var, 
-        confidence_interval_95=ci
+        uncertainty=uncertainty
     ))
     
     # Band powers with bootstrap
@@ -161,12 +170,19 @@ def generate_signal_metrics(provider_data: Dict[str, Any], event_onset_sec: Opti
             return _compute_band_power_raw(sample, sample_rate, b)
         
         bp_est, bp_var, bp_ci = compute_bootstrap_ci(data, band_statistic, n_resamples=100)
+        uncertainty = IUncertainty(
+            mean=bp_est,
+            variance=bp_var,
+            distribution="bootstrap",
+            confidence_interval=bp_ci,
+            sample_size=100,
+            method="bootstrap"
+        )
         metrics.append(IMeasurement(
             metric_name=f"{name}_band_power",
             value=bp_est,
             unit="uV2/Hz",
-            variance=bp_var,
-            confidence_interval_95=bp_ci
+            uncertainty=uncertainty
         ))
     
     # Powerline artifact detection

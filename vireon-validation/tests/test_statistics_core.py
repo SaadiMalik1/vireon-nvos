@@ -3,9 +3,10 @@ import pytest
 from vireon_validation.statistics import compute_bootstrap_ci
 
 def test_compute_bootstrap_ci():
-    np.random.seed(42)
+    from vireon_core.runtime.rng import DeterministicRNG
+    rng = DeterministicRNG(seed=42)
     # Generate random normal data (mean = 0, std = 1)
-    data = np.random.normal(loc=0.0, scale=1.0, size=100)
+    data = rng.normal(loc=0.0, scale=1.0, size=100)
     
     def mean_statistic(sample):
         return np.mean(sample)
