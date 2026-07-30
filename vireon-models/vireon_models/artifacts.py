@@ -4,13 +4,15 @@ from vireon_core.contracts.plugin import (
     IPlugin, ScientificContract, ScientificReadinessLevel, PluginCapability
 )
 from vireon_core.contracts.base import IScientificObject, ISignal, SignalType
+from vireon_core.runtime.rng import DeterministicRNG
 
 class OcularArtifactGenerator(IPlugin):
     """Injects simulated EOG blink artifacts into EEG data."""
-    def __init__(self, blink_rate_hz: float = 0.3, amplitude_uv: float = 100.0, channel_weights: list = None):
+    def __init__(self, blink_rate_hz: float = 0.3, amplitude_uv: float = 100.0, channel_weights: list = None, seed: int = 42):
         self.blink_rate_hz = blink_rate_hz
         self.amplitude_uv = amplitude_uv
         self.channel_weights = channel_weights # Frontal channels should have higher weights
+        self.rng = DeterministicRNG(seed)
 
     @property
     def plugin_id(self) -> str:
@@ -71,7 +73,7 @@ class OcularArtifactGenerator(IPlugin):
         weights = self.channel_weights if self.channel_weights else [1.0] * n_channels
         
         blink_prob = self.blink_rate_hz / fs
-        blinks = np.random.rand(n_samples) < blink_prob
+        blinks = self.rng.uniform(size=n_samples) < blink_prob
         
         blink_len = int(0.4 * fs)
         if blink_len > 0:
@@ -94,9 +96,10 @@ class OcularArtifactGenerator(IPlugin):
 
 class EMGArtifactGenerator(IPlugin):
     """Injects high-frequency muscle noise."""
-    def __init__(self, active_prob: float = 0.1, max_amplitude_uv: float = 50.0):
+    def __init__(self, active_prob: float = 0.1, max_amplitude_uv: float = 50.0, seed: int = 42):
         self.active_prob = active_prob
         self.max_amplitude_uv = max_amplitude_uv
+        self.rng = DeterministicRNG(seed)
 
     @property
     def plugin_id(self) -> str:
@@ -154,20 +157,21 @@ class EMGArtifactGenerator(IPlugin):
         fs = signal.sampling_rate
         n_samples, n_channels = data.shape
         
-        tension = np.convolve(np.random.randn(n_samples), np.ones(int(max(1, fs)))/fs, mode='same')
+        tension = np.convolve(self.rng.normal(size=n_samples), np.ones(int(max(1, fs)))/fs, mode='same')
         tension = np.clip(tension * 10, 0, 1) # threshold for active bursts
         
-        noise = np.random.randn(n_samples, n_channels) * self.max_amplitude_uv
+        noise = self.rng.normal(size=(n_samples, n_channels)) * self.max_amplitude_uv
         artifact = noise * tension[:, np.newaxis]
         
         return {"signal": ISignal(sampling_rate=fs, data=data + artifact)}
 
 class ElectrodePopGenerator(IPlugin):
     """Injects sudden transient step functions simulating loose electrodes."""
-    def __init__(self, pop_rate_hz: float = 0.05, amplitude_uv: float = 500.0, decay_time_s: float = 1.0):
+    def __init__(self, pop_rate_hz: float = 0.05, amplitude_uv: float = 500.0, decay_time_s: float = 1.0, seed: int = 42):
         self.pop_rate_hz = pop_rate_hz
         self.amplitude_uv = amplitude_uv
         self.decay_time_s = decay_time_s
+        self.rng = DeterministicRNG(seed)
 
     @property
     def plugin_id(self) -> str:
@@ -228,22 +232,23 @@ class ElectrodePopGenerator(IPlugin):
         artifact = np.zeros_like(data)
         
         for ch in range(n_channels):
-            pops = np.random.rand(n_samples) < pop_prob
+            pops = self.rng.uniform(size=n_samples) < pop_prob
             pop_indices = np.where(pops)[0]
             
             decay = np.exp(-np.arange(n_samples) / (self.decay_time_s * fs))
             
             for idx in pop_indices:
                 length = n_samples - idx
-                artifact[idx:, ch] += decay[:length] * self.amplitude_uv * (np.random.rand() > 0.5 and 1 or -1)
+                artifact[idx:, ch] += decay[:length] * self.amplitude_uv * (self.rng.uniform() > 0.5 and 1 or -1)
                 
         return {"signal": ISignal(sampling_rate=fs, data=data + artifact)}
 
 class ImpedanceDriftGenerator(IPlugin):
     """Injects low-frequency stochastic baseline wandering."""
-    def __init__(self, drift_strength: float = 20.0, cutoff_hz: float = 0.1):
+    def __init__(self, drift_strength: float = 20.0, cutoff_hz: float = 0.1, seed: int = 42):
         self.drift_strength = drift_strength
         self.cutoff_hz = cutoff_hz
+        self.rng = DeterministicRNG(seed)
 
     @property
     def plugin_id(self) -> str:
@@ -301,7 +306,7 @@ class ImpedanceDriftGenerator(IPlugin):
         fs = signal.sampling_rate
         n_samples, n_channels = data.shape
         
-        noise = np.random.randn(n_samples, n_channels)
+        noise = self.rng.normal(size=(n_samples, n_channels))
         
         import scipy.signal
         nyq = 0.5 * fs

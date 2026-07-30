@@ -1,4 +1,5 @@
 import numpy as np
+from vireon_core.runtime.rng import DeterministicRNG
 
 class LeadfieldProjector:
     """
@@ -7,7 +8,7 @@ class LeadfieldProjector:
     def __init__(self, num_sources: int, num_sensors: int, seed: int = 42):
         self.num_sources = num_sources
         self.num_sensors = num_sensors
-        self.rng = np.random.default_rng(seed)
+        self.rng = DeterministicRNG(seed)
         
         # Simulate random locations in a bounding box [-10, 10]
         source_locs = self.rng.uniform(-10, 10, (num_sources, 3))

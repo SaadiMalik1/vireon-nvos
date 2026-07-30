@@ -52,5 +52,5 @@ class DeterministicRNG:
     def get_state(self) -> dict:
         return {
             "initial_seed": self.initial_seed,
-            "bit_generator": type(self._generator.bit_generator).__name__,
+            "bit_generator": self._generator.bit_generator.state,
         }

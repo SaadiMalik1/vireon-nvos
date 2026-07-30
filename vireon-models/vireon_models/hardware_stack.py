@@ -1,6 +1,7 @@
 import numpy as np
 from abc import ABC, abstractmethod
 from vireon_core.contracts.base import IUncertainty
+from vireon_core.runtime.rng import DeterministicRNG
 
 class IHardwareStage(ABC):
     @abstractmethod
@@ -8,13 +9,14 @@ class IHardwareStage(ABC):
         pass
 
 class ElectrodeStage(IHardwareStage):
-    def __init__(self, impedance: float):
+    def __init__(self, impedance: float, seed: int = 42):
         self.impedance = impedance
+        self.rng = DeterministicRNG(seed)
         
     def process(self, signal: np.ndarray) -> np.ndarray:
         # Simulate impedance-dependent thermal noise
         noise_std = np.sqrt(4 * 1.38e-23 * 310 * self.impedance * 1000) * 1e6 # microvolts
-        return signal + np.random.normal(0, noise_std, signal.shape)
+        return signal + self.rng.normal(loc=0.0, scale=noise_std, size=signal.shape)
 
 class AmplifierStage(IHardwareStage):
     def __init__(self, gain: float, cmrr_db: float):
@@ -37,12 +39,13 @@ class ADCStage(IHardwareStage):
         return np.clip(quantized, -self.v_ref, self.v_ref)
 
 class WirelessStage(IHardwareStage):
-    def __init__(self, packet_loss_rate: float):
+    def __init__(self, packet_loss_rate: float, seed: int = 42):
         self.packet_loss_rate = packet_loss_rate
+        self.rng = DeterministicRNG(seed)
         
     def process(self, signal: np.ndarray) -> np.ndarray:
         # Simulate packet loss with NaNs
-        mask = np.random.rand(signal.shape[1]) < self.packet_loss_rate
+        mask = self.rng.uniform(size=signal.shape[1]) < self.packet_loss_rate
         lost_signal = signal.copy()
         lost_signal[:, mask] = np.nan
         return lost_signal

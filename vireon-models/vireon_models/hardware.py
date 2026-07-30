@@ -4,6 +4,7 @@ from vireon_core.contracts.plugin import (
     IPlugin, ScientificContract, ScientificReadinessLevel, PluginCapability
 )
 from vireon_core.contracts.base import IScientificObject, ISignal, SignalType
+from vireon_core.runtime.rng import DeterministicRNG
 
 class ADCQuantizationModel(IPlugin):
     """Simulates ADC bit-depth quantization and LSB resolution."""
@@ -144,8 +145,9 @@ class AmplifierSaturationModel(IPlugin):
 
 class SamplingJitterModel(IPlugin):
     """Simulates stochastic sampling time jitter."""
-    def __init__(self, jitter_std_s: float = 0.0001):
+    def __init__(self, jitter_std_s: float = 0.001, seed: int = 42):
         self.jitter_std_s = jitter_std_s
+        self.rng = DeterministicRNG(seed)
 
     @property
     def plugin_id(self) -> str:
@@ -208,7 +210,7 @@ class SamplingJitterModel(IPlugin):
         n_samples, n_channels = data.shape
         t = np.arange(n_samples) / fs
         
-        t_jittered = t + np.random.randn(n_samples) * self.jitter_std_s
+        t_jittered = t + self.rng.normal(size=n_samples) * self.jitter_std_s
         
         jittered_data = np.zeros_like(data)
         for ch in range(n_channels):
@@ -218,10 +220,11 @@ class SamplingJitterModel(IPlugin):
 
 class PacketLossModel(IPlugin):
     """Simulates wireless transmission packet loss or buffer overflows."""
-    def __init__(self, drop_prob: float = 0.01, burst_length: int = 5, fill_value: float = np.nan):
+    def __init__(self, drop_prob: float = 0.01, burst_length: int = 5, fill_value: float = np.nan, seed: int = 42):
         self.drop_prob = drop_prob
         self.burst_length = burst_length
         self.fill_value = fill_value
+        self.rng = DeterministicRNG(seed)
 
     @property
     def plugin_id(self) -> str:
@@ -279,7 +282,7 @@ class PacketLossModel(IPlugin):
         fs = signal.sampling_rate
         n_samples = data.shape[0]
         
-        drops = np.random.rand(n_samples) < self.drop_prob
+        drops = self.rng.uniform(size=n_samples) < self.drop_prob
         data_dropped = data.copy()
         drop_indices = np.where(drops)[0]
         
@@ -293,8 +296,10 @@ class ADS1299:
     """
     Mock integration for the ADS1299 hardware chip.
     """
+    def __init__(self, seed: int = 42):
+        self.rng = DeterministicRNG(seed)
+
     def process(self, signal, sample_rate=250.0):
         # Just add some noise
-        import numpy as np
-        noise = np.random.normal(0, 1.0, signal.shape)
+        noise = self.rng.normal(loc=0.0, scale=1.0, size=signal.shape)
         return signal + noise

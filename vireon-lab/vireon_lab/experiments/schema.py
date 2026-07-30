@@ -1,5 +1,6 @@
 from typing import Any
 import yaml
+import numpy as np
 
 from vireon_core.contracts import IExperimentDef, IProvider
 from vireon_lab.experiments.base import ExperimentSchema
@@ -12,7 +13,7 @@ class MockProvider(IProvider):
     def stop(self) -> None:
         pass
     def get_data(self) -> Any:
-        return "mock_eeg_data"
+        return {"data": np.zeros((100, 2))}
 
 def load_experiment_from_yaml(filepath: str) -> IExperimentDef:
     """
