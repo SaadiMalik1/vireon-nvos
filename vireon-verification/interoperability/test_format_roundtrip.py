@@ -87,7 +87,9 @@ def test_interoperability():
     except ImportError:
         results["LSL_Roundtrip"] = {"status": "SKIPPED", "reason": "Missing dependency: pylsl"}
 
-    with open(os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-verification/results/interoperability_metrics.json"), "w") as f:
+    metrics_path = os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-verification/results/interoperability_metrics.json")
+    os.makedirs(os.path.dirname(metrics_path), exist_ok=True)
+    with open(metrics_path, "w") as f:
         json.dump(results, f, indent=4)
         
     for k, v in results.items():
