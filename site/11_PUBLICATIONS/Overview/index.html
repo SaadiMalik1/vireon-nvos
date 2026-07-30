@@ -25,7 +25,7 @@
     
     
       
-        <title>Publications - VIREON NVOS</title>
+        <title>Reproducible Publications - VIREON NVOS</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#publications" class="md-skip">
+        <a href="#reproducible-publications" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Publications
+              Reproducible Publications
             
           </span>
         </div>
@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    README
+    Introduction to VIREON
   
 
     
@@ -467,7 +467,7 @@
   <span class="md-ellipsis">
     
   
-    Why VIREON
+    Why VIREON?
   
 
     
@@ -556,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Architecture Overview
   
 
     
@@ -752,7 +752,7 @@
   <span class="md-ellipsis">
     
   
-    Scientific Pipeline
+    The Scientific Pipeline
   
 
     
@@ -1037,7 +1037,7 @@
   <span class="md-ellipsis">
     
   
-    Source Space
+    Source Space vs Sensor Space
   
 
     
@@ -1093,7 +1093,7 @@
   <span class="md-ellipsis">
     
   
-    Uncertainty
+    Bayesian Uncertainty
   
 
     
@@ -1846,7 +1846,7 @@
   <span class="md-ellipsis">
     
   
-    Labs
+    Interactive Labs
   
 
     
@@ -2024,7 +2024,7 @@
   <span class="md-ellipsis">
     
   
-    Research
+    Ongoing Research
   
 
     
@@ -2113,7 +2113,7 @@
   <span class="md-ellipsis">
     
   
-    Regression Suite
+    Regression &amp; CI/CD
   
 
     
@@ -2204,6 +2204,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reproducible Publications
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -2211,7 +2229,7 @@
   <span class="md-ellipsis">
     
   
-    Publications
+    Reproducible Publications
   
 
     
@@ -2220,6 +2238,47 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-evidence-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Evidence Graph
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reproducing-a-paper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reproducing a Paper
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2301,7 +2360,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap
+    Roadmap to SRL-9
   
 
     
@@ -2688,6 +2747,36 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-evidence-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Evidence Graph
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reproducing-a-paper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reproducing a Paper
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2706,8 +2795,15 @@
   
 
 
-<h1 id="publications">Publications</h1>
-<p>Coming soon. Executable graphs capable of perfectly reproducing the findings of papers built on VIREON.</p>
+<h1 id="reproducible-publications">Reproducible Publications</h1>
+<p>The ultimate proof of the VIREON ecosystem is the ability to instantly reproduce published scientific findings.</p>
+<h2 id="the-evidence-graph">The Evidence Graph</h2>
+<p>When a paper is published using VIREON, the authors submit an <code>IEvidence</code> JSON-LD bundle to this repository. This bundle contains the exact Git hashes, random seeds, and DAG topology used to generate their results.</p>
+<h2 id="reproducing-a-paper">Reproducing a Paper</h2>
+<p>To reproduce a finding, you do not need to download their scripts or configure their environment. You simply run:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>vireon<span class="w"> </span>reproduce<span class="w"> </span>vk:Publication:Author2026
+</span></code></pre></div>
+The Core Engine will parse the bundle, dynamically fetch the exact versions of the plugins, download the fingerprinted dataset from <code>vireon-corpus</code>, execute the DAG, and output a boolean confirming whether the generated metrics match the published metrics.</p>
 
 
 

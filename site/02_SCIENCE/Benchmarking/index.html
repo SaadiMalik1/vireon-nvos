@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    README
+    Introduction to VIREON
   
 
     
@@ -467,7 +467,7 @@
   <span class="md-ellipsis">
     
   
-    Why VIREON
+    Why VIREON?
   
 
     
@@ -556,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Architecture Overview
   
 
     
@@ -752,7 +752,7 @@
   <span class="md-ellipsis">
     
   
-    Scientific Pipeline
+    The Scientific Pipeline
   
 
     
@@ -871,6 +871,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Benchmarking
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -887,6 +905,36 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1047,7 +1095,7 @@
   <span class="md-ellipsis">
     
   
-    Source Space
+    Source Space vs Sensor Space
   
 
     
@@ -1103,7 +1151,7 @@
   <span class="md-ellipsis">
     
   
-    Uncertainty
+    Bayesian Uncertainty
   
 
     
@@ -1856,7 +1904,7 @@
   <span class="md-ellipsis">
     
   
-    Labs
+    Interactive Labs
   
 
     
@@ -2034,7 +2082,7 @@
   <span class="md-ellipsis">
     
   
-    Research
+    Ongoing Research
   
 
     
@@ -2123,7 +2171,7 @@
   <span class="md-ellipsis">
     
   
-    Regression Suite
+    Regression &amp; CI/CD
   
 
     
@@ -2212,7 +2260,7 @@
   <span class="md-ellipsis">
     
   
-    Publications
+    Reproducible Publications
   
 
     
@@ -2301,7 +2349,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap
+    Roadmap to SRL-9
   
 
     
@@ -2688,6 +2736,25 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2707,7 +2774,14 @@
 
 
 <h1 id="benchmarking">Benchmarking</h1>
-<p>Content coming soon.</p>
+<p>Benchmarking in VIREON is the automated execution of Validation scenarios.</p>
+<h2 id="execution">Execution</h2>
+<p>Benchmarks are defined in YAML manifests within <code>vireon-validation</code>. They specify:
+1. The target plugin (e.g., <code>WelchPSD</code>).
+2. The dataset or generative twin.
+3. The expected metric (e.g., <code>RMSE</code>).
+4. The maximum allowed tolerance (e.g., <code>1e-6</code>).</p>
+<p>These benchmarks are executed continuously via <code>vireon-verification</code> CI pipelines to ensure that scientific accuracy does not regress as the codebase evolves.</p>
 
 
 

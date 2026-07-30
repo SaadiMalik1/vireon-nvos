@@ -25,7 +25,7 @@
     
     
       
-        <title>Source Space - VIREON NVOS</title>
+        <title>Source Space vs Sensor Space - VIREON NVOS</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#source-space" class="md-skip">
+        <a href="#source-space-vs-sensor-space" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Source Space
+              Source Space vs Sensor Space
             
           </span>
         </div>
@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    README
+    Introduction to VIREON
   
 
     
@@ -467,7 +467,7 @@
   <span class="md-ellipsis">
     
   
-    Why VIREON
+    Why VIREON?
   
 
     
@@ -556,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Architecture Overview
   
 
     
@@ -752,7 +752,7 @@
   <span class="md-ellipsis">
     
   
-    Scientific Pipeline
+    The Scientific Pipeline
   
 
     
@@ -1039,6 +1039,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source Space vs Sensor Space
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1046,7 +1064,7 @@
   <span class="md-ellipsis">
     
   
-    Source Space
+    Source Space vs Sensor Space
   
 
     
@@ -1055,6 +1073,47 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sensor-space-synthesis-the-naive-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sensor Space Synthesis (The Naive Approach)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-space-synthesis-the-vireon-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source Space Synthesis (The VIREON Approach)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1103,7 +1162,7 @@
   <span class="md-ellipsis">
     
   
-    Uncertainty
+    Bayesian Uncertainty
   
 
     
@@ -1856,7 +1915,7 @@
   <span class="md-ellipsis">
     
   
-    Labs
+    Interactive Labs
   
 
     
@@ -2034,7 +2093,7 @@
   <span class="md-ellipsis">
     
   
-    Research
+    Ongoing Research
   
 
     
@@ -2123,7 +2182,7 @@
   <span class="md-ellipsis">
     
   
-    Regression Suite
+    Regression &amp; CI/CD
   
 
     
@@ -2212,7 +2271,7 @@
   <span class="md-ellipsis">
     
   
-    Publications
+    Reproducible Publications
   
 
     
@@ -2301,7 +2360,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap
+    Roadmap to SRL-9
   
 
     
@@ -2688,6 +2747,36 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sensor-space-synthesis-the-naive-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sensor Space Synthesis (The Naive Approach)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-space-synthesis-the-vireon-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source Space Synthesis (The VIREON Approach)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2706,8 +2795,18 @@
   
 
 
-<h1 id="source-space">Source Space</h1>
-<p>Content coming soon.</p>
+<h1 id="source-space-vs-sensor-space">Source Space vs Sensor Space</h1>
+<p>When synthesizing EEG/MEG data, a critical architectural decision is where the signal originates.</p>
+<h2 id="sensor-space-synthesis-the-naive-approach">Sensor Space Synthesis (The Naive Approach)</h2>
+<p>Generating a sine wave and adding it directly to the <code>C3</code> electrode is computationally cheap. However, it is physiologically impossible. Brain activity does not occur <em>at</em> the electrode.</p>
+<h2 id="source-space-synthesis-the-vireon-approach">Source Space Synthesis (The VIREON Approach)</h2>
+<p>VIREON mandates that all biological activity is generated in a 3D coordinate space inside the head model (the "Source Space"). </p>
+<ol>
+<li><strong>Current Dipoles:</strong> Neural activity is modeled as a primary current dipole <span class="arithmatex">\(\mathbf{J}^p(\mathbf{r}, t)\)</span>.</li>
+<li><strong>Volume Conduction:</strong> The electrical potentials propagate through the brain, skull, and scalp. The skull acts as a spatial low-pass filter, significantly blurring the signal.</li>
+<li><strong>The Leadfield:</strong> The projection from the 3D source space to the 2D sensor array is calculated using a Forward Model (e.g., Boundary Element Method), resulting in the Leadfield matrix <span class="arithmatex">\(\mathbf{L}\)</span>.</li>
+</ol>
+<p>This ensures that spatial filters (like CSP or Beamformers) trained on VIREON data learn physiologically plausible covariance matrices.</p>
 
 
 

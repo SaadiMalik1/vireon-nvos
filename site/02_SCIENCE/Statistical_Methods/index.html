@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    README
+    Introduction to VIREON
   
 
     
@@ -467,7 +467,7 @@
   <span class="md-ellipsis">
     
   
-    Why VIREON
+    Why VIREON?
   
 
     
@@ -556,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Architecture Overview
   
 
     
@@ -752,7 +752,7 @@
   <span class="md-ellipsis">
     
   
-    Scientific Pipeline
+    The Scientific Pipeline
   
 
     
@@ -1037,7 +1037,7 @@
   <span class="md-ellipsis">
     
   
-    Source Space
+    Source Space vs Sensor Space
   
 
     
@@ -1067,6 +1067,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Statistical Methods
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1083,6 +1101,36 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#common-spatial-pattern-csp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Spatial Pattern (CSP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1103,7 +1151,7 @@
   <span class="md-ellipsis">
     
   
-    Uncertainty
+    Bayesian Uncertainty
   
 
     
@@ -1856,7 +1904,7 @@
   <span class="md-ellipsis">
     
   
-    Labs
+    Interactive Labs
   
 
     
@@ -2034,7 +2082,7 @@
   <span class="md-ellipsis">
     
   
-    Research
+    Ongoing Research
   
 
     
@@ -2123,7 +2171,7 @@
   <span class="md-ellipsis">
     
   
-    Regression Suite
+    Regression &amp; CI/CD
   
 
     
@@ -2212,7 +2260,7 @@
   <span class="md-ellipsis">
     
   
-    Publications
+    Reproducible Publications
   
 
     
@@ -2301,7 +2349,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap
+    Roadmap to SRL-9
   
 
     
@@ -2688,6 +2736,25 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#common-spatial-pattern-csp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Spatial Pattern (CSP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2707,7 +2774,13 @@
 
 
 <h1 id="statistical-methods">Statistical Methods</h1>
-<p>Content coming soon.</p>
+<p>Neurotechnology validation relies on robust statistical inference. A decoder that achieves 90% accuracy on a single subject dataset may be statistically insignificant if the sample size is low or the variance is high.</p>
+<h2 id="common-spatial-pattern-csp">Common Spatial Pattern (CSP)</h2>
+<p>CSP is a fundamental spatial filtering technique for Motor Imagery BCIs. It seeks to find a spatial projection matrix <span class="arithmatex">\(\mathbf{W}\)</span> that maximizes the variance of one class while minimizing the variance of the other.</p>
+<p>Mathematically, it solves the generalized eigenvalue problem:
+$$ \mathbf{\Sigma}_1 \mathbf{w} = \lambda \mathbf{\Sigma}_2 \mathbf{w} $$
+Where <span class="arithmatex">\(\mathbf{\Sigma}_1\)</span> and <span class="arithmatex">\(\mathbf{\Sigma}_2\)</span> are the spatial covariance matrices of the two classes.</p>
+<p><em>Assumption</em>: CSP assumes that the noise covariance is stationary between the two classes. If an artifact (e.g. jaw clenching) is present in class 1 but not class 2, CSP will learn to decode the artifact, not the neural signal. VIREON validates CSP implementations by explicitly injecting asymmetric artifacts.</p>
 
 
 

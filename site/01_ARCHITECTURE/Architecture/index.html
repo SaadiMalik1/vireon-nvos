@@ -25,7 +25,7 @@
     
     
       
-        <title>Architecture - VIREON NVOS</title>
+        <title>Architecture Overview - VIREON NVOS</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#architecture" class="md-skip">
+        <a href="#architecture-overview" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Architecture
+              Architecture Overview
             
           </span>
         </div>
@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    README
+    Introduction to VIREON
   
 
     
@@ -467,7 +467,7 @@
   <span class="md-ellipsis">
     
   
-    Why VIREON
+    Why VIREON?
   
 
     
@@ -558,6 +558,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture Overview
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -565,7 +583,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Architecture Overview
   
 
     
@@ -574,6 +592,36 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-tripartite-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Tripartite Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -762,7 +810,7 @@
   <span class="md-ellipsis">
     
   
-    Scientific Pipeline
+    The Scientific Pipeline
   
 
     
@@ -1047,7 +1095,7 @@
   <span class="md-ellipsis">
     
   
-    Source Space
+    Source Space vs Sensor Space
   
 
     
@@ -1103,7 +1151,7 @@
   <span class="md-ellipsis">
     
   
-    Uncertainty
+    Bayesian Uncertainty
   
 
     
@@ -1856,7 +1904,7 @@
   <span class="md-ellipsis">
     
   
-    Labs
+    Interactive Labs
   
 
     
@@ -2034,7 +2082,7 @@
   <span class="md-ellipsis">
     
   
-    Research
+    Ongoing Research
   
 
     
@@ -2123,7 +2171,7 @@
   <span class="md-ellipsis">
     
   
-    Regression Suite
+    Regression &amp; CI/CD
   
 
     
@@ -2212,7 +2260,7 @@
   <span class="md-ellipsis">
     
   
-    Publications
+    Reproducible Publications
   
 
     
@@ -2301,7 +2349,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap
+    Roadmap to SRL-9
   
 
     
@@ -2688,6 +2736,25 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-tripartite-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Tripartite Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2706,8 +2773,16 @@
   
 
 
-<h1 id="architecture">Architecture</h1>
-<p>Content coming soon.</p>
+<h1 id="architecture-overview">Architecture Overview</h1>
+<p>The VIREON NVOS architecture is designed to enforce maximum decoupling between scientific intent and execution logic.</p>
+<h2 id="the-tripartite-structure">The Tripartite Structure</h2>
+<p>The architecture is divided into three distinct conceptual zones:</p>
+<ol>
+<li><strong>The Core Engine (<code>vireon-core</code>)</strong>: The dumb orchestrator. It knows nothing about brains, signals, or physics. It only knows how to match capabilities, validate JSON-LD contracts, and route payloads through a DAG.</li>
+<li><strong>The Knowledge Graph (<code>vireon-knowledge</code>)</strong>: The semantic ontology. It holds the fundamental truths of the ecosystem (e.g., "Ocular Blinks occur in the frontal cortex", "Welch PSD requires Stationarity").</li>
+<li><strong>The Plugin Ecosystem (<code>vireon-models</code>, <code>vireon-methods</code>)</strong>: The actual science. These repositories contain the executable code that generates artifacts, models dipoles, or extracts features.</li>
+</ol>
+<p>By isolating the scientific logic in the Plugin Ecosystem, we ensure that the Core Engine remains highly stable, while researchers can rapidly iterate on new models without risking regressions in the orchestration logic.</p>
 
 
 

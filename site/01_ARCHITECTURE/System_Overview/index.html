@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    README
+    Introduction to VIREON
   
 
     
@@ -467,7 +467,7 @@
   <span class="md-ellipsis">
     
   
-    Why VIREON
+    Why VIREON?
   
 
     
@@ -556,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Architecture Overview
   
 
     
@@ -752,7 +752,7 @@
   <span class="md-ellipsis">
     
   
-    Scientific Pipeline
+    The Scientific Pipeline
   
 
     
@@ -782,6 +782,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System Overview
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -798,6 +816,36 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-execution-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Execution Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1047,7 +1095,7 @@
   <span class="md-ellipsis">
     
   
-    Source Space
+    Source Space vs Sensor Space
   
 
     
@@ -1103,7 +1151,7 @@
   <span class="md-ellipsis">
     
   
-    Uncertainty
+    Bayesian Uncertainty
   
 
     
@@ -1856,7 +1904,7 @@
   <span class="md-ellipsis">
     
   
-    Labs
+    Interactive Labs
   
 
     
@@ -2034,7 +2082,7 @@
   <span class="md-ellipsis">
     
   
-    Research
+    Ongoing Research
   
 
     
@@ -2123,7 +2171,7 @@
   <span class="md-ellipsis">
     
   
-    Regression Suite
+    Regression &amp; CI/CD
   
 
     
@@ -2212,7 +2260,7 @@
   <span class="md-ellipsis">
     
   
-    Publications
+    Reproducible Publications
   
 
     
@@ -2301,7 +2349,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap
+    Roadmap to SRL-9
   
 
     
@@ -2688,6 +2736,25 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-execution-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Execution Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2707,7 +2774,16 @@
 
 
 <h1 id="system-overview">System Overview</h1>
-<p>Content coming soon.</p>
+<p>A high-level view of how a standard VIREON execution run unfolds.</p>
+<h2 id="the-execution-lifecycle">The Execution Lifecycle</h2>
+<ol>
+<li><strong>Goal Declaration:</strong> The user defines a YAML manifest specifying the desired target metric (e.g., <code>Estimate Motor Imagery Decoder Accuracy</code>).</li>
+<li><strong>Graph Resolution:</strong> The <code>vireon-core</code> engine parses the manifest and resolves a sequence of plugins that can transform a raw empirical dataset or synthetic generator into the requested metric.</li>
+<li><strong>Contract Verification:</strong> Before execution begins, the <code>EvidenceEngine</code> queries the <code>vireon-knowledge</code> graph to ensure that the cumulative assumptions of the DAG do not conflict.</li>
+<li><strong>Data Flow:</strong> <code>IScientificObject</code> payloads (like <code>ISignal</code> and <code>IMeasurement</code>) are passed sequentially through the plugin instances.</li>
+<li><strong>Evidence Generation:</strong> As each node completes, its inputs, outputs, Git hashes, and stochastic states are serialized into the <code>IEvidence</code> bundle.</li>
+<li><strong>Output:</strong> The system yields both the final numerical result and the immutable JSON-LD provenance bundle.</li>
+</ol>
 
 
 

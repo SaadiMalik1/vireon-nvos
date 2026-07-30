@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    README
+    Introduction to VIREON
   
 
     
@@ -467,7 +467,7 @@
   <span class="md-ellipsis">
     
   
-    Why VIREON
+    Why VIREON?
   
 
     
@@ -556,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Architecture Overview
   
 
     
@@ -752,7 +752,7 @@
   <span class="md-ellipsis">
     
   
-    Scientific Pipeline
+    The Scientific Pipeline
   
 
     
@@ -1037,7 +1037,7 @@
   <span class="md-ellipsis">
     
   
-    Source Space
+    Source Space vs Sensor Space
   
 
     
@@ -1093,7 +1093,7 @@
   <span class="md-ellipsis">
     
   
-    Uncertainty
+    Bayesian Uncertainty
   
 
     
@@ -1759,6 +1759,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1775,6 +1793,64 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#end-to-end-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        End-to-End Execution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="End-to-End Execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tutorial-1-validating-welch-psd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tutorial 1: Validating Welch PSD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tutorial-2-adversarial-decoder-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tutorial 2: Adversarial Decoder Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1856,7 +1932,7 @@
   <span class="md-ellipsis">
     
   
-    Labs
+    Interactive Labs
   
 
     
@@ -2034,7 +2110,7 @@
   <span class="md-ellipsis">
     
   
-    Research
+    Ongoing Research
   
 
     
@@ -2123,7 +2199,7 @@
   <span class="md-ellipsis">
     
   
-    Regression Suite
+    Regression &amp; CI/CD
   
 
     
@@ -2212,7 +2288,7 @@
   <span class="md-ellipsis">
     
   
-    Publications
+    Reproducible Publications
   
 
     
@@ -2301,7 +2377,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap
+    Roadmap to SRL-9
   
 
     
@@ -2688,6 +2764,53 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#end-to-end-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        End-to-End Execution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="End-to-End Execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tutorial-1-validating-welch-psd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tutorial 1: Validating Welch PSD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tutorial-2-adversarial-decoder-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tutorial 2: Adversarial Decoder Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2707,7 +2830,13 @@
 
 
 <h1 id="tutorials">Tutorials</h1>
-<p>Coming soon. This section will contain step-by-step guides for running your first end-to-end evidence generation pipeline.</p>
+<p>Welcome to the VIREON Tutorials. </p>
+<h2 id="end-to-end-execution">End-to-End Execution</h2>
+<p>These guides are designed to take you from a raw dataset to a fully validated <code>IEvidence</code> bundle.</p>
+<h3 id="tutorial-1-validating-welch-psd">Tutorial 1: Validating Welch PSD</h3>
+<p>Learn how to use the declarative YAML interface to pass the <code>SyntheticAlpha10Hz</code> dataset through the Welch PSD estimator, and observe how injecting a non-stationary artifact triggers a <code>ScientificContractViolation</code>.</p>
+<h3 id="tutorial-2-adversarial-decoder-testing">Tutorial 2: Adversarial Decoder Testing</h3>
+<p>Learn how to wrap a simple scikit-learn Linear Discriminant Analysis (LDA) classifier in an <code>IPlugin</code> wrapper, and use <code>vireon-validation</code> to test its robustness against increasing levels of telemetry packet loss.</p>
 
 
 

@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    README
+    Introduction to VIREON
   
 
     
@@ -467,7 +467,7 @@
   <span class="md-ellipsis">
     
   
-    Why VIREON
+    Why VIREON?
   
 
     
@@ -556,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Architecture Overview
   
 
     
@@ -752,7 +752,7 @@
   <span class="md-ellipsis">
     
   
-    Scientific Pipeline
+    The Scientific Pipeline
   
 
     
@@ -1011,6 +1011,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Signal Modeling
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1027,6 +1045,47 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-additive-noise-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Additive Noise Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#non-stationarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Non-Stationarity
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1047,7 +1106,7 @@
   <span class="md-ellipsis">
     
   
-    Source Space
+    Source Space vs Sensor Space
   
 
     
@@ -1103,7 +1162,7 @@
   <span class="md-ellipsis">
     
   
-    Uncertainty
+    Bayesian Uncertainty
   
 
     
@@ -1856,7 +1915,7 @@
   <span class="md-ellipsis">
     
   
-    Labs
+    Interactive Labs
   
 
     
@@ -2034,7 +2093,7 @@
   <span class="md-ellipsis">
     
   
-    Research
+    Ongoing Research
   
 
     
@@ -2123,7 +2182,7 @@
   <span class="md-ellipsis">
     
   
-    Regression Suite
+    Regression &amp; CI/CD
   
 
     
@@ -2212,7 +2271,7 @@
   <span class="md-ellipsis">
     
   
-    Publications
+    Reproducible Publications
   
 
     
@@ -2301,7 +2360,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap
+    Roadmap to SRL-9
   
 
     
@@ -2688,6 +2747,36 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-additive-noise-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Additive Noise Model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#non-stationarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Non-Stationarity
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2707,7 +2796,17 @@
 
 
 <h1 id="signal-modeling">Signal Modeling</h1>
-<p>Content coming soon.</p>
+<p>To validate algorithms, we must first mathematically define the signals they process.</p>
+<h2 id="the-additive-noise-model">The Additive Noise Model</h2>
+<p>The standard mathematical formulation for a recorded electrophysiological signal <span class="arithmatex">\(X(t)\)</span> is:</p>
+<div class="arithmatex">\[ X(t) = S(t) + A(t) + N(t) \]</div>
+<p>Where:
+- <span class="arithmatex">\(S(t)\)</span> is the true neural source signal (e.g., a Motor Rhythm).
+- <span class="arithmatex">\(A(t)\)</span> is structured physiological artifacts (e.g., Ocular blinks, EMG).
+- <span class="arithmatex">\(N(t)\)</span> is unstructured or instrumental noise (e.g., Thermal noise, 50/60Hz Line noise).</p>
+<h2 id="non-stationarity">Non-Stationarity</h2>
+<p>A critical challenge in signal modeling is non-stationarity. Brain states shift (e.g., from awake to drowsy), causing the underlying probability distribution of <span class="arithmatex">\(S(t)\)</span> to change over time. 
+VIREON's generative models (<code>vireon-models</code>) allow researchers to explicitly schedule state transitions to test how adaptive decoders handle concept drift.</p>
 
 
 

@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    README
+    Introduction to VIREON
   
 
     
@@ -467,7 +467,7 @@
   <span class="md-ellipsis">
     
   
-    Why VIREON
+    Why VIREON?
   
 
     
@@ -556,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Architecture Overview
   
 
     
@@ -726,6 +726,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repository Map
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -742,6 +760,80 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Kernel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-ontology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Ontology
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-science" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Science
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation &amp; Testing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-evidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data &amp; Evidence
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -762,7 +854,7 @@
   <span class="md-ellipsis">
     
   
-    Scientific Pipeline
+    The Scientific Pipeline
   
 
     
@@ -1047,7 +1139,7 @@
   <span class="md-ellipsis">
     
   
-    Source Space
+    Source Space vs Sensor Space
   
 
     
@@ -1103,7 +1195,7 @@
   <span class="md-ellipsis">
     
   
-    Uncertainty
+    Bayesian Uncertainty
   
 
     
@@ -1856,7 +1948,7 @@
   <span class="md-ellipsis">
     
   
-    Labs
+    Interactive Labs
   
 
     
@@ -2034,7 +2126,7 @@
   <span class="md-ellipsis">
     
   
-    Research
+    Ongoing Research
   
 
     
@@ -2123,7 +2215,7 @@
   <span class="md-ellipsis">
     
   
-    Regression Suite
+    Regression &amp; CI/CD
   
 
     
@@ -2212,7 +2304,7 @@
   <span class="md-ellipsis">
     
   
-    Publications
+    Reproducible Publications
   
 
     
@@ -2301,7 +2393,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap
+    Roadmap to SRL-9
   
 
     
@@ -2688,6 +2780,69 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Kernel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-ontology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Ontology
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-science" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Science
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation &amp; Testing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-evidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data &amp; Evidence
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2707,7 +2862,32 @@
 
 
 <h1 id="repository-map">Repository Map</h1>
-<p>Content coming soon.</p>
+<p>The VIREON ecosystem is intentionally fragmented into domain-specific repositories to enforce decoupling.</p>
+<h2 id="the-kernel">The Kernel</h2>
+<ul>
+<li><strong><code>vireon-core</code></strong>: The execution DAG, capability router, and Evidence Engine. Contains no scientific logic.</li>
+</ul>
+<h2 id="the-ontology">The Ontology</h2>
+<ul>
+<li><strong><code>vireon-knowledge</code></strong>: The JSON-LD Knowledge Graph mapping methods, assumptions, and hardware characteristics.</li>
+</ul>
+<h2 id="the-science">The Science</h2>
+<ul>
+<li><strong><code>vireon-models</code></strong>: Generative digital twins. Source space dipoles, hardware amplifiers, artifact synthesizers.</li>
+<li><strong><code>vireon-methods</code></strong>: Signal processing and statistical algorithms (e.g., Welch PSD, CSP, ICA).</li>
+</ul>
+<h2 id="validation-testing">Validation &amp; Testing</h2>
+<ul>
+<li><strong><code>vireon-validation</code></strong>: Automated scenario manifests for adversarial testing of decoders.</li>
+<li><strong><code>vireon-verification</code></strong>: CI/CD regression tests ensuring numerical equivalence (SRL-3) of the methods.</li>
+</ul>
+<h2 id="data-evidence">Data &amp; Evidence</h2>
+<ul>
+<li><strong><code>vireon-corpus</code></strong>: Highly curated, fingerprinted physiological datasets (e.g., MNE Sample, PhysioNet).</li>
+<li><strong><code>vireon-publications</code></strong>: Executable JSON-LD evidence bundles that reproduce canonical papers.</li>
+<li><strong><code>vireon-reference</code></strong>: Ground-truth implementations (often slow, unoptimized Python) used to verify faster rust/C++ extensions.</li>
+<li><strong><code>vireon-lab</code></strong>: Interactive Jupyter notebooks and tutorials for exploring the ecosystem.</li>
+</ul>
 
 
 

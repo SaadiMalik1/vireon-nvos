@@ -25,7 +25,7 @@
     
     
       
-        <title>Why VIREON - VIREON NVOS</title>
+        <title>Why VIREON? - VIREON NVOS</title>
       
     
     
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Why VIREON
+              Why VIREON?
             
           </span>
         </div>
@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    README
+    Introduction to VIREON
   
 
     
@@ -469,6 +469,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why VIREON?
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -476,7 +494,7 @@
   <span class="md-ellipsis">
     
   
-    Why VIREON
+    Why VIREON?
   
 
     
@@ -485,6 +503,58 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-reproducibility-crisis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Reproducibility Crisis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-siloed-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Siloed Ecosystem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-nvos-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The NVOS Solution
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -566,7 +636,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Architecture Overview
   
 
     
@@ -762,7 +832,7 @@
   <span class="md-ellipsis">
     
   
-    Scientific Pipeline
+    The Scientific Pipeline
   
 
     
@@ -1047,7 +1117,7 @@
   <span class="md-ellipsis">
     
   
-    Source Space
+    Source Space vs Sensor Space
   
 
     
@@ -1103,7 +1173,7 @@
   <span class="md-ellipsis">
     
   
-    Uncertainty
+    Bayesian Uncertainty
   
 
     
@@ -1856,7 +1926,7 @@
   <span class="md-ellipsis">
     
   
-    Labs
+    Interactive Labs
   
 
     
@@ -2034,7 +2104,7 @@
   <span class="md-ellipsis">
     
   
-    Research
+    Ongoing Research
   
 
     
@@ -2123,7 +2193,7 @@
   <span class="md-ellipsis">
     
   
-    Regression Suite
+    Regression &amp; CI/CD
   
 
     
@@ -2212,7 +2282,7 @@
   <span class="md-ellipsis">
     
   
-    Publications
+    Reproducible Publications
   
 
     
@@ -2301,7 +2371,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap
+    Roadmap to SRL-9
   
 
     
@@ -2688,6 +2758,47 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-reproducibility-crisis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Reproducibility Crisis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-siloed-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Siloed Ecosystem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-nvos-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The NVOS Solution
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2706,8 +2817,15 @@
   
 
 
-<h1 id="why-vireon">Why VIREON</h1>
-<p>Content coming soon.</p>
+<h1 id="why-vireon">Why VIREON?</h1>
+<p>Neurotechnology is experiencing a Cambrian explosion, but the validation infrastructure is fundamentally broken.</p>
+<h2 id="the-reproducibility-crisis">The Reproducibility Crisis</h2>
+<p>Today, if Lab A publishes a paper on a novel Brain-Computer Interface (BCI) decoder, they typically publish a static PDF and a link to a static CSV dataset. Lab B cannot easily reproduce the exact DSP pipeline (filters, artifact rejection, feature extraction) because it is buried in undocumented scripts or relies on proprietary software (e.g., MATLAB toolboxes with unknown inner workings).</p>
+<h2 id="the-siloed-ecosystem">The Siloed Ecosystem</h2>
+<p>Hardware manufacturers (amplifiers, implants) keep their telemetry protocols and artifact noise profiles closed-source. Algorithm developers train decoders on pristine, pre-cleaned academic datasets. When the decoder is deployed on real hardware in a noisy clinical environment, it fails.</p>
+<h2 id="the-nvos-solution">The NVOS Solution</h2>
+<p>VIREON acts as the neutral ground. 
+By wrapping both hardware simulators and software decoders in the same <code>IPlugin</code> interface and forcing them to interact under strict <code>ScientificContracts</code>, VIREON ensures that decoders are exposed to realistic, hardware-specific digital twins <em>before</em> they are ever deployed in vivo.</p>
 
 
 

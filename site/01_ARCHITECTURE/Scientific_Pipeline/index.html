@@ -25,7 +25,7 @@
     
     
       
-        <title>Scientific Pipeline - VIREON NVOS</title>
+        <title>The Scientific Pipeline - VIREON NVOS</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#scientific-pipeline" class="md-skip">
+        <a href="#the-scientific-pipeline" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Scientific Pipeline
+              The Scientific Pipeline
             
           </span>
         </div>
@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    README
+    Introduction to VIREON
   
 
     
@@ -467,7 +467,7 @@
   <span class="md-ellipsis">
     
   
-    Why VIREON
+    Why VIREON?
   
 
     
@@ -556,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Architecture Overview
   
 
     
@@ -754,6 +754,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Scientific Pipeline
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -761,7 +779,7 @@
   <span class="md-ellipsis">
     
   
-    Scientific Pipeline
+    The Scientific Pipeline
   
 
     
@@ -770,6 +788,58 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Nodes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-edges" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Edges
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline Resolution
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1047,7 +1117,7 @@
   <span class="md-ellipsis">
     
   
-    Source Space
+    Source Space vs Sensor Space
   
 
     
@@ -1103,7 +1173,7 @@
   <span class="md-ellipsis">
     
   
-    Uncertainty
+    Bayesian Uncertainty
   
 
     
@@ -1856,7 +1926,7 @@
   <span class="md-ellipsis">
     
   
-    Labs
+    Interactive Labs
   
 
     
@@ -2034,7 +2104,7 @@
   <span class="md-ellipsis">
     
   
-    Research
+    Ongoing Research
   
 
     
@@ -2123,7 +2193,7 @@
   <span class="md-ellipsis">
     
   
-    Regression Suite
+    Regression &amp; CI/CD
   
 
     
@@ -2212,7 +2282,7 @@
   <span class="md-ellipsis">
     
   
-    Publications
+    Reproducible Publications
   
 
     
@@ -2301,7 +2371,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap
+    Roadmap to SRL-9
   
 
     
@@ -2688,6 +2758,47 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Nodes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-edges" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Edges
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline Resolution
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2706,8 +2817,16 @@
   
 
 
-<h1 id="scientific-pipeline">Scientific Pipeline</h1>
-<p>Content coming soon.</p>
+<h1 id="the-scientific-pipeline">The Scientific Pipeline</h1>
+<p>In traditional data science, a pipeline is usually an imperative script (<code>train.py</code>) that loads data, calls <code>.fit()</code>, and computes an accuracy score. </p>
+<p>In VIREON, a pipeline is a <strong>Directed Acyclic Graph (DAG) of Scientific Contracts</strong>.</p>
+<h2 id="the-nodes">The Nodes</h2>
+<p>Every node in the pipeline is an instantiated <code>IPlugin</code> (e.g., an Artifact Generator, a Feature Extractor, a Decoder).</p>
+<h2 id="the-edges">The Edges</h2>
+<p>Every edge in the pipeline is an <code>IScientificObject</code> (e.g., an <code>ISignal</code> containing EEG data). Edges are strictly typed. You cannot pass raw numpy arrays between nodes.</p>
+<h2 id="pipeline-resolution">Pipeline Resolution</h2>
+<p>When a user defines a scenario (e.g., "Test Decoder X against Dataset Y with Artifact Z"), the core engine dynamically builds the pipeline. 
+If Decoder X requires input capabilities that Dataset Y cannot provide, the pipeline resolution fails immediately, preventing invalid scientific testing.</p>
 
 
 

@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    README
+    Introduction to VIREON
   
 
     
@@ -467,7 +467,7 @@
   <span class="md-ellipsis">
     
   
-    Why VIREON
+    Why VIREON?
   
 
     
@@ -556,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Architecture Overview
   
 
     
@@ -752,7 +752,7 @@
   <span class="md-ellipsis">
     
   
-    Scientific Pipeline
+    The Scientific Pipeline
   
 
     
@@ -899,6 +899,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Digital Twins
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -915,6 +933,47 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hardware-twins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardware Twins
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#biological-twins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Biological Twins
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1047,7 +1106,7 @@
   <span class="md-ellipsis">
     
   
-    Source Space
+    Source Space vs Sensor Space
   
 
     
@@ -1103,7 +1162,7 @@
   <span class="md-ellipsis">
     
   
-    Uncertainty
+    Bayesian Uncertainty
   
 
     
@@ -1856,7 +1915,7 @@
   <span class="md-ellipsis">
     
   
-    Labs
+    Interactive Labs
   
 
     
@@ -2034,7 +2093,7 @@
   <span class="md-ellipsis">
     
   
-    Research
+    Ongoing Research
   
 
     
@@ -2123,7 +2182,7 @@
   <span class="md-ellipsis">
     
   
-    Regression Suite
+    Regression &amp; CI/CD
   
 
     
@@ -2212,7 +2271,7 @@
   <span class="md-ellipsis">
     
   
-    Publications
+    Reproducible Publications
   
 
     
@@ -2301,7 +2360,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap
+    Roadmap to SRL-9
   
 
     
@@ -2688,6 +2747,36 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hardware-twins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardware Twins
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#biological-twins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Biological Twins
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2707,7 +2796,17 @@
 
 
 <h1 id="digital-twins">Digital Twins</h1>
-<p>Content coming soon.</p>
+<p>In VIREON, a Digital Twin is an executable <code>IPlugin</code> that generates synthetic data mirroring a specific physical or biological entity.</p>
+<h2 id="hardware-twins">Hardware Twins</h2>
+<p>A hardware twin models the signal acquisition chain.
+- <strong>Amplifier Noise:</strong> Models the specific thermal noise floor and <span class="arithmatex">\(1/f\)</span> noise characteristics of a specific ADC (e.g., Texas Instruments ADS1299).
+- <strong>Impedance:</strong> Models the skin-electrode interface.
+- <strong>Telemetry:</strong> Models packet loss or jitter in Bluetooth/WiFi transmission.</p>
+<h2 id="biological-twins">Biological Twins</h2>
+<p>A biological twin models physiological phenomena.
+- <strong>Ocular Twin:</strong> Generates Electrooculography (EOG) artifacts based on Poisson-distributed blink timing.
+- <strong>Cortical Twin:</strong> Generates alpha rhythms based on thalamocortical loop dynamics.</p>
+<p>By combining these twins, researchers can test a decoder against a highly realistic, albeit adversarial, simulation of a patient wearing a specific headset.</p>
 
 
 

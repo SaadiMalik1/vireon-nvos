@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    README
+    Introduction to VIREON
   
 
     
@@ -467,7 +467,7 @@
   <span class="md-ellipsis">
     
   
-    Why VIREON
+    Why VIREON?
   
 
     
@@ -556,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Architecture Overview
   
 
     
@@ -752,7 +752,7 @@
   <span class="md-ellipsis">
     
   
-    Scientific Pipeline
+    The Scientific Pipeline
   
 
     
@@ -1037,7 +1037,7 @@
   <span class="md-ellipsis">
     
   
-    Source Space
+    Source Space vs Sensor Space
   
 
     
@@ -1093,7 +1093,7 @@
   <span class="md-ellipsis">
     
   
-    Uncertainty
+    Bayesian Uncertainty
   
 
     
@@ -1856,7 +1856,7 @@
   <span class="md-ellipsis">
     
   
-    Labs
+    Interactive Labs
   
 
     
@@ -2034,7 +2034,7 @@
   <span class="md-ellipsis">
     
   
-    Research
+    Ongoing Research
   
 
     
@@ -2123,7 +2123,7 @@
   <span class="md-ellipsis">
     
   
-    Regression Suite
+    Regression &amp; CI/CD
   
 
     
@@ -2212,7 +2212,7 @@
   <span class="md-ellipsis">
     
   
-    Publications
+    Reproducible Publications
   
 
     
@@ -2301,7 +2301,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap
+    Roadmap to SRL-9
   
 
     
@@ -2707,7 +2707,9 @@
 
 
 <h1 id="vireon-verification">vireon-verification</h1>
-<p>Content coming soon.</p>
+<p><code>vireon-verification</code> is the CI/CD test suite.</p>
+<p>While <code>vireon-validation</code> tests the <em>science</em> (does the decoder fail when noise is added?), <code>vireon-verification</code> tests the <em>math</em> (does the optimized Rust Welch PSD output the exact same float64 array as the <code>vireon-reference</code> Python Welch PSD?).</p>
+<p>No Pull Request can be merged into <code>vireon-methods</code> unless the <code>vireon-verification</code> GitHub Actions pass with numerical equivalence.</p>
 
 
 

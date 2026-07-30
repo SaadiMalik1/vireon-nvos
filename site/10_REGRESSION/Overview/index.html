@@ -25,7 +25,7 @@
     
     
       
-        <title>Regression Suite - VIREON NVOS</title>
+        <title>Regression & CI/CD - VIREON NVOS</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#regression-suite" class="md-skip">
+        <a href="#regression-cicd" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Regression Suite
+              Regression &amp; CI/CD
             
           </span>
         </div>
@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    README
+    Introduction to VIREON
   
 
     
@@ -467,7 +467,7 @@
   <span class="md-ellipsis">
     
   
-    Why VIREON
+    Why VIREON?
   
 
     
@@ -556,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Architecture Overview
   
 
     
@@ -752,7 +752,7 @@
   <span class="md-ellipsis">
     
   
-    Scientific Pipeline
+    The Scientific Pipeline
   
 
     
@@ -1037,7 +1037,7 @@
   <span class="md-ellipsis">
     
   
-    Source Space
+    Source Space vs Sensor Space
   
 
     
@@ -1093,7 +1093,7 @@
   <span class="md-ellipsis">
     
   
-    Uncertainty
+    Bayesian Uncertainty
   
 
     
@@ -1846,7 +1846,7 @@
   <span class="md-ellipsis">
     
   
-    Labs
+    Interactive Labs
   
 
     
@@ -2024,7 +2024,7 @@
   <span class="md-ellipsis">
     
   
-    Research
+    Ongoing Research
   
 
     
@@ -2115,6 +2115,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regression &amp; CI/CD
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -2122,7 +2140,7 @@
   <span class="md-ellipsis">
     
   
-    Regression Suite
+    Regression &amp; CI/CD
   
 
     
@@ -2131,6 +2149,64 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-verification-suite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Verification Suite
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Verification Suite">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tolerance-bounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tolerance Bounds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fuzzing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fuzzing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2212,7 +2288,7 @@
   <span class="md-ellipsis">
     
   
-    Publications
+    Reproducible Publications
   
 
     
@@ -2301,7 +2377,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap
+    Roadmap to SRL-9
   
 
     
@@ -2688,6 +2764,53 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-verification-suite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Verification Suite
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Verification Suite">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tolerance-bounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tolerance Bounds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fuzzing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fuzzing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2706,8 +2829,14 @@
   
 
 
-<h1 id="regression-suite">Regression Suite</h1>
-<p>Coming soon. Documentation on the CI/CD integration for the <code>vireon-verification</code> benchmarks.</p>
+<h1 id="regression-cicd">Regression &amp; CI/CD</h1>
+<p>Scientific software must not silently degrade. The <code>vireon-verification</code> repository ensures that the math is always correct.</p>
+<h2 id="the-verification-suite">The Verification Suite</h2>
+<p>Every pull request to <code>vireon-methods</code> or <code>vireon-models</code> triggers a comprehensive suite of numerical regression tests via GitHub Actions.</p>
+<h3 id="tolerance-bounds">Tolerance Bounds</h3>
+<p>We do not test for boolean equality (<code>True</code>/<code>False</code>), as floating-point arithmetic across different architectures (e.g., Apple Silicon vs x86) will diverge. Instead, we test against the unoptimized ground-truth in <code>vireon-reference</code> using strict tolerances (e.g., <code>np.allclose(result, reference, rtol=1e-5)</code>).</p>
+<h3 id="fuzzing">Fuzzing</h3>
+<p>Inputs are fuzzed with <code>NaN</code>s, <code>Inf</code>s, and extreme scaling factors to ensure that <code>IPlugins</code> fail gracefully and throw appropriately typed <code>ScientificContractViolations</code> rather than crashing the execution DAG.</p>
 
 
 

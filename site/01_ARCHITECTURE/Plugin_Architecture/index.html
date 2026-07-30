@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    README
+    Introduction to VIREON
   
 
     
@@ -467,7 +467,7 @@
   <span class="md-ellipsis">
     
   
-    Why VIREON
+    Why VIREON?
   
 
     
@@ -556,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Architecture Overview
   
 
     
@@ -698,6 +698,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Architecture
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -714,6 +732,86 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#iplugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IPlugin
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IPlugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. capabilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. contract
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-execute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. execute
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -762,7 +860,7 @@
   <span class="md-ellipsis">
     
   
-    Scientific Pipeline
+    The Scientific Pipeline
   
 
     
@@ -1047,7 +1145,7 @@
   <span class="md-ellipsis">
     
   
-    Source Space
+    Source Space vs Sensor Space
   
 
     
@@ -1103,7 +1201,7 @@
   <span class="md-ellipsis">
     
   
-    Uncertainty
+    Bayesian Uncertainty
   
 
     
@@ -1856,7 +1954,7 @@
   <span class="md-ellipsis">
     
   
-    Labs
+    Interactive Labs
   
 
     
@@ -2034,7 +2132,7 @@
   <span class="md-ellipsis">
     
   
-    Research
+    Ongoing Research
   
 
     
@@ -2123,7 +2221,7 @@
   <span class="md-ellipsis">
     
   
-    Regression Suite
+    Regression &amp; CI/CD
   
 
     
@@ -2212,7 +2310,7 @@
   <span class="md-ellipsis">
     
   
-    Publications
+    Reproducible Publications
   
 
     
@@ -2301,7 +2399,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap
+    Roadmap to SRL-9
   
 
     
@@ -2688,6 +2786,75 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#iplugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IPlugin
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IPlugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. capabilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. contract
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-execute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. execute
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2707,7 +2874,18 @@
 
 
 <h1 id="plugin-architecture">Plugin Architecture</h1>
-<p>Content coming soon.</p>
+<p>VIREON's extensibility is driven by its Plugin Architecture. The core engine (<code>vireon-core</code>) is completely agnostic to the actual mathematics being performed. It only understands Capabilities and Contracts.</p>
+<h2 id="iplugin"><code>IPlugin</code></h2>
+<p>The abstract base class for everything in the VIREON ecosystem.
+To add a new signal processing method, you do not modify <code>vireon-core</code>. You create a new Python class inheriting from <code>IPlugin</code> in <code>vireon-methods</code>.</p>
+<h3 id="1-capabilities">1. <code>capabilities</code></h3>
+<p>A list of <code>PluginCapability</code> objects defining what the plugin consumes (e.g., <code>ISignal</code>) and what it produces (e.g., <code>IMeasurement</code>).</p>
+<h3 id="2-contract">2. <code>contract</code></h3>
+<p>A <code>ScientificContract</code> object mapping the plugin's mathematical assumptions to the <code>vireon-knowledge</code> ontology.</p>
+<h3 id="3-execute">3. <code>execute</code></h3>
+<p>The actual runtime logic. This method accepts a dictionary of <code>IScientificObject</code> payloads, performs the numpy/scipy calculations, and returns a new <code>IScientificObject</code>.</p>
+<h2 id="discovery">Discovery</h2>
+<p>Plugins are automatically discovered by the engine at runtime via Python's entry points mechanism. This allows third-party researchers to publish their own standalone VIREON plugin packages (<code>vireon-methods-customlab</code>) that the core engine can seamlessly orchestrate.</p>
 
 
 

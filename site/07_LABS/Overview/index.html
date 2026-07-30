@@ -25,7 +25,7 @@
     
     
       
-        <title>Labs - VIREON NVOS</title>
+        <title>Interactive Labs - VIREON NVOS</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#labs" class="md-skip">
+        <a href="#interactive-labs" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Labs
+              Interactive Labs
             
           </span>
         </div>
@@ -355,7 +355,7 @@
   <span class="md-ellipsis">
     
   
-    README
+    Introduction to VIREON
   
 
     
@@ -467,7 +467,7 @@
   <span class="md-ellipsis">
     
   
-    Why VIREON
+    Why VIREON?
   
 
     
@@ -556,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Architecture Overview
   
 
     
@@ -752,7 +752,7 @@
   <span class="md-ellipsis">
     
   
-    Scientific Pipeline
+    The Scientific Pipeline
   
 
     
@@ -1037,7 +1037,7 @@
   <span class="md-ellipsis">
     
   
-    Source Space
+    Source Space vs Sensor Space
   
 
     
@@ -1093,7 +1093,7 @@
   <span class="md-ellipsis">
     
   
-    Uncertainty
+    Bayesian Uncertainty
   
 
     
@@ -1848,6 +1848,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interactive Labs
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1855,7 +1873,7 @@
   <span class="md-ellipsis">
     
   
-    Labs
+    Interactive Labs
   
 
     
@@ -1864,6 +1882,36 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#available-labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available Labs
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2034,7 +2082,7 @@
   <span class="md-ellipsis">
     
   
-    Research
+    Ongoing Research
   
 
     
@@ -2123,7 +2171,7 @@
   <span class="md-ellipsis">
     
   
-    Regression Suite
+    Regression &amp; CI/CD
   
 
     
@@ -2212,7 +2260,7 @@
   <span class="md-ellipsis">
     
   
-    Publications
+    Reproducible Publications
   
 
     
@@ -2301,7 +2349,7 @@
   <span class="md-ellipsis">
     
   
-    Roadmap
+    Roadmap to SRL-9
   
 
     
@@ -2688,6 +2736,25 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#available-labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available Labs
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2706,8 +2773,14 @@
   
 
 
-<h1 id="labs">Labs</h1>
-<p>Coming soon. Interactive Jupyter Notebooks for exploring the Digital Twin artifacts.</p>
+<h1 id="interactive-labs">Interactive Labs</h1>
+<p>The <code>vireon-lab</code> repository contains interactive environments (Jupyter Notebooks and Streamlit apps) for intuitively exploring the boundaries of neurotechnology.</p>
+<h2 id="available-labs">Available Labs</h2>
+<ol>
+<li><strong>The Dipole Sandbox:</strong> A 3D interactive viewer plotting the MNE sample brain. Drag a virtual dipole across the motor cortex and watch how the sensor-space projection shifts in real-time based on the Boundary Element Method (BEM) leadfield.</li>
+<li><strong>The Artifact Synthesizer:</strong> Play with the parameters of the Ocular Blink generator. Adjust the Poisson lambda rate and observe the spectral leakage effects on a simulated EEG trace.</li>
+<li><strong>The Contract Validator:</strong> An interactive graph explorer for <code>vireon-knowledge</code>. Input a set of methods and datasets, and the app will visually highlight any conflicting scientific assumptions.</li>
+</ol>
 
 
 
