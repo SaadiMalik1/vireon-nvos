@@ -1,0 +1,3 @@
+# Philosophy
+
+Content coming soon.
