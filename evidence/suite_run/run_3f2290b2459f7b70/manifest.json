@@ -1,0 +1,10 @@
+{
+  "scenario_id": "benchmark.attack.eeg_artifact_injection",
+  "execution_hash": "3f2290b2459f7b70",
+  "version": "1.0.0",
+  "sample_rate": 250.0,
+  "num_channels": 8,
+  "duration_sec": 2.0,
+  "seed": 42,
+  "has_real_telemetry": true
+}

@@ -1,0 +1,30 @@
+{
+    "@context": {
+        "vk": "https://vireon.org/knowledge/ontology#"
+    },
+    "@id": "vk:Assumptions",
+    "assumptions": {
+        "Stationarity": {
+            "@id": "vk:Assumption:Stationarity",
+            "description": "The statistical properties of the process do not change over time.",
+            "property_key": "is_stationary",
+            "expected_value": true,
+            "fallback_recommendation": "vk:Method:Wavelets",
+            "version": "1.0",
+            "confidence": 0.8,
+            "superseded_by": null,
+            "supporting_papers": ["doi:10.1109/TBME.1995.391090"]
+        },
+        "StatisticalIndependence": {
+            "@id": "vk:Assumption:StatisticalIndependence",
+            "description": "The underlying source signals are statistically independent.",
+            "property_key": "is_independent",
+            "expected_value": true,
+            "fallback_recommendation": "vk:Method:PCA",
+            "version": "1.1",
+            "confidence": 0.9,
+            "superseded_by": null,
+            "supporting_papers": ["doi:10.1007/978-3-540-75171-7_4"]
+        }
+    }
+}

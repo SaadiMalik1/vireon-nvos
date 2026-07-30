@@ -1,0 +1,9 @@
+{
+  "scenario_id": "benchmark.signal.motor_imagery_erd",
+  "execution_hash": "hash_180325",
+  "version": "1.0.0",
+  "sample_rate": 250.0,
+  "num_channels": 8,
+  "duration_sec": 4.0,
+  "has_real_telemetry": true
+}

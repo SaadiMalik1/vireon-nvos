@@ -1,0 +1,6 @@
+{
+  "scenario_id": "benchmark.attack.signal_replay",
+  "execution_hash": "9a9fada75597b5ad",
+  "version": "1.0.0",
+  "has_real_telemetry": false
+}

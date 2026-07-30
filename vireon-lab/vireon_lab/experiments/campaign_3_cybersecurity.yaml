@@ -1,0 +1,36 @@
+id: campaign.3.cybersecurity
+
+classification:
+  domain: bci
+  type: cybersecurity
+  threat_level: L3
+
+system:
+  provider: synthetic_signal
+  config:
+    sample_rate: 250
+    duration_sec: 10
+    num_channels: 8
+    noise_level: 0.1
+
+stimulus:
+  intended_action: none
+
+perturbation:
+  type: signal_replay
+  parameters:
+    start_time: 2.0
+    duration: 3.0
+    channel_mask: [0, 1]
+
+expected:
+  actuator_command: none
+
+measurements:
+  - false_activation
+  - snr_db
+
+evidence:
+  - event_trace
+  - telemetry
+  - execution_log

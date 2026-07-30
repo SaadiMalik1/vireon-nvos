@@ -1,0 +1,35 @@
+id: campaign.2.decoder_robustness
+
+classification:
+  domain: bci
+  type: decoder_validation
+  threat_level: L1
+
+system:
+  provider: synthetic_signal
+  config:
+    sample_rate: 250
+    duration_sec: 10
+    num_channels: 8
+    noise_level: 0.1
+
+stimulus:
+  intended_action: motor_imagery
+
+perturbation:
+  type: baseline_wander
+  parameters:
+    amplitude: 50.0
+    frequency: 0.5
+
+expected:
+  actuator_command: motor_imagery
+
+measurements:
+  - decoder_accuracy
+  - snr_db
+
+evidence:
+  - event_trace
+  - telemetry
+  - execution_log

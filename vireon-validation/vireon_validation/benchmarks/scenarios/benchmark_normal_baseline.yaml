@@ -1,0 +1,16 @@
+id: benchmark.normal.baseline
+classification:
+  domain: bci
+  type: normal
+system:
+  provider: mock_provider
+stimulus:
+  intended_action: move_forward
+expected:
+  actuator_command: move_forward
+measurements:
+  - false_activation_rate
+  - causal_propagation_latency
+evidence:
+  - event_trace
+  - telemetry

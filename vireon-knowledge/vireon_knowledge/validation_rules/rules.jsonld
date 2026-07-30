@@ -1,0 +1,16 @@
+{
+    "@context": {
+        "vk": "https://vireon.org/knowledge/rules#"
+    },
+    "@id": "vk:ValidationRules",
+    "rules": [
+        {
+            "@id": "vk:Rule:StationarityForWelch",
+            "target_method": "vk:Method:Welch",
+            "condition": "signal.stationarity == True",
+            "violation_severity": "HIGH",
+            "recommendation": "vk:Method:Multitaper",
+            "message": "Welch's method is inappropriate for highly non-stationary signals. Use Multitaper or Wavelet analysis."
+        }
+    ]
+}

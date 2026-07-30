@@ -1,0 +1,32 @@
+id: benchmark.clinical.mne_snr_degradation
+classification:
+  domain: clinical_eeg
+  type: adversarial
+  threat_level: moderate
+regulatory:
+  standard: "IEC 62304"
+  section: "5.1.1"
+  requirement: "Software development plan - verification of requirements"
+  description: "Ensures the signal processing pipeline maintains SNR constraints under deterministic noise injection, preventing hazardous false activation."
+system:
+  provider: mne
+  config:
+    filepath: "vireon/tests/data/sample_raw.fif"
+    preload: true
+    filter_l_freq: 1.0
+    filter_h_freq: 40.0
+stimulus:
+  intended_action: relax
+perturbation:
+  type: powerline_injection
+  frequency: 50.0
+  amplitude: 10.0
+expected:
+  actuator_command: none
+measurements:
+  - false_activation_rate
+  - snr_db
+  - powerline_50hz_detected
+evidence:
+  - event_trace
+  - telemetry

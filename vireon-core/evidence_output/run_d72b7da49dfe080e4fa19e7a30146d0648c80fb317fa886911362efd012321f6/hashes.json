@@ -1,0 +1,8 @@
+{
+  "assertions.json": "483221cf859ccdefa7b7637a93b6d7c02c431a9ed4efaec148cc8e4924e8427d",
+  "environment.json": "ce571b656628580ee2e740ab69a006f4ab8b9488b1db4b38917560add9e4bd1f",
+  "events.json": "2a258133e846adf63d38bb6aacb3b9b14459f35d861c90d1bee1fa5ba973be8d",
+  "manifest.json": "ca4b40c67aee4879773230be722838d7de709fa6f1531dea7de0c1dffa010aed",
+  "measurements.json": "da74e34f196163199bf8f98daecd1345553f056bdbf3392a6a0349c45fae5d13",
+  "telemetry.parquet": "fd67f1869a509bc5c85250f899a074dad252c195efa88b6190755f16a2fb252c"
+}

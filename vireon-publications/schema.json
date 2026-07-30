@@ -1,0 +1,43 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Executable Publication Bundle",
+    "description": "Schema for a complete reproducible publication bundle in VIREON.",
+    "type": "object",
+    "properties": {
+        "paper": {
+            "type": "string",
+            "description": "DOI or URI to the published paper."
+        },
+        "manifest": {
+            "type": "object",
+            "description": "Metadata manifest containing versions and authors."
+        },
+        "environment": {
+            "type": "object",
+            "description": "Container or dependency lockfile definition."
+        },
+        "dataset": {
+            "type": "string",
+            "description": "URI to the immutable dataset."
+        },
+        "workflow": {
+            "type": "object",
+            "description": "The DAG of plugin capabilities to execute."
+        },
+        "evidence": {
+            "type": "object",
+            "description": "The resulting IEvidence bundle after execution."
+        },
+        "verification_report": {
+            "type": "object",
+            "description": "Numerical comparison against expected outputs."
+        },
+        "expected_outputs": {
+            "type": "object",
+            "description": "The tolerance bounds required for successful reproduction."
+        }
+    },
+    "required": [
+        "paper", "manifest", "environment", "dataset", "workflow", "evidence", "verification_report", "expected_outputs"
+    ]
+}

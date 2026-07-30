@@ -1,0 +1,23 @@
+{
+    "reference": {
+        "doi": "10.1234/vireon.ref.001",
+        "modality": "EEG",
+        "dataset": "CHB-MIT",
+        "implementation": "scipy.signal.welch",
+        "software_versions": {
+            "scipy": "1.18.0",
+            "numpy": "2.0.0"
+        },
+        "expected_metrics": {
+            "peak_alpha_hz": 9.5,
+            "delta_power_db": -12.4
+        },
+        "confidence_intervals": {
+            "peak_alpha_hz": [9.4, 9.6]
+        },
+        "tolerance": {
+            "absolute_error_max": 1e-12
+        },
+        "citation": "Author et al. (2025). Reference PSD bounds for pediatric seizure detection."
+    }
+}

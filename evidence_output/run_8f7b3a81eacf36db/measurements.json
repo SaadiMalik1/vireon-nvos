@@ -1,0 +1,67 @@
+[
+  {
+    "metric_name": "false_activation_rate",
+    "value": 0.0,
+    "unit": "metric"
+  },
+  {
+    "metric_name": "command_substitution_rate",
+    "value": 0.0,
+    "unit": "metric"
+  },
+  {
+    "metric_name": "causal_propagation_latency",
+    "value": 0.006,
+    "unit": "metric"
+  },
+  {
+    "metric_name": "snr_db",
+    "value": 0.08285240230529142,
+    "unit": "metric"
+  },
+  {
+    "metric_name": "delta_band_power",
+    "value": 13.412838757038116,
+    "unit": "metric"
+  },
+  {
+    "metric_name": "theta_band_power",
+    "value": 15.293877124786377,
+    "unit": "metric"
+  },
+  {
+    "metric_name": "alpha_band_power",
+    "value": 4083.5750732421875,
+    "unit": "metric"
+  },
+  {
+    "metric_name": "beta_band_power",
+    "value": 323.748628616333,
+    "unit": "metric"
+  },
+  {
+    "metric_name": "gamma_band_power",
+    "value": 8.938169717788696,
+    "unit": "metric"
+  },
+  {
+    "metric_name": "mu_band_power",
+    "value": 5040.954620361328,
+    "unit": "metric"
+  },
+  {
+    "metric_name": "powerline_50hz_detected",
+    "value": 0.0,
+    "unit": "metric"
+  },
+  {
+    "metric_name": "powerline_60hz_detected",
+    "value": 0.0,
+    "unit": "metric"
+  },
+  {
+    "metric_name": "p300_detected",
+    "value": 0.0,
+    "unit": "metric"
+  }
+]

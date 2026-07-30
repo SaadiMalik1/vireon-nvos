@@ -1,0 +1,24 @@
+id: benchmark.generated.exp-0025-generated
+classification:
+  domain: clinical_eeg
+  type: normal
+  threat_level: none
+regulatory:
+  standard: IEC 62304
+  section: 5.1.1
+  requirement: Software development plan
+  description: Validation against real clinical datasets.
+system:
+  provider: mne
+  config:
+    filepath: vireon/data/flat/S002_R001.edf
+    preload: true
+stimulus:
+  intended_action: relax
+expected:
+  actuator_command: none
+measurements:
+- false_activation_rate
+evidence:
+- event_trace
+- telemetry

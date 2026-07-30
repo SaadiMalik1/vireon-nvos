@@ -1,0 +1,10 @@
+{
+  "scenario_id": "benchmark.signal.eeg_baseline_snr",
+  "execution_hash": "e6630077c3cbf715",
+  "version": "1.0.0",
+  "sample_rate": 250.0,
+  "num_channels": 8,
+  "duration_sec": 2.0,
+  "seed": 42,
+  "has_real_telemetry": true
+}

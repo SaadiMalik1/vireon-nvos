@@ -1,0 +1,23 @@
+id: benchmark.cyber.cyb-001-powerline
+classification:
+  domain: clinical_eeg
+  type: adversarial
+  threat_level: high
+regulatory:
+  standard: IEC 62304
+  section: 5.1.1
+  requirement: Software verification
+system:
+  provider: mne
+  config:
+    filepath: vireon/data/raw/eegbci/S001R04.edf
+    preload: true
+stimulus:
+  intended_action: move_hands
+expected:
+  actuator_command: move_hands
+measurements:
+- snr_db
+evidence:
+- event_trace
+- telemetry

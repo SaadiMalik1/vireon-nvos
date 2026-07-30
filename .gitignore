@@ -1,0 +1,74 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+
+# Rust
+target/
+Cargo.lock
+
+# Node
+node_modules/
+.next/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.*
+
+# Logs
+*.log
+
+# Data
+datasets/
+downloads/
+cache/
+tmp/
+
+# Generated results
+results/
+artifacts/
+reports/
+benchmarks/output/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# MNE / FreeSurfer
+subjects/
+freesurfer/
+*.fif
+*.edf
+
+# LSL recordings
+*.xdf
+
+# Coverage
+coverage.xml
+
+# Python wheels
+*.whl
+
+# Local configs
+config.local.*

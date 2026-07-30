@@ -1,0 +1,24 @@
+id: benchmark.generated.exp-0038-generated
+classification:
+  domain: clinical_eeg
+  type: adversarial
+  threat_level: moderate
+regulatory:
+  standard: IEC 62304
+  section: 5.1.1
+  requirement: Software development plan
+  description: Validation against real clinical datasets.
+system:
+  provider: mne
+  config:
+    filepath: vireon/data/flat/S003_R003.edf
+    preload: true
+stimulus:
+  intended_action: relax
+expected:
+  actuator_command: none
+measurements:
+- snr_db
+evidence:
+- event_trace
+- telemetry

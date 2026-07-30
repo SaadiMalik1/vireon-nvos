@@ -1,0 +1,23 @@
+id: benchmark.agency.agn-001-commandsub
+classification:
+  domain: clinical_eeg
+  type: adversarial
+  threat_level: critical
+regulatory:
+  standard: IEC 62304
+  section: 5.1.1
+  requirement: Software verification
+system:
+  provider: mne
+  config:
+    filepath: vireon/data/raw/somato/sub-01/meg/sub-01_task-somato_meg.fif
+    preload: true
+stimulus:
+  intended_action: stimulus_presentation
+expected:
+  actuator_command: stimulus_presentation
+measurements:
+- causal_propagation_latency
+evidence:
+- event_trace
+- telemetry

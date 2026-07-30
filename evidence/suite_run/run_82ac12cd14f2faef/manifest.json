@@ -1,0 +1,10 @@
+{
+  "scenario_id": "benchmark.attack.martinovic_2012_p300",
+  "execution_hash": "82ac12cd14f2faef",
+  "version": "1.0.0",
+  "sample_rate": 250.0,
+  "num_channels": 8,
+  "duration_sec": 2.0,
+  "seed": 42,
+  "has_real_telemetry": true
+}

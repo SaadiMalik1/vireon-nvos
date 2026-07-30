@@ -1,0 +1,28 @@
+{
+    "@context": {
+        "vk": "https://vireon.org/knowledge/ontology#"
+    },
+    "@id": "vk:Methodology",
+    "methods": {
+        "Welch": {
+            "@id": "vk:Method:Welch",
+            "name": "Welch's Method for PSD Estimation",
+            "assumptions": [
+                "vk:Assumption:Stationarity"
+            ]
+        },
+        "Multitaper": {
+            "@id": "vk:Method:Multitaper",
+            "name": "Multitaper PSD Estimation",
+            "assumptions": [
+                "vk:Assumption:ShortDuration"
+            ]
+        }
+    },
+    "assumptions": {
+        "Stationarity": {
+            "@id": "vk:Assumption:Stationarity",
+            "description": "The statistical properties of the process do not change over time."
+        }
+    }
+}

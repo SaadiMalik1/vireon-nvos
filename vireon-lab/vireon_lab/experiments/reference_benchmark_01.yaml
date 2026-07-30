@@ -1,0 +1,28 @@
+id: reference_benchmark_01
+classification:
+  type: normal
+  threat_level: "0"
+  intended_agency: complete
+system:
+  provider: synthetic_signal
+  config:
+    seed: 12345
+    num_channels: 4
+    duration_sec: 10.0
+    noise_level: 0.05
+    include_p300: true
+stimulus:
+  type: motor_imagery
+  target: left_hand
+measurements:
+  - snr_db
+  - decoder_accuracy
+  - p300_detected
+evidence:
+  - events
+  - measurements
+  - telemetry_hash
+expected:
+  snr_db: "> 0.0"
+  decoder_accuracy: ">= 0.8"
+  p300_detected: "== 1.0"

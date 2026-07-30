@@ -1,0 +1,23 @@
+id: benchmark.decoder.dec-001-crosssubject
+classification:
+  domain: clinical_eeg
+  type: normal
+  threat_level: none
+regulatory:
+  standard: IEC 62304
+  section: 5.1.1
+  requirement: Software verification
+system:
+  provider: mne
+  config:
+    filepath: vireon/data/raw/eegbci/S002R04.edf
+    preload: true
+stimulus:
+  intended_action: move_feet
+expected:
+  actuator_command: move_feet
+measurements:
+- snr_db
+evidence:
+- event_trace
+- telemetry

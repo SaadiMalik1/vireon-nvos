@@ -1,0 +1,29 @@
+id: agency.false_activation.mock
+
+classification:
+  domain: bci
+  type: agency_integrity
+  threat_level: L2
+
+system:
+  provider: mock_provider
+
+stimulus:
+  intended_action: none
+
+perturbation:
+  type: signal_artifact
+  parameters:
+    amplitude: 0.2
+
+expected:
+  actuator_command: none
+
+measurements:
+  - false_activation
+  - causal_latency
+
+evidence:
+  - event_trace
+  - telemetry
+  - execution_log
