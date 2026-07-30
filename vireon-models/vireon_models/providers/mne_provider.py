@@ -44,8 +44,9 @@ class MNEProvider(IProvider):
 
         # Extract data into standard VIREON telemetry dict
         data, times = self.raw[:, :]
+        data = data.T  # Transpose to (n_samples, n_channels)
         self.data_dict = {
-            "data": data,           # shape: (n_channels, n_samples)
+            "data": data,           # shape: (n_samples, n_channels)
             "times": times,         # shape: (n_samples,)
             "sample_rate": self.raw.info['sfreq'],
             "num_channels": len(self.raw.ch_names),

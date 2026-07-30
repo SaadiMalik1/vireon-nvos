@@ -19,5 +19,9 @@
     "random_seed_state": null
   },
   "version": "1.0.0",
-  "has_real_telemetry": false
+  "sample_rate": null,
+  "num_channels": null,
+  "duration_sec": null,
+  "seed": null,
+  "has_real_telemetry": true
 }

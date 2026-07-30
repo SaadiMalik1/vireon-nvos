@@ -38,6 +38,13 @@ class ScientificContract(BaseModel):
     expected_numerical_tolerances: Dict[str, float] = {}
     calibration_provenance: str = ""
 
+class ScientificContractViolation(Exception):
+    """
+    Raised when a plugin's execution violates its declared Scientific Contract
+    (e.g., input data violates mathematical assumptions or numerical tolerances).
+    """
+    pass
+
 class PluginCapability(BaseModel):
     id: str
     version: str

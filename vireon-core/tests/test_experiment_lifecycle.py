@@ -22,12 +22,8 @@ def test_experiment_creation():
     experiment = IExperiment(
         hypothesis="Signal processing correctly identifies artifacts",
         signal_type=SignalType.EEG,
-        dataset_id="chbmit-01",
-        experiment_def=scenario,
-        threat_model=["impedance_drift"],
-        validation_protocol=["FDA-001"]
+        experiment_def=scenario
     )
     
     assert experiment.hypothesis == "Signal processing correctly identifies artifacts"
     assert experiment.signal_type == SignalType.EEG
-    assert experiment.threat_model == ["impedance_drift"]

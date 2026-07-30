@@ -51,26 +51,10 @@ class SphereModel(IHeadModel):
         )
         
     def compute_leadfield(self, dipole_positions: np.ndarray, electrode_positions: np.ndarray) -> np.ndarray:
-        n_elec = electrode_positions.shape[0]
-        n_dip = dipole_positions.shape[0]
-        leadfield = np.zeros((n_elec, n_dip * 3))
-        
-        for i in range(n_elec):
-            for j in range(n_dip):
-                r_e = electrode_positions[i]
-                r_d = dipole_positions[j]
-                
-                r_vec = r_e - r_d
-                r_mag = np.linalg.norm(r_vec)
-                
-                if r_mag > 1e-6:
-                    potential_grad = r_vec / (4 * np.pi * self.conductivity * (r_mag ** 3))
-                else:
-                    potential_grad = np.zeros(3)
-                    
-                leadfield[i, j*3:(j+1)*3] = potential_grad
-                
-        return leadfield
+        # TODO: Implement the correct single-sphere analytical solution (e.g., Frank 1952).
+        # The previous implementation used an infinite homogeneous medium approximation 
+        # (r_vec / (4 * pi * sigma * r_mag^3)), which is scientifically inaccurate for surface EEG.
+        raise NotImplementedError("Single-sphere analytical solution is pending implementation.")
 
 class BEMModel(IHeadModel):
     """
