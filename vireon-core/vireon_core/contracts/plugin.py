@@ -5,16 +5,16 @@ from enum import IntEnum
 from vireon_core.contracts.base import IScientificObject, SignalType
 
 class ScientificReadinessLevel(IntEnum):
-    SRL_0 = 0  # Concept only
-    SRL_1 = 1  # Mathematical implementation
-    SRL_2 = 2  # Unit tested
-    SRL_3 = 3  # Cross-validated against another tool
-    SRL_4 = 4  # Verified on public datasets
-    SRL_5 = 5  # Literature reproduced
-    SRL_6 = 6  # Used in published research
-    SRL_7 = 7  # Multi-laboratory validation
-    SRL_8 = 8  # Clinical evaluation
-    SRL_9 = 9  # Regulatory-grade evidence
+    SRL_0 = 0  # Unverified Idea
+    SRL_1 = 1  # Mathematical Proof
+    SRL_2 = 2  # Synthetic Validation
+    SRL_3 = 3  # Numerical Equivalence
+    SRL_4 = 4  # Adversarial Validation
+    SRL_5 = 5  # Empirical Validation
+    SRL_6 = 6  # Physiological Validation
+    SRL_7 = 7  # Multi-Lab Reproducibility
+    SRL_8 = 8  # Clinical Retrospective
+    SRL_9 = 9  # Regulatory Grade
 
 class ScientificContract(BaseModel):
     mathematical_assumptions: List[str] = []
@@ -90,6 +90,21 @@ class IPlugin(ABC):
     @property
     @abstractmethod
     def outputs(self) -> List[Type[IScientificObject]]:
+        pass
+
+    @property
+    @abstractmethod
+    def plugin_type(self) -> str:
+        """
+        Returns the specific type of plugin (e.g., 'method', 'hardware', 'artifact').
+        """
+        pass
+
+    @abstractmethod
+    def initialize(self, config: Dict[str, Any]) -> None:
+        """
+        Initializes the plugin with the given configuration.
+        """
         pass
 
     @abstractmethod

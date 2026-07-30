@@ -45,9 +45,16 @@ class ExperimentRunner:
             try:
                 evidence_bundles = []
                 # 1. Execution
+                from vireon_validation.agency import AgencyValidator
+                from vireon_validation.metrics import generate_signal_metrics
                 for i in range(self.repetitions):
                     # We pass seed = i to get different noise/attacks per repetition
-                    evidence = ExecutionEngine.run(experiment, seed=i)
+                    evidence = ExecutionEngine.run(
+                        experiment, 
+                        seed=i,
+                        agency_validator_cls=AgencyValidator,
+                        signal_metrics_func=generate_signal_metrics
+                    )
                     evidence_bundles.append(evidence)
                     
                 # 2. Decision Engine

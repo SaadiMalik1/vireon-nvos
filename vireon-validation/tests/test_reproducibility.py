@@ -18,7 +18,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-from vireon_lab.scenarios.schema import load_scenario_from_yaml
+from vireon_lab.experiments.schema import load_experiment_from_yaml
 from vireon_core.kernel.execution_engine import ExecutionEngine
 from vireon_validation.evidence.generator import EvidenceGenerator
 from vireon_lab.replay import ReplayEngine
@@ -32,12 +32,12 @@ class TestDeterministicExecution(unittest.TestCase):
 
     def test_same_seed_same_hash(self):
         """Two executions with the same seed must produce the same execution hash."""
-        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
+        filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
         
-        scenario1 = load_scenario_from_yaml(filepath)
+        scenario1 = load_experiment_from_yaml(filepath)
         evidence1 = ExecutionEngine.run(scenario1, seed=42)
         
-        scenario2 = load_scenario_from_yaml(filepath)
+        scenario2 = load_experiment_from_yaml(filepath)
         evidence2 = ExecutionEngine.run(scenario2, seed=42)
 
         self.assertEqual(evidence1.execution_hash, evidence2.execution_hash)
@@ -46,10 +46,10 @@ class TestDeterministicExecution(unittest.TestCase):
         """Two executions with the same seed must produce identical event traces."""
         filepath = os.path.join(SCENARIOS_DIR, "benchmark_motor_imagery_erd.yaml")
         
-        scenario1 = load_scenario_from_yaml(filepath)
+        scenario1 = load_experiment_from_yaml(filepath)
         evidence1 = ExecutionEngine.run(scenario1, seed=99)
         
-        scenario2 = load_scenario_from_yaml(filepath)
+        scenario2 = load_experiment_from_yaml(filepath)
         evidence2 = ExecutionEngine.run(scenario2, seed=99)
         
         # Event IDs must match (deterministic RNG)
@@ -66,10 +66,10 @@ class TestDeterministicExecution(unittest.TestCase):
         """Two executions with the same seed must produce identical measurements."""
         filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_artifact_attack.yaml")
         
-        scenario1 = load_scenario_from_yaml(filepath)
+        scenario1 = load_experiment_from_yaml(filepath)
         evidence1 = ExecutionEngine.run(scenario1, seed=42)
         
-        scenario2 = load_scenario_from_yaml(filepath)
+        scenario2 = load_experiment_from_yaml(filepath)
         evidence2 = ExecutionEngine.run(scenario2, seed=42)
         
         metrics1 = {m.metric_name: m.value for m in evidence1.measurements}
@@ -78,12 +78,12 @@ class TestDeterministicExecution(unittest.TestCase):
 
     def test_same_seed_same_telemetry(self):
         """Two executions with the same seed must produce bit-exact identical numpy data."""
-        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
+        filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
         
-        scenario1 = load_scenario_from_yaml(filepath)
+        scenario1 = load_experiment_from_yaml(filepath)
         evidence1 = ExecutionEngine.run(scenario1, seed=42)
         
-        scenario2 = load_scenario_from_yaml(filepath)
+        scenario2 = load_experiment_from_yaml(filepath)
         evidence2 = ExecutionEngine.run(scenario2, seed=42)
         
         data1 = evidence1._raw_provider_data["data"]
@@ -92,24 +92,24 @@ class TestDeterministicExecution(unittest.TestCase):
 
     def test_different_seed_different_hash(self):
         """Two executions with different seeds must produce different execution hashes."""
-        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
+        filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
         
-        scenario1 = load_scenario_from_yaml(filepath)
+        scenario1 = load_experiment_from_yaml(filepath)
         evidence1 = ExecutionEngine.run(scenario1, seed=42)
         
-        scenario2 = load_scenario_from_yaml(filepath)
+        scenario2 = load_experiment_from_yaml(filepath)
         evidence2 = ExecutionEngine.run(scenario2, seed=999)
         
         self.assertNotEqual(evidence1.execution_hash, evidence2.execution_hash)
 
     def test_different_seed_different_events(self):
         """Different seeds must produce different event IDs."""
-        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
+        filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
         
-        scenario1 = load_scenario_from_yaml(filepath)
+        scenario1 = load_experiment_from_yaml(filepath)
         evidence1 = ExecutionEngine.run(scenario1, seed=42)
         
-        scenario2 = load_scenario_from_yaml(filepath)
+        scenario2 = load_experiment_from_yaml(filepath)
         evidence2 = ExecutionEngine.run(scenario2, seed=999)
         
         ids1 = [e.event_id for e in evidence1.events]
@@ -122,7 +122,7 @@ class TestReplayEngine(unittest.TestCase):
 
     def test_execute_and_compare_reproducible(self):
         """ReplayEngine.execute_and_compare should confirm reproducibility."""
-        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
+        filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
         result = ReplayEngine.execute_and_compare(filepath, seed=42)
 
         self.assertTrue(result["reproducible"])
@@ -133,7 +133,7 @@ class TestReplayEngine(unittest.TestCase):
 
     def test_execute_and_compare_with_expected_hash(self):
         """ReplayEngine should match a known execution hash."""
-        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
+        filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
         
         # First, get the hash
         run = ReplayEngine.execute_scenario(filepath, seed=42)
@@ -167,8 +167,8 @@ class TestBundleIntegrity(unittest.TestCase):
 
     def test_verify_untampered_bundle(self):
         """An untampered evidence bundle should pass integrity verification."""
-        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
-        scenario = load_scenario_from_yaml(filepath)
+        filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
+        scenario = load_experiment_from_yaml(filepath)
         evidence = ExecutionEngine.run(scenario, seed=42)
         
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -182,8 +182,8 @@ class TestBundleIntegrity(unittest.TestCase):
 
     def test_detect_tampered_bundle(self):
         """A tampered evidence bundle should fail integrity verification."""
-        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
-        scenario = load_scenario_from_yaml(filepath)
+        filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
+        scenario = load_experiment_from_yaml(filepath)
         evidence = ExecutionEngine.run(scenario, seed=42)
         
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -201,8 +201,8 @@ class TestBundleIntegrity(unittest.TestCase):
 
     def test_bundle_contains_environment(self):
         """Evidence bundle should contain environment.json."""
-        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
-        scenario = load_scenario_from_yaml(filepath)
+        filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
+        scenario = load_experiment_from_yaml(filepath)
         evidence = ExecutionEngine.run(scenario, seed=42)
         
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -220,8 +220,8 @@ class TestBundleIntegrity(unittest.TestCase):
 
     def test_bundle_contains_hashes(self):
         """Evidence bundle should contain hashes.json with all file checksums."""
-        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
-        scenario = load_scenario_from_yaml(filepath)
+        filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
+        scenario = load_experiment_from_yaml(filepath)
         evidence = ExecutionEngine.run(scenario, seed=42)
         
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -245,8 +245,8 @@ class TestTelemetryCrossVerification(unittest.TestCase):
 
     def test_cross_verify_real_telemetry(self):
         """Recomputing metrics from stored telemetry.npz should match measurements.json."""
-        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
-        scenario = load_scenario_from_yaml(filepath)
+        filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
+        scenario = load_experiment_from_yaml(filepath)
         evidence = ExecutionEngine.run(scenario, seed=42)
         
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -260,15 +260,15 @@ class TestTelemetryCrossVerification(unittest.TestCase):
 
     def test_two_bundles_identical(self):
         """Two bundles from same seed should have identical hashes.json content."""
-        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
+        filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
 
         with tempfile.TemporaryDirectory() as tmpdir1, tempfile.TemporaryDirectory() as tmpdir2:
-            scenario1 = load_scenario_from_yaml(filepath)
+            scenario1 = load_experiment_from_yaml(filepath)
             evidence1 = ExecutionEngine.run(scenario1, seed=42)
             gen1 = EvidenceGenerator(evidence1, tmpdir1)
             bundle1 = gen1.generate_bundle()
 
-            scenario2 = load_scenario_from_yaml(filepath)
+            scenario2 = load_experiment_from_yaml(filepath)
             evidence2 = ExecutionEngine.run(scenario2, seed=42)
             gen2 = EvidenceGenerator(evidence2, tmpdir2)
             bundle2 = gen2.generate_bundle()
@@ -293,10 +293,20 @@ class TestM1EndToEndProof(unittest.TestCase):
     """
     def test_baseline_noop_deterministic(self):
         filepath = os.path.join(SCENARIOS_DIR, "baseline_noop_001.yaml")
-        scenario = load_scenario_from_yaml(filepath)
+        scenario = load_experiment_from_yaml(filepath)
         
-        evidence1 = ExecutionEngine.run(scenario, seed=123)
-        evidence2 = ExecutionEngine.run(scenario, seed=123)
+        from vireon_validation.agency import AgencyValidator
+        from vireon_validation.metrics import generate_signal_metrics
+        evidence1 = ExecutionEngine.run(
+            scenario, seed=123,
+            agency_validator_cls=AgencyValidator,
+            signal_metrics_func=generate_signal_metrics
+        )
+        evidence2 = ExecutionEngine.run(
+            scenario, seed=123,
+            agency_validator_cls=AgencyValidator,
+            signal_metrics_func=generate_signal_metrics
+        )
         
         # M1 criteria: same seed yields identical execution hash
         self.assertEqual(evidence1.execution_hash, evidence2.execution_hash)
@@ -309,6 +319,6 @@ class TestM1EndToEndProof(unittest.TestCase):
 
         # M1 criteria: Execution context is recorded
         self.assertIsNotNone(evidence1.execution_context)
-        self.assertEqual(evidence1.execution_context.scenario_id, "baseline.no_op.001")
+        self.assertEqual(evidence1.execution_context.experiment_id, "baseline.no_op.001")
         self.assertEqual(evidence1.execution_context.deterministic_seed, 123)
         self.assertEqual(evidence1.execution_context.provider_metadata.get("provider_type"), "MockProvider")

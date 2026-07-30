@@ -24,7 +24,7 @@ def _build_provider(system_config: Dict[str, Any]) -> IProvider:
     provider_name = system_config.get("provider", "mock_provider")
     config = system_config.get("config", {})
 
-    if provider_name == "synthetic_signal":
+    if provider_name == "synthetic_eeg":
         from vireon_models.providers.datasets import SyntheticSignalProvider
         return SyntheticSignalProvider(**config)
     elif provider_name == "motor_imagery":

@@ -147,7 +147,7 @@ export function SignalProcessingPanel() {
   const [provenance, setProvenance] = useState<any>(null);
 
   useEffect(() => {
-    fetch('http://localhost:8001/api/processing/config')
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/processing/config`)
       .then(res => res.json())
       .then(data => setConfig(data))
       .catch(err => console.error("Failed to load processing config", err));
@@ -157,7 +157,7 @@ export function SignalProcessingPanel() {
     const newConfig = { ...config, [section]: { ...config[section], [key]: value } };
     setConfig(newConfig);
     
-    fetch('http://localhost:8001/api/processing/config', {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/processing/config`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newConfig)

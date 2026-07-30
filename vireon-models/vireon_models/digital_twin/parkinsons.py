@@ -20,10 +20,16 @@ class ParkinsonsDiseaseModel(IDiseaseModel):
     def __init__(self, beta_amplification_factor: float = 2.5):
         self.beta_amplification_factor = beta_amplification_factor
 
-    def apply_pathology(self, neural_source: np.ndarray) -> np.ndarray:
-        # In a real model, this would use a Fourier or wavelet transform to selectively 
-        # amplify the beta band. For this stub, we simulate a broadband pathological amplitude increase.
-        return neural_source * self.beta_amplification_factor
+    def apply_pathology(self, neural_source: np.ndarray, sample_rate: float) -> np.ndarray:
+        from scipy.signal import butter, filtfilt
+        nyq = 0.5 * sample_rate
+        low = 13.0 / nyq
+        high = 30.0 / nyq
+        # Filter for beta band
+        b, a = butter(4, [low, high], btype='band')
+        beta_band = filtfilt(b, a, neural_source)
+        # Recombine original with amplified beta
+        return neural_source + (beta_band * (self.beta_amplification_factor - 1.0))
 
 class LevodopaMedicationModel(IMedicationModel):
     """

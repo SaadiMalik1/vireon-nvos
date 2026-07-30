@@ -64,16 +64,23 @@ class DecoderEvaluator:
             X_train, y_train = X[train_idx], y[train_idx]
             X_test, y_test = X[test_idx], y[test_idx]
             
-            clf.fit(X_train, y_train)
-            y_pred = clf.predict(X_test)
-            y_prob = clf.predict_proba(X_test)[:, 1] if len(np.unique(y)) == 2 else clf.predict_proba(X_test)
-            
-            y_true_all.extend(y_test)
-            y_pred_all.extend(y_pred)
-            y_prob_all.extend(y_prob)
+            try:
+                clf.fit(X_train, y_train)
+                y_pred = clf.predict(X_test)
+                y_prob = clf.predict_proba(X_test)[:, 1] if len(np.unique(y)) == 2 else clf.predict_proba(X_test)
+                
+                y_true_all.extend(y_test)
+                y_pred_all.extend(y_pred)
+                y_prob_all.extend(y_prob)
+            except ValueError as e:
+                # E.g. The number of samples must be more than the number of classes.
+                continue
             
         training_time = time.time() - start_time
         
+        if not y_true_all:
+            return cls._empty_metrics()
+
         y_true = np.array(y_true_all)
         y_pred = np.array(y_pred_all)
         y_prob = np.array(y_prob_all)

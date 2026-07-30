@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
 
 from vireon_core.agency.causal_graph import CausalGraph, CausalStage
 from vireon_core.kernel.execution_engine import ExecutionEngine
-from vireon_lab.scenarios.schema import load_scenario_from_yaml
+from vireon_lab.experiments.schema import load_experiment_from_yaml
 import tempfile
 import yaml
 
@@ -37,7 +37,7 @@ class TestCausalGraph(unittest.TestCase):
             temp_path = f.name
             
         try:
-            scenario = load_scenario_from_yaml(temp_path)
+            scenario = load_experiment_from_yaml(temp_path)
             evidence = ExecutionEngine.run(scenario)
                         
             # Verify events match causal stages

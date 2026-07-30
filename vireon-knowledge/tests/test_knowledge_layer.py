@@ -19,8 +19,7 @@ def test_decision_engine_evaluation():
     
     # Passing evidence
     context = IExecutionContext(
-        experiment_id="exp-1",
-        scenario_id="scen-1",
+        experiment_id="scen-1",
         deterministic_seed=42,
         provider_metadata={},
         version_info="1.0.0",
@@ -28,7 +27,7 @@ def test_decision_engine_evaluation():
     )
     
     evidence_pass = IEvidence(
-        scenario_id="scen-1",
+        experiment_id="scen-1",
         execution_hash="hash1",
         execution_context=context,
         telemetry_path="path",
@@ -45,7 +44,7 @@ def test_decision_engine_evaluation():
     
     # Failing evidence
     evidence_fail = IEvidence(
-        scenario_id="scen-1",
+        experiment_id="scen-1",
         execution_hash="hash2",
         execution_context=context,
         telemetry_path="path",
@@ -60,7 +59,7 @@ def test_decision_engine_evaluation():
     
     # Missing evidence
     evidence_missing = IEvidence(
-        scenario_id="scen-1",
+        experiment_id="scen-1",
         execution_hash="hash3",
         execution_context=context,
         telemetry_path="path",

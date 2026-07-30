@@ -23,7 +23,7 @@ export function ValidationPanel() {
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:8002/api/scenarios')
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/scenarios`)
       .then(res => res.json())
       .then(data => {
         setScenarios(data.scenarios);
@@ -41,11 +41,11 @@ export function ValidationPanel() {
     setEvidenceData(null);
 
     try {
-      const res = await fetch(`http://localhost:8002/api/execute/${selectedScenario}`, { method: 'POST' });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/execute/${selectedScenario}`, { method: 'POST' });
       const data = await res.json();
       setExecutionResult(data);
 
-      const evRes = await fetch(`http://localhost:8002/api/evidence/${data.execution_hash}`);
+      const evRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/evidence/${data.execution_hash}`);
       const evData = await evRes.json();
       setEvidenceData(evData);
     } catch (err) {

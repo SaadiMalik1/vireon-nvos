@@ -19,9 +19,9 @@ def test_sleep_staging():
         "difference": diff
     }
     
-    os.makedirs("/home/ronin/Documents/VIREON/vireon-verification/results", exist_ok=True)
+    os.makedirs(os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-verification/results"), exist_ok=True)
     
-    metrics_file = "/home/ronin/Documents/VIREON/vireon-verification/results/literature_metrics.json"
+    metrics_file = os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-verification/results/literature_metrics.json")
     if os.path.exists(metrics_file):
         with open(metrics_file, "r") as f:
             metrics = json.load(f)

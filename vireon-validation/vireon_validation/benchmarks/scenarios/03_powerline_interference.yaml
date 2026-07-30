@@ -1,0 +1,22 @@
+id: benchmark.powerline.interference
+classification:
+  domain: clinical
+  type: adversarial
+system:
+  provider: eeg_dataset_provider
+  dataset: chbmit
+stimulus:
+  intended_action: none
+attack_model:
+  type: powerline_noise
+  description: "60Hz powerline interference injection"
+  parameters:
+    frequency: 60.0
+    amplitude_uv: 50.0
+expected:
+  actuator_command: none
+measurements:
+  - snr_degradation
+  - filter_attenuation_db
+evidence:
+  - event_trace

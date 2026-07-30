@@ -9,7 +9,7 @@ def test_psd_crossval():
     Verifies VIREON's PSD implementation against SciPy's periodogram.
     """
     # Load reference signal
-    ref_dir = "/home/ronin/Documents/VIREON/vireon-reference/reference"
+    ref_dir = os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-reference/reference")
     signal = np.load(os.path.join(ref_dir, "test_signal.npy"))
     fs = 250.0
 
@@ -59,8 +59,8 @@ def test_psd_crossval():
     assert rmse < 1e-3, "PSD RMSE too high"
 
     # Write metrics to a dashboard-friendly file
-    os.makedirs("/home/ronin/Documents/VIREON/vireon-verification/results", exist_ok=True)
-    with open("/home/ronin/Documents/VIREON/vireon-verification/results/psd_metrics.json", "w") as f:
+    os.makedirs(os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-verification/results"), exist_ok=True)
+    with open(os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-verification/results/psd_metrics.json"), "w") as f:
         import json
         json.dump({
             "algorithm": "PSD",

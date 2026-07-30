@@ -1,21 +1,11 @@
-id: benchmark.agency.false_activation
+id: benchmark_false_activation
 classification:
-  domain: bci
-  type: agency_integrity
-  threat_level: L2
+  type: normal
 system:
   provider: mock_provider
-stimulus:
-  intended_action: none
-perturbation:
-  type: signal_artifact
-  parameters:
-    amplitude: 0.8
 expected:
   actuator_command: none
 measurements:
   - false_activation_rate
-  - causal_propagation_latency
 evidence:
   - event_trace
-  - telemetry

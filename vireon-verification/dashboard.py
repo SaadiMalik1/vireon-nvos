@@ -3,7 +3,7 @@ import json
 from glob import glob
 
 def generate_dashboard():
-    results_dir = "/home/ronin/Documents/VIREON/vireon-verification/results"
+    results_dir = os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-verification/results")
     
     if not os.path.exists(results_dir):
         print("No verification results found. Run the test suites first.")
@@ -64,7 +64,8 @@ def generate_dashboard():
         print("No literature results.")
 
     print("\n========================================")
-    print(f"OVERALL VERIFICATION STATUS: {'PASS' if all_passed else 'FAIL'}")
+    status_str = 'PASS' if all_passed else 'FAIL'
+    print(f"OVERALL VERIFICATION STATUS: {status_str}")
     print("========================================")
 
 if __name__ == "__main__":

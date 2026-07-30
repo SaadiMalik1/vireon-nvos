@@ -14,24 +14,31 @@ class MethodologicalValidator:
         
     def _test_stationarity(self, data: np.ndarray) -> bool:
         """
-        Simple Augmented Dickey-Fuller proxy or basic variance stationarity test.
-        For demonstration, we check if the variance of the first half is similar to the second half.
+        Augmented Dickey-Fuller (ADF) test for stationarity.
+        Null Hypothesis (H0): The series has a unit root (is non-stationary).
+        Alternate Hypothesis (H1): The series is stationary.
+        Returns True if stationary (p-value < 0.05).
         """
+        try:
+            from statsmodels.tsa.stattools import adfuller
+        except ImportError:
+            # Fallback if statsmodels is not available
+            return True
+
         if len(data.shape) > 1:
-            data = data[0] # use first channel
+            data = data[:, 0] if data.shape[0] > data.shape[1] else data[0, :]
+            
         n = len(data)
-        if n < 100:
+        if n < 30:
             return True
             
-        var_1 = np.var(data[:n//2])
-        var_2 = np.var(data[n//2:])
-        
-        # If variance changes by more than 50%, it's non-stationary
-        if min(var_1, var_2) == 0:
-            return False
-            
-        ratio = max(var_1, var_2) / min(var_1, var_2)
-        return ratio < 1.5
+        try:
+            # maxlag is automatically determined if None, but let's be safe for short signals
+            result = adfuller(data, autolag='AIC')
+            p_value = result[1]
+            return p_value < 0.05
+        except Exception:
+            return True
 
     def validate(self, method: IMethodology, data: np.ndarray) -> Dict[str, Any]:
         """

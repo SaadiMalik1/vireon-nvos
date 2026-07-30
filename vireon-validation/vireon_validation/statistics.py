@@ -2,7 +2,7 @@ import numpy as np
 from scipy import stats
 from typing import Callable, Tuple, Any
 
-def compute_bootstrap_ci(data: np.ndarray, statistic_fn: Callable, n_resamples: int = 1000) -> Tuple[float, float, list[float]]:
+def compute_bootstrap_ci(data: np.ndarray, statistic_fn: Callable, n_resamples: int = 1000, seed: int = 42) -> Tuple[float, float, list[float]]:
     """
     Computes the point estimate, variance, and 95% bootstrap confidence interval
     for a given statistic function.
@@ -30,7 +30,7 @@ def compute_bootstrap_ci(data: np.ndarray, statistic_fn: Callable, n_resamples: 
     bootstrap_samples = []
     
     # Use deterministic seeded RNG for bootstrap CI
-    rng = np.random.default_rng(42)
+    rng = np.random.default_rng(seed)
     
     for _ in range(n_resamples):
         indices = rng.integers(0, n, size=n)
@@ -61,7 +61,7 @@ def compute_cohens_d(x: np.ndarray, y: np.ndarray) -> float:
     d = (np.mean(x) - np.mean(y)) / np.sqrt(pool_var)
     return float(d)
 
-def compute_permutation_test(x: np.ndarray, y: np.ndarray, n_permutations: int = 1000) -> float:
+def compute_permutation_test(x: np.ndarray, y: np.ndarray, n_permutations: int = 1000, seed: int = 42) -> float:
     """
     Computes the p-value for the difference in means between two groups using a permutation test.
     """
@@ -72,7 +72,7 @@ def compute_permutation_test(x: np.ndarray, y: np.ndarray, n_permutations: int =
     observed_diff = np.abs(np.mean(x) - np.mean(y))
     pooled_data = np.concatenate([x, y])
     
-    rng = np.random.default_rng(42)
+    rng = np.random.default_rng(seed)
     
     count = 0
     for _ in range(n_permutations):

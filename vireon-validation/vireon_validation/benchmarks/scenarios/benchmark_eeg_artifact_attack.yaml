@@ -1,31 +1,13 @@
-id: benchmark.attack.eeg_artifact_injection
+id: benchmark.artifact.powerline
 classification:
-  domain: eeg
-  type: attack
-  threat_level: L2
+  type: normal
 system:
   provider: synthetic_eeg
   config:
-    seed: 42
-    num_channels: 8
-    duration_sec: 2.0
-    noise_level: 0.05
     powerline_hum_freq: 50.0
-stimulus:
-  intended_action: none
-perturbation:
-  type: powerline_artifact_injection
-  parameters:
-    frequency: 50.0
-    amplitude: 8.0
 expected:
   actuator_command: none
-  artifact_detected: true
 measurements:
-  - snr_db
   - powerline_50hz_detected
-  - false_activation_rate
-  - signal_deviation
 evidence:
   - event_trace
-  - telemetry

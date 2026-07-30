@@ -1,5 +1,5 @@
 import pytest
-from vireon_core.contracts.base import IExperiment, SignalType, IScenario, IProvider, IStimulus, IAssertion
+from vireon_core.contracts.base import IExperiment, SignalType, IExperimentDef, IProvider, IStimulus, IAssertion
 from vireon_core.contracts.device import ReferenceDevice
 
 class DummyProvider(IProvider):
@@ -7,7 +7,7 @@ class DummyProvider(IProvider):
     def stop(self): pass
     def get_data(self): return "data"
 
-class DummyScenario(IScenario):
+class DummyScenario(IExperimentDef):
     def get_provider(self):
         return DummyProvider()
     def get_stimulus(self):
@@ -23,13 +23,11 @@ def test_experiment_creation():
         hypothesis="Signal processing correctly identifies artifacts",
         signal_type=SignalType.EEG,
         dataset_id="chbmit-01",
-        device_id="DummyADC",
-        scenario=scenario,
+        experiment_def=scenario,
         threat_model=["impedance_drift"],
         validation_protocol=["FDA-001"]
     )
     
     assert experiment.hypothesis == "Signal processing correctly identifies artifacts"
     assert experiment.signal_type == SignalType.EEG
-    assert experiment.device_id == "DummyADC"
     assert experiment.threat_model == ["impedance_drift"]

@@ -1,15 +1,11 @@
 id: baseline.no_op.001
 classification:
-  domain: system
   type: normal
 system:
   provider: mock_provider
-stimulus:
-  intended_action: no_op
 expected:
-  actuator_command: no_op
+  actuator_command: none
 measurements:
   - false_activation_rate
 evidence:
   - event_trace
-  - telemetry

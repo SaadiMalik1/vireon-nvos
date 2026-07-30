@@ -87,7 +87,9 @@ class TestGenerateSignalMetrics(unittest.TestCase):
         provider_data = {"data": data, "sample_rate": 250.0, "num_channels": 2}
         metrics = generate_signal_metrics(provider_data)
         
-        metric_names = [m.metric_name for m in metrics]
+        metric_names = []
+        for m in metrics:
+            metric_names.append(m.metric_name)
 
         self.assertIn("snr_db", metric_names)
         self.assertIn("alpha_band_power", metric_names)

@@ -334,7 +334,7 @@ class SyntheticMotorImageryProvider(IProvider):
 
 from vireon_models.patient import DigitalPatient
 from vireon_models.forward import LeadfieldProjector
-from vireon_devices.hardware import ADS1299
+from vireon_models.hardware import ADS1299
 
 class DigitalTwinProvider(IProvider):
     """

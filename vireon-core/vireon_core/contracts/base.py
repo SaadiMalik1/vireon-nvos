@@ -140,7 +140,7 @@ class IExecutionContext(BaseModel):
     The deterministic execution context for an experiment.
     """
     experiment_id: str
-    scenario_id: str
+
     deterministic_seed: int
     provider_metadata: Dict[str, Any]
     version_info: str

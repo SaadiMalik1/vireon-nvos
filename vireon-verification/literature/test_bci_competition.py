@@ -7,7 +7,7 @@ def test_literature_reproduction():
     
     # 1. BCI Competition IV (Motor Imagery)
     # Expected accuracy for a standard CSP+LDA pipeline on 2-class motor imagery is ~70-80%
-    dataset_path = "/home/ronin/Documents/VIREON/vireon-benchmarks/datasets/eegbci"
+    dataset_path = os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-benchmarks/datasets/eegbci")
     
     if os.path.exists(dataset_path):
         try:
@@ -42,8 +42,8 @@ def test_literature_reproduction():
     else:
         results["EEGBCI_Motor_Imagery"] = {"status": "SKIPPED", "reason": "Dataset eegbci not found. Run 'vireon datasets fetch eegbci'"}
 
-    os.makedirs("/home/ronin/Documents/VIREON/vireon-verification/results", exist_ok=True)
-    with open("/home/ronin/Documents/VIREON/vireon-verification/results/literature_metrics.json", "w") as f:
+    os.makedirs(os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-verification/results"), exist_ok=True)
+    with open(os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-verification/results/literature_metrics.json"), "w") as f:
         json.dump(results, f, indent=4)
         
     for k, v in results.items():

@@ -7,10 +7,7 @@ def fetch_eegbci(out_dir):
     subjects = list(range(1, 6))
     eegbci.load_data(subjects, [1, 2, 3, 4], path=os.path.join(out_dir, "eegbci"))
 
-def fetch_sleep_edf(out_dir):
-    from mne.datasets import sleep_physionet
-    print("Fetching Sleep-EDF...")
-    sleep_physionet.age.fetch_data(subjects=[0, 1], recording=[1], path=os.path.join(out_dir, "sleep"))
+
 
 def fetch_sample(out_dir):
     from mne.datasets import sample

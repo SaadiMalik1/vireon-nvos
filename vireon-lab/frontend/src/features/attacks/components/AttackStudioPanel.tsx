@@ -20,7 +20,7 @@ export function AttackStudioPanel() {
   const [intensity, setIntensity] = useState<number>(1.0);
 
   useEffect(() => {
-    fetch('http://localhost:8001/api/attacks')
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/attacks`)
       .then(res => res.json())
       .then(data => {
         setAttacks(data);
@@ -45,7 +45,7 @@ export function AttackStudioPanel() {
     if (!selectedId) return;
     setExecuting(true);
     try {
-      await fetch('http://localhost:8001/api/attacks/execute', {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/attacks/execute`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: selectedId, intensity }),
@@ -59,7 +59,7 @@ export function AttackStudioPanel() {
   const handleDisengage = async () => {
     setExecuting(true);
     try {
-      await fetch('http://localhost:8001/api/attacks/execute', {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/attacks/execute`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: "none", intensity: 0 }),

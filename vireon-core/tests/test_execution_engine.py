@@ -3,15 +3,15 @@ import os
 # Adjust path for testing
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-from vireon_lab.scenarios.schema import load_scenario_from_yaml
+from vireon_lab.experiments.schema import load_experiment_from_yaml
 from vireon_core.kernel.execution_engine import ExecutionEngine
 from vireon_validation.evidence.generator import EvidenceGenerator
 
 def test_pipeline():
-    scenario_path = os.path.join(os.path.dirname(__file__), '..', '..', 'vireon-lab', 'vireon_lab', 'scenarios', 'mock_scenario.yaml')
+    scenario_path = os.path.join(os.path.dirname(__file__), '..', '..', 'vireon-lab', 'vireon_lab', 'experiments', 'mock_scenario.yaml')
     
     # Load Scenario
-    scenario = load_scenario_from_yaml(scenario_path)
+    scenario = load_experiment_from_yaml(scenario_path)
     print(f"Loaded scenario: {scenario.schema.id}")
 
     # Initialize Engine

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, Dict, Optional
 
-class IDevice(ABC):
+class IHardwareDevice(ABC):
     """
     Base abstraction for a neurotechnology device.
     """
@@ -9,7 +9,7 @@ class IDevice(ABC):
     def get_hardware_specs(self) -> Dict[str, Any]:
         pass
 
-class ReferenceDevice(IDevice):
+class ReferenceDevice(IHardwareDevice):
     """
     A reference hardware platform (e.g., ADS1299, Intan RHD).
     Used as ground-truth baselines for benchmarking.
@@ -21,7 +21,7 @@ class ReferenceDevice(IDevice):
     def get_hardware_specs(self) -> Dict[str, Any]:
         return self.specs
 
-class CommercialDevice(IDevice):
+class CommercialDevice(IHardwareDevice):
     """
     A specific commercial medical device (e.g., Neuralink, Medtronic Percept).
     """
@@ -33,7 +33,7 @@ class CommercialDevice(IDevice):
     def get_hardware_specs(self) -> Dict[str, Any]:
         return self.specs
 
-class VirtualDevice(IDevice):
+class VirtualDevice(IHardwareDevice):
     """
     A user-defined software-emulated hardware model for stress-testing.
     """

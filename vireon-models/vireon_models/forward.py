@@ -9,9 +9,19 @@ class LeadfieldProjector:
         self.num_sensors = num_sensors
         self.rng = np.random.default_rng(seed)
         
-        # Simple random mixing matrix (Leadfield matrix)
-        # In a real model, this would be computed via BEM/FEM on an anatomical MRI.
-        self.mixing_matrix = self.rng.uniform(0.1, 1.0, (num_sensors, num_sources)).astype(np.float32)
+        # Simulate random locations in a bounding box [-10, 10]
+        source_locs = self.rng.uniform(-10, 10, (num_sources, 3))
+        sensor_locs = self.rng.uniform(-10, 10, (num_sensors, 3))
+        
+        # Calculate inverse-square distance for leadfield spatial decay
+        mixing_matrix = np.zeros((num_sensors, num_sources), dtype=np.float32)
+        for i in range(num_sensors):
+            for j in range(num_sources):
+                dist = np.linalg.norm(sensor_locs[i] - source_locs[j])
+                # Avoid division by zero, add small epsilon and scale
+                mixing_matrix[i, j] = 1.0 / (dist**2 + 0.1)
+                
+        self.mixing_matrix = mixing_matrix
 
     def project(self, source_signals: np.ndarray) -> np.ndarray:
         """

@@ -209,11 +209,10 @@ class SamplingJitterModel(IPlugin):
         t = np.arange(n_samples) / fs
         
         t_jittered = t + np.random.randn(n_samples) * self.jitter_std_s
-        t_jittered = np.sort(t_jittered)
         
         jittered_data = np.zeros_like(data)
         for ch in range(n_channels):
-            jittered_data[:, ch] = np.interp(t, t_jittered, data[:, ch])
+            jittered_data[:, ch] = np.interp(t_jittered, t, data[:, ch])
             
         return {"signal": ISignal(sampling_rate=fs, data=jittered_data)}
 
@@ -289,3 +288,13 @@ class PacketLossModel(IPlugin):
             data_dropped[idx:end_idx, :] = self.fill_value
             
         return {"signal": ISignal(sampling_rate=fs, data=data_dropped)}
+
+class ADS1299:
+    """
+    Mock integration for the ADS1299 hardware chip.
+    """
+    def process(self, signal, sample_rate=250.0):
+        # Just add some noise
+        import numpy as np
+        noise = np.random.normal(0, 1.0, signal.shape)
+        return signal + noise

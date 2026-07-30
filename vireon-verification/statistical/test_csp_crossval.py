@@ -69,8 +69,8 @@ def test_csp_crossval():
     assert corr > 0.99, "CSP correlation too low"
     assert rmse < 1e-3, "CSP RMSE too high"
 
-    os.makedirs("/home/ronin/Documents/VIREON/vireon-verification/results", exist_ok=True)
-    with open("/home/ronin/Documents/VIREON/vireon-verification/results/csp_metrics.json", "w") as f:
+    os.makedirs(os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-verification/results"), exist_ok=True)
+    with open(os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-verification/results/csp_metrics.json"), "w") as f:
         import mne
         json.dump({
             "algorithm": "CSP",

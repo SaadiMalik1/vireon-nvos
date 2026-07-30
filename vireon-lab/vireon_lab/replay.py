@@ -23,7 +23,7 @@ from typing import Dict, Any, Optional, Tuple
 
 import numpy as np
 
-from vireon_lab.experiments.schema import load_scenario_from_yaml
+from vireon_lab.experiments.schema import load_experiment_from_yaml
 from vireon_core.kernel.execution_engine import ExecutionEngine
 from vireon_validation.evidence.generator import EvidenceGenerator
 from vireon_validation.metrics import generate_signal_metrics
@@ -43,11 +43,11 @@ class ReplayEngine:
         """
         Execute a scenario and return a structured result dict.
         """
-        scenario = load_scenario_from_yaml(scenario_path)
+        scenario = load_experiment_from_yaml(scenario_path)
         evidence = ExecutionEngine.run(scenario, seed=seed)
         
         return {
-            "scenario_id": evidence.scenario_id,
+            "experiment_id": evidence.experiment_id,
             "execution_hash": evidence.execution_hash,
             "seed": seed,
             "events": [e.model_dump() for e in evidence.events],
@@ -105,7 +105,7 @@ class ReplayEngine:
             "measurements_match": measurements_match,
             "expected_hash_match": expected_match,
             "seed": seed,
-            "scenario_id": run1["scenario_id"],
+            "experiment_id": run1["experiment_id"],
         }
 
     @staticmethod

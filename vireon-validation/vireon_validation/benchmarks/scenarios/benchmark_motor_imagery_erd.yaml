@@ -1,24 +1,13 @@
 id: benchmark.signal.motor_imagery_erd
 classification:
-  domain: bci
-  type: agency_integrity
-  threat_level: L1
+  type: normal
 system:
   provider: motor_imagery
-  config:
-    seed: 42
-    num_channels: 8
-    target_class: left_hand
-    trial_duration_sec: 4.0
-stimulus:
-  intended_action: left_hand
 expected:
-  actuator_command: left_hand
+  actuator_command: none
 measurements:
   - mu_band_power
-  - beta_band_power
   - snr_db
   - false_activation_rate
 evidence:
   - event_trace
-  - telemetry

@@ -1,0 +1,363 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/ronin/Documents/VIREON
+configfile: pyproject.toml
+plugins: cov-7.1.0, hypothesis-6.164.0
+collected 69 items
+
+vireon-core/tests/test_causal_graph.py ..                                [  2%]
+vireon-core/tests/test_execution_engine.py F                             [  4%]
+vireon-core/tests/test_experiment_lifecycle.py F                         [  5%]
+vireon-devices/tests/test_device_hardware.py ....                        [ 11%]
+vireon-knowledge/tests/test_knowledge_layer.py .                         [ 13%]
+vireon-models/tests/test_digital_twin.py ...                             [ 17%]
+vireon-models/tests/test_real_data_pipeline.py FFFF                      [ 23%]
+vireon-validation/tests/test_agency_validation.py ...                    [ 27%]
+vireon-validation/tests/test_formal_verification.py ..                   [ 30%]
+vireon-validation/tests/test_reproducibility.py ...F.FFFFFF.F..FFF       [ 56%]
+vireon-validation/tests/test_signal_metrics.py ..........                [ 71%]
+vireon-validation/tests/test_statistics_core.py ..                       [ 73%]
+vireon-validation/vireon_validation/tests/test_decoder.py ..             [ 76%]
+vireon-validation/vireon_validation/tests/test_metrics.py ....           [ 82%]
+vireon-validation/vireon_validation/tests/test_statistics.py .....       [ 89%]
+vireon-verification/interoperability/test_format_roundtrip.py .          [ 91%]
+vireon-verification/literature/test_bci_competition.py .                 [ 92%]
+vireon-verification/literature/test_erp_p300.py .                        [ 94%]
+vireon-verification/literature/test_seizure.py .                         [ 95%]
+vireon-verification/literature/test_sleep_staging.py .                   [ 97%]
+vireon-verification/numerical/test_psd_crossval.py .                     [ 98%]
+vireon-verification/statistical/test_csp_crossval.py .                   [100%]
+
+=================================== FAILURES ===================================
+________________________________ test_pipeline _________________________________
+
+    def test_pipeline():
+        scenario_path = os.path.join(os.path.dirname(__file__), '..', '..', 'vireon-lab', 'vireon_lab', 'scenarios', 'mock_scenario.yaml')
+    
+        # Load Scenario
+>       scenario = load_experiment_from_yaml(scenario_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+vireon-core/tests/test_execution_engine.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+filepath = '/home/ronin/Documents/VIREON/vireon-core/tests/../../vireon-lab/vireon_lab/scenarios/mock_scenario.yaml'
+
+    def load_experiment_from_yaml(filepath: str) -> IExperimentDef:
+        """
+        Loads an experiment from a YAML file and returns the correct IExperimentDef subclass based on type.
+        """
+>       with open(filepath, 'r') as f:
+             ^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/ronin/Documents/VIREON/vireon-core/tests/../../vireon-lab/vireon_lab/scenarios/mock_scenario.yaml'
+
+vireon-lab/vireon_lab/experiments/schema.py:21: FileNotFoundError
+___________________________ test_experiment_creation ___________________________
+
+    def test_experiment_creation():
+        scenario = DummyScenario()
+        device = ReferenceDevice(name="DummyADC", specs={"channels": 8})
+    
+>       experiment = IExperiment(
+            hypothesis="Signal processing correctly identifies artifacts",
+            signal_type=SignalType.EEG,
+            dataset_id="chbmit-01",
+            device_id="DummyADC",
+            scenario=scenario,
+            threat_model=["impedance_drift"],
+            validation_protocol=["FDA-001"]
+        )
+
+vireon-core/tests/test_experiment_lifecycle.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = IExperiment()
+data = {'hypothesis': 'Signal processing correctly identifies artifacts', 'signal_type': <SignalType.EEG: 'EEG'>, 'dataset_id': 'chbmit-01', 'device_id': 'DummyADC', ...}
+
+    def __init__(self, **data):
+>       super().__init__(**data)
+E       pydantic_core._pydantic_core.ValidationError: 1 validation error for IExperiment
+E       experiment_def
+E         Field required [type=missing, input_value={'hypothesis': 'Signal pr..._protocol': ['FDA-001']}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/missing
+
+vireon-core/vireon_core/contracts/base.py:16: ValidationError
+______________ TestRealDataPipeline.test_artifact_attack_scenario ______________
+
+self = <test_real_data_pipeline.TestRealDataPipeline testMethod=test_artifact_attack_scenario>
+
+    def test_artifact_attack_scenario(self):
+        """Execute the artifact attack scenario and verify powerline detection."""
+        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_artifact_attack.yaml")
+        scenario = load_experiment_from_yaml(filepath)
+        evidence = ExecutionEngine.run(scenario)
+    
+        metric_names = {m.metric_name for m in evidence.measurements}
+>       self.assertIn("powerline_50hz_detected", metric_names)
+E       AssertionError: 'powerline_50hz_detected' not found in set()
+
+vireon-models/tests/test_real_data_pipeline.py:86: AssertionError
+___________ TestRealDataPipeline.test_backward_compat_mock_provider ____________
+
+self = <test_real_data_pipeline.TestRealDataPipeline testMethod=test_backward_compat_mock_provider>
+
+    def test_backward_compat_mock_provider(self):
+        """Legacy scenarios with mock_provider should still work."""
+        filepath = os.path.join(SCENARIOS_DIR, "benchmark_false_activation.yaml")
+        scenario = load_experiment_from_yaml(filepath)
+        evidence = ExecutionEngine.run(scenario)
+    
+        # Should still have agency metrics
+        metric_names = {m.metric_name for m in evidence.measurements}
+>       self.assertIn("false_activation_rate", metric_names)
+E       AssertionError: 'false_activation_rate' not found in set()
+
+vireon-models/tests/test_real_data_pipeline.py:100: AssertionError
+_______________ TestRealDataPipeline.test_eeg_baseline_scenario ________________
+
+self = <test_real_data_pipeline.TestRealDataPipeline testMethod=test_eeg_baseline_scenario>
+
+    def test_eeg_baseline_scenario(self):
+        """Execute the EEG baseline SNR scenario with SyntheticSignalProvider."""
+        from vireon_models.providers.datasets import SyntheticSignalProvider
+    
+>       class MockScenario(IScenario):
+                           ^^^^^^^^^
+E       NameError: name 'IScenario' is not defined
+
+vireon-models/tests/test_real_data_pipeline.py:27: NameError
+_______________ TestRealDataPipeline.test_motor_imagery_scenario _______________
+
+self = <test_real_data_pipeline.TestRealDataPipeline testMethod=test_motor_imagery_scenario>
+
+    def test_motor_imagery_scenario(self):
+        """Execute the motor imagery ERD scenario with MotorImageryProvider."""
+        filepath = os.path.join(SCENARIOS_DIR, "benchmark_motor_imagery_erd.yaml")
+        scenario = load_experiment_from_yaml(filepath)
+        evidence = ExecutionEngine.run(scenario)
+    
+        metric_names = {m.metric_name for m in evidence.measurements}
+>       self.assertIn("mu_band_power", metric_names)
+E       AssertionError: 'mu_band_power' not found in set()
+
+vireon-models/tests/test_real_data_pipeline.py:72: AssertionError
+_____________ TestDeterministicExecution.test_same_seed_same_hash ______________
+
+self = <test_reproducibility.TestDeterministicExecution testMethod=test_same_seed_same_hash>
+
+    def test_same_seed_same_hash(self):
+        """Two executions with the same seed must produce the same execution hash."""
+        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
+    
+        scenario1 = load_experiment_from_yaml(filepath)
+        evidence1 = ExecutionEngine.run(scenario1, seed=42)
+    
+        scenario2 = load_experiment_from_yaml(filepath)
+        evidence2 = ExecutionEngine.run(scenario2, seed=42)
+    
+>       self.assertEqual(evidence1.execution_hash, evidence2.execution_hash)
+E       AssertionError: 'de353c0163646f738163a1bd087574e232325461103c140efc1e9a0f53f7f7e3' != 'a5545ffdc850c65643e182298897153d0bd5614a1b3084c15d0434b03de01635'
+E       - de353c0163646f738163a1bd087574e232325461103c140efc1e9a0f53f7f7e3
+E       + a5545ffdc850c65643e182298897153d0bd5614a1b3084c15d0434b03de01635
+
+vireon-validation/tests/test_reproducibility.py:43: AssertionError
+___________ TestDeterministicExecution.test_same_seed_same_telemetry ___________
+
+self = <test_reproducibility.TestDeterministicExecution testMethod=test_same_seed_same_telemetry>
+
+    def test_same_seed_same_telemetry(self):
+        """Two executions with the same seed must produce bit-exact identical numpy data."""
+        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
+    
+        scenario1 = load_experiment_from_yaml(filepath)
+        evidence1 = ExecutionEngine.run(scenario1, seed=42)
+    
+        scenario2 = load_experiment_from_yaml(filepath)
+        evidence2 = ExecutionEngine.run(scenario2, seed=42)
+    
+>       data1 = evidence1._raw_provider_data["data"]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: string indices must be integers, not 'str'
+
+vireon-validation/tests/test_reproducibility.py:89: TypeError
+______________ TestReplayEngine.test_artifact_attack_reproducible ______________
+
+self = <test_reproducibility.TestReplayEngine testMethod=test_artifact_attack_reproducible>
+
+    def test_artifact_attack_reproducible(self):
+        """Artifact attack scenario should also be reproducible."""
+        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_artifact_attack.yaml")
+        result = ReplayEngine.execute_and_compare(filepath, seed=123)
+>       self.assertTrue(result["reproducible"])
+E       AssertionError: False is not true
+
+vireon-validation/tests/test_reproducibility.py:156: AssertionError
+____________ TestReplayEngine.test_execute_and_compare_reproducible ____________
+
+self = <test_reproducibility.TestReplayEngine testMethod=test_execute_and_compare_reproducible>
+
+    def test_execute_and_compare_reproducible(self):
+        """ReplayEngine.execute_and_compare should confirm reproducibility."""
+        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
+        result = ReplayEngine.execute_and_compare(filepath, seed=42)
+    
+>       self.assertTrue(result["reproducible"])
+E       AssertionError: False is not true
+
+vireon-validation/tests/test_reproducibility.py:128: AssertionError
+_________ TestReplayEngine.test_execute_and_compare_with_expected_hash _________
+
+self = <test_reproducibility.TestReplayEngine testMethod=test_execute_and_compare_with_expected_hash>
+
+    def test_execute_and_compare_with_expected_hash(self):
+        """ReplayEngine should match a known execution hash."""
+        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
+    
+        # First, get the hash
+        run = ReplayEngine.execute_scenario(filepath, seed=42)
+        known_hash = run["execution_hash"]
+    
+        # Then verify it matches
+        result = ReplayEngine.execute_and_compare(filepath, seed=42, expected_hash=known_hash)
+>       self.assertTrue(result["expected_hash_match"])
+E       AssertionError: False is not true
+
+vireon-validation/tests/test_reproducibility.py:144: AssertionError
+_______________ TestReplayEngine.test_mock_provider_reproducible _______________
+
+self = <test_reproducibility.TestReplayEngine testMethod=test_mock_provider_reproducible>
+
+    def test_mock_provider_reproducible(self):
+        """Legacy mock provider scenarios should also be reproducible."""
+        filepath = os.path.join(SCENARIOS_DIR, "benchmark_false_activation.yaml")
+        result = ReplayEngine.execute_and_compare(filepath, seed=42)
+>       self.assertTrue(result["reproducible"])
+E       AssertionError: False is not true
+
+vireon-validation/tests/test_reproducibility.py:162: AssertionError
+_______________ TestReplayEngine.test_motor_imagery_reproducible _______________
+
+self = <test_reproducibility.TestReplayEngine testMethod=test_motor_imagery_reproducible>
+
+    def test_motor_imagery_reproducible(self):
+        """Motor imagery scenario should also be reproducible."""
+        filepath = os.path.join(SCENARIOS_DIR, "benchmark_motor_imagery_erd.yaml")
+        result = ReplayEngine.execute_and_compare(filepath, seed=77)
+>       self.assertTrue(result["reproducible"])
+E       AssertionError: False is not true
+
+vireon-validation/tests/test_reproducibility.py:150: AssertionError
+_______________ TestBundleIntegrity.test_bundle_contains_hashes ________________
+
+self = <test_reproducibility.TestBundleIntegrity testMethod=test_bundle_contains_hashes>
+
+    def test_bundle_contains_hashes(self):
+        """Evidence bundle should contain hashes.json with all file checksums."""
+        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
+        scenario = load_experiment_from_yaml(filepath)
+        evidence = ExecutionEngine.run(scenario, seed=42)
+    
+        with tempfile.TemporaryDirectory() as tmpdir:
+            gen = EvidenceGenerator(evidence, tmpdir)
+            bundle_path = gen.generate_bundle()
+    
+            hashes_path = os.path.join(bundle_path, "hashes.json")
+            self.assertTrue(os.path.exists(hashes_path))
+    
+            with open(hashes_path) as f:
+                hashes = json.load(f)
+            self.assertIn("manifest.json", hashes)
+            self.assertIn("events.json", hashes)
+            self.assertIn("measurements.json", hashes)
+            self.assertIn("environment.json", hashes)
+>           self.assertIn("telemetry.npz", hashes)
+E           AssertionError: 'telemetry.npz' not found in {'assertions.json': 'b0ba9b34a7cec98abb97cc6a1fa9c75bd08001fd6f6e77d2ec1ddeae7f504c63', 'environment.json': '5dbcb71f840b2947849e9f4dd7b4126ff39d7675dd05f2d891d1b7fe7e44c600', 'events.json': '239f497b947e98bc8c5c7fcd55911a0991b161cdc47ddda7588c841132aa5170', 'manifest.json': '1a6f386f8840612d200bb86ec8f46ad2f73ce2ed016405187e6bb51b448a6b59', 'measurements.json': '4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945', 'telemetry.parquet': 'fd67f1869a509bc5c85250f899a074dad252c195efa88b6190755f16a2fb252c'}
+
+vireon-validation/tests/test_reproducibility.py:240: AssertionError
+_______ TestTelemetryCrossVerification.test_cross_verify_real_telemetry ________
+
+self = <test_reproducibility.TestTelemetryCrossVerification testMethod=test_cross_verify_real_telemetry>
+
+    def test_cross_verify_real_telemetry(self):
+        """Recomputing metrics from stored telemetry.npz should match measurements.json."""
+        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
+        scenario = load_experiment_from_yaml(filepath)
+        evidence = ExecutionEngine.run(scenario, seed=42)
+    
+        with tempfile.TemporaryDirectory() as tmpdir:
+            gen = EvidenceGenerator(evidence, tmpdir)
+            bundle_path = gen.generate_bundle()
+    
+            result = ReplayEngine.cross_verify_telemetry(bundle_path)
+>           self.assertTrue(result["valid"])
+E           AssertionError: False is not true
+
+vireon-validation/tests/test_reproducibility.py:257: AssertionError
+__________ TestTelemetryCrossVerification.test_two_bundles_identical ___________
+
+self = <test_reproducibility.TestTelemetryCrossVerification testMethod=test_two_bundles_identical>
+
+    def test_two_bundles_identical(self):
+        """Two bundles from same seed should have identical hashes.json content."""
+        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
+    
+        with tempfile.TemporaryDirectory() as tmpdir1, tempfile.TemporaryDirectory() as tmpdir2:
+            scenario1 = load_experiment_from_yaml(filepath)
+            evidence1 = ExecutionEngine.run(scenario1, seed=42)
+            gen1 = EvidenceGenerator(evidence1, tmpdir1)
+            bundle1 = gen1.generate_bundle()
+    
+            scenario2 = load_experiment_from_yaml(filepath)
+            evidence2 = ExecutionEngine.run(scenario2, seed=42)
+            gen2 = EvidenceGenerator(evidence2, tmpdir2)
+            bundle2 = gen2.generate_bundle()
+    
+            # Load hashes from both bundles
+            with open(os.path.join(bundle1, "hashes.json")) as f:
+                hashes1 = json.load(f)
+            with open(os.path.join(bundle2, "hashes.json")) as f:
+                hashes2 = json.load(f)
+    
+            # All file hashes should be identical
+>           self.assertEqual(hashes1, hashes2)
+E           AssertionError: {'ass[182 chars]n': '0b6a964fc2c6d9ecf2a4fe7be9d7441aa635109f1[283 chars]52c'} != {'ass[182 chars]n': '38b0208e27605ff03b5709a1959a88b75f01570c5[283 chars]52c'}
+E           Diff is 713 characters long. Set self.maxDiff to None to see it.
+
+vireon-validation/tests/test_reproducibility.py:283: AssertionError
+_____________ TestM1EndToEndProof.test_baseline_noop_deterministic _____________
+
+self = <test_reproducibility.TestM1EndToEndProof testMethod=test_baseline_noop_deterministic>
+
+    def test_baseline_noop_deterministic(self):
+        filepath = os.path.join(SCENARIOS_DIR, "baseline_noop_001.yaml")
+        scenario = load_experiment_from_yaml(filepath)
+    
+        evidence1 = ExecutionEngine.run(scenario, seed=123)
+        evidence2 = ExecutionEngine.run(scenario, seed=123)
+    
+        # M1 criteria: same seed yields identical execution hash
+>       self.assertEqual(evidence1.execution_hash, evidence2.execution_hash)
+E       AssertionError: '55f9fc4b4625eb9561624d7943d9c9f3e008d1d8029cb137c66779512696c79a' != '2d1b9e62afc19fad0077ca58befe55410fb082943a6f90b42c85caa19f6d395b'
+E       - 55f9fc4b4625eb9561624d7943d9c9f3e008d1d8029cb137c66779512696c79a
+E       + 2d1b9e62afc19fad0077ca58befe55410fb082943a6f90b42c85caa19f6d395b
+
+vireon-validation/tests/test_reproducibility.py:302: AssertionError
+=========================== short test summary info ============================
+FAILED vireon-core/tests/test_execution_engine.py::test_pipeline - FileNotFou...
+FAILED vireon-core/tests/test_experiment_lifecycle.py::test_experiment_creation
+FAILED vireon-models/tests/test_real_data_pipeline.py::TestRealDataPipeline::test_artifact_attack_scenario
+FAILED vireon-models/tests/test_real_data_pipeline.py::TestRealDataPipeline::test_backward_compat_mock_provider
+FAILED vireon-models/tests/test_real_data_pipeline.py::TestRealDataPipeline::test_eeg_baseline_scenario
+FAILED vireon-models/tests/test_real_data_pipeline.py::TestRealDataPipeline::test_motor_imagery_scenario
+FAILED vireon-validation/tests/test_reproducibility.py::TestDeterministicExecution::test_same_seed_same_hash
+FAILED vireon-validation/tests/test_reproducibility.py::TestDeterministicExecution::test_same_seed_same_telemetry
+FAILED vireon-validation/tests/test_reproducibility.py::TestReplayEngine::test_artifact_attack_reproducible
+FAILED vireon-validation/tests/test_reproducibility.py::TestReplayEngine::test_execute_and_compare_reproducible
+FAILED vireon-validation/tests/test_reproducibility.py::TestReplayEngine::test_execute_and_compare_with_expected_hash
+FAILED vireon-validation/tests/test_reproducibility.py::TestReplayEngine::test_mock_provider_reproducible
+FAILED vireon-validation/tests/test_reproducibility.py::TestReplayEngine::test_motor_imagery_reproducible
+FAILED vireon-validation/tests/test_reproducibility.py::TestBundleIntegrity::test_bundle_contains_hashes
+FAILED vireon-validation/tests/test_reproducibility.py::TestTelemetryCrossVerification::test_cross_verify_real_telemetry
+FAILED vireon-validation/tests/test_reproducibility.py::TestTelemetryCrossVerification::test_two_bundles_identical
+FAILED vireon-validation/tests/test_reproducibility.py::TestM1EndToEndProof::test_baseline_noop_deterministic
+======================== 17 failed, 52 passed in 2.18s =========================

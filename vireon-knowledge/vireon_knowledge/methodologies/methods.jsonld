@@ -7,21 +7,19 @@
         "Welch": {
             "@id": "vk:Method:Welch",
             "name": "Welch's Method for PSD Estimation",
-            "requires_assumptions": [
+            "assumptions": [
                 "vk:Assumption:Stationarity"
             ]
         },
         "Multitaper": {
             "@id": "vk:Method:Multitaper",
             "name": "Multitaper PSD Estimation",
-            "requires_assumptions": [
-                "vk:Assumption:ShortDuration"
-            ]
+            "assumptions": []
         },
         "ICA": {
             "@id": "vk:Method:ICA",
             "name": "Independent Component Analysis",
-            "requires_assumptions": [
+            "assumptions": [
                 "vk:Assumption:StatisticalIndependence"
             ]
         }

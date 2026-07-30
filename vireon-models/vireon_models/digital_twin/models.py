@@ -10,7 +10,7 @@ class IPatientModel(ABC):
 
 class IDiseaseModel(ABC):
     @abstractmethod
-    def apply_pathology(self, neural_source: np.ndarray) -> np.ndarray:
+    def apply_pathology(self, neural_source: np.ndarray, sample_rate: float) -> np.ndarray:
         pass
 
 class IMedicationModel(ABC):
@@ -27,7 +27,7 @@ class DigitalTwinPipeline:
         self.disease = disease
         self.medication = medication
 
-    def generate_tissue_activity(self, base_activity: np.ndarray) -> np.ndarray:
-        activity = self.disease.apply_pathology(base_activity)
+    def generate_tissue_activity(self, base_activity: np.ndarray, sample_rate: float) -> np.ndarray:
+        activity = self.disease.apply_pathology(base_activity, sample_rate)
         activity = self.medication.apply_pharmacodynamics(activity)
         return activity

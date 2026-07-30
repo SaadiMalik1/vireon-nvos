@@ -1,0 +1,15 @@
+id: benchmark.baseline.eeg
+classification:
+  domain: bci
+  type: normal
+system:
+  provider: synthetic_eeg
+  dataset: chbmit
+stimulus:
+  intended_action: none
+expected:
+  actuator_command: none
+measurements:
+  - snr_baseline
+evidence:
+  - event_trace

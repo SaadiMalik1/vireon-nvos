@@ -45,7 +45,14 @@ class DiseaseModel:
         if self.name == "epilepsy":
             # Add hypersynchronous high-frequency oscillations (HFOs)
             t = np.linspace(0, sources.shape[0] / sample_rate, sources.shape[0], endpoint=False)
-            hfo = np.sin(2 * np.pi * 80.0 * t) * (20.0 * self.severity)
+            hfo = np.zeros_like(t)
+            # Add 3 random transient HFO bursts per second on average
+            num_bursts = int(3 * (sources.shape[0] / sample_rate))
+            if num_bursts > 0:
+                burst_centers = np.random.default_rng(42).uniform(0, t[-1], num_bursts)
+                for center in burst_centers:
+                    envelope = np.exp(-((t - center) ** 2) / (2 * 0.01 ** 2)) # 10ms width
+                    hfo += envelope * np.sin(2 * np.pi * 150.0 * t) * (20.0 * self.severity)
             sources[:, 0] += hfo  # Focal onset in node 0
         return sources
 

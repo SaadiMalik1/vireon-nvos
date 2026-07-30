@@ -7,8 +7,6 @@ from vireon_core.contracts import IExperimentDef, IProvider, IObservation, IEven
 from vireon_core.agency.causal_graph import CausalGraph, CausalStage
 from vireon_core.runtime.rng import DeterministicRNG
 from vireon_core.runtime.clock import DeterministicClock, ClockMode
-from vireon_validation.agency import AgencyValidator
-from vireon_validation.metrics import generate_signal_metrics
 
 class ExecutionEngine:
     """
@@ -20,13 +18,15 @@ class ExecutionEngine:
     when the same seed is used.
     """
     @classmethod
-    def run(cls, experiment: IExperimentDef, seed: int = 42) -> IEvidence:
-        engine = cls(experiment, seed)
+    def run(cls, experiment: IExperimentDef, seed: int = 42, agency_validator_cls=None, signal_metrics_func=None) -> IEvidence:
+        engine = cls(experiment, seed, agency_validator_cls, signal_metrics_func)
         return engine.execute()
 
-    def __init__(self, experiment: IExperimentDef, seed: int = 42):
+    def __init__(self, experiment: IExperimentDef, seed: int = 42, agency_validator_cls=None, signal_metrics_func=None):
         self.experiment = experiment
         self.seed = seed
+        self.agency_validator_cls = agency_validator_cls
+        self.signal_metrics_func = signal_metrics_func
         self.rng = DeterministicRNG(seed=seed)
         self.clock = DeterministicClock(mode=ClockMode.VIRTUAL, step_dt_ms=1.0)
         self.provider = experiment.get_provider()
@@ -35,8 +35,7 @@ class ExecutionEngine:
         experiment_id = experiment_id.id if experiment_id else "unknown_experiment"
 
         self.execution_context = IExecutionContext(
-            experiment_id=f"exp_{hashlib.md5(experiment_id.encode()).hexdigest()[:8]}",
-            scenario_id=experiment_id,
+            experiment_id=experiment_id,
             deterministic_seed=seed,
             provider_metadata={"provider_type": self.provider.__class__.__name__},
             version_info="vireon-kernel-0.1.0",
@@ -97,16 +96,13 @@ class ExecutionEngine:
                 is_perturbed=node.is_perturbed
             ))
 
-        # 8. Measurement & Assertions
-        # Agency metrics from causal graph
-        validator = AgencyValidator(self.causal_graph)
-        agency_metrics = validator.generate_metrics()
-        for name, val in agency_metrics.items():
-            self.measurements.append(IMeasurement(metric_name=name, value=val, unit="metric"))
+        if self.agency_validator_cls:
+            validator = self.agency_validator_cls(self.causal_graph)
+            agency_metrics = validator.generate_metrics()
+            for name, val in agency_metrics.items():
+                self.measurements.append(IMeasurement(metric_name=name, value=val, unit="metric"))
 
-        # Signal-level metrics from provider data (if real numpy data)
-        if isinstance(data, dict) and isinstance(data.get("data"), np.ndarray):
-            # Find the stimulus event to get event_onset_sec
+        if self.signal_metrics_func and isinstance(data, dict) and isinstance(data.get("data"), np.ndarray):
             onset_sec = None
             stim_node = next((n for n in self.causal_graph.get_nodes() if n.stage == CausalStage.SIGNAL and n.is_perturbed), None)
             if stim_node:
@@ -114,23 +110,33 @@ class ExecutionEngine:
             elif hasattr(self.experiment, 'stimulus_time_sec'):
                 onset_sec = self.experiment.stimulus_time_sec
 
-            signal_metrics = generate_signal_metrics(data, event_onset_sec=onset_sec)
+            signal_metrics = self.signal_metrics_func(data, event_onset_sec=onset_sec)
             self.measurements.extend(signal_metrics)
 
         assertions = self.experiment.get_assertions()
         m_dict = {m.metric_name: m.value for m in self.measurements}
         for a in assertions:
-            # Default stub evaluation
-            self.assertions_met[a.name] = True
-            
-            # Evaluate real assertions based on metrics if possible
+            # Side channel leak specific check
             if a.name == "expected_side_channel_leak":
-                # A side channel leak is proven if P300 is detected and the expected result is True
                 p300_present = m_dict.get("p300_detected", 0.0) == 1.0
                 if str(a.expected_result).lower() == "true":
                     self.assertions_met[a.name] = p300_present
                 else:
                     self.assertions_met[a.name] = not p300_present
+                continue
+                
+            # Generic assertion check against metrics
+            if a.name in m_dict:
+                actual_val = m_dict[a.name]
+                expected = a.expected_result
+                if isinstance(expected, bool):
+                    self.assertions_met[a.name] = bool(actual_val) == expected
+                elif isinstance(expected, (int, float)):
+                    self.assertions_met[a.name] = actual_val >= expected
+                else:
+                    self.assertions_met[a.name] = str(actual_val) == str(expected)
+            else:
+                self.assertions_met[a.name] = False
         # 9. Produce Evidence
         # Use the actual experiment ID from the schema
         experiment_id = getattr(self.experiment, 'schema', None)
@@ -161,12 +167,14 @@ class ExecutionEngine:
         hasher.update(experiment_id.encode("utf-8"))
         hasher.update(str(self.seed).encode("utf-8"))
 
-        # Hash full json representation of events
+        # Hash full json representation of events, excluding non-deterministic object_id
         for evt in events:
-            hasher.update(evt.model_dump_json().encode("utf-8"))
+            evt_dict = evt.model_dump(exclude={"object_id"})
+            hasher.update(json.dumps(evt_dict, sort_keys=True).encode("utf-8"))
 
         # Hash full json representation of measurements
         for m in self.measurements:
-            hasher.update(m.model_dump_json().encode("utf-8"))
+            m_dict = m.model_dump(exclude={"object_id"})
+            hasher.update(json.dumps(m_dict, sort_keys=True).encode("utf-8"))
 
         return hasher.hexdigest()

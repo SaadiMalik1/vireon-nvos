@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vireon-nvos"
+version = "0.1.0"
+description = "Validation, Integrity, Research Engine for Open Neuro Interfaces"
+authors = [
+    {name = "VIREON Authors"}
+]
+dependencies = [
+    "numpy",
+    "scipy",
+    "scikit-learn",
+    "mne",
+    "pydantic>=2.0.0",
+    "pyyaml"
+]
+
+[tool.setuptools.packages.find]
+where = [
+    "vireon-core",
+    "vireon-models",
+    "vireon-methods",
+    "vireon-knowledge",
+    "vireon-validation",
+    "vireon-lab"
+]

@@ -36,7 +36,7 @@ class EvidenceGenerator:
 
         # Write manifest
         manifest = {
-            "scenario_id": self.evidence.scenario_id,
+            "experiment_id": self.evidence.experiment_id,
             "execution_hash": self.evidence.execution_hash,
             "execution_context": self.evidence.execution_context.model_dump(),
             "version": "1.0.0"
@@ -56,12 +56,12 @@ class EvidenceGenerator:
             json.dump(manifest, f, indent=2)
 
         # Write Events
-        events_data = [e.model_dump() for e in self.evidence.events]
+        events_data = [e.model_dump(exclude={"object_id"}) for e in self.evidence.events]
         with open(run_dir / "events.json", "w") as f:
             json.dump(events_data, f, indent=2)
 
         # Write Measurements
-        measurements_data = [m.model_dump() for m in self.evidence.measurements]
+        measurements_data = [m.model_dump(exclude={"object_id"}) for m in self.evidence.measurements]
         with open(run_dir / "measurements.json", "w") as f:
             json.dump(measurements_data, f, indent=2)
 

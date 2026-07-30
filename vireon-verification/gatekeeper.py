@@ -8,7 +8,7 @@ def run_gatekeeper():
     print("========================================\n")
     
     # Define verification tests
-    base_dir = "/home/ronin/Documents/VIREON"
+    base_dir = os.environ.get("VIREON_HOME", ".")
     suites = [
         "vireon-verification/numerical/test_psd_crossval.py",
         "vireon-verification/statistical/test_csp_crossval.py",

@@ -58,7 +58,9 @@ class EvidenceQualityEngine:
         components = [completeness, numerical, statistical, validity, traceability, reproducibility, external, standards]
         # Avoid division by zero in harmonic mean
         epsilon = 1e-6
-        components = [max(epsilon, c) for c in components]
+        components = []
+        for c in [completeness, numerical, statistical, validity, traceability, reproducibility, external, standards]:
+            components.append(max(epsilon, c))
         overall = len(components) / sum(1.0 / c for c in components)
 
         return IEvidenceQuality(
@@ -72,3 +74,36 @@ class EvidenceQualityEngine:
             standards_compliance=standards,
             overall=overall
         )
+
+class LiteratureVerifier:
+    """
+    Verifies that a plugin's claims are backed by literature in the Knowledge Graph.
+    """
+    def __init__(self, kg):
+        self.kg = kg
+
+    def verify(self, contract) -> bool:
+        """
+        Parses PMIDs or DOIs from the contract and checks the KnowledgeGraph
+        to ensure the cited papers support the contract's claims.
+        """
+        if not contract.validation_papers:
+            return False
+            
+        supported = False
+        for paper in contract.validation_papers:
+            # Extract DOI/PMID
+            if "10." in paper:
+                # It's a DOI
+                paper_id = f"doi:{paper}"
+            else:
+                paper_id = f"pmid:{paper}"
+                
+            # Query KG for paper
+            if paper_id in self.kg._graph:
+                paper_node = self.kg._graph[paper_id]
+                # Check if it supports the claims (stub logic for now)
+                if paper_node.get("supports_claims", True):
+                    supported = True
+                    break
+        return supported

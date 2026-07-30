@@ -22,7 +22,7 @@ def test_interoperability():
     try:
         import pyedflib
         import mne.export
-        edf_path = "/home/ronin/Documents/VIREON/vireon-verification/results/test.edf"
+        edf_path = os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-verification/results/test.edf")
         os.makedirs(os.path.dirname(edf_path), exist_ok=True)
         mne.export.export_raw(edf_path, raw, fmt='edf', overwrite=True)
         raw_edf = mne.io.read_raw_edf(edf_path, preload=True, verbose=False)
@@ -42,7 +42,7 @@ def test_interoperability():
     try:
         import mne_bids
         from mne_bids import BIDSPath, write_raw_bids
-        bids_root = "/home/ronin/Documents/VIREON/vireon-verification/results/bids"
+        bids_root = os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-verification/results/bids")
         bids_path = BIDSPath(subject='01', task='test', root=bids_root)
         write_raw_bids(raw, bids_path, overwrite=True, allow_preload=True, format='EDF', verbose=False)
         
@@ -87,7 +87,7 @@ def test_interoperability():
     except ImportError:
         results["LSL_Roundtrip"] = {"status": "SKIPPED", "reason": "Missing dependency: pylsl"}
 
-    with open("/home/ronin/Documents/VIREON/vireon-verification/results/interoperability_metrics.json", "w") as f:
+    with open(os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-verification/results/interoperability_metrics.json"), "w") as f:
         json.dump(results, f, indent=4)
         
     for k, v in results.items():

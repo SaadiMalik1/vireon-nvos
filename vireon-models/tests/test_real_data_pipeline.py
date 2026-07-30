@@ -6,7 +6,7 @@ import tempfile
 import numpy as np
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-from vireon_lab.scenarios.schema import load_scenario_from_yaml
+from vireon_lab.experiments.schema import load_experiment_from_yaml
 from vireon_core.kernel.execution_engine import ExecutionEngine
 from vireon_validation.evidence.generator import EvidenceGenerator
 
@@ -24,13 +24,20 @@ class TestRealDataPipeline(unittest.TestCase):
         """Execute the EEG baseline SNR scenario with SyntheticSignalProvider."""
         from vireon_models.providers.datasets import SyntheticSignalProvider
         
-        class MockScenario(IScenario):
+        from vireon_core.contracts.base import IExperimentDef
+        class MockScenario(IExperimentDef):
             def get_provider(self):
                 return SyntheticSignalProvider(seed=42, num_channels=4, duration_sec=1.0, include_p300=True)
         
-        filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_baseline_snr.yaml")
-        scenario = load_scenario_from_yaml(filepath)
-        evidence = ExecutionEngine.run(scenario)
+        filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
+        scenario = load_experiment_from_yaml(filepath)
+        from vireon_validation.agency import AgencyValidator
+        from vireon_validation.metrics import generate_signal_metrics
+        evidence = ExecutionEngine.run(
+            scenario,
+            agency_validator_cls=AgencyValidator,
+            signal_metrics_func=generate_signal_metrics
+        )
         
         # Check that signal-level metrics are present
         metric_names = {m.metric_name for m in evidence.measurements}
@@ -65,8 +72,14 @@ class TestRealDataPipeline(unittest.TestCase):
     def test_motor_imagery_scenario(self):
         """Execute the motor imagery ERD scenario with MotorImageryProvider."""
         filepath = os.path.join(SCENARIOS_DIR, "benchmark_motor_imagery_erd.yaml")
-        scenario = load_scenario_from_yaml(filepath)
-        evidence = ExecutionEngine.run(scenario)
+        scenario = load_experiment_from_yaml(filepath)
+        from vireon_validation.agency import AgencyValidator
+        from vireon_validation.metrics import generate_signal_metrics
+        evidence = ExecutionEngine.run(
+            scenario,
+            agency_validator_cls=AgencyValidator,
+            signal_metrics_func=generate_signal_metrics
+        )
         
         metric_names = {m.metric_name for m in evidence.measurements}
         self.assertIn("mu_band_power", metric_names)
@@ -74,13 +87,19 @@ class TestRealDataPipeline(unittest.TestCase):
         self.assertIn("false_activation_rate", metric_names)
 
         # Scenario ID should be the real one from the YAML
-        self.assertEqual(evidence.scenario_id, "benchmark.signal.motor_imagery_erd")
+        self.assertEqual(evidence.experiment_id, "benchmark.signal.motor_imagery_erd")
 
     def test_artifact_attack_scenario(self):
         """Execute the artifact attack scenario and verify powerline detection."""
         filepath = os.path.join(SCENARIOS_DIR, "benchmark_eeg_artifact_attack.yaml")
-        scenario = load_scenario_from_yaml(filepath)
-        evidence = ExecutionEngine.run(scenario)
+        scenario = load_experiment_from_yaml(filepath)
+        from vireon_validation.agency import AgencyValidator
+        from vireon_validation.metrics import generate_signal_metrics
+        evidence = ExecutionEngine.run(
+            scenario,
+            agency_validator_cls=AgencyValidator,
+            signal_metrics_func=generate_signal_metrics
+        )
         
         metric_names = {m.metric_name for m in evidence.measurements}
         self.assertIn("powerline_50hz_detected", metric_names)
@@ -92,8 +111,14 @@ class TestRealDataPipeline(unittest.TestCase):
     def test_backward_compat_mock_provider(self):
         """Legacy scenarios with mock_provider should still work."""
         filepath = os.path.join(SCENARIOS_DIR, "benchmark_false_activation.yaml")
-        scenario = load_scenario_from_yaml(filepath)
-        evidence = ExecutionEngine.run(scenario)
+        scenario = load_experiment_from_yaml(filepath)
+        from vireon_validation.agency import AgencyValidator
+        from vireon_validation.metrics import generate_signal_metrics
+        evidence = ExecutionEngine.run(
+            scenario,
+            agency_validator_cls=AgencyValidator,
+            signal_metrics_func=generate_signal_metrics
+        )
         
         # Should still have agency metrics
         metric_names = {m.metric_name for m in evidence.measurements}

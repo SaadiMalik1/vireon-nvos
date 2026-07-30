@@ -16,6 +16,24 @@ VIREON abstracts the complexities of experimental neurophysiology into a **capab
 - **Scientific Contracts**: Every plugin explicitly declares its mathematical, statistical, and physiological assumptions. If data violates these assumptions (e.g., applying stationary methods to transient event-related potentials), the kernel halts.
 - **Evidence Engine**: Instead of just producing numerical results, VIREON produces immutable `IEvidence` JSON-LD bundles. It tracks provenance, random seeds, and exact Git hashes to solve the reproducibility crisis.
 
+## 📦 Installation
+
+To install the VIREON NVOS core framework and all standard modules for local development:
+
+```bash
+git clone https://github.com/SaadiMalik1/vireon-nvos.git
+cd vireon-nvos
+pip install -e .
+```
+
+To run the Next.js frontend lab:
+
+```bash
+cd vireon-lab/frontend
+npm install
+npm run dev
+```
+
 ## 📚 Documentation Ecosystem
 
 The core value of VIREON is its rigorous documentation and ontological definitions. The documentation is treated as a first-class citizen and built via MkDocs.
