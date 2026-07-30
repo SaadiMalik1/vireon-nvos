@@ -11,6 +11,22 @@
             "violation_severity": "HIGH",
             "recommendation": "vk:Method:Multitaper",
             "message": "Welch's method is inappropriate for highly non-stationary signals. Use Multitaper or Wavelet analysis."
+        },
+        {
+            "@id": "vk:Rule:RankDeficiencyForICA",
+            "target_method": "vk:Method:ICA",
+            "condition": "signal.rank < signal.num_channels",
+            "violation_severity": "CRITICAL",
+            "recommendation": "vk:Method:PCA_Dimension_Reduction",
+            "message": "ICA fails on rank-deficient data (e.g. after average referencing). Reduce dimensionality first."
+        },
+        {
+            "@id": "vk:Rule:BalancedClassesForCSP",
+            "target_method": "vk:Method:CSP",
+            "condition": "dataset.class_balance_ratio < 0.2",
+            "violation_severity": "HIGH",
+            "recommendation": "vk:Method:Class_Weighting",
+            "message": "Common Spatial Patterns is highly sensitive to class imbalance. Ensure balanced classes or use class weighting."
         }
     ]
 }
