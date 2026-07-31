@@ -117,3 +117,68 @@ class IPlugin(ABC):
     @abstractmethod
     def execute(self, inputs: Dict[str, IScientificObject]) -> Dict[str, IScientificObject]:
         pass
+
+class IDatasetPlugin(IPlugin):
+    """
+    Plugin interface for acquiring and formatting canonical validation datasets.
+    """
+    @abstractmethod
+    def download(self, cache_dir: str) -> None:
+        pass
+
+    @abstractmethod
+    def verify_checksum(self, cache_dir: str) -> bool:
+        pass
+        
+    @abstractmethod
+    def verify_license(self) -> bool:
+        pass
+        
+    @abstractmethod
+    def convert_to_bids(self, cache_dir: str, bids_dir: str) -> None:
+        pass
+        
+    @abstractmethod
+    def generate_metadata(self, bids_dir: str) -> Dict[str, Any]:
+        pass
+        
+    @abstractmethod
+    def generate_hash(self, bids_dir: str) -> str:
+        pass
+        
+    @abstractmethod
+    def create_manifest(self, output_path: str) -> None:
+        pass
+
+    @abstractmethod
+    def load(self, subject_id: str, bids_root: str) -> IScientificObject:
+        pass
+        
+    @abstractmethod
+    def stream(self, subject_id: str, bids_root: str):
+        pass
+        
+    @abstractmethod
+    def iterate(self, bids_root: str):
+        pass
+        
+    @abstractmethod
+    def statistics(self, bids_root: str) -> Dict[str, Any]:
+        pass
+        
+    @abstractmethod
+    def quality_report(self, bids_root: str) -> Dict[str, Any]:
+        pass
+
+class IMethodPlugin(IPlugin):
+    """
+    Plugin interface for scientific methods (Signal Processing, ML, etc).
+    """
+    @property
+    def plugin_type(self) -> str:
+        return "method"
+        
+    @property
+    @abstractmethod
+    def dependencies(self) -> List[str]:
+        pass

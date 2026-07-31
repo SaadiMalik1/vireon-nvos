@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vireon-evidence"
+version = "0.1.0"
+description = "VIREON Scientific Evidence Graph and Operating System"
+dependencies = [
+    "vireon-core",
+    "networkx"
+]
