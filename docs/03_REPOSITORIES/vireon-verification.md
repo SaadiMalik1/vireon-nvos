@@ -1,7 +1,10 @@
 # vireon-verification
 
-`vireon-verification` is the CI/CD test suite.
+`vireon-verification` ensures the absolute mathematical correctness of the system.
 
-While `vireon-validation` tests the *science* (does the decoder fail when noise is added?), `vireon-verification` tests the *math* (does the optimized Rust Welch PSD output the exact same float64 array as the `vireon-reference` Python Welch PSD?).
+## Benchmarks vs. Regression
+Unlike `vireon-validation` (which asks scientific questions like "Does this decoder work with 20% impedance drift?"), `vireon-verification` runs CI/CD tests to ensure the code *compiles* and math functions correctly against `vireon-reference`. It establishes SRL-1 to SRL-3.
 
-No Pull Request can be merged into `vireon-methods` unless the `vireon-verification` GitHub Actions pass with numerical equivalence.
+## Status
+- **SRL-1 to SRL-3 CI/CD**: [FULLY IMPLEMENTED] - Deterministic hashing and numerical equivalency tests are active.
+- **Automated Formal Verification**: [STUBBED] - Z3 theorem prover integration for proving contract bounds is currently a stub.

@@ -10,3 +10,8 @@ Learn how to use the declarative YAML interface to pass the `SyntheticAlpha10Hz`
 
 ### Tutorial 2: Adversarial Decoder Testing
 Learn how to wrap a simple scikit-learn Linear Discriminant Analysis (LDA) classifier in an `IPlugin` wrapper, and use `vireon-validation` to test its robustness against increasing levels of telemetry packet loss.
+
+
+## Phase E Implementation Status
+> [!NOTE]
+> As of Phase E, the architecture has expanded to include Massive Campaigns, Hardware Digital Twins, EvidenceBundle v5 (SRI/Regulatory mapping), and the Reproduce CLI. Features described in this document may be subject to these new workflows. If specific API endpoints, models, or UI components are discussed but missing in the codebase, they are currently [STUBBED] pending Phase F implementation.

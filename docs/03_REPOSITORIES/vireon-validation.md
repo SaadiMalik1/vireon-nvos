@@ -1,9 +1,6 @@
 # vireon-validation
 
-`vireon-validation` is the automated adversarial testing suite for neurotechnology claims.
-
-## Benchmarks vs. Regression
-Unlike `vireon-verification` (which runs CI/CD tests to ensure the code *compiles* and math functions correctly), `vireon-validation` asks scientific questions: "Does this decoder still work if the skin impedance drifts by 20% over 3 hours?"
+`vireon-validation` is the automated adversarial testing suite for neurotechnology claims. It asks scientific questions: "Does this decoder still work if the skin impedance drifts by 20% over 3 hours?"
 
 ## Structure
 The repository contains YAML scenario definitions.
@@ -19,4 +16,18 @@ metrics:
   - precision
 ```
 
-The Execution Engine runs these scenarios iteratively, slowly increasing the `intensity` of the adversarial perturbations (e.g., packet loss, clock jitter, muscle noise) until the target decoder fails. This defines the **Operating Envelope** of the algorithm.
+## Massive Campaign Orchestrator
+- **Status**: [FULLY IMPLEMENTED]
+- The Execution Engine runs scenarios iteratively, generating massive multidimensional grids of algorithms vs. perturbations. It successfully sweeps across parameters to define the **Operating Envelope** of the algorithm.
+
+## Statistical Framework
+- **Status**: [FULLY IMPLEMENTED]
+- The core statistical methods (`vireon_validation.statistics.framework`) are actively used to compute bounds:
+  - Bland-Altman Analysis
+  - Intraclass Correlation (ICC)
+  - Kolmogorov-Smirnov (KS) Test
+  - Cohen's d
+
+## Pipeline Validation
+- **Status**: [WIP / PARTIALLY IMPLEMENTED]
+- While the orchestrator can run End-to-End pipelines, the native validation of complex cyclic graphs and bidirectional workflows is currently stubbed and only supports linear DAGs.

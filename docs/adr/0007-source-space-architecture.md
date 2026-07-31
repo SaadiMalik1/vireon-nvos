@@ -14,3 +14,8 @@ VIREON mandates a **Source Space First** architecture for biological signals. Bi
 - **Positive:** Decoders trained on this data will learn physiologically plausible spatial filters (e.g., CSP).
 - **Negative:** Massive computational overhead. Computing leadfields for high-resolution FEM models requires significant memory and processing time.
 - **Requirement:** Maintain multiple tiers of head models (e.g., analytical SphereModel for speed, BEM for accuracy) allowing users to balance speed vs. realism.
+
+
+## Phase E Implementation Status
+> [!NOTE]
+> As of Phase E, the architecture has expanded to include Massive Campaigns, Hardware Digital Twins, EvidenceBundle v5 (SRI/Regulatory mapping), and the Reproduce CLI. Features described in this document may be subject to these new workflows. If specific API endpoints, models, or UI components are discussed but missing in the codebase, they are currently [STUBBED] pending Phase F implementation.

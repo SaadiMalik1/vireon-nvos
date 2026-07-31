@@ -10,9 +10,12 @@ It is strictly an orchestration and contract enforcement engine.
 
 ### `vireon_core.contracts`
 Defines the `IPlugin` and `IScientificObject` abstract base classes. Any Python object that inherits from `IPlugin` can be loaded dynamically by the kernel.
+- **Status**: [FULLY IMPLEMENTED] 
 
 ### `vireon_core.engine`
 The execution router. It accepts a declarative YAML manifest (a Goal), parses the available capabilities across all registered plugins, and dynamically constructs the execution DAG.
+- **Status**: [FULLY IMPLEMENTED] - Resolves linear directed acyclic graphs. 
 
 ### `vireon_core.evidence`
 The provenance tracker. As the DAG executes, this module intercepts the inputs and outputs, hashes them, and serializes the state of the `ScientificContract` into an immutable `IEvidence` JSON-LD bundle.
+- **Status**: [FULLY IMPLEMENTED] - Support for `EvidenceBundle v5` (Regulatory Profiles and Scientific Reproducibility Index) is active.

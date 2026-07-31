@@ -2,13 +2,12 @@
 
 `vireon-corpus` is the canonical store for empirical validation datasets.
 
-## Requirements for Inclusion
-A dataset cannot be added to `vireon-corpus` simply by uploading a CSV. It must be accompanied by:
-- A JSON/YAML manifest declaring the specific amplifier hardware used.
-- The precise spatial coordinates of the electrode montage.
-- The cryptographic hash (`sha256`) of the raw files to ensure immutable provenance tracking during Evidence Generation.
+## Requirements for Ingestion
+To be ingested into `vireon-corpus`, a dataset must:
+1. Be structured in BIDS (Brain Imaging Data Structure) format.
+2. Have explicit provenance (DOI of original publication).
+3. Be hashed cryptographically so the Evidence Engine can lock executions to specific dataset versions.
 
-## Current Dataset Catalog
-- **CHB-MIT** (`dataset.chb_mit`): EEG recordings from pediatric subjects with intractable seizures.
-- **MNE Sample** (`dataset.mne_sample`): MEG/EEG data from a single subject presenting audiovisual stimuli.
-- **BCI Competition IV 2a** (`dataset.bci_competition_iv_2a`): 4-class motor imagery EEG dataset.
+## Status
+- **BIDS Ingestion**: [FULLY IMPLEMENTED] - Datasets can be parsed and hashed.
+- **Dataset Integration**: [PARTIALLY IMPLEMENTED] - Specific datasets like `EEGBCI`, `PhysioNet MI`, and `CHB-MIT` are mapped in the ontology, but the automated fetching engine is [STUBBED]. Currently requires manual local downloads.

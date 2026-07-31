@@ -11,3 +11,7 @@ VIREON does not exist to prove that a decoder works. It exists to find the exact
 If you use Independent Component Analysis (ICA) to remove eye blinks, you are assuming that the blink artifact is statistically independent from the underlying neural signal. If this assumption is false (e.g., if the user blinks reflexively *in response* to a stimulus), the ICA will project neural data into the noise component, destroying the signal.
 
 VIREON forces this assumption to be declared explicitly in the `ScientificContract` so that adversarial datasets can be constructed to test it.
+
+## Phase E Implementation Status
+> [!NOTE]
+> As of Phase E, the architecture has expanded to include Massive Campaigns, Hardware Digital Twins, EvidenceBundle v5 (SRI/Regulatory mapping), and the Reproduce CLI. Features described in this document may be subject to these new workflows. If specific API endpoints, models, or UI components are discussed but missing in the codebase, they are currently [STUBBED] pending Phase F implementation.

@@ -14,3 +14,8 @@ Every `IPlugin` must define a `ScientificContract`. This contract explicitly lis
 - **Positive:** Automatically generates documentation for the boundaries of an algorithm.
 - **Negative:** Forces researchers to rigorously mathematically justify their code before it can be run in the ecosystem.
 - **Requirement:** The `EvidenceEngine` must dynamically verify that the metadata of the `IScientificObject` payload satisfies the downstream plugin's contract before execution is permitted.
+
+
+## Phase E Implementation Status
+> [!NOTE]
+> As of Phase E, the architecture has expanded to include Massive Campaigns, Hardware Digital Twins, EvidenceBundle v5 (SRI/Regulatory mapping), and the Reproduce CLI. Features described in this document may be subject to these new workflows. If specific API endpoints, models, or UI components are discussed but missing in the codebase, they are currently [STUBBED] pending Phase F implementation.

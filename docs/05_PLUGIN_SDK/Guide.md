@@ -52,3 +52,8 @@ def execute(self, inputs: Dict[str, IScientificObject]) -> Dict[str, IScientific
 
 ## 2. Registering the Plugin
 Once implemented, the plugin does not need to be hardcoded into `vireon-core`. The core execution orchestrator uses Python's reflection (or entry points) to discover available plugins in your environment.
+
+
+## Phase E Implementation Status
+> [!NOTE]
+> As of Phase E, the architecture has expanded to include Massive Campaigns, Hardware Digital Twins, EvidenceBundle v5 (SRI/Regulatory mapping), and the Reproduce CLI. Features described in this document may be subject to these new workflows. If specific API endpoints, models, or UI components are discussed but missing in the codebase, they are currently [STUBBED] pending Phase F implementation.

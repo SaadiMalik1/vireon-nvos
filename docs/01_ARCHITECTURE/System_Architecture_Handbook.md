@@ -20,3 +20,8 @@ VIREON is structured as a capability-based orchestration engine. The architectur
 - **Validation, not Simulation**: We do not simulate brain activity for discovery; we validate software against known physiological envelopes.
 - **Contract-first Execution**: Algorithms cannot execute if they violate biological or physical constraints mapped in the Knowledge Graph.
 - **Immutability**: Once an experiment completes, its evidence bundle is cryptographically hashed and cannot be altered.
+
+
+## Phase E Implementation Status
+> [!NOTE]
+> As of Phase E, the architecture has expanded to include Massive Campaigns, Hardware Digital Twins, EvidenceBundle v5 (SRI/Regulatory mapping), and the Reproduce CLI. Features described in this document may be subject to these new workflows. If specific API endpoints, models, or UI components are discussed but missing in the codebase, they are currently [STUBBED] pending Phase F implementation.

@@ -20,3 +20,7 @@ graph LR;
 ```
 
 This immutable `IEvidence` bundle is the final output of any execution run. It can be cryptographically signed and used as the basis for a regulatory submission (e.g. FDA Q-Sub).
+
+## Phase E Implementation Status
+> [!NOTE]
+> As of Phase E, the architecture has expanded to include Massive Campaigns, Hardware Digital Twins, EvidenceBundle v5 (SRI/Regulatory mapping), and the Reproduce CLI. Features described in this document may be subject to these new workflows. If specific API endpoints, models, or UI components are discussed but missing in the codebase, they are currently [STUBBED] pending Phase F implementation.

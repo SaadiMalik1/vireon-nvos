@@ -3,21 +3,26 @@
 The VIREON ecosystem is intentionally fragmented into domain-specific repositories to enforce decoupling.
 
 ## The Kernel
-- **`vireon-core`**: The execution DAG, capability router, and Evidence Engine. Contains no scientific logic.
+- **`vireon-core`**: The execution DAG, capability router, and Evidence Engine. Contains the core `EvidenceBundle v5` schemas tracking SRI and Regulatory Profiles.
 
-## The Ontology
-- **`vireon-knowledge`**: The JSON-LD Knowledge Graph mapping methods, assumptions, and hardware characteristics.
+## The Ontology & Knowledge
+- **`vireon-knowledge`**: The formal ontology and Knowledge Graph linking methods, assumptions, and literature.
+- **`vireon-evidence`**: Contains the Knowledge Infrastructure Query API (`vireon_evidence.graph.query`) and the `Failure Atlas` for tracking operational envelopes.
 
 ## The Science
-- **`vireon-models`**: Generative digital twins. Source space dipoles, hardware amplifiers, artifact synthesizers.
-- **`vireon-methods`**: Signal processing and statistical algorithms (e.g., Welch PSD, CSP, ICA).
+- **`vireon-models`**: Generative digital twins (Artifacts, Head models, Source space). Specifically expanded to include Hardware Digital Twins (`AmplifierTwin`, `TelemetryTwin`, `BatteryDegradationTwin`).
+- **`vireon-methods`**: Signal processing and statistical methodologies (e.g., Welch PSD, CSP).
 
 ## Validation & Testing
-- **`vireon-validation`**: Automated scenario manifests for adversarial testing of decoders.
-- **`vireon-verification`**: CI/CD regression tests ensuring numerical equivalence (SRL-3) of the methods.
+- **`vireon-validation`**: Automated benchmarking scenarios, Massive Campaign Orchestrators, and the `vireon_validation.statistics.framework` covering Bland-Altman, ICC, and KS statistics.
+- **`vireon-verification`**: Continuous Integration checks ensuring standard mathematical and numerical agreements.
 
 ## Data & Evidence
-- **`vireon-corpus`**: Highly curated, fingerprinted physiological datasets (e.g., MNE Sample, PhysioNet).
-- **`vireon-publications`**: Executable JSON-LD evidence bundles that reproduce canonical papers.
+- **`vireon-corpus`**: High-quality, curated, and fingerprinted physiological datasets.
+- **`vireon-publications`**: Executable evidence graphs reproducing the results of canonical papers.
 - **`vireon-reference`**: Ground-truth implementations (often slow, unoptimized Python) used to verify faster rust/C++ extensions.
-- **`vireon-lab`**: Interactive Jupyter notebooks and tutorials for exploring the ecosystem.
+- **`vireon-lab`**: Interactive Jupyter notebooks and the `vireon reproduce [DOI]` CLI for one-command paper replication.
+
+## Phase E Implementation Status
+> [!NOTE]
+> As of Phase E, the architecture has expanded to include Massive Campaigns, Hardware Digital Twins, EvidenceBundle v5 (SRI/Regulatory mapping), and the Reproduce CLI. Features described in this document may be subject to these new workflows. If specific API endpoints, models, or UI components are discussed but missing in the codebase, they are currently [STUBBED] pending Phase F implementation.

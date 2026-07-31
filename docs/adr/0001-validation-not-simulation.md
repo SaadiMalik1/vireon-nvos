@@ -18,3 +18,8 @@ Instead of attempting to recreate a perfect brain, VIREON intentionally generate
 - **Positive:** Decoders validated on VIREON are robust to realistic hardware and physiological failure modes.
 - **Negative:** Users expecting a "plug-and-play virtual brain" may find the adversarial nature of the system jarring. 
 - **Requirement:** Every generated artifact must be mathematically quantifiable and explicitly declared in a `ScientificContract`.
+
+
+## Phase E Implementation Status
+> [!NOTE]
+> As of Phase E, the architecture has expanded to include Massive Campaigns, Hardware Digital Twins, EvidenceBundle v5 (SRI/Regulatory mapping), and the Reproduce CLI. Features described in this document may be subject to these new workflows. If specific API endpoints, models, or UI components are discussed but missing in the codebase, they are currently [STUBBED] pending Phase F implementation.

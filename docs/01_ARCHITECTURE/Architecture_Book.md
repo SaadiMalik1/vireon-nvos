@@ -20,3 +20,8 @@ Plugins declare:
 
 ### Evidence Flow
 As data flows, the **Evidence Engine** constructs a shadow graph. It records the state of the digital twin, the specific versions of the plugins used, the explicit assumptions made, and the numerical tolerances observed. This results in an `IEvidence` bundle—an immutable record of exactly *why* a particular scientific outcome was reached.
+
+
+## Phase E Implementation Status
+> [!NOTE]
+> As of Phase E, the architecture has expanded to include Massive Campaigns, Hardware Digital Twins, EvidenceBundle v5 (SRI/Regulatory mapping), and the Reproduce CLI. Features described in this document may be subject to these new workflows. If specific API endpoints, models, or UI components are discussed but missing in the codebase, they are currently [STUBBED] pending Phase F implementation.
