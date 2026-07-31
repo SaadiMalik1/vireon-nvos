@@ -36,3 +36,24 @@ class PublicationNode(EvidenceNode):
     node_type: str = "Publication"
     doi: str
     title: str
+
+class MathematicalAssumptionNode(EvidenceNode):
+    node_type: str = "MathematicalAssumption"
+    assumption_text: str
+
+class SignalTypeNode(EvidenceNode):
+    node_type: str = "SignalType"
+    modality: str
+
+class HardwareNode(EvidenceNode):
+    node_type: str = "Hardware"
+    device_name: str
+
+class ConsensusNode(EvidenceNode):
+    node_type: str = "ScientificConsensus"
+    consensus_statement: str
+
+class ClinicalApplicationNode(EvidenceNode):
+    node_type: str = "ClinicalApplication"
+    disease_or_task: str
+

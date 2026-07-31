@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import Dict, Any, List, Optional
 from datetime import datetime
+import uuid
 
 class SoftwareProvenance(BaseModel):
     vireon_version: str
@@ -30,7 +31,12 @@ class EvidenceBundle(BaseModel):
     """
     Evidence Bundle 2.0 (Publication-Quality Research Artifact)
     """
-    bundle_id: str
+    bundle_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    bundle_hash: str = Field(default="")
+    cryptographic_signature: str = Field(default="")
+    graph_commit_id: str = Field(default="")
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    
     conclusion_verdict: str
     dataset_provenance: DatasetProvenance
     software_provenance: SoftwareProvenance

@@ -1,35 +1,24 @@
-from typing import List, Dict, Any
+from typing import Dict, Any, List
 from vireon_evidence.graph.core import EvidenceGraph
 
-class ContinuousMetaAnalysisEngine:
+class ContinuousMetaAnalysis:
     """
-    Aggregates benchmark evidence continuously to dynamically recommend SRL updates.
+    Continuously recomputes overall confidence, effect size, heterogeneity, 
+    publication bias indicators, and recommended SRL.
     """
     def __init__(self, graph: EvidenceGraph):
         self.graph = graph
-
-    def aggregate_evidence(self, method_id: str) -> Dict[str, Any]:
+        
+    def recompute(self, method_id: str) -> Dict[str, Any]:
         """
-        Gathers all executed benchmarks for a given method across all datasets and laboratories.
-        Returns a meta-analysis summary and a dynamically calculated SRL recommendation.
+        Executed after every new benchmark for a method.
         """
         # Stub logic
-        # 1. Query EvidenceGraph for all EvidenceBundles generated using `method_id`.
-        # 2. Extract metrics (e.g., CCC, RMSE) across datasets.
-        # 3. Calculate mean confidence and reproduction ratios.
-        
-        total_benchmarks = 47 # Example aggregated metric
-        distinct_datasets = 22
-        laboratories = 14
-        
-        confidence = 0.993
-        srl_recommendation = "SRL-6"
-        
         return {
             "method_id": method_id,
-            "total_benchmark_runs": total_benchmarks,
-            "distinct_datasets": distinct_datasets,
-            "independent_laboratories": laboratories,
-            "current_confidence": f"{confidence * 100:.1f}%",
-            "srl_recommendation": srl_recommendation
+            "overall_confidence": 0.985,
+            "effect_size": 1.2,
+            "heterogeneity": 0.15,
+            "publication_bias": "Low",
+            "recommended_srl": "SRL-4"
         }
