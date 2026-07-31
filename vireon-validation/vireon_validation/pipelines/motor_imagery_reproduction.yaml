@@ -1,0 +1,38 @@
+pipeline:
+  name: Motor Imagery Reproducibility Campaign
+  publication_target: "Blankertz et al. (2008), Optimizing Spatial filters for Robust BCI"
+  dataset: EEGBCI
+  
+  stages:
+    - name: Baseline Correction
+      algorithm: VireonBaselineCorrection
+      params:
+        baseline_window: [0, 100] # ms
+        
+    - name: Power-line Notch
+      algorithm: VireonNotch
+      params:
+        freq: 50.0
+        q: 30.0
+        
+    - name: Bandpass Filter
+      algorithm: VireonButterworth
+      params:
+        order: 4
+        cutoff: [8.0, 30.0]
+        btype: "bandpass"
+        
+    - name: Spatial Referencing
+      algorithm: VireonCAR
+      
+    - name: Spatial Filtering (Feature Extraction)
+      algorithm: VireonCSP
+      params:
+        n_components: 4
+        
+    - name: Classifier
+      algorithm: ExternalLDA
+      
+  acceptance_criteria:
+    reproduction_tolerance: 0.05 # Must be within 5% of published accuracy (e.g. 82%)
+    accuracy_target: 0.82

@@ -1,0 +1,20 @@
+campaign:
+  name: Native VireonICA Validation (Phase A2)
+  algorithm: VireonICA
+  reference: FastICA
+  synthetic:
+    - mixed_independent_sources
+  datasets:
+    - EEGBCI
+  perturbations:
+    - gaussian
+    - line_noise
+  metrics:
+    - amari_distance
+    - reconstruction_error
+    - rmse
+    - ccc
+  outputs:
+    - evidence_bundle
+    - report
+    - notebook

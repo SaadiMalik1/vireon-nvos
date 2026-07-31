@@ -1,0 +1,21 @@
+campaign:
+  name: Native VireonICA Failure Mode (Phase A2)
+  algorithm: VireonICA
+  reference: FastICA
+  expect_failure: true
+  synthetic:
+    - pure_gaussian_sources
+  datasets:
+    - EEGBCI
+  perturbations:
+    - none
+  metrics:
+    - reconstruction_error
+    - amari_distance
+    - source_correlation_optimal_match
+    - sir
+    - sdr
+  outputs:
+    - evidence_bundle
+    - report
+    - notebook

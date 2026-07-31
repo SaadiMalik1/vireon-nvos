@@ -1,0 +1,22 @@
+campaign:
+  name: Native VireonWelch Validation (Phase A1)
+  algorithm: VireonWelch
+  reference: SciPyWelch
+  synthetic:
+    - alpha
+    - beta
+    - white_noise
+    - pink_noise
+  datasets:
+    - EEGBCI
+  perturbations:
+    - gaussian
+    - line_noise
+  metrics:
+    - rmse
+    - ccc
+    - runtime
+  outputs:
+    - evidence_bundle
+    - report
+    - notebook

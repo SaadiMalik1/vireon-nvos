@@ -1,13 +1,25 @@
 # Architecture Overview
 
-The VIREON NVOS architecture is designed to enforce maximum decoupling between scientific intent and execution logic.
+The VIREON NVOS (Neurotechnology Validation Operating System) architecture has evolved from a simple algorithmic benchmarking suite into a comprehensive, layered infrastructure designed to generate, organize, and independently reproduce computational neuroscience evidence.
 
-## The Tripartite Structure
+## The 6-Layer Vision
 
-The architecture is divided into three distinct conceptual zones:
+The architecture is divided into six progressive layers:
 
-1. **The Core Engine (`vireon-core`)**: The dumb orchestrator. It knows nothing about brains, signals, or physics. It only knows how to match capabilities, validate JSON-LD contracts, and route payloads through a DAG.
-2. **The Knowledge Graph (`vireon-knowledge`)**: The semantic ontology. It holds the fundamental truths of the ecosystem (e.g., "Ocular Blinks occur in the frontal cortex", "Welch PSD requires Stationarity").
-3. **The Plugin Ecosystem (`vireon-models`, `vireon-methods`)**: The actual science. These repositories contain the executable code that generates artifacts, models dipoles, or extracts features.
+1. **Layer 1: Scientific Corpus** (`vireon-knowledge`, `Datasets`)
+   Contains datasets, BIDS ingestion structures, metadata, and the provenance tracking necessary to root analyses in physical reality.
 
-By isolating the scientific logic in the Plugin Ecosystem, we ensure that the Core Engine remains highly stable, while researchers can rapidly iterate on new models without risking regressions in the orchestration logic.
+2. **Layer 2: Computational Methods** (`vireon-methods`, `vireon-models`)
+   Contains reference wrappers and native implementations of algorithms (filtering, spatial, connectivity, source imaging).
+
+3. **Layer 3: Evidence Generation Platform** (`vireon-core`, `vireon-validation`)
+   The core engine driving benchmarking campaigns, computing statistical equivalences, and packaging results into immutable `EvidenceBundle` artifacts.
+
+4. **Layer 4: Scientific Knowledge Graph** (`vireon-evidence`)
+   The semantic ontology mapping Methods, Datasets, Claims, Clinical Domains, and **Workflows**. It acts as the queryable truth base for operational envelopes and failure modes.
+
+5. **Layer 5: Reproducibility Platform** (`vireon-lab`)
+   Provides the ability to execute massive factorial campaigns, launch digital twins, and expose the `vireon reproduce DOI` CLI, allowing anyone to replicate full papers effortlessly.
+
+6. **Layer 6: Neurotechnology Validation OS**
+   The final synthesis. At this layer, VIREON operates not merely as a library, but as a continuous validation infrastructure monitoring the limits, reliability, and clinical readiness of complete neurotechnology pipelines.

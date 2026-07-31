@@ -43,5 +43,75 @@ class GraphCommitter:
         for m in transaction.bundle.method_provenance:
             self.graph.add_relationship(m.plugin_id, node.node_id, "generated")
             
-        # Link to dataset
-        self.graph.add_relationship(node.node_id, transaction.bundle.dataset_provenance.dataset_id, "validated_on")
+        # Expanded Hierarchical Flow
+        # Method -> Campaign -> Perturbation Sweep -> Dataset -> Evidence -> Scientific Claim -> Consensus
+        
+        # Method -> Campaign
+        campaign_node_id = f"campaign_{transaction.bundle.bundle_id}"
+        for m in transaction.bundle.method_provenance:
+            self.graph.add_relationship(m.plugin_id, campaign_node_id, "executed_in")
+            
+        # Campaign -> Perturbation
+        perturbation_node_id = f"perturbation_{transaction.bundle.perturbation}"
+        self.graph.add_relationship(campaign_node_id, perturbation_node_id, "under_condition")
+        
+        # Method -> Mathematical Assumptions
+        for assumption in transaction.bundle.assumptions:
+            assumption_node_id = f"assumption_{assumption}"
+            for m in transaction.bundle.method_provenance:
+                self.graph.add_relationship(m.plugin_id, assumption_node_id, "assumes")
+                
+        # Method -> Known Limitations
+        for limitation in transaction.bundle.known_limitations:
+            limit_node_id = f"limitation_{limitation}"
+            for m in transaction.bundle.method_provenance:
+                self.graph.add_relationship(m.plugin_id, limit_node_id, "limited_by")
+                
+        # Method -> Clinical Domains
+        for domain in transaction.bundle.clinical_domains_supported:
+            domain_node_id = f"clinical_domain_{domain}"
+            for m in transaction.bundle.method_provenance:
+                self.graph.add_relationship(m.plugin_id, domain_node_id, "validated_for")
+                
+        # Perturbation -> Dataset
+        self.graph.add_relationship(perturbation_node_id, transaction.bundle.dataset_provenance.dataset_id, "applied_to")
+        
+        # Dataset -> Evidence
+        self.graph.add_relationship(transaction.bundle.dataset_provenance.dataset_id, node.node_id, "produced")
+        
+        # Evidence -> Scientific Claim
+        claim_node_id = f"claim_{transaction.bundle.srl_recommendation}"
+        self.graph.add_relationship(node.node_id, claim_node_id, "supports")
+        
+        # Domain Extensions
+        if transaction.bundle.connectivity_metric:
+            network_node = f"network_{transaction.bundle.connectivity_metric}"
+            self.graph.add_relationship(node.node_id, network_node, "quantifies_network")
+            
+        if transaction.bundle.head_model:
+            head_model_node = f"headmodel_{transaction.bundle.head_model}"
+            self.graph.add_relationship(node.node_id, head_model_node, "localized_via")
+            
+        # Global Campaign Entities
+        dataset_node_id = f"dataset_{transaction.bundle.dataset}"
+        protocol_node_id = f"protocol_{transaction.bundle.campaign_class}"
+        self.graph.add_relationship(node.node_id, dataset_node_id, "evaluated_on")
+        self.graph.add_relationship(node.node_id, protocol_node_id, "executed_via")
+        
+        # Workflow Architecture Additions
+        if hasattr(transaction.bundle, 'workflow_id') and transaction.bundle.workflow_id:
+            workflow_node_id = f"workflow_{transaction.bundle.workflow_id}"
+            self.graph.add_relationship(workflow_node_id, node.node_id, "comprises_algorithm")
+            self.graph.add_relationship(workflow_node_id, dataset_node_id, "validated_on_dataset")
+            
+        for p in transaction.bundle.perturbations:
+            perturb_node_id = f"perturbation_{p}"
+            self.graph.add_relationship(node.node_id, perturb_node_id, "subject_to")
+            
+        if transaction.bundle.pass_fail == "FAIL":
+            failure_node_id = f"failure_mode_{transaction.bundle.srl_recommendation}"
+            self.graph.add_relationship(node.node_id, failure_node_id, "exhibits_failure")
+            
+        # Scientific Claim -> Consensus
+        consensus_node_id = "consensus_srl"
+        self.graph.add_relationship(claim_node_id, consensus_node_id, "contributes_to")

@@ -223,6 +223,7 @@ class SignalType(str, Enum):
     MEG = "MEG"
     EMG = "EMG"
     EOG = "EOG"
+    ECG = "ECG"
     FNIRS = "FNIRS"
     SPIKE = "SPIKE"
     UNKNOWN = "UNKNOWN"

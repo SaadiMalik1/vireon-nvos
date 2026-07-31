@@ -1,0 +1,20 @@
+campaign:
+  name: Native VireonCSP Robustness Sweep (Phase A2)
+  algorithm: VireonCSP
+  reference: MNECSP
+  synthetic:
+    - simulated_motor_imagery
+  datasets:
+    - EEGBCI
+  perturbations:
+    noise_snr: [0, 5, 10, 20, 30]
+    channel_dropout: [1, 2, 4, 8]
+  metrics:
+    - eigenvalue_agreement
+    - covariance_reconstruction
+    - spatial_pattern_correlation
+    - explained_variance
+  outputs:
+    - evidence_bundle
+    - report
+    - notebook

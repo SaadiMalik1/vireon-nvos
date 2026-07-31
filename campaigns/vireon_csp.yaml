@@ -1,0 +1,20 @@
+campaign:
+  name: Native VireonCSP Validation (Phase A2)
+  algorithm: VireonCSP
+  reference: MNECSP
+  synthetic:
+    - simulated_motor_imagery
+  datasets:
+    - EEGBCI
+  perturbations:
+    - gaussian
+    - motion_artifacts
+  metrics:
+    - spatial_pattern_correlation
+    - covariance_agreement
+    - rmse
+    - ccc
+  outputs:
+    - evidence_bundle
+    - report
+    - notebook

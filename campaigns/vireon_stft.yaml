@@ -1,0 +1,21 @@
+campaign:
+  name: Native VireonSTFT Validation (Phase A2)
+  algorithm: VireonSTFT
+  reference: SciPySTFT
+  synthetic:
+    - chirp
+    - frequency_sweep
+    - transient_burst
+  datasets:
+    - EEGBCI
+  perturbations:
+    - gaussian
+  metrics:
+    - time_localization
+    - frequency_localization
+    - rmse
+    - ccc
+  outputs:
+    - evidence_bundle
+    - report
+    - notebook

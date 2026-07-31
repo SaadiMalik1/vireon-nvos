@@ -1,0 +1,21 @@
+campaign:
+  name: Native VireonPLV Connectivity Validation (Phase 3.1)
+  algorithm: VireonPLV
+  reference: MNE_Connectivity_PLV
+  class: Robustness
+  synthetic:
+    - coupled_oscillators
+  datasets:
+    - RestingStateEEG
+  perturbations:
+    noise_snr: [0, 5, 10, 20, 30]
+    epoch_length: [1.0, 2.0, 4.0, 10.0]
+  metrics:
+    - matrix_rmse
+    - node_degree_correlation
+    - false_positive_rate
+    - small_world_coefficient
+  outputs:
+    - evidence_bundle
+    - report
+    - notebook

@@ -1,0 +1,24 @@
+campaign:
+  name: Native VireonButterworth 6-Class Validation (Phase B)
+  algorithm: VireonButterworth
+  reference: SciPyButterworth
+  class: Robustness
+  synthetic:
+    - impulse
+    - step
+    - chirp
+  datasets:
+    - EEGBCI
+  perturbations:
+    noise_snr: [0, 5, 10, 20, 30]
+    clock_drift: [0.0, 0.1, 0.5]
+  metrics:
+    - impulse_response
+    - frequency_response
+    - phase_response
+    - stability
+    - pole_zero_analysis
+  outputs:
+    - evidence_bundle
+    - report
+    - notebook

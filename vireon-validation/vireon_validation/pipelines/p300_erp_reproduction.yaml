@@ -1,0 +1,35 @@
+pipeline:
+  name: P300 ERP Analysis Reproducibility Campaign
+  publication_target: "ERP CORE: An open resource for human event-related brain potentials (Kappenman et al., 2021)"
+  dataset: ERP_CORE_P300
+  
+  stages:
+    - name: High-Pass Filter
+      algorithm: VireonButterworth
+      params:
+        order: 2
+        cutoff: 0.1
+        btype: "highpass"
+        
+    - name: Spatial Referencing
+      algorithm: VireonCAR
+      
+    - name: Baseline Correction
+      algorithm: VireonBaselineCorrection
+      params:
+        baseline_window: [-200, 0] # ms
+        
+    - name: Low-Pass Filter
+      algorithm: VireonButterworth
+      params:
+        order: 4
+        cutoff: 30.0
+        btype: "lowpass"
+        
+    - name: Epoch Averaging
+      algorithm: VireonAverager
+        
+  acceptance_criteria:
+    reproduction_tolerance: 0.05
+    amplitude_target_uv: 6.5
+    latency_target_ms: 320

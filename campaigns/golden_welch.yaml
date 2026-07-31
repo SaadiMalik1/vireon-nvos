@@ -1,0 +1,21 @@
+campaign:
+  name: Golden Reference Validation (Phase A0)
+  algorithm: SciPyWelch
+  reference: SciPyWelch
+  synthetic:
+    - alpha
+    - beta
+    - white_noise
+    - pink_noise
+  datasets:
+    - EEGBCI
+  perturbations:
+    - none
+  metrics:
+    - rmse
+    - ccc
+    - runtime
+  outputs:
+    - evidence_bundle
+    - report
+    - notebook

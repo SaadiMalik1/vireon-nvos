@@ -1,0 +1,21 @@
+campaign:
+  name: Native VireonCAR 6-Class Validation (Phase B)
+  algorithm: VireonCAR
+  reference: MNECAR
+  class: Robustness
+  synthetic:
+    - multisine_correlated
+  datasets:
+    - EEGBCI
+  perturbations:
+    noise_snr: [0, 5, 10, 20, 30]
+    channel_dropout: [1, 2, 4, 8]
+  metrics:
+    - snr_improvement
+    - spatial_smoothness
+    - topographic_preservation
+    - boundary_behavior
+  outputs:
+    - evidence_bundle
+    - report
+    - notebook

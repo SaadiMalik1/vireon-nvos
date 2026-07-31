@@ -1,0 +1,20 @@
+campaign:
+  name: Native VireonMinimumNorm Imaging Validation (Stage 4.3)
+  algorithm: VireonMinimumNorm
+  reference: MNE_Python_dSPM
+  class: Reproducibility
+  synthetic:
+    - digital_twin_parkinsons_stn
+  datasets:
+    - SyntheticEEG
+  perturbations:
+    noise_snr: [1.0, 3.0, 5.0]
+    head_model_error: [0.0, 0.05]
+  metrics:
+    - localization_error_mm
+    - spatial_spread_function
+    - uncertainty_credible_region_coverage
+  outputs:
+    - evidence_bundle
+    - report
+    - notebook

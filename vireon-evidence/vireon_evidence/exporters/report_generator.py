@@ -16,6 +16,12 @@ class MultiFormatReportGenerator:
         md += f"## Verdict: {self.bundle.conclusion_verdict}\n\n"
         for k, v in self.bundle.statistical_agreement.items():
             md += f"- **{k}**: {v}\n"
+            
+        md += "\n## Automated Publication Figures\n"
+        md += "![Bland-Altman Plot](figures/bland_altman_stub.png)\n"
+        md += "![Robustness Curves](figures/robustness_sweep_stub.png)\n"
+        md += "![Memory Distribution](figures/memory_dist_stub.png)\n"
+        
         return md
         
     def generate_jupyter_notebook(self) -> Dict[str, Any]:

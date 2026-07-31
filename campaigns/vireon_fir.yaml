@@ -1,0 +1,21 @@
+campaign:
+  name: Native VireonFIR Validation (Phase A1)
+  algorithm: VireonFIR
+  reference: SciPyLFilter
+  synthetic:
+    - impulse
+    - step
+    - chirp
+    - multitone
+  datasets:
+    - EEGBCI
+  perturbations:
+    - none
+  metrics:
+    - rmse
+    - ccc
+    - runtime
+  outputs:
+    - evidence_bundle
+    - report
+    - notebook

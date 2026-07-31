@@ -1,0 +1,30 @@
+massive_campaign:
+  name: Global Validaton Campaign - Welch PSD
+  methods:
+    - VireonWelchPSD
+  datasets:
+    - EEGBCI
+    - SleepEDF
+    - CHB-MIT
+    - TUH_EEG
+    - OpenNeuro_RestingState
+    - ERP_CORE
+  hardware_profiles:
+    - OpenBCI_Cyton
+    - BioSemi_ActiveTwo
+    - BrainProducts_actiCHamp
+    - DigitalTwin_Simulator
+  random_seeds:
+    - 42
+    - 123
+    - 999
+  perturbations:
+    WhiteNoise: [0.1, 0.5, 1.0]
+    ChannelDropout: [0.05, 0.10, 0.20]
+    LineNoise: [0.5, 1.0, 5.0]
+    Quantization: [16, 12, 8]
+  
+  outputs:
+    - MetaAnalysisReport
+    - FailureAtlasLog
+    - PublicationPackage
