@@ -27,8 +27,8 @@ class DatasetProvider(IProvider):
         raise NotImplementedError
 
 
-class BCICompetitionIV2aProvider(DatasetProvider):
-    """Real dataset provider for BCI Competition IV 2a."""
+class SyntheticBCICompetitionProvider(DatasetProvider):
+    """Synthetic dataset provider that mimics BCI Competition IV 2a for testing."""
     def __init__(self, data_dir: str, subject_id: int):
         self.data_dir = data_dir
         self.subject_id = subject_id
