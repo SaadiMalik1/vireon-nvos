@@ -20,8 +20,8 @@
 ## P0-METHODS
 - [x] T09: Real welch
 - [x] T10: Real fft
-- [~] T11: Real stft
-- [ ] T12: Real wavelets
+- [x] T11: Real stft
+- [~] T12: Real wavelets
 - [ ] T13: Real ica
 - [ ] T14: Fix CSP plugin
 - [ ] T15: Delete native mocks
