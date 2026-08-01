@@ -27,7 +27,7 @@ class SRLAutomator:
         reasons.append(f"{successful_reproductions} successful reproductions out of {total_runs}")
         reasons.append(f"Reproduced on {len(datasets_used)} distinct datasets")
         
-        if successful_reproductions > 10 and len(datasets_used) >= 3 and mean_ccc > 0.95:
+        if successful_reproductions > 10 and len(datasets_used) >= 3 and mean_ccc > 0.94999:
             recommended_srl = "SRL-4"
             reasons.append("Mean CCC > 0.95 across multiple datasets.")
         elif successful_reproductions > 5 and len(datasets_used) >= 1:

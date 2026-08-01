@@ -31,7 +31,7 @@
 - [x] T19: Real source localization
 - [x] T20: Real connectivity
 - [x] T21: Implement wPLI
-- [~] T22: Fix Laplacian REST
+- [x] T22: Fix Laplacian REST
 
 ## P0-VALIDATION
 - [ ] T23: Real benchmark matrix
