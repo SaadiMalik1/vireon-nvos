@@ -26,9 +26,9 @@
 - [x] T14: Fix CSP plugin
 - [x] T15: Delete native mocks
 - [x] T16: Real FIR filter
-- [~] T17: Real IIR filter
-- [ ] T18: Real LCMV beamforming
-- [ ] T19: Real source localization
+- [x] T17: Real IIR filter
+- [x] T18: Real LCMV beamforming
+- [~] T19: Real source localization
 - [ ] T20: Real connectivity
 - [ ] T21: Implement wPLI
 - [ ] T22: Fix Laplacian REST
