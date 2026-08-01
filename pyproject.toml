@@ -15,6 +15,7 @@ dependencies = [
     "scikit-learn",
     "mne",
     "pydantic>=2.0.0",
+    "networkx>=3.0",
     "pyyaml"
 ]
 

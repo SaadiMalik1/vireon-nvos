@@ -21,11 +21,11 @@ class ExecutionEngine:
     when the same seed is used.
     """
     @classmethod
-    def run(cls, experiment: IExperimentDef, seed: int = 42, agency_validator_cls=None, signal_metrics_func=None, dag: Optional[ExecutionDAG] = None, plugin_manager: Optional[PluginManager] = None, assertion_evaluator=None) -> IEvidence:
-        engine = cls(experiment, seed, agency_validator_cls, signal_metrics_func, plugin_manager, assertion_evaluator)
+    def run(cls, experiment: IExperimentDef, seed: int = 42, agency_validator_cls=None, signal_metrics_func=None, dag: Optional[ExecutionDAG] = None, plugin_manager: Optional[PluginManager] = None, assertion_evaluator=None, knowledge_graph=None) -> IEvidence:
+        engine = cls(experiment, seed, agency_validator_cls, signal_metrics_func, plugin_manager, assertion_evaluator, knowledge_graph)
         return engine.execute(dag)
 
-    def __init__(self, experiment: IExperimentDef, seed: int = 42, agency_validator_cls=None, signal_metrics_func=None, plugin_manager: Optional[PluginManager] = None, assertion_evaluator=None):
+    def __init__(self, experiment: IExperimentDef, seed: int = 42, agency_validator_cls=None, signal_metrics_func=None, plugin_manager: Optional[PluginManager] = None, assertion_evaluator=None, knowledge_graph=None):
         from vireon_core.contracts.base import DefaultAssertionEvaluator
         self.experiment = experiment
         self.seed = seed
@@ -33,6 +33,20 @@ class ExecutionEngine:
         self.signal_metrics_func = signal_metrics_func
         self.plugin_manager = plugin_manager or PluginManager()
         self.assertion_evaluator = assertion_evaluator or DefaultAssertionEvaluator()
+        if knowledge_graph is None:
+            try:
+                from vireon_knowledge.engine import KnowledgeGraph
+                import os
+                # Find the root of vireon_knowledge, assuming standard structure
+                # vireon-knowledge/vireon_knowledge
+                import vireon_knowledge
+                kg_root = os.path.dirname(vireon_knowledge.__file__)
+                self.knowledge_graph = KnowledgeGraph(kg_root)
+            except ImportError:
+                self.knowledge_graph = None
+        else:
+            self.knowledge_graph = knowledge_graph
+            
         self.rng = DeterministicRNG(seed=seed)
         self.clock = DeterministicClock(mode=ClockMode.VIRTUAL, step_dt_ms=1.0)
         self.provider = experiment.get_provider()
@@ -108,6 +122,12 @@ class ExecutionEngine:
                             event_ids[node_id] = evt_id
                             self.node_outputs[node_id] = {"error": "FAILED"}
                             continue
+                            
+                        if self.knowledge_graph:
+                            violations = self.knowledge_graph.validate_methodology(plugin.plugin_id, inputs_dict)
+                            for v in violations:
+                                evt_id = self.log_event(f"KNOWLEDGE_VIOLATION: {v['description']}", stage, parents)
+                                event_ids[node_id] = evt_id
                             
                         if isinstance(plugin, IDecoder) and stage == "DECODER_STATE":
                             # Extract signal from inputs

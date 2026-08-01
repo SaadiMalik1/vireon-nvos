@@ -45,6 +45,33 @@ def populate():
                     "description": a_val.get("description", "")
                 })
                 
+    # Load methodology
+    methodology_file = os.path.join(ontologies_dir, "ontologies", "methodology.jsonld")
+    if os.path.exists(methodology_file):
+        with open(methodology_file, "r") as f:
+            data = json.load(f)
+            if "methods" in data:
+                for m_key, m_val in data["methods"].items():
+                    node_id = m_val.get("@id")
+                    graph["nodes"].append({
+                        "id": node_id,
+                        "type": "Method",
+                        "description": m_val.get("name", "")
+                    })
+                    for assumption_id in m_val.get("assumptions", []):
+                        graph["edges"].append({
+                            "source": node_id,
+                            "target": assumption_id,
+                            "relationship": "REQUIRES"
+                        })
+            if "assumptions" in data:
+                for a_key, a_val in data["assumptions"].items():
+                    graph["nodes"].append({
+                        "id": a_val.get("@id"),
+                        "type": "Assumption",
+                        "description": a_val.get("description", "")
+                    })
+                
     # We could load rules, ontologies, etc. but let's stick to the main structure for now.
     
     print(f"Added {len(graph['nodes'])} formal ontology nodes.")
