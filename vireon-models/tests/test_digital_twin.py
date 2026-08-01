@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 from vireon_models.patient import DigitalPatient, BrainNetwork
-from vireon_models.forward import LeadfieldProjector
+from vireon_models.forward import RandomMixingMatrix
 
 def test_brain_network_generation():
     network = BrainNetwork(num_nodes=4, seed=42)
@@ -15,7 +15,7 @@ def test_leadfield_projection():
     from vireon_core.runtime.rng import DeterministicRNG
     rng = DeterministicRNG(seed=42)
     sources = rng.normal(0, 1, (250, 4)).astype(np.float32)
-    projector = LeadfieldProjector(num_sources=4, num_sensors=8, seed=42)
+    projector = RandomMixingMatrix(num_sources=4, num_sensors=8, seed=42)
     sensors = projector.project(sources)
     
     # 4 sources mapped to 8 sensors

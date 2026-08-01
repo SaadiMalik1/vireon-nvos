@@ -1,0 +1,1 @@
+- test_real_data_pipeline.py::test_eeg_baseline_scenario fails due to has_real_telemetry assertion.

@@ -1,9 +1,10 @@
 import numpy as np
 from vireon_core.runtime.rng import DeterministicRNG
 
-class LeadfieldProjector:
+class RandomMixingMatrix:
     """
-    Simulates the volume conduction (Forward Model) from source space to sensor space.
+    Test fixture, not a forward model.
+    Simulates a random volume conduction mixing matrix.
     """
     def __init__(self, num_sources: int, num_sensors: int, seed: int = 42):
         self.num_sources = num_sources

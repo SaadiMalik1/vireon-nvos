@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, List, Optional, Dict, Type
 import numpy as np
+from vireon_core.runtime.rng import DeterministicRNG
 from pydantic import BaseModel
 from vireon_core.contracts.base import IUncertainty, IScientificObject, ISignal, SignalType
 from vireon_core.contracts.plugin import IPlugin, ScientificContract, ScientificReadinessLevel, PluginCapability
@@ -23,7 +24,8 @@ class SphereModel(IHeadModel):
     Tier 1 Head Model: Analytical spherical head model (always available, lightweight for CI).
     Assumes homogeneous spherical volume conductor.
     """
-    def __init__(self, radius: float = 0.085, conductivity: float = 0.33):
+    def __init__(self, n_sources: Optional[int] = None, n_sensors: Optional[int] = None, 
+                 radius: float = 0.085, conductivity: float = 0.33, seed: int = 42):
         self.radius = radius
         self.conductivity = conductivity
         self.conductivity_uncertainty = IUncertainty(
@@ -33,6 +35,46 @@ class SphereModel(IHeadModel):
             sample_size=1000,
             method="literature_variance"
         )
+        self.n_sources = n_sources
+        self.n_sensors = n_sensors
+        self.seed = seed
+        
+        if n_sources is not None and n_sensors is not None:
+            rng = DeterministicRNG(seed)
+            # Generate random dipole positions inside the sphere
+            phi = rng.uniform(0, 2 * np.pi, n_sources)
+            costheta = rng.uniform(-1, 1, n_sources)
+            u = rng.uniform(0, 1, n_sources)
+            theta = np.arccos(costheta)
+            r_dist = radius * 0.8 * np.cbrt(u)
+            self.dipole_positions = np.column_stack([
+                r_dist * np.sin(theta) * np.cos(phi),
+                r_dist * np.sin(theta) * np.sin(phi),
+                r_dist * np.cos(theta)
+            ])
+            
+            # Generate random electrode positions on the sphere surface
+            phi_e = rng.uniform(0, 2 * np.pi, n_sensors)
+            costheta_e = rng.uniform(-1, 1, n_sensors)
+            theta_e = np.arccos(costheta_e)
+            self.electrode_positions = np.column_stack([
+                radius * np.sin(theta_e) * np.cos(phi_e),
+                radius * np.sin(theta_e) * np.sin(phi_e),
+                radius * np.cos(theta_e)
+            ])
+            
+            self._leadfield_matrix = self.compute_leadfield(self.dipole_positions, self.electrode_positions)
+            
+            # Generate fixed random orientations for each dipole to project scalar sources
+            # We want ori to be (n_sources, 3)
+            ori = rng.uniform(-1, 1, (n_sources, 3))
+            ori_norm = np.linalg.norm(ori, axis=1, keepdims=True)
+            self.dipole_orientations = ori / ori_norm
+        else:
+            self.dipole_positions = None
+            self.electrode_positions = None
+            self._leadfield_matrix = None
+            self.dipole_orientations = None
         
     @property
     def contract(self) -> ScientificContract:
@@ -75,6 +117,25 @@ class SphereModel(IHeadModel):
                 leadfield[j, i*3:(i+1)*3] = proj
                 
         return leadfield
+
+    def project(self, source_signals: np.ndarray) -> np.ndarray:
+        """
+        Projects scalar source signals (samples, sources) to sensor signals (samples, sensors).
+        Uses the internal fixed dipole orientations to map scalars to 3D moments.
+        """
+        if self._leadfield_matrix is None:
+            raise ValueError("n_sources and n_sensors must be set to use project()")
+            
+        N = source_signals.shape[0]
+        # Map (N, n_sources) to (N, n_sources * 3)
+        dipole_moments = np.zeros((N, self.n_sources * 3))
+        for i in range(self.n_sources):
+            # source_signals[:, i] is (N,)
+            # self.dipole_orientations[i] is (3,)
+            # We want (N, 3)
+            dipole_moments[:, i*3:(i+1)*3] = source_signals[:, i:i+1] * self.dipole_orientations[i]
+            
+        return dipole_moments @ self._leadfield_matrix.T
 
 class BEMModel(IHeadModel):
     """

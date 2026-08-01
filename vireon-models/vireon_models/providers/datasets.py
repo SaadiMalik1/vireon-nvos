@@ -343,7 +343,7 @@ class SyntheticMotorImageryProvider(IProvider):
         return self._data
 
 from vireon_models.patient import DigitalPatient
-from vireon_models.forward import LeadfieldProjector
+from vireon_models.source_space import SphereModel
 from vireon_models.hardware import ADS1299
 
 class DigitalTwinProvider(IProvider):
@@ -360,7 +360,7 @@ class DigitalTwinProvider(IProvider):
         self.patient = DigitalPatient(age=25, seed=seed)
         
         # 2. Forward Model (Volume Conduction)
-        self.projector = LeadfieldProjector(num_sources=4, num_sensors=8, seed=seed)
+        self.projector = SphereModel(n_sources=4, n_sensors=8, radius=0.07, conductivity=0.33, seed=seed)
         
         # 3. Hardware Device (Amplifier and ADC Quantization)
         self.device = ADS1299()
