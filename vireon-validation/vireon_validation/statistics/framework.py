@@ -17,9 +17,28 @@ class StatisticalFramework:
         }
         
     @staticmethod
-    def intraclass_correlation(method_a: np.ndarray, method_b: np.ndarray) -> float:
-        # Stub ICC computation
-        return 0.94
+    def intraclass_correlation(ratings: np.ndarray) -> float:
+        """
+        Shrout & Fleiss (1979) ICC(2,1).
+        ratings shape: (n_subjects, n_raters).
+        """
+        n, k = ratings.shape
+        mean_per_subject = ratings.mean(axis=1)
+        mean_per_rater = ratings.mean(axis=0)
+        grand_mean = ratings.mean()
+
+        ss_between = n * np.sum((mean_per_rater - grand_mean)**2)
+        ss_within = np.sum((ratings - mean_per_subject[:, None])**2)
+        ss_subjects = k * np.sum((mean_per_subject - grand_mean)**2)
+        ss_total = np.sum((ratings - grand_mean)**2)
+        ss_residual = ss_total - ss_subjects - ss_between
+
+        ms_subjects = ss_subjects / (n - 1)
+        ms_raters = ss_between / (k - 1)
+        ms_residual = ss_residual / ((n - 1) * (k - 1))
+
+        icc = (ms_subjects - ms_residual) / (ms_subjects + (k - 1) * ms_residual + k * (ms_raters - ms_residual) / n)
+        return float(icc)
         
     @staticmethod
     def kolmogorov_smirnov(data_a: np.ndarray, data_b: np.ndarray) -> dict:
