@@ -75,3 +75,4 @@ config.local.*
 
 # NVOS Implementation
 nvos-imp/
+nvos\ -imp/
