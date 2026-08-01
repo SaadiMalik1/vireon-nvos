@@ -19,8 +19,8 @@ def main():
     experiment_parser.add_argument("--campaign", type=str, default="all", help="Campaign name or specific experiment id to run (default: all)")
     experiment_parser.add_argument("--repetitions", type=int, default=1, help="Number of repetitions per experiment")
     
-    verify_parser = subparsers.add_parser("verify", help="Run verification suites")
-    verify_parser.add_argument("verify_cmd", choices=["reproducibility", "all"], help="Verify reproducibility or all suites")
+    verify_parser = subparsers.add_parser("verify", help="Verify reproducibility bundle integrity")
+    verify_parser.add_argument("--bundle", type=str, required=True, help="Path to the evidence bundle directory")
     
     reproduce_parser = subparsers.add_parser("reproduce", help="Reproduce a publication")
     reproduce_parser.add_argument("doi", type=str, help="The DOI of the publication to reproduce (e.g. doi:10.1234/vireon.1)")
@@ -57,12 +57,17 @@ def main():
             runner.run_campaign(args.campaign)
             
     elif args.command == "verify":
-        if args.verify_cmd in ["reproducibility", "all"]:
-            from vireon_lab.cli.reproduce import ReproducibilityEngine
-            workspace_root = os.path.abspath(os.path.join(base_dir, '..'))
-            engine = ReproducibilityEngine(workspace_root)
-            success = engine.verify()
-            sys.exit(0 if success else 1)
+        from vireon_lab.replay import ReplayEngine
+        engine = ReplayEngine()
+        result = engine.verify_bundle_integrity(args.bundle)
+        if result.get("valid", False):
+            print(f"[OK] Bundle {args.bundle} verified. All hashes match.")
+            sys.exit(0)
+        else:
+            print(f"[FAIL] Bundle {args.bundle} verification failed:")
+            for mismatch_file, mismatch_info in (result.get("mismatches") or {}).items():
+                print(f"  - {mismatch_file}: {mismatch_info['actual']} != {mismatch_info['expected']}")
+            sys.exit(1)
             
     elif args.command == "reproduce":
         print(f"==================================================")

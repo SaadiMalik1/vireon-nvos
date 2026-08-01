@@ -54,8 +54,8 @@
 - [x] T38: Real BIDS conversion
 - [x] T39: Real checksum verification
 - [x] T40: Real content hash
-- [~] T41: Downgrade corpus SRL
-- [ ] T42: Fix verify CLI
+- [x] T41: Downgrade corpus SRL
+- [~] T42: Fix verify CLI
 - [ ] T43: Fix reproduce CLI
 - [ ] T44: Delete pipeline runners
 
