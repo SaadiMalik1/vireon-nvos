@@ -62,9 +62,9 @@
 ## P1-KNOWLEDGE + MODELS
 - [x] T45: Wire Knowledge Graph
 - [x] T46: Wire Decision Engine
-- [~] T47: Real sphere model
-- [ ] T48: Real BEM model
-- [ ] T49: Real ADS1299
+- [x] T47: Real sphere model
+- [x] T48: Real BEM model
+- [~] T49: Real ADS1299
 - [ ] T50: Delete hardware stubs
 - [ ] T51: Delete disease stubs
 - [ ] T52: Delete hardware twins

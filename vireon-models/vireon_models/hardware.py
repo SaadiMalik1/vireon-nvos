@@ -293,16 +293,37 @@ class PacketLossModel(IPlugin):
         return {"signal": ISignal(sampling_rate=fs, data=data_dropped)}
 
 class ADS1299:
-    """
-    Mock integration for the ADS1299 hardware chip.
-    """
-    def __init__(self, seed: int = 42):
-        self.rng = DeterministicRNG(seed)
+    """TI ADS1299 EEG analog front-end model.
 
-    def process(self, signal, sample_rate=250.0):
-        # Just add some noise
-        noise = self.rng.normal(loc=0.0, scale=1.0, size=signal.shape)
-        return signal + noise
+    Datasheet: SBAS499C (revision C, 2018).
+    Key specs:
+    - Input-referred noise: 1.0 µVpp (250 SPS, gain=24)
+    - Input impedance: 1 GΩ
+    - CMRR: -110 dB
+    - ADC resolution: 24 bit
+    - Programmable gain: 1, 2, 4, 6, 8, 12, 24
+    - Sample rates: 250, 500, 1000, 2000, 4000, 8000, 16000 SPS
+    """
+    def __init__(self, gain: int = 24, sample_rate: int = 250,
+                 rng: DeterministicRNG = None):
+        self.gain = gain
+        self.sample_rate = sample_rate
+        self.rng = rng or DeterministicRNG(42)
+        # Input-referred noise from datasheet Table 1
+        self.input_noise_vpp = {250: 1.0, 500: 1.5, 1000: 2.0, 2000: 2.5}.get(sample_rate, 2.0)
+        self.lsb_uv = (4.5 / (gain * 2**23)) * 1e6  # V to µV, 24-bit ADC
+
+    def process(self, signal_uv: np.ndarray) -> np.ndarray:
+        """Apply ADS1299 acquisition model to signal (in µV)."""
+        # 1. Add input-referred noise (Gaussian approximation of datasheet noise)
+        noise_rms = self.input_noise_vpp / 6.6  # Vpp to RMS (6.6 sigma for 99.9%)
+        noise = self.rng.normal(0, noise_rms, size=signal_uv.shape)
+        # 2. Apply gain
+        amplified = (signal_uv + noise) * self.gain
+        # 3. Quantize (24-bit ADC)
+        quantized = np.round(amplified / self.lsb_uv) * self.lsb_uv
+        # 4. Convert back to input-referred µV
+        return quantized / self.gain
 
 
 import numpy as np
