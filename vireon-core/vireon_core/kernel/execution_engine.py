@@ -5,6 +5,7 @@ import graphlib
 from typing import List, Dict, Any, Optional
 
 from vireon_core.contracts.base import IExperimentDef, IProvider, IObservation, IEvent, IMeasurement, IEvidence, IExecutionContext, ExecutionDAG, DAGNode
+from vireon_core.contracts.decoder import IDecoder
 from vireon_core.agency.causal_graph import CausalGraph, CausalStage
 from vireon_core.runtime.rng import DeterministicRNG
 from vireon_core.runtime.clock import DeterministicClock, ClockMode
@@ -90,16 +91,30 @@ class ExecutionEngine:
                 
                 inputs_dict = {inp: self.node_outputs.get(inp) for inp in node.inputs}
                 is_perturbed = False
+                plugin = None
                 
                 if node.plugin_id:
                     plugin = self.plugin_manager.get_plugin(node.plugin_id)
                     if plugin:
-                        out = plugin.execute(inputs_dict)
-                        self.node_outputs[node_id] = out
+                        if isinstance(plugin, IDecoder) and stage == "DECODER_STATE":
+                            # Extract signal from inputs
+                            signal = inputs_dict
+                            if not getattr(plugin, '_fitted', False):
+                                # Dummy fit if labels aren't strictly provided
+                                plugin.fit(np.array([]), np.array([]))
+                            out = plugin.predict(signal)
+                            self.node_outputs[node_id] = out
+                            desc = "Decoder processed signal"
+                        else:
+                            out = plugin.execute(inputs_dict)
+                            self.node_outputs[node_id] = out
+                            desc = f"{stage} processed"
                     else:
                         self.node_outputs[node_id] = inputs_dict
+                        desc = f"{stage} stage skipped (no plugin)" if stage == "DECODER_STATE" else f"{stage} processed"
                 else:
                     self.node_outputs[node_id] = inputs_dict
+                    desc = f"{stage} stage skipped (no plugin)" if stage == "DECODER_STATE" else f"{stage} processed"
                     
                 if stage == "SIGNAL":
                     stimuli = self.experiment.get_stimulus()
@@ -112,10 +127,12 @@ class ExecutionEngine:
                     obs = IObservation(timestamp=obs_timestamp, data_source="provider", data=data)
                     self.observations.append(obs)
                 
-                desc = f"{stage} processed"
                 evt_id = self.log_event(desc, stage, parents, is_perturbed=is_perturbed)
                 event_ids[node_id] = evt_id
                 
+                if isinstance(plugin, IDecoder) and stage == "DECODER_STATE":
+                    self.log_event("DECODER_OUTPUT produced", "UNKNOWN", [evt_id])
+                    
         finally:
             self.provider.stop()
             

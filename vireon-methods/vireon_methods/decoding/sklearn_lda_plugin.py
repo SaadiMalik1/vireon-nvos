@@ -3,13 +3,15 @@ from typing import Dict, Any, List, Type
 
 from vireon_core.contracts.plugin import IMethodPlugin, ScientificReadinessLevel, ScientificContract, PluginCapability
 from vireon_core.contracts.base import IScientificObject, SignalType
+from vireon_core.contracts.decoder import IDecoder
 
-class SklearnLDAPlugin(IMethodPlugin):
+class SklearnLDAPlugin(IMethodPlugin, IDecoder):
     """
     Tier 1 Reference Wrapper for Scikit-Learn's Linear Discriminant Analysis (LDA).
     SRL-2 indicates it is a trusted reference wrapper.
     """
     def __init__(self):
+        super().__init__()
         try:
             from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
             self._lda = LinearDiscriminantAnalysis()
@@ -67,8 +69,14 @@ class SklearnLDAPlugin(IMethodPlugin):
         if not self._lda:
             raise RuntimeError("scikit-learn is required for SklearnLDAPlugin")
         self._lda.fit(X, y)
+        self._fitted = True
         
     def predict(self, X: np.ndarray) -> np.ndarray:
         if not self._lda:
             raise RuntimeError("scikit-learn is required for SklearnLDAPlugin")
         return self._lda.predict(X)
+
+    def predict_proba(self, X: np.ndarray) -> np.ndarray:
+        if not self._lda:
+            raise RuntimeError("scikit-learn is required for SklearnLDAPlugin")
+        return self._lda.predict_proba(X)

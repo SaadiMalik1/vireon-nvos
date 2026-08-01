@@ -2,10 +2,17 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 import numpy as np
 
+class DecoderNotFittedError(Exception):
+    """Raised when predict or predict_proba is called before fit."""
+    pass
+
 class IDecoder(ABC):
     """
     Interface for BCI decoders in VIREON.
     """
+    def __init__(self):
+        self._fitted = False
+
     @abstractmethod
     def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         """
@@ -13,7 +20,7 @@ class IDecoder(ABC):
         X shape: (n_epochs, n_channels, n_times)
         y shape: (n_epochs,)
         """
-        pass
+        self._fitted = True
 
     @abstractmethod
     def predict(self, X: np.ndarray) -> np.ndarray:
@@ -21,6 +28,8 @@ class IDecoder(ABC):
         Predict labels for epochs X.
         Returns array of shape (n_epochs,)
         """
+        if not getattr(self, '_fitted', False):
+            raise DecoderNotFittedError("Decoder must be fitted before predict.")
         pass
 
     @abstractmethod
@@ -29,4 +38,6 @@ class IDecoder(ABC):
         Predict probabilities for epochs X.
         Returns array of shape (n_epochs, n_classes)
         """
+        if not getattr(self, '_fitted', False):
+            raise DecoderNotFittedError("Decoder must be fitted before predict_proba.")
         pass
