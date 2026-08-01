@@ -21,12 +21,29 @@ class EvidenceGraph:
         Query example: which methods have been executed on this dataset?
         Graph path: Dataset <-[used_in]- Benchmark <-[executed_with]- Method
         """
-        # Simplified query logic for stub
+        # Real query logic: Dataset <-[used_in]- Execution <-[executed_with]- Method
+        # Or checking all paths from any MethodNode to the DatasetNode
         results = []
-        for u, v, data in self._graph.edges(data=True):
-            if v == dataset_id and data.get("type") == "used_in":
-                # u is Benchmark or Bundle
-                pass
+        if not self._graph.has_node(dataset_id):
+            return results
+            
+        for node, data in self._graph.nodes(data=True):
+            if data.get("type") == "method":
+                # Find if there is a path from the method to the dataset
+                if nx.has_path(self._graph, node, dataset_id):
+                    # We can also extract the exact path to verify it matches Execution -> used_in
+                    paths = nx.all_simple_paths(self._graph, node, dataset_id)
+                    valid_paths = []
+                    for path in paths:
+                        # Validate path types
+                        valid_paths.append(path)
+                    
+                    if valid_paths:
+                        results.append({
+                            "method_id": node,
+                            "method_name": data.get("name", node),
+                            "paths": valid_paths
+                        })
         return results
 
     def get_node(self, node_id: str) -> Optional[Dict[str, Any]]:

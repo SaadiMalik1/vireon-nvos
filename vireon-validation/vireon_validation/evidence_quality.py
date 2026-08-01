@@ -101,9 +101,18 @@ class LiteratureVerifier:
                 
             # Query KG for paper
             if paper_id in self.kg._graph:
-                paper_node = self.kg._graph[paper_id]
-                # Check if it supports the claims (stub logic for now)
-                if paper_node.get("supports_claims", True):
-                    supported = True
+                # Check if it supports the claims
+                # Node has outgoing edges in the graph
+                supported = False
+                if self.kg._graph.has_node(paper_id):
+                    # Check edges to see if there is a supports_claims edge
+                    for _, target_id, edge_data in self.kg._graph.out_edges(paper_id, data=True):
+                        if edge_data.get("type") == "supports_claims":
+                            supported = True
+                            break
+                        if edge_data.get("type") == "violates":
+                            return False # If it explicitly violates, verification fails immediately
+                
+                if supported:
                     break
         return supported

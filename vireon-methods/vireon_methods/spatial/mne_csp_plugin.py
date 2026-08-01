@@ -66,9 +66,24 @@ class MNECSPPlugin(IMethodPlugin):
         if not self._mne_csp:
             raise RuntimeError("MNE is required for MNECSPPlugin")
             
-        # For a real pipeline, execute would take trials and labels, fit, and transform.
-        # This is a stubbed representation for the architecture scaffolding.
-        return {}
+        signal_obj = inputs.get("signal")
+        if not isinstance(signal_obj, ISignal):
+            raise ValueError("Expected ISignal as 'signal' input")
+            
+        labels_obj = inputs.get("labels")
+        
+        # Data shape should be (epochs, channels, times)
+        X = signal_obj.data
+        
+        if labels_obj is not None:
+            # We assume labels are provided as a 1D array in an ISignal or similar
+            y = labels_obj.data.flatten() if hasattr(labels_obj, 'data') else np.array(labels_obj)
+            features = self._mne_csp.fit_transform(X, y)
+        else:
+            features = self._mne_csp.transform(X)
+            
+        # Wrap features back in ISignal (or IMeasurement in a stricter implementation)
+        return {"features": ISignal(sampling_rate=signal_obj.sampling_rate, data=features)}
         
     def fit_transform(self, X: np.ndarray, y: np.ndarray) -> np.ndarray:
         if not self._mne_csp:
