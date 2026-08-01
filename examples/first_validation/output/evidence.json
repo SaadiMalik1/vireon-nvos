@@ -1,10 +1,10 @@
 {
-    "bundle_id": "d3eae5c6-eade-4dff-afa5-e54e2991f448",
+    "bundle_id": "dbf0dc9f-1a97-497d-ad7c-07b39756d8c1",
     "evidence_hash": "",
     "replay_hash": "",
     "graph_commit_id": "",
     "cryptographic_signature": "",
-    "timestamp": "2026-08-01T04:07:46.324513",
+    "timestamp": "2026-08-01T04:24:50.861078",
     "algorithm": "",
     "reference": "",
     "dataset": "",
@@ -49,7 +49,7 @@
     "report_path": "",
     "conclusion_verdict": "PASS",
     "dataset_provenance": {
-        "dataset_id": "SyntheticMotorImagery",
+        "dataset_id": "PhysioNet_MotorImagery_S001R04",
         "doi": "10.mock.doi",
         "bids_version": "1.0",
         "download_url": "http://mock.url",
@@ -72,7 +72,7 @@
     "environment": {
         "hardware_info": {},
         "random_seed": 42,
-        "execution_timestamp": "2026-08-01T04:07:46.324496"
+        "execution_timestamp": "2026-08-01T04:24:50.861059"
     },
     "input_hashes": {
         "input": "hash"

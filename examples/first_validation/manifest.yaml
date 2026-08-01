@@ -2,7 +2,7 @@ campaign:
   name: Motor Imagery CSP Demo
   
   dataset:
-    provider: SyntheticMotorImagery
+    provider: PhysioNetMotorImagery
     
   workflow:
     - Bandpass

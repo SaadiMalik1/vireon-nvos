@@ -394,3 +394,52 @@ class DigitalTwinProvider(IProvider):
             self.start()
         return self._data
 
+
+class PhysioNetMotorImageryProvider(IProvider):
+    """
+    Loads real Motor Imagery EEG data from the PhysioNet eegmmidb dataset.
+    Requires the dataset to be downloaded locally to ~/mne_data.
+    """
+    def __init__(self, subject_id: int = 1, run_id: int = 4):
+        self.subject_id = subject_id
+        self.run_id = run_id
+        
+        import os
+        import mne
+        # MNE defaults to ~/mne_data
+        mne_data = os.path.expanduser("~/mne_data")
+        file_path = os.path.join(mne_data, "MNE-eegbci-data", "files", "eegmmidb", "1.0.0", 
+                                 f"S{subject_id:03d}", f"S{subject_id:03d}R{run_id:02d}.edf")
+        
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"PhysioNet data not found at {file_path}. Please download it.")
+            
+        # Load raw data
+        raw = mne.io.read_raw_edf(file_path, preload=True, verbose=False)
+        events, event_id = mne.events_from_annotations(raw, verbose=False)
+        
+        # MNE eegbci events: T0 (rest), T1 (left fist), T2 (right fist)
+        # We will extract epochs for T1 and T2 (binary classification for CSP)
+        # T1 = 2, T2 = 3 in the events array
+        picks = mne.pick_types(raw.info, meg=False, eeg=True, stim=False, eog=False, exclude='bads')
+        epochs = mne.Epochs(raw, events, event_id=dict(T1=2, T2=3), tmin=-1.0, tmax=4.0, proj=True, picks=picks,
+                            baseline=None, preload=True, verbose=False)
+                            
+        self.epochs = epochs
+        
+    def get_data(self) -> dict:
+        import numpy as np
+        # get_data() on MNE epochs returns (n_epochs, n_channels, n_times)
+        X = self.epochs.get_data(copy=True)
+        # convert labels to 0 and 1
+        y = self.epochs.events[:, -1] - 2 
+        
+        return {
+            "data": X,
+            "label": y,
+            "sample_rate": self.epochs.info['sfreq'],
+            "ch_names": self.epochs.ch_names
+        }
+        
+    def start(self): pass
+    def stop(self): pass

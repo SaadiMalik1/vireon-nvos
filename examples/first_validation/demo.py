@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.abspath('../../vireon-validation'))
 sys.path.insert(0, os.path.abspath('../../vireon-evidence'))
 
 from vireon_core.contracts.base import ISignal
-from vireon_models.providers.datasets import SyntheticMotorImageryProvider
+from vireon_models.providers.datasets import PhysioNetMotorImageryProvider
 from vireon_methods.machine_learning.csp import CSPPlugin
 from vireon_validation.benchmarks.matrix import BenchmarkMatrix
 from vireon_validation.perturbations.library import WhiteNoisePerturbation, ChannelDropoutPerturbation, LineNoisePerturbation
@@ -22,22 +22,13 @@ def main():
     print("  VIREON - NATIVE NEUROSCIENCE EVIDENCE ENGINE    ")
     print("==================================================")
     
-    print("\n[1] Synthesizing Deterministic Motor Imagery Dataset...")
-    # This generates mathematically exact ERD/ERS phenomena matching real physiological models
-    provider = SyntheticMotorImageryProvider(subject_id=1, seed=42)
+    print("\n[1] Loading REAL PhysioNet Motor Imagery Dataset...")
+    # This loads the actual biological dataset from ~/mne_data
+    provider = PhysioNetMotorImageryProvider(subject_id=1, run_id=4)
+    data_dict = provider.get_data()
     
-    X_list, y_list = [], []
-    for i in range(10):
-        provider.trial_index = i
-        provider._data = None
-        data_dict = provider.get_data()
-        X_list.append(data_dict["data"])
-        y_list.append(data_dict["label"])
-        
-    X = np.array(X_list)
-    X = np.transpose(X, (0, 2, 1)) # to (epochs, channels, times)
-    y = np.array(y_list)
-    y = (y % 2).astype(int) # Bin for CSP demo
+    X = data_dict["data"] # shape is already (epochs, channels, times) from MNE
+    y = data_dict["label"]
     
     signal = ISignal(sampling_rate=data_dict["sample_rate"], data=X)
     labels = ISignal(sampling_rate=0, data=y)
@@ -48,6 +39,7 @@ def main():
     csp = CSPPlugin()
     print(f"    Purpose: {csp.contract.purpose}")
     print(f"    Assumptions: {', '.join(csp.contract.mathematical_assumptions)}")
+    print(f"    Validation Papers: {', '.join(csp.contract.validation_papers)}")
     
     print("\n[3] Building Cartesian Benchmark Matrix...")
     matrix = BenchmarkMatrix()
@@ -56,16 +48,16 @@ def main():
     matrix.add_perturbation(ChannelDropoutPerturbation(name="ChannelDropout", severity=0.2))
     
     print("\n[4] Executing Perturbation Sweeps...")
-    csp.execute({"signal": signal, "labels": labels}) # Pre-fit for demo simplicity
+    # Pre-fit for demo simplicity to ensure no dimensionality issues
+    csp.execute({"signal": signal, "labels": labels}) 
     
     matrix.add_method(csp)
-    matrix.add_dataset("SyntheticMotorImagery")
+    matrix.add_dataset("PhysioNet_MotorImagery_S001R04")
     bundles_dict = matrix.execute_matrix()
     
     print(f"    Generated {len(bundles_dict)} Cryptographic Evidence Bundles.")
     
     print("\n[5] Packaging Output Evidence...")
-    # Render the reports
     from vireon_core.contracts.evidence import EvidenceBundle
     bundle_obj = EvidenceBundle(**bundles_dict[0])
     
@@ -83,7 +75,9 @@ def main():
         
     # 3. Evidence Graph Artifacts
     with open("output/evidence_graph.json", "w") as f:
-        json.dump({"nodes": [bundle_obj.bundle_id], "edges": [{"source": bundle_obj.bundle_id, "target": "SyntheticMotorImagery", "type": "validated_on"}]}, f, indent=4)
+        json.dump({"nodes": [bundle_obj.bundle_id, csp.contract.validation_papers[0]], 
+                   "edges": [{"source": bundle_obj.bundle_id, "target": "PhysioNet_MotorImagery_S001R04", "type": "validated_on"},
+                             {"source": bundle_obj.bundle_id, "target": csp.contract.validation_papers[0], "type": "evaluates_claim"}]}, f, indent=4)
         
     print("    Evidence artifacts written to examples/first_validation/output/")
     print("\nRun Complete. You may now review output/evidence.md to see the generated figures and statistics.")
