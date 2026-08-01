@@ -70,16 +70,10 @@ def main():
             sys.exit(1)
             
     elif args.command == "reproduce":
-        print(f"==================================================")
-        print(f"  VIREON EXECUTABLE PUBLICATIONS")
-        print(f"==================================================")
-        print(f"Fetching publication package for DOI: {args.doi}")
-        print("  - Downloading dataset... OK")
-        print("  - Pulling experiment manifest... OK")
-        print("  - Instantiating Scientific Object Model... OK")
-        print("  - Dispatching capability plugins... OK")
-        print(f"\n[PASS] Publication {args.doi} successfully reproduced locally.")
-        print(f"Evidence bundle saved to results/{args.doi.replace(':', '_')}.json")
+        from vireon_lab.cli.reproduce import ReproducibilityEngine
+        workspace_root = os.path.abspath(os.path.join(base_dir, ".."))
+        engine = ReproducibilityEngine(workspace_root)
+        engine.reproduce_doi(args.doi)
 
 if __name__ == "__main__":
     main()

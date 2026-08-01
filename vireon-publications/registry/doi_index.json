@@ -3,12 +3,20 @@
         "10.1109/TAU.1967.1161901": {
             "title": "The Use of Fast Fourier Transform for the Estimation of Power Spectra",
             "required_dataset": "None (Synthetic Only)",
-            "scenario": "benchmark.spectral.welch"
+            "scenario": "benchmark.spectral.welch",
+            "expected_outputs": {
+                "psd_peak_hz": 10.0
+            },
+            "tolerance": 0.5
         },
         "10.1109/86.84781": {
             "title": "Designing Optimal Spatial Filters for Single-Trial EEG Classification",
             "required_dataset": "dataset.bci_competition_iv_2a",
-            "scenario": "benchmark.classification.csp"
+            "scenario": "benchmark.classification.csp",
+            "expected_outputs": {
+                "accuracy": 0.82
+            },
+            "tolerance": 0.05
         }
     }
 }

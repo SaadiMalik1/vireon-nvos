@@ -8,8 +8,13 @@ def main():
     args = parser.parse_args()
     
     if args.command == "reproduce":
-        print(f"Resolving DOI {args.doi}...")
-        print("Error: Replication environment not found in local index. Ensure you have the corresponding vireon-corpus dataset downloaded.")
+        import os
+        from vireon_lab.cli.reproduce import ReproducibilityEngine
+        
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        workspace_root = os.path.abspath(os.path.join(base_dir, ".."))
+        engine = ReproducibilityEngine(workspace_root)
+        engine.reproduce_doi(args.doi)
 
 if __name__ == "__main__":
     main()

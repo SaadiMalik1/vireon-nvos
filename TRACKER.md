@@ -56,11 +56,11 @@
 - [x] T40: Real content hash
 - [x] T41: Downgrade corpus SRL
 - [x] T42: Fix verify CLI
-- [ ] T43: Fix reproduce CLI
+- [~] T43: Fix reproduce CLI
 - [x] T44: Delete pipeline runners
 
 ## P1-KNOWLEDGE + MODELS
-- [~] T45: Wire Knowledge Graph
+- [x] T45: Wire Knowledge Graph
 - [ ] T46: Wire Decision Engine
 - [ ] T47: Real sphere model
 - [ ] T48: Real BEM model
