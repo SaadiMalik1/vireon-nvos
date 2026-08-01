@@ -27,20 +27,37 @@ class CampaignCLI:
         print("Executing reference comparisons...")
         print("Applying perturbations...")
         
-        # Stub generating a perfect EvidenceBundle for the Golden Campaign
-        bundle = EvidenceBundle(
-            algorithm=algorithm,
-            reference=reference,
-            pass_fail="PASS",
-            srl_recommendation="SRL-1",
-            metrics={"rmse": 0.0, "ccc": 1.0}
-        )
+        from vireon_validation.benchmarks.matrix import BenchmarkMatrix
+        from vireon_core.contracts.evidence import MethodProvenance
+        from collections import namedtuple
         
-        print(f"\nCampaign Complete!")
-        print(f"Evidence Hash: {bundle.bundle_id}")
-        print(f"Verdict: {bundle.pass_fail}")
-        print(f"RMSE: {bundle.metrics.get('rmse')}")
-        print(f"CCC: {bundle.metrics.get('ccc')}")
+        print(f"Starting Campaign: {algorithm} vs {reference}")
+        print("Executing synthetic datasets and reference comparisons...")
+        
+        # Instantiate real matrix
+        matrix = BenchmarkMatrix()
+        
+        # Mock plugin objects for the matrix engine based on manifest strings
+        MockMethod = namedtuple('MockMethod', ['method_name'])
+        matrix.add_method(MockMethod(method_name=algorithm))
+        
+        # Read datasets from manifest or use default
+        datasets = campaign.get("datasets", ["BCI_Competition_IV"])
+        for ds in datasets:
+            matrix.add_dataset(ds)
+            
+        # Execute the real matrix sweeps
+        results = matrix.execute_matrix()
+        
+        # Compute aggregate metrics from results
+        passed_count = sum(1 for r in results if r.get('conclusion_verdict') == 'PASS')
+        mean_ccc = sum(r.get('statistical_agreement', {}).get('ccc', 0.0) for r in results) / max(len(results), 1)
+        
+        print(f"\nCampaign Complete! Executed {len(results)} permutations.")
+        if results:
+            print(f"Evidence Hash [0]: {results[0].get('bundle_id')}")
+            print(f"Overall Verdict: {'PASS' if passed_count == len(results) else 'FAIL'}")
+            print(f"Mean CCC: {mean_ccc:.4f}")
         
 def main():
     if len(sys.argv) < 3 or sys.argv[1] != "run":

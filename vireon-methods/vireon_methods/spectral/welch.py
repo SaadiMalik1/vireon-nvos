@@ -15,5 +15,22 @@ class WelchPSDPlugin(IPlugin):
         )
 
     def execute(self, inputs):
-        # TODO: Implement Welch's PSD calculation using scipy.signal.welch
-        pass
+        from vireon_core.contracts.base import ISignal
+        import numpy as np
+        from scipy.signal import welch
+        
+        signal = inputs.get("signal")
+        if not isinstance(signal, ISignal):
+            raise ValueError("Expected ISignal as 'signal' input")
+            
+        X = signal.data
+        fs = signal.sampling_rate
+        
+        # Determine appropriate axis (last axis usually time)
+        axis = -1
+        
+        # Compute Welch PSD
+        f, Pxx = welch(X, fs=fs, axis=axis, nperseg=int(fs*2))
+        
+        # Pxx holds the power density. Wrap in ISignal.
+        return {"signal": ISignal(sampling_rate=fs, data=Pxx)}

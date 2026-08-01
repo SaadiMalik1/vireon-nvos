@@ -15,5 +15,36 @@ class ICAPlugin(IPlugin):
         )
 
     def execute(self, inputs):
-        # TODO: Implement FastICA
-        pass
+        from vireon_core.contracts.base import ISignal
+        import numpy as np
+        
+        signal = inputs.get("signal")
+        if not isinstance(signal, ISignal):
+            raise ValueError("Expected ISignal as 'signal' input")
+            
+        try:
+            from sklearn.decomposition import FastICA
+        except ImportError:
+            raise RuntimeError("ICAPlugin requires scikit-learn. Please install 'scikit-learn'.")
+            
+        X = signal.data
+        # Typically shape is (samples, channels) or (epochs, channels, times)
+        # FastICA expects (samples, features)
+        original_shape = X.shape
+        if len(original_shape) == 3:
+            X_flat = np.transpose(X, [0, 2, 1]).reshape(-1, original_shape[1])
+        else:
+            X_flat = X
+            
+        ica = FastICA(random_state=42)
+        S_flat = ica.fit_transform(X_flat)
+        
+        if len(original_shape) == 3:
+            S = S_flat.reshape(original_shape[0], original_shape[2], -1)
+            S = np.transpose(S, [0, 2, 1])
+        else:
+            S = S_flat
+            
+        # Returning components (unmixing matrix) and the separated signals
+        # For simplicity, returning just the separated signals under "signal" key
+        return {"signal": ISignal(sampling_rate=signal.sampling_rate, data=S)}
