@@ -39,8 +39,8 @@ class SyntheticBCICompetitionProvider(DatasetProvider):
     def stop(self): pass
     def get_data(self): return self._data
 
-class CHBMITProvider(DatasetProvider):
-    """Real dataset provider for CHB-MIT Scalp EEG."""
+class SyntheticCHBMITProvider(DatasetProvider):
+    """Synthetic dataset provider that mimics CHB-MIT Scalp EEG for testing."""
     def __init__(self, data_dir: str, subject_id: str):
         self.data_dir = data_dir
         self.subject_id = subject_id

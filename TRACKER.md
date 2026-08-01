@@ -46,8 +46,8 @@
 - [~] T32: Implement MCC
 
 ## P0-CORPUS + CLI
-- [ ] T33: Rename BCI provider
-- [ ] T34: Rename CHBMIT provider
+- [x] T33: Rename BCI provider
+- [~] T34: Rename CHBMIT provider
 - [ ] T35: Rename Sleep EDF provider
 - [ ] T36: Wire EEGBCI provider
 - [ ] T37: Wire PhysioNet provider
