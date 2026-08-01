@@ -16,7 +16,8 @@ class CSVGenerator:
             
             for i, bundle in enumerate(evidence_bundles):
                 for m in bundle.measurements:
-                    writer.writerow([i, bundle.experiment_id, m.metric_name, m.value, m.variance or 0.0])
+                    var = m.uncertainty.variance if getattr(m, 'uncertainty', None) else 0.0
+                    writer.writerow([i, bundle.experiment_id, m.metric_name, m.value, var])
 
 class PlotGenerator:
     @staticmethod
@@ -53,9 +54,9 @@ class PaperGenerator:
             return
             
         bundle = evidence_bundles[0]
-        decision = bundle.decision
+        decision = evidence_bundles[0].decision
         
-        abstract = f"# Abstract\n\nThis paper presents the empirical validation of the `{name}` experiment. The system achieved a decision of **{'PASS' if decision and decision.passed else 'FAIL'}** with a confidence score of {decision.confidence if decision else 0.0}%."
+        abstract = f"# Abstract\n\nThis paper presents the empirical validation of the `{name}` experiment. The system achieved a decision of **{'PASS' if decision and decision.status == 'PASS' else 'FAIL'}** with a confidence score of {decision.confidence if decision else 0.0}%."
         methods = f"# Methods\n\n- **Experiment ID**: {bundle.experiment_id}\n- **Repetitions**: {len(evidence_bundles)}"
         
         avg_metrics = {}
@@ -70,7 +71,7 @@ class PaperGenerator:
             mean_val = sum(values) / len(values)
             results += f"- **{metric}**: {mean_val:.4f}\n"
             
-        discussion = f"# Discussion\n\n- **Reasoning**: {decision.reasoning if decision else 'N/A'}\n- **Next Steps**: {decision.recommended_next_step if decision else 'N/A'}"
+        discussion = f"# Discussion\n\n- **Reasoning**: {decision.reason if decision else 'N/A'}\n- **Next Steps**: {'Proceed' if decision and decision.status == 'PASS' else 'Investigate failure'}"
         appendix = "# Appendix\n\n- **Environment Fingerprint**: {bundle.execution_context.environment_fingerprint}"
         
         os.makedirs(os.path.join(out_dir, "paper"), exist_ok=True)

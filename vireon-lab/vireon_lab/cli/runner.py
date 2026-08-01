@@ -5,7 +5,7 @@ from typing import List, Optional
 from vireon_core.kernel.execution_engine import ExecutionEngine
 from vireon_lab.cli.registry import ExperimentRegistry, CampaignRegistry
 from vireon_lab.cli.generators import CSVGenerator, PlotGenerator, PaperGenerator, ProvenanceGenerator
-from vireon_validation.decision import DecisionEngine
+from vireon_knowledge.decision_engine import DecisionEngine
 from vireon_validation.evidence_quality import EvidenceQualityEngine
 
 class ExperimentRunner:
@@ -83,21 +83,51 @@ class ExperimentRunner:
                 execution_context = evidence_bundles[0].execution_context if evidence_bundles else None
                 evidence_quality = EvidenceQualityEngine.evaluate(avg_measurements, expected, execution_context)
                 
-                decision = DecisionEngine.evaluate(avg_measurements, expected, evidence_quality)
+                from vireon_knowledge.rules import IRule
+                rules = []
+                for k, v in expected.items():
+                    if isinstance(v, str) and ("<" in v or ">" in v or "=" in v):
+                        parts = v.strip().split(" ")
+                        if len(parts) == 2:
+                            op, target = parts
+                            metric_name = k
+                        elif len(parts) == 3:
+                            metric_name, op, target = parts
+                        else:
+                            continue
+                        try:
+                            rules.append(IRule(rule_id=f"rule_{k}", description=f"Expected {k} {op} {target}", target_metric=metric_name, operator=op, threshold=float(target)))
+                        except ValueError:
+                            pass
+                    else:
+                        rules.append(IRule(rule_id=f"rule_{k}", description=f"Expected {k} == {v}", target_metric=k, operator="==", threshold=v))
+                        
+                decision_engine = DecisionEngine(rules=rules)
+                from vireon_core.contracts.base import IEvidence, IExecutionContext
+                dummy_evidence = IEvidence(
+                    experiment_id=experiment_id,
+                    execution_hash="dummy",
+                    execution_context=execution_context or IExecutionContext(environment_fingerprint="dummy", dependencies={}, hardware_info={}, execution_timestamp=0.0),
+                    telemetry_path="",
+                    events=[],
+                    measurements=avg_measurements,
+                    assertions_met={}
+                )
+                decision = decision_engine.evaluate(dummy_evidence)
                 
                 # Validation Graph
                 validation_graph = {
                     "dataset": "SyntheticSignalProvider",
                     "experiment": experiment_id,
                     "evidence_hashes": [b.execution_hash for b in evidence_bundles],
-                    "decision": decision.passed,
+                    "decision": decision.status == "PASS",
                     "evidence_quality": evidence_quality.overall,
                     "publication": "generated"
                 }
                 
                 for bundle in evidence_bundles:
                     bundle.evidence_quality = evidence_quality
-                    bundle.decision = decision
+                    bundle.decision = decision # This is now DecisionResult instead of IDecision
                     bundle.validation_graph = validation_graph
                 
                 # 3. Artifact Generation & Publication
@@ -108,8 +138,8 @@ class ExperimentRunner:
                 PaperGenerator.generate(experiment_id, evidence_bundles, os.path.join(run_dir, "publication"))
                 ProvenanceGenerator.generate(evidence_bundles, os.path.join(run_dir, "provenance", f"{experiment_id}_provenance.json"))
                 
-                print(f"   Completed {experiment_id}. Decision: {'PASS' if decision.passed else 'FAIL'}")
-                print(f"   Reasoning: {decision.reasoning}")
+                print(f"   Completed {experiment_id}. Decision: {decision.status}")
+                print(f"   Reasoning: {decision.reason}")
                 
             except Exception as e:
                 print(f"   [ERROR] Failed to run {experiment_id}: {e}")

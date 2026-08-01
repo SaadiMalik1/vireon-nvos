@@ -36,7 +36,7 @@ class EvidenceQualityEngine:
         traceability = 1.0  # Assumes topological sorting succeeded if pipeline executed
 
         # 5. Statistical Robustness: s = (sum of metrics with variance/CI) / N
-        metrics_with_stats = sum(1 for m in measurements if m.variance is not None or m.confidence_interval_95 is not None)
+        metrics_with_stats = sum(1 for m in measurements if getattr(m, 'uncertainty', None) is not None)
         statistical = metrics_with_stats / len(measurements) if measurements else 0.0
         # If cross-validation was used, statistical robustness gets a significant boost
         if any(m.metric_name.startswith("decoder_") for m in measurements):

@@ -8,7 +8,7 @@ class BCIAssertionEvaluator(DefaultAssertionEvaluator):
             return bool(p300) == bool(assertion.expected_result)
         return super().evaluate(assertion, measurements)
 
-class DecisionEngine:
+class StringConstraintEvaluator:
     """
     Evaluates evidence bundles and produces an explicit scientific conclusion.
     """

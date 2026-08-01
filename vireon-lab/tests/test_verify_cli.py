@@ -32,7 +32,7 @@ def test_verify_cli_valid():
         create_mock_bundle(bundle_path, tampered=False)
         
         env = os.environ.copy()
-        env["PYTHONPATH"] = "vireon-core:vireon-models:vireon-lab:vireon-corpus:vireon-validation"
+        env["PYTHONPATH"] = "vireon-core:vireon-models:vireon-lab:vireon-corpus:vireon-validation:vireon-knowledge"
         result = subprocess.run(
             ["python", "-m", "vireon_lab.cli.main", "verify", "--bundle", bundle_path],
             env=env,
@@ -48,7 +48,7 @@ def test_verify_cli_tampered():
         create_mock_bundle(bundle_path, tampered=True)
         
         env = os.environ.copy()
-        env["PYTHONPATH"] = "vireon-core:vireon-models:vireon-lab:vireon-corpus:vireon-validation"
+        env["PYTHONPATH"] = "vireon-core:vireon-models:vireon-lab:vireon-corpus:vireon-validation:vireon-knowledge"
         result = subprocess.run(
             ["python", "-m", "vireon_lab.cli.main", "verify", "--bundle", bundle_path],
             env=env,
