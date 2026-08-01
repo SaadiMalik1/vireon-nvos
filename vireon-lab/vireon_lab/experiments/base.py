@@ -39,6 +39,9 @@ def _build_provider(system_config: Dict[str, Any]) -> IProvider:
     elif provider_name == "eegbci":
         from vireon_models.providers.eegbci_provider import EEGBCIProvider
         return EEGBCIProvider(**config)
+    elif provider_name == "physionet_mi":
+        from vireon_models.providers.datasets import PhysioNetMotorImageryProvider
+        return PhysioNetMotorImageryProvider(**config)
     else:
         # Default: MockProvider for backward compatibility
         from vireon_lab.experiments.schema import MockProvider
