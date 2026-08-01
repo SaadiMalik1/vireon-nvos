@@ -30,3 +30,6 @@ where = [
     "vireon-evidence"
 ]
 include = ["vireon_*"]
+
+[project.entry-points."vireon.plugins"]
+# Plugins will be registered here as they're implemented

@@ -37,6 +37,7 @@ class ScientificContract(BaseModel):
     reference_software: List[str] = []
     expected_numerical_tolerances: Dict[str, float] = {}
     calibration_provenance: str = ""
+    capabilities_provided: List[str] = []
 
 class ScientificContractViolation(Exception):
     """
