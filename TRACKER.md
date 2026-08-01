@@ -64,8 +64,8 @@
 - [x] T46: Wire Decision Engine
 - [x] T47: Real sphere model
 - [x] T48: Real BEM model
-- [~] T49: Real ADS1299
-- [ ] T50: Delete hardware stubs
+- [x] T49: Real ADS1299
+- [~] T50: Delete hardware stubs
 - [ ] T51: Delete disease stubs
 - [ ] T52: Delete hardware twins
 - [ ] T53: Delete seizure workflow
