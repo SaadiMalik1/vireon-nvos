@@ -256,3 +256,51 @@ class IExperiment(IScientificObject):
     decision: Optional[IDecision] = None
 
     model_config = {"arbitrary_types_allowed": True}
+
+class DAGNode(BaseModel):
+    node_id: str
+    stage: str
+    plugin_id: Optional[str] = None
+    inputs: List[str] = []
+    config: Dict[str, Any] = {}
+
+class ExecutionDAG(BaseModel):
+    nodes: List[DAGNode]
+
+    @classmethod
+    def from_stages(cls, stages: Optional[List[str]] = None) -> 'ExecutionDAG':
+        if stages is None:
+            stages = ["INTENTION", "NEURAL_STATE", "SIGNAL", "DECODER_STATE", "COMMAND", "ACTUATOR_STATE", "FEEDBACK"]
+        nodes = []
+        for i, stage in enumerate(stages):
+            node_id = f"stage_{i}"
+            inputs = [f"stage_{i-1}"] if i > 0 else []
+            nodes.append(DAGNode(node_id=node_id, stage=stage, inputs=inputs))
+        return cls(nodes=nodes)
+
+    def validate_dag(self):
+        node_map = {n.node_id: n for n in self.nodes}
+        roots = []
+        import graphlib
+        graph = {}
+        for n in self.nodes:
+            if not n.inputs:
+                roots.append(n.node_id)
+            graph[n.node_id] = []
+            for inp in n.inputs:
+                if inp not in node_map:
+                    raise ValueError(f"Input '{inp}' for node '{n.node_id}' does not exist.")
+                graph[n.node_id].append(inp)
+                
+        ts = graphlib.TopologicalSorter(graph)
+        try:
+            tuple(ts.static_order())
+        except graphlib.CycleError as e:
+            raise ValueError(f"ExecutionDAG contains a cycle: {e}")
+
+        if len(roots) != 1:
+            raise ValueError("ExecutionDAG must have exactly one root.")
+
+    def model_post_init(self, __context: Any) -> None:
+        self.validate_dag()
+
