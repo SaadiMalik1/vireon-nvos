@@ -42,3 +42,20 @@ class SRLAutomator:
             "reasons": reasons,
             "confidence": successful_reproductions / total_runs if total_runs > 0 else 0.0
         }
+
+def validate_srl_claim(plugin) -> List[str]:
+    """Check if a plugin's SRL claim is supported by evidence.
+    Returns list of violations."""
+    from vireon_core.contracts.plugin import ScientificReadinessLevel
+    violations = []
+    if plugin.srl >= ScientificReadinessLevel.SRL_4:
+        # SRL_4+ requires: empirical validation, reference comparison, published results
+        if not plugin.contract.validation_papers:
+            violations.append("SRL_4+ requires validation_papers")
+        if not plugin.contract.expected_numerical_tolerances:
+            violations.append("SRL_4+ requires expected_numerical_tolerances")
+    if plugin.srl >= ScientificReadinessLevel.SRL_5:
+        # SRL_5 requires: independent reproduction
+        if not getattr(plugin, "_independent_reproduction_evidence", None):
+            violations.append("SRL_5 requires independent reproduction evidence")
+    return violations

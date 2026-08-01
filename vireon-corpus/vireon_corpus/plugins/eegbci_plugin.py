@@ -21,7 +21,7 @@ class EEGBCIPlugin(IDatasetPlugin):
         
     @property
     def srl(self) -> ScientificReadinessLevel:
-        return ScientificReadinessLevel.SRL_5
+        return ScientificReadinessLevel.SRL_1
         
     @property
     def contract(self) -> ScientificContract:
