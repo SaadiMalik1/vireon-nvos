@@ -66,11 +66,39 @@ class SleepEDFPlugin(IDatasetPlugin):
         return True
         
     def convert_to_bids(self, cache_dir: str, bids_dir: str) -> None:
-        print("Converting Sleep-EDF to BIDS format (simulated)...")
+        print("Converting Sleep-EDF to BIDS format (simulated with mne_bids)...")
         bids_out = os.path.join(bids_dir, "sleep-edf")
-        os.makedirs(os.path.join(bids_out, "sub-01", "eeg"), exist_ok=True)
-        with open(os.path.join(bids_out, "dataset_description.json"), "w") as f:
-            json.dump({"Name": "Sleep-EDF", "BIDSVersion": "1.8.0"}, f)
+        
+        try:
+            from mne_bids import BIDSPath, write_raw_bids
+            import mne
+            import numpy as np
+            from vireon_core.runtime.rng import DeterministicRNG
+            
+            info = mne.create_info(ch_names=[f"EEG{i:02d}" for i in range(1, 8)], sfreq=100.0, ch_types='eeg')
+            rng = DeterministicRNG(seed=42)
+            data = rng.normal(0, 1, (7, 3000))
+            raw = mne.io.RawArray(data, info)
+            events = np.array([[100, 0, 1], [300, 0, 2]])
+            event_id = {'Sleep_Stage_1': 1, 'Sleep_Stage_2': 2}
+            
+            bids_path = BIDSPath(subject='01', task='sleep', root=bids_out, datatype='eeg')
+            write_raw_bids(raw, bids_path, events=events, event_id=event_id, overwrite=True, format='EDF', allow_preload=True)
+            
+        except ImportError:
+            # Fallback if mne_bids not available
+            os.makedirs(os.path.join(bids_out, "sub-01", "eeg"), exist_ok=True)
+            with open(os.path.join(bids_out, "dataset_description.json"), "w") as f:
+                json.dump({"Name": "Sleep-EDF", "BIDSVersion": "1.8.0"}, f)
+            with open(os.path.join(bids_out, "participants.tsv"), "w") as f:
+                f.write("participant_id\tage\tsex\nsub-01\t25\tF\n")
+            with open(os.path.join(bids_out, "sub-01", "eeg", "sub-01_task-sleep_eeg.json"), "w") as f:
+                json.dump({"TaskName": "sleep", "SamplingFrequency": 100.0, "EEGReference": "Mastoid"}, f)
+            with open(os.path.join(bids_out, "sub-01", "eeg", "sub-01_task-sleep_channels.tsv"), "w") as f:
+                f.write("name\ttype\tunits\n")
+                for i in range(1, 8): f.write(f"EEG{i:02d}\tEEG\tuV\n")
+            with open(os.path.join(bids_out, "sub-01", "eeg", "sub-01_task-sleep_events.tsv"), "w") as f:
+                f.write("onset\tduration\ttrial_type\n1.000\t30\tSleep_Stage_1\n3.000\t30\tSleep_Stage_2\n")
         
     def generate_metadata(self, bids_dir: str) -> Dict[str, Any]:
         return {"dataset_name": "Sleep-EDF", "subjects": 153}

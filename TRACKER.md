@@ -50,8 +50,8 @@
 - [x] T34: Rename CHBMIT provider
 - [x] T35: Rename Sleep-EDF provider
 - [x] T36: Wire EEGBCI provider
-- [~] T37: Wire PhysioNet provider
-- [ ] T38: Real BIDS conversion
+- [x] T37: Wire PhysioNet provider
+- [~] T38: Real BIDS conversion
 - [ ] T39: Real checksum verification
 - [ ] T40: Real content hash
 - [ ] T41: Downgrade corpus SRL
