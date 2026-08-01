@@ -36,6 +36,9 @@ def _build_provider(system_config: Dict[str, Any]) -> IProvider:
     elif provider_name == "mne":
         from vireon_models.providers.mne_provider import MNEProvider
         return MNEProvider(**config)
+    elif provider_name == "eegbci":
+        from vireon_models.providers.eegbci_provider import EEGBCIProvider
+        return EEGBCIProvider(**config)
     else:
         # Default: MockProvider for backward compatibility
         from vireon_lab.experiments.schema import MockProvider

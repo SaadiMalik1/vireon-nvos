@@ -48,8 +48,8 @@
 ## P0-CORPUS + CLI
 - [x] T33: Rename BCI provider
 - [x] T34: Rename CHBMIT provider
-- [~] T35: Rename Sleep-EDF provider
-- [ ] T36: Wire EEGBCI provider
+- [x] T35: Rename Sleep-EDF provider
+- [~] T36: Wire EEGBCI provider
 - [ ] T37: Wire PhysioNet provider
 - [ ] T38: Real BIDS conversion
 - [ ] T39: Real checksum verification
