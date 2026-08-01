@@ -1,0 +1,25 @@
+campaign:
+  name: Motor Imagery CSP Demo
+  
+  dataset:
+    provider: SyntheticMotorImagery
+    
+  workflow:
+    - Bandpass
+    - CAR
+    - CSP
+    - LDA
+    
+  perturbations:
+    - WhiteNoise
+    - LineNoise
+    - ChannelDropout
+    
+  evaluation:
+    - RMSE
+    - CCC
+    - Accuracy
+    
+  report:
+    markdown: true
+    figures: true

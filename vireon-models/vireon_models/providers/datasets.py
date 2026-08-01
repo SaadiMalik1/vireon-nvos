@@ -313,7 +313,9 @@ class MotorImageryProvider(IProvider):
 class SyntheticMotorImageryProvider(IProvider):
     """
     Wraps MockBCICompetitionIVDataset as a synthetic canonical IProvider.
-    Returns a single synthetic trial simulating the 22-channel BCI Competition IV benchmark.
+    Generates physiologically inspired motor imagery signals with configurable 1/f noise, 
+    ERD/ERS dynamics, and controllable ground truth. It is intended for deterministic 
+    benchmarking and CI when external datasets are unavailable.
     """
 
     def __init__(self, subject_id: int = 1, seed: int = 42, trial_index: int = 0):
