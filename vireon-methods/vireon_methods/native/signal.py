@@ -3,7 +3,7 @@ from scipy import signal
 
 class VireonButterworth:
     """
-    Native VIREON implementation of Butterworth filtering.
+    scipy wrapper for Butterworth filtering.
     """
     plugin_id = "vireon.methods.signal.butterworth"
     version = "1.0.0"

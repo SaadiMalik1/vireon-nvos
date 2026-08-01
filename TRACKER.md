@@ -25,8 +25,8 @@
 - [x] T13: Real ica
 - [x] T14: Fix CSP plugin
 - [x] T15: Delete native mocks
-- [~] T16: Real FIR filter
-- [ ] T17: Real IIR filter
+- [x] T16: Real FIR filter
+- [~] T17: Real IIR filter
 - [ ] T18: Real LCMV beamforming
 - [ ] T19: Real source localization
 - [ ] T20: Real connectivity
