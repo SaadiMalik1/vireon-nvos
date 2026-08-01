@@ -15,10 +15,10 @@
 - [x] T05: Transaction content hash
 - [x] T06: Real environment capture
 - [x] T07: Remove side-channel
-- [~] T08: Remove hardcoded domain logic
+- [x] T08: Remove hardcoded domain logic
 
 ## P0-METHODS
-- [ ] T09: Real welch
+- [~] T09: Real welch
 - [ ] T10: Real fft
 - [ ] T11: Real stft
 - [ ] T12: Real wavelets
