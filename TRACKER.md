@@ -42,8 +42,8 @@
 - [x] T28: Real BCI competition test
 - [x] T29: Real sleep staging test
 - [x] T30: Real ICC
-- [~] T31: Implement Passing-Bablok
-- [ ] T32: Implement MCC
+- [x] T31: Implement Passing-Bablok
+- [~] T32: Implement MCC
 
 ## P0-CORPUS + CLI
 - [ ] T33: Rename BCI provider

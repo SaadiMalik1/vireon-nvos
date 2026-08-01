@@ -98,3 +98,24 @@ class StatisticalFramework:
             "ci_slope": [float(b_low), float(b_high)],
             "ci_intercept": [float(min(a_low, a_high)), float(max(a_low, a_high))]
         }
+
+    @staticmethod
+    def matthews_correlation_coefficient(y_true: np.ndarray, y_pred: np.ndarray) -> float:
+        """MCC.
+
+        Reference: Matthews (1975). Comparison of the predicted and observed secondary
+        structure of T4 phage lysozyme. Biochimica et Biophysica Acta, 405(2), 442-451.
+        """
+        y_true = np.asarray(y_true)
+        y_pred = np.asarray(y_pred)
+        tp = np.sum((y_true == 1) & (y_pred == 1))
+        tn = np.sum((y_true == 0) & (y_pred == 0))
+        fp = np.sum((y_true == 0) & (y_pred == 1))
+        fn = np.sum((y_true == 1) & (y_pred == 0))
+        
+        numerator = tp * tn - fp * fn
+        denominator = np.sqrt(float((tp + fp) * (tp + fn) * (tn + fp) * (tn + fn)))
+        
+        if denominator == 0:
+            return 0.0
+        return float(numerator / denominator)
