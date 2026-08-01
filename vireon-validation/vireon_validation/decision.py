@@ -1,5 +1,12 @@
 from typing import List, Dict, Any
-from vireon_core.contracts.base import IMeasurement, IDecision
+from vireon_core.contracts.base import IMeasurement, IDecision, AssertionEvaluator, IAssertion, DefaultAssertionEvaluator
+
+class BCIAssertionEvaluator(DefaultAssertionEvaluator):
+    def evaluate(self, assertion: IAssertion, measurements: dict) -> bool:
+        if assertion.name == "expected_side_channel_leak":
+            p300 = measurements.get("p300_detected", 0.0)
+            return bool(p300) == bool(assertion.expected_result)
+        return super().evaluate(assertion, measurements)
 
 class DecisionEngine:
     """

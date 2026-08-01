@@ -21,16 +21,18 @@ class ExecutionEngine:
     when the same seed is used.
     """
     @classmethod
-    def run(cls, experiment: IExperimentDef, seed: int = 42, agency_validator_cls=None, signal_metrics_func=None, dag: Optional[ExecutionDAG] = None, plugin_manager: Optional[PluginManager] = None) -> IEvidence:
-        engine = cls(experiment, seed, agency_validator_cls, signal_metrics_func, plugin_manager)
+    def run(cls, experiment: IExperimentDef, seed: int = 42, agency_validator_cls=None, signal_metrics_func=None, dag: Optional[ExecutionDAG] = None, plugin_manager: Optional[PluginManager] = None, assertion_evaluator=None) -> IEvidence:
+        engine = cls(experiment, seed, agency_validator_cls, signal_metrics_func, plugin_manager, assertion_evaluator)
         return engine.execute(dag)
 
-    def __init__(self, experiment: IExperimentDef, seed: int = 42, agency_validator_cls=None, signal_metrics_func=None, plugin_manager: Optional[PluginManager] = None):
+    def __init__(self, experiment: IExperimentDef, seed: int = 42, agency_validator_cls=None, signal_metrics_func=None, plugin_manager: Optional[PluginManager] = None, assertion_evaluator=None):
+        from vireon_core.contracts.base import DefaultAssertionEvaluator
         self.experiment = experiment
         self.seed = seed
         self.agency_validator_cls = agency_validator_cls
         self.signal_metrics_func = signal_metrics_func
         self.plugin_manager = plugin_manager or PluginManager()
+        self.assertion_evaluator = assertion_evaluator or DefaultAssertionEvaluator()
         self.rng = DeterministicRNG(seed=seed)
         self.clock = DeterministicClock(mode=ClockMode.VIRTUAL, step_dt_ms=1.0)
         self.provider = experiment.get_provider()
@@ -180,17 +182,7 @@ class ExecutionEngine:
         assertions = self.experiment.get_assertions()
         m_dict = {m.metric_name: m.value for m in self.measurements}
         for a in assertions:
-            if a.name in m_dict:
-                actual_val = m_dict[a.name]
-                expected = a.expected_result
-                if isinstance(expected, bool):
-                    self.assertions_met[a.name] = bool(actual_val) == expected
-                elif isinstance(expected, (int, float)):
-                    self.assertions_met[a.name] = actual_val >= expected
-                else:
-                    self.assertions_met[a.name] = str(actual_val) == str(expected)
-            else:
-                self.assertions_met[a.name] = False
+            self.assertions_met[a.name] = self.assertion_evaluator.evaluate(a, m_dict)
 
         self.execution_context.random_seed_state = self.rng.get_state()
 

@@ -121,6 +121,24 @@ class IAssertion(IScientificObject):
     description: str
     expected_result: Any
 
+class AssertionEvaluator(ABC):
+    @abstractmethod
+    def evaluate(self, assertion: IAssertion, measurements: dict) -> bool:
+        pass
+
+class DefaultAssertionEvaluator(AssertionEvaluator):
+    def evaluate(self, assertion: IAssertion, measurements: dict) -> bool:
+        if assertion.name not in measurements:
+            return False
+        actual_val = measurements[assertion.name]
+        expected = assertion.expected_result
+        if isinstance(expected, bool):
+            return bool(actual_val) == expected
+        elif isinstance(expected, (int, float)):
+            return actual_val >= expected
+        else:
+            return str(actual_val) == str(expected)
+
 class IMeasurement(IScientificObject):
     """
     A quantified metric resulting from the scenario execution.
