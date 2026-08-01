@@ -38,8 +38,8 @@
 - [x] T24: Fix CSP crossval
 - [x] T25: Fix PSD crossval
 - [x] T26: Real ERP p300 test
-- [~] T27: Real seizure test
-- [ ] T28: Real BCI competition test
+- [x] T27: Real seizure test
+- [~] T28: Real BCI competition test
 - [ ] T29: Real sleep staging test
 - [ ] T30: Real ICC
 - [ ] T31: Implement Passing-Bablok
