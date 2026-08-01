@@ -18,8 +18,8 @@
 - [x] T08: Remove hardcoded domain logic
 
 ## P0-METHODS
-- [~] T09: Real welch
-- [ ] T10: Real fft
+- [x] T09: Real welch
+- [~] T10: Real fft
 - [ ] T11: Real stft
 - [ ] T12: Real wavelets
 - [ ] T13: Real ica
