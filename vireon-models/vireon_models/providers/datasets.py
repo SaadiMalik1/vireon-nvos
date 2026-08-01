@@ -50,8 +50,8 @@ class SyntheticCHBMITProvider(DatasetProvider):
     def stop(self): pass
     def get_data(self): return self._data
 
-class SleepEDFProvider(DatasetProvider):
-    """Real dataset provider for Sleep-EDF."""
+class SyntheticSleepEDFProvider(DatasetProvider):
+    """Synthetic dataset provider that mimics Sleep-EDF for testing."""
     def __init__(self, data_dir: str, subject_id: int):
         self.data_dir = data_dir
         self.subject_id = subject_id
