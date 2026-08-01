@@ -30,8 +30,8 @@
 - [x] T18: Real LCMV beamforming
 - [x] T19: Real source localization
 - [x] T20: Real connectivity
-- [~] T21: Implement wPLI
-- [ ] T22: Fix Laplacian REST
+- [x] T21: Implement wPLI
+- [~] T22: Fix Laplacian REST
 
 ## P0-VALIDATION
 - [ ] T23: Real benchmark matrix
