@@ -23,22 +23,8 @@ class VireonCSP:
 
 
 class VireonICA:
-    """
-    Native VIREON implementation of Independent Component Analysis (ICA).
-    SRL-1: Initial native implementation.
-    """
-    plugin_id = "vireon.methods.spatial.ica"
-    version = "1.0.0"
-    
-    def __init__(self, n_components: int = 19):
-        self.n_components = n_components
-        
-    def process(self, data: np.ndarray) -> np.ndarray:
-        """
-        Mock Native ICA estimation logic.
-        """
-        # Return mock independent components
-        return np.random.normal(0, 1, size=(data.shape[0], self.n_components))
+    def __init__(self, *args, **kwargs):
+        raise NotImplementedError("Use vireon_methods.spatial.vireon_ica.VireonICA")
 
 class VireonCAR:
     """

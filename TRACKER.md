@@ -21,8 +21,8 @@
 - [x] T09: Real welch
 - [x] T10: Real fft
 - [x] T11: Real stft
-- [~] T12: Real wavelets
-- [ ] T13: Real ica
+- [x] T12: Real wavelets
+- [~] T13: Real ica
 - [ ] T14: Fix CSP plugin
 - [ ] T15: Delete native mocks
 - [ ] T16: Real FIR filter
