@@ -34,8 +34,8 @@
 - [x] T22: Fix Laplacian REST
 
 ## P0-VALIDATION
-- [ ] T23: Real benchmark matrix
-- [ ] T24: Fix CSP crossval
+- [x] T23: Real benchmark matrix
+- [~] T24: Fix CSP crossval
 - [ ] T25: Fix PSD crossval
 - [ ] T26: Real ERP p300 test
 - [ ] T27: Real seizure test
