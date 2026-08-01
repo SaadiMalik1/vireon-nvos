@@ -37,7 +37,7 @@ class BenchmarkMatrix:
                     return EvidenceBundle(
                         bundle_id=str(uuid.uuid4()),
                         conclusion_verdict="PASS" if success else "FAIL",
-                        dataset_provenance=DatasetProvenance(dataset_id=ds, bids_version="1.0", hash_checksum="hash"),
+                        dataset_provenance=DatasetProvenance(dataset_id=ds, bids_version="1.0", hash_checksum="hash", doi="10.mock.doi", download_url="http://mock.url"),
                         software_provenance=SoftwareProvenance(vireon_version="1.0", python_version="3.x", os_info="Linux", dependencies={}),
                         method_provenance=[MethodProvenance(plugin_id=m.method_name, version="1.0", srl="SRL_3", scientific_contract_hash="hash")],
                         environment=EnvironmentFingerprint(hardware_info={}, random_seed=42),

@@ -6,6 +6,29 @@ class CSPPlugin(IPlugin):
         return [PluginCapability(id="machine_learning.csp", version="1.0.0", consumes=["ISignal"], produces=["IFeatureMatrix"])]
     
     @property
+    def plugin_id(self): return "vk:Method:MachineLearning:CSP"
+    
+    @property
+    def version(self): return "1.0.0"
+    
+    @property
+    def plugin_type(self): return "Method"
+    
+    @property
+    def srl(self): from vireon_core.contracts.plugin import ScientificReadinessLevel; return ScientificReadinessLevel.SRL_4
+    
+    @property
+    def inputs(self): from vireon_core.contracts.base import ISignal; return [ISignal]
+    
+    @property
+    def outputs(self): from vireon_core.contracts.base import ISignal; return [ISignal]
+    
+    def initialize(self, config=None): pass
+    
+    @property
+    def method_name(self): return self.plugin_id
+
+    @property
     def contract(self):
         return ScientificContract(
             purpose="Common Spatial Patterns for BCI",
