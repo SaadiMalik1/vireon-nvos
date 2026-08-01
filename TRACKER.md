@@ -55,9 +55,9 @@
 - [x] T39: Real checksum verification
 - [x] T40: Real content hash
 - [x] T41: Downgrade corpus SRL
-- [~] T42: Fix verify CLI
+- [x] T42: Fix verify CLI
 - [ ] T43: Fix reproduce CLI
-- [ ] T44: Delete pipeline runners
+- [~] T44: Delete pipeline runners
 
 ## P1-KNOWLEDGE + MODELS
 - [ ] T45: Wire Knowledge Graph
