@@ -59,3 +59,42 @@ class StatisticalFramework:
         mean = np.mean(data)
         std = np.std(data)
         return (mean - 1.96 * std, mean + 1.96 * std)
+
+    @staticmethod
+    def passing_bablok(x: np.ndarray, y: np.ndarray) -> dict:
+        """Passing-Bablok regression for method comparison.
+
+        Reference: Passing & Bablok (1983). A new biometrical procedure for testing
+        the equality of measurements from two different analytical methods.
+        Journal of Clinical Chemistry and Clinical Biochemistry, 21(11), 709-720.
+        """
+        if np.any(np.isnan(x)) or np.any(np.isnan(y)):
+            raise ValueError("NaN values not supported")
+        n = len(x)
+        slopes = []
+        for i in range(n):
+            for j in range(i+1, n):
+                if x[j] != x[i]:
+                    slopes.append((y[j] - y[i]) / (x[j] - x[i]))
+        slopes = np.sort(slopes)
+        b = np.median(slopes)
+        a = np.median(y - b * x)
+
+        import scipy.stats
+        k = len(slopes)
+        c_gamma = scipy.stats.norm.ppf(0.975) * np.sqrt(n * (n - 1) * (2 * n + 5) / 18)
+        m1 = int(np.round((k - c_gamma) / 2))
+        m2 = int(np.round(k - m1 + 1))
+
+        m1 = max(0, min(m1, k - 1))
+        m2 = max(0, min(m2 - 1, k - 1))
+
+        b_low, b_high = slopes[m1], slopes[m2]
+        a_low, a_high = np.median(y - b_high * x), np.median(y - b_low * x)
+
+        return {
+            "slope": float(b),
+            "intercept": float(a),
+            "ci_slope": [float(b_low), float(b_high)],
+            "ci_intercept": [float(min(a_low, a_high)), float(max(a_low, a_high))]
+        }

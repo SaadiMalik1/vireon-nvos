@@ -40,9 +40,9 @@
 - [x] T26: Real ERP p300 test
 - [x] T27: Real seizure test
 - [x] T28: Real BCI competition test
-- [~] T29: Real sleep staging test
-- [ ] T30: Real ICC
-- [ ] T31: Implement Passing-Bablok
+- [x] T29: Real sleep staging test
+- [x] T30: Real ICC
+- [~] T31: Implement Passing-Bablok
 - [ ] T32: Implement MCC
 
 ## P0-CORPUS + CLI
