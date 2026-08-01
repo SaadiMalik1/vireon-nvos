@@ -215,7 +215,7 @@ class IDatasetPlugin(IPlugin):
         pass
 
     @abstractmethod
-    def verify_checksum(self, cache_dir: str) -> bool:
+    def verify_checksum(self, dataset_path: str, expected_checksum: str = None) -> bool:
         pass
         
     @abstractmethod

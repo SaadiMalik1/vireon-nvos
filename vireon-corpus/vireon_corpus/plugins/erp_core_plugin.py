@@ -57,8 +57,32 @@ class ERPCOREPlugin(IDatasetPlugin):
         print("Downloading ERP CORE via OSF (simulated)...")
         os.makedirs(os.path.join(cache_dir, "originals"), exist_ok=True)
 
-    def verify_checksum(self, cache_dir: str) -> bool:
-        return True
+    def verify_checksum(self, dataset_path: str, expected_checksum: str = None) -> bool:
+        checksums_file = os.path.join(dataset_path, "checksums.sha256")
+        if expected_checksum is None:
+            if not os.path.exists(checksums_file):
+                return False
+            with open(checksums_file) as f:
+                for line in f:
+                    parts = line.strip().split(None, 1)
+                    if len(parts) != 2: continue
+                    expected_hash, filename = parts
+                    filepath = os.path.join(dataset_path, filename)
+                    if not os.path.exists(filepath): return False
+                    actual_hash = self._compute_file_hash(filepath)
+                    if actual_hash != expected_hash:
+                        return False
+            return True
+        else:
+            actual = self._compute_file_hash(dataset_path)
+            return actual == expected_checksum
+
+    def _compute_file_hash(self, filepath: str) -> str:
+        h = hashlib.sha256()
+        with open(filepath, "rb") as f:
+            for chunk in iter(lambda: f.read(8192), b""):
+                h.update(chunk)
+        return h.hexdigest()
         
     def verify_license(self) -> bool:
         return True
