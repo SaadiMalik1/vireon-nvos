@@ -8,7 +8,12 @@ class IMethodology(IPlugin, ABC):
     """
     Base class for verified methodologies, integrating into the capability-based kernel.
     """
-    pass
+    @property
+    def plugin_type(self) -> str:
+        return "method"
+
+    def initialize(self, config: Dict[str, Any]) -> None:
+        pass
 
 class WelchPSD(IMethodology):
     """
@@ -47,7 +52,7 @@ class WelchPSD(IMethodology):
             ],
             supported_modalities=[SignalType.EEG, SignalType.ECOG, SignalType.SEEG, SignalType.LFP, SignalType.EMG],
             unsupported_modalities=[SignalType.SPIKE],
-            failure_conditions=["Signal length < nperseg"],
+            failure_conditions=["signal.shape[-1] < nperseg", "NaN", "Inf"],
             known_artifacts=["Spectral leakage", "Scalloping loss"],
             expected_uncertainty=["Variance decreases as 1/K where K is number of segments"],
             validation_papers=["10.1109/TAU.1967.1161901"],
@@ -131,7 +136,7 @@ class FastICAMethod(IMethodology):
             ],
             supported_modalities=[SignalType.EEG, SignalType.ECOG, SignalType.SEEG, SignalType.MEG],
             unsupported_modalities=[],
-            failure_conditions=["Gaussian sources cannot be separated"],
+            failure_conditions=["n_components > min(n_samples, n_features)", "NaN"],
             known_artifacts=["Sign and variance ambiguity of components"],
             expected_uncertainty=["Local minima in optimization"],
             validation_papers=["10.1109/72.761722"],
@@ -210,7 +215,7 @@ class ContinuousWaveletTransform(IMethodology):
             ],
             supported_modalities=[SignalType.EEG, SignalType.ECOG, SignalType.SEEG, SignalType.LFP],
             unsupported_modalities=[],
-            failure_conditions=["Edge artifacts (cone of influence)"],
+            failure_conditions=["NaN"],
             known_artifacts=["Time-frequency resolution tradeoff (Heisenberg-Gabor)"],
             expected_uncertainty=["Edge effects at start/end of signal"],
             validation_papers=["10.1109/78.84777"],

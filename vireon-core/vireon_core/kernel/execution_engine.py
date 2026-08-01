@@ -96,6 +96,17 @@ class ExecutionEngine:
                 if node.plugin_id:
                     plugin = self.plugin_manager.get_plugin(node.plugin_id)
                     if plugin:
+                        from vireon_core.contracts.plugin import ContractValidator, ScientificContractViolation
+                        try:
+                            ContractValidator.validate(plugin, inputs_dict)
+                        except ScientificContractViolation as e:
+                            import logging
+                            logging.error(f"Contract violation in {node_id}: {e}")
+                            evt_id = self.log_event(f"CONTRACT_VIOLATION: {e.violated_assumption}", stage, parents)
+                            event_ids[node_id] = evt_id
+                            self.node_outputs[node_id] = {"error": "FAILED"}
+                            continue
+                            
                         if isinstance(plugin, IDecoder) and stage == "DECODER_STATE":
                             # Extract signal from inputs
                             signal = inputs_dict

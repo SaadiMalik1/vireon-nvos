@@ -44,7 +44,94 @@ class ScientificContractViolation(Exception):
     Raised when a plugin's execution violates its declared Scientific Contract
     (e.g., input data violates mathematical assumptions or numerical tolerances).
     """
-    pass
+    def __init__(self, plugin_id: str, violated_assumption: str, details: str, remediation: str):
+        super().__init__(f"Plugin {plugin_id} violated {violated_assumption}: {details}. Remediation: {remediation}")
+        self.plugin_id = plugin_id
+        self.violated_assumption = violated_assumption
+        self.details = details
+        self.remediation = remediation
+
+STATIONARITY_PVALUE_THRESHOLD = 0.05  # threshold for ADF stationarity test
+
+class ContractValidator:
+    @staticmethod
+    def validate(plugin: 'IPlugin', inputs: dict) -> None:
+        contract = plugin.contract
+        import numpy as np
+
+        def iter_arrays(inps):
+            if isinstance(inps, dict):
+                for v in inps.values():
+                    if hasattr(v, 'data') and isinstance(v.data, np.ndarray):
+                        yield v.data
+                    elif isinstance(v, np.ndarray):
+                        yield v
+                    elif isinstance(v, dict):
+                        yield from iter_arrays(v)
+
+        for arr in iter_arrays(inputs):
+            if np.any(np.isnan(arr)):
+                raise ScientificContractViolation(
+                    plugin_id=plugin.plugin_id,
+                    violated_assumption="No NaN values",
+                    details="Signal contains NaN values",
+                    remediation="Impute or remove NaN values before processing"
+                )
+            if np.any(np.isinf(arr)):
+                raise ScientificContractViolation(
+                    plugin_id=plugin.plugin_id,
+                    violated_assumption="No Inf values",
+                    details="Signal contains Inf values",
+                    remediation="Clip or remove Inf values before processing"
+                )
+
+        for cond in contract.failure_conditions:
+            if "nperseg" in cond.lower() and hasattr(plugin, 'nperseg'):
+                for arr in iter_arrays(inputs):
+                    # For Welch PSD, shape is typically (n_epochs, n_channels, n_times) or (n_times,)
+                    if arr.shape[-1] < plugin.nperseg:
+                        raise ScientificContractViolation(
+                            plugin_id=plugin.plugin_id,
+                            violated_assumption="Signal length >= nperseg",
+                            details=f"Signal length {arr.shape[-1]} is < {plugin.nperseg}",
+                            remediation="Increase signal length or decrease nperseg"
+                        )
+                        
+        requires_stationarity = any("stationar" in a.lower() for a in contract.mathematical_assumptions)
+        if requires_stationarity:
+            try:
+                from statsmodels.tsa.stattools import adfuller
+                has_statsmodels = True
+            except ImportError:
+                has_statsmodels = False
+
+            for arr in iter_arrays(inputs):
+                sig_1d = arr.ravel()
+                if len(sig_1d) > 100000:
+                    sig_1d = sig_1d[:100000]
+                
+                if has_statsmodels:
+                    result = adfuller(sig_1d)
+                    p_value = result[1]
+                    if p_value > STATIONARITY_PVALUE_THRESHOLD:
+                        raise ScientificContractViolation(
+                            plugin_id=plugin.plugin_id,
+                            violated_assumption="Stationarity",
+                            details=f"ADF test failed (p={p_value} > {STATIONARITY_PVALUE_THRESHOLD})",
+                            remediation="Detrend or difference the signal to achieve stationarity"
+                        )
+                else:
+                    n2 = len(sig_1d) // 2
+                    m1, m2 = np.mean(sig_1d[:n2]), np.mean(sig_1d[n2:])
+                    if abs(m1 - m2) > np.std(sig_1d):
+                        import logging
+                        logging.warning("statsmodels unavailable. Simple stationarity check failed.")
+                        raise ScientificContractViolation(
+                            plugin_id=plugin.plugin_id,
+                            violated_assumption="Stationarity",
+                            details="Simple mean/variance check failed",
+                            remediation="Detrend or difference the signal to achieve stationarity"
+                        )
 
 class PluginCapability(BaseModel):
     id: str
