@@ -35,8 +35,8 @@
 
 ## P0-VALIDATION
 - [x] T23: Real benchmark matrix
-- [~] T24: Fix CSP crossval
-- [ ] T25: Fix PSD crossval
+- [x] T24: Fix CSP crossval
+- [~] T25: Fix PSD crossval
 - [ ] T26: Real ERP p300 test
 - [ ] T27: Real seizure test
 - [ ] T28: Real BCI competition test

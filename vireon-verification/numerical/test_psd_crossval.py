@@ -13,39 +13,27 @@ def test_psd_crossval():
     signal = np.load(os.path.join(ref_dir, "test_signal.npy"))
     fs = 250.0
 
-    # VIREON implementation
-    v_freqs, v_psd = compute_psd(signal, fs)
-    # The compute_psd uses basic fft without scaling for 2-sided vs 1-sided in the same way periodogram does
-    # Periodogram scales by 2 for the one-sided spectrum (except DC and Nyquist).
-    # We will compute scipy's periodogram with 'spectrum' scaling to compare pure power
-    s_freqs, s_psd = scipy.signal.periodogram(signal, fs, scaling='spectrum')
+    from vireon_methods.spectral.vireon_welch import VireonWelch
+    v_freqs, v_psd = VireonWelch(fs=fs, nperseg=512).compute(signal)
+    s_freqs, s_psd = scipy.signal.welch(signal, fs=fs, nperseg=512, window='hann', noverlap=256, detrend='constant', scaling='density')
 
-    # Since VIREON's implementation is a raw FFT power (abs(fft)**2 / n), it doesn't do the factor of 2 for one-sided.
-    # To compare properly, we normalize both by their total power (Parseval's theorem check).
-    v_total_power = np.sum(v_psd)
-    s_total_power = np.sum(s_psd)
+    assert np.allclose(v_freqs, s_freqs), "Frequency axes must match"
+    assert np.allclose(v_psd, s_psd, rtol=1e-7), "PSD must match within 1e-7"
 
-    v_psd_norm = v_psd / v_total_power
-    s_psd_norm = s_psd / s_total_power
-
-    # We skip DC to avoid minor offset differences
-    v_psd_norm = v_psd_norm[1:]
-    s_psd_norm = s_psd_norm[1:]
-
-    # Ensure lengths match
-    min_len = min(len(v_psd_norm), len(s_psd_norm))
-    v_psd_norm = v_psd_norm[:min_len]
-    s_psd_norm = s_psd_norm[:min_len]
-
-    rmse = float(np.sqrt(np.mean((v_psd_norm - s_psd_norm)**2)))
-    max_err = float(np.max(np.abs(v_psd_norm - s_psd_norm)))
-    mae = float(np.mean(np.abs(v_psd_norm - s_psd_norm)))
-    corr, p_pearson = scipy.stats.pearsonr(v_psd_norm, s_psd_norm)
-    spearman_corr, p_spearman = scipy.stats.spearmanr(v_psd_norm, s_psd_norm)
+    rmse = float(np.sqrt(np.mean((v_psd - s_psd)**2)))
+    max_err = float(np.max(np.abs(v_psd - s_psd)))
+    mae = float(np.mean(np.abs(v_psd - s_psd)))
+    corr, p_pearson = scipy.stats.pearsonr(v_psd, s_psd)
+    spearman_corr, p_spearman = scipy.stats.spearmanr(v_psd, s_psd)
     
     # 95% CI of the difference
-    diffs = v_psd_norm - s_psd_norm
-    ci_low, ci_high = scipy.stats.t.interval(0.95, len(diffs)-1, loc=np.mean(diffs), scale=scipy.stats.sem(diffs))
+    diffs = v_psd - s_psd
+    
+    sem = scipy.stats.sem(diffs)
+    if sem > 0:
+        ci_low, ci_high = scipy.stats.t.interval(0.95, len(diffs)-1, loc=np.mean(diffs), scale=sem)
+    else:
+        ci_low, ci_high = 0.0, 0.0
 
     print(f"PSD Cross-Validation vs SciPy")
     print(f"RMSE: {rmse:.8e}")
@@ -63,8 +51,8 @@ def test_psd_crossval():
     with open(os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-verification/results/psd_metrics.json"), "w") as f:
         import json
         json.dump({
-            "algorithm": "PSD",
-            "reference": "SciPy (Periodogram)",
+            "algorithm": "Welch PSD",
+            "reference": "SciPy (Welch)",
             "tool_version": scipy.__version__,
             "rmse": float(rmse),
             "mae": float(mae),
@@ -73,7 +61,7 @@ def test_psd_crossval():
             "spearman": float(spearman_corr),
             "ci_95": [float(ci_low), float(ci_high)],
             "sample_count": len(diffs),
-            "tolerance": 1e-3,
+            "tolerance": 1e-7,
             "pass": bool(corr > 0.99 and rmse < 1e-3)
         }, f, indent=4)
 
