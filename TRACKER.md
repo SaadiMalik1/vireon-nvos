@@ -13,8 +13,8 @@
 - [x] T03: Wire decoder
 - [x] T04: Contract validator
 - [x] T05: Transaction content hash
-- [~] T06: Real environment capture
-- [ ] T07: Remove side-channel
+- [x] T06: Real environment capture
+- [~] T07: Remove side-channel
 - [ ] T08: Remove hardcoded domain logic
 
 ## P0-METHODS

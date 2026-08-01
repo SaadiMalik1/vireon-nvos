@@ -81,13 +81,15 @@ class TestDeterministicExecution(unittest.TestCase):
         filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
         
         scenario1 = load_experiment_from_yaml(filepath)
-        evidence1 = ExecutionEngine.run(scenario1, seed=42)
+        engine1 = ExecutionEngine(scenario1, seed=42)
+        evidence1 = engine1.execute()
         
         scenario2 = load_experiment_from_yaml(filepath)
-        evidence2 = ExecutionEngine.run(scenario2, seed=42)
+        engine2 = ExecutionEngine(scenario2, seed=42)
+        evidence2 = engine2.execute()
         
-        data1 = evidence1._raw_provider_data["data"]
-        data2 = evidence2._raw_provider_data["data"]
+        data1 = engine1.observations[0].data["data"]
+        data2 = engine2.observations[0].data["data"]
         np.testing.assert_array_equal(data1, data2)
 
     def test_different_seed_different_hash(self):
@@ -169,11 +171,13 @@ class TestBundleIntegrity(unittest.TestCase):
         """An untampered evidence bundle should pass integrity verification."""
         filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
         scenario = load_experiment_from_yaml(filepath)
-        evidence = ExecutionEngine.run(scenario, seed=42)
+        engine = ExecutionEngine(scenario, seed=42)
+        evidence = engine.execute()
+        raw_data = engine.observations[0].data if engine.observations else None
         
         with tempfile.TemporaryDirectory() as tmpdir:
             gen = EvidenceGenerator(evidence, tmpdir)
-            bundle_path = gen.generate_bundle()
+            bundle_path = gen.generate_bundle(raw_provider_data=raw_data)
 
             result = ReplayEngine.verify_bundle_integrity(bundle_path)
             self.assertTrue(result["valid"])
@@ -184,11 +188,13 @@ class TestBundleIntegrity(unittest.TestCase):
         """A tampered evidence bundle should fail integrity verification."""
         filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
         scenario = load_experiment_from_yaml(filepath)
-        evidence = ExecutionEngine.run(scenario, seed=42)
+        engine = ExecutionEngine(scenario, seed=42)
+        evidence = engine.execute()
+        raw_data = engine.observations[0].data if engine.observations else None
         
         with tempfile.TemporaryDirectory() as tmpdir:
             gen = EvidenceGenerator(evidence, tmpdir)
-            bundle_path = gen.generate_bundle()
+            bundle_path = gen.generate_bundle(raw_provider_data=raw_data)
 
             # Tamper with measurements.json
             measurements_file = os.path.join(bundle_path, "measurements.json")
@@ -203,11 +209,13 @@ class TestBundleIntegrity(unittest.TestCase):
         """Evidence bundle should contain environment.json."""
         filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
         scenario = load_experiment_from_yaml(filepath)
-        evidence = ExecutionEngine.run(scenario, seed=42)
+        engine = ExecutionEngine(scenario, seed=42)
+        evidence = engine.execute()
+        raw_data = engine.observations[0].data if engine.observations else None
         
         with tempfile.TemporaryDirectory() as tmpdir:
             gen = EvidenceGenerator(evidence, tmpdir)
-            bundle_path = gen.generate_bundle()
+            bundle_path = gen.generate_bundle(raw_provider_data=raw_data)
 
             env_path = os.path.join(bundle_path, "environment.json")
             self.assertTrue(os.path.exists(env_path))
@@ -222,11 +230,13 @@ class TestBundleIntegrity(unittest.TestCase):
         """Evidence bundle should contain hashes.json with all file checksums."""
         filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
         scenario = load_experiment_from_yaml(filepath)
-        evidence = ExecutionEngine.run(scenario, seed=42)
+        engine = ExecutionEngine(scenario, seed=42)
+        evidence = engine.execute()
+        raw_data = engine.observations[0].data if engine.observations else None
         
         with tempfile.TemporaryDirectory() as tmpdir:
             gen = EvidenceGenerator(evidence, tmpdir)
-            bundle_path = gen.generate_bundle()
+            bundle_path = gen.generate_bundle(raw_provider_data=raw_data)
 
             hashes_path = os.path.join(bundle_path, "hashes.json")
             self.assertTrue(os.path.exists(hashes_path))
@@ -247,11 +257,13 @@ class TestTelemetryCrossVerification(unittest.TestCase):
         """Recomputing metrics from stored telemetry.npz should match measurements.json."""
         filepath = os.path.join(SCENARIOS_DIR, "01_baseline_eeg.yaml")
         scenario = load_experiment_from_yaml(filepath)
-        evidence = ExecutionEngine.run(scenario, seed=42)
+        engine = ExecutionEngine(scenario, seed=42)
+        evidence = engine.execute()
+        raw_data = engine.observations[0].data if engine.observations else None
         
         with tempfile.TemporaryDirectory() as tmpdir:
             gen = EvidenceGenerator(evidence, tmpdir)
-            bundle_path = gen.generate_bundle()
+            bundle_path = gen.generate_bundle(raw_provider_data=raw_data)
 
             result = ReplayEngine.cross_verify_telemetry(bundle_path)
             self.assertTrue(result["valid"])
@@ -264,14 +276,18 @@ class TestTelemetryCrossVerification(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmpdir1, tempfile.TemporaryDirectory() as tmpdir2:
             scenario1 = load_experiment_from_yaml(filepath)
-            evidence1 = ExecutionEngine.run(scenario1, seed=42)
+            engine1 = ExecutionEngine(scenario1, seed=42)
+            evidence1 = engine1.execute()
+            raw_data1 = engine1.observations[0].data if engine1.observations else None
             gen1 = EvidenceGenerator(evidence1, tmpdir1)
-            bundle1 = gen1.generate_bundle()
+            bundle1 = gen1.generate_bundle(raw_provider_data=raw_data1)
 
             scenario2 = load_experiment_from_yaml(filepath)
-            evidence2 = ExecutionEngine.run(scenario2, seed=42)
+            engine2 = ExecutionEngine(scenario2, seed=42)
+            evidence2 = engine2.execute()
+            raw_data2 = engine2.observations[0].data if engine2.observations else None
             gen2 = EvidenceGenerator(evidence2, tmpdir2)
-            bundle2 = gen2.generate_bundle()
+            bundle2 = gen2.generate_bundle(raw_provider_data=raw_data2)
 
             # Load hashes from both bundles
             with open(os.path.join(bundle1, "hashes.json")) as f:

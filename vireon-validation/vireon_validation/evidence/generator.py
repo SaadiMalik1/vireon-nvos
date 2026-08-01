@@ -28,11 +28,11 @@ class EvidenceGenerator:
         self.evidence = evidence
         self.output_dir = Path(output_dir)
 
-    def generate_bundle(self) -> str:
+    def generate_bundle(self, raw_provider_data=None) -> str:
         run_dir = self.output_dir / f"run_{self.evidence.execution_hash}"
         run_dir.mkdir(parents=True, exist_ok=True)
 
-        raw_data = getattr(self.evidence, '_raw_provider_data', None)
+        raw_data = raw_provider_data
 
         # Write manifest
         manifest = {

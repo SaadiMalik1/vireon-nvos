@@ -205,7 +205,6 @@ class ExecutionEngine:
             measurements=self.measurements,
             assertions_met=self.assertions_met
         )
-        evidence._raw_provider_data = data
         return evidence
 
     def _compute_execution_hash(self, experiment_id: str, events: List[IEvent], node_outputs: Dict[str, Any] = None, order: List[str] = None) -> str:
