@@ -11,8 +11,8 @@
 - [x] T01: Plugin discovery
 - [x] T02: DAG execution engine
 - [x] T03: Wire decoder
-- [~] T04: Contract validator
-- [ ] T05: Transaction content hash
+- [x] T04: Contract validator
+- [~] T05: Transaction content hash
 - [ ] T06: Real environment capture
 - [ ] T07: Remove side-channel
 - [ ] T08: Remove hardcoded domain logic

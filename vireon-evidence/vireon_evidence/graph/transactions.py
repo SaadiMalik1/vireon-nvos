@@ -14,10 +14,23 @@ class EvidenceTransaction:
         self.transaction_hash = self._compute_hash()
         
     def _compute_hash(self) -> str:
-        # Stubbed cryptographic hash of the transaction
         import hashlib
-        payload = f"{self.bundle.bundle_id}:{self.timestamp}:{self.message}"
-        return hashlib.sha256(payload.encode()).hexdigest()
+        bundle_json = self.bundle.model_dump_json(
+            exclude_none=True,
+            serialize_as_any=True,
+        )
+        payload = f"{self.bundle.bundle_id}:{self.message}:{bundle_json}"
+        return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+    def verify_integrity(self, bundle: EvidenceBundle) -> bool:
+        import hashlib
+        bundle_json = bundle.model_dump_json(
+            exclude_none=True,
+            serialize_as_any=True,
+        )
+        payload = f"{bundle.bundle_id}:{self.message}:{bundle_json}"
+        computed_hash = hashlib.sha256(payload.encode("utf-8")).hexdigest()
+        return self.transaction_hash == computed_hash
 
 class GraphCommitter:
     def __init__(self, graph: EvidenceGraph):
