@@ -3,7 +3,8 @@ from .vireon_connectivity import (
     VireonImaginaryCoherence,
     VireonPLV,
     VireonPLI,
-    VireonAEC
+    VireonAEC,
+    VireonWPLI
 )
 
 __all__ = [
@@ -11,5 +12,6 @@ __all__ = [
     "VireonImaginaryCoherence",
     "VireonPLV",
     "VireonPLI",
-    "VireonAEC"
+    "VireonAEC",
+    "VireonWPLI"
 ]

@@ -29,8 +29,8 @@
 - [x] T17: Real IIR filter
 - [x] T18: Real LCMV beamforming
 - [x] T19: Real source localization
-- [~] T20: Real connectivity
-- [ ] T21: Implement wPLI
+- [x] T20: Real connectivity
+- [~] T21: Implement wPLI
 - [ ] T22: Fix Laplacian REST
 
 ## P0-VALIDATION

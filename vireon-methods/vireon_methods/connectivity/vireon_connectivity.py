@@ -145,3 +145,44 @@ class VireonAEC:
         aec_matrix = np.corrcoef(env)
         
         return aec_matrix
+
+class VireonWPLI:
+    """Weighted Phase Lag Index.
+    
+    Reference: Vinck, M. et al. (2011). An improved index of phase-synchronization
+    for electrophysiological data in the presence of volume-conduction, noise,
+    and sample-size bias. NeuroImage, 55(4), 1548-1565.
+    DOI: 10.1016/j.neuroimage.2011.01.055
+    """
+    def compute(self, X: np.ndarray, fs: float, band: tuple = None) -> np.ndarray:
+        if not isinstance(X, np.ndarray):
+            X = np.array(X)
+        if np.any(np.isnan(X)) or np.any(np.isinf(X)):
+            raise ScientificContractViolation("NaN or Inf detected.", violated_assumption="finite_values", details="", remediation="")
+            
+        n_channels = X.shape[0]
+        wpli_matrix = np.zeros((n_channels, n_channels))
+        
+        for i in range(n_channels):
+            for j in range(i + 1, n_channels):
+                Sxy = np.fft.fft(X[i]) * np.conj(np.fft.fft(X[j]))
+                f = np.fft.fftfreq(X.shape[1], d=1/fs)
+                
+                if band is not None:
+                    idx = np.logical_and(f >= band[0], f <= band[1])
+                    imag_Sxy = np.imag(Sxy[idx])
+                else:
+                    imag_Sxy = np.imag(Sxy)
+                    
+                num = np.abs(np.sum(imag_Sxy))
+                den = np.sum(np.abs(imag_Sxy))
+                
+                if den == 0:
+                    wpli = 0.0
+                else:
+                    wpli = num / den
+                    
+                wpli_matrix[i, j] = wpli
+                wpli_matrix[j, i] = wpli
+                
+        return wpli_matrix

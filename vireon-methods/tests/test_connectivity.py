@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 from vireon_methods.connectivity.vireon_connectivity import (
-    VireonCoherence, VireonImaginaryCoherence, VireonPLV, VireonPLI, VireonAEC
+    VireonCoherence, VireonImaginaryCoherence, VireonPLV, VireonPLI, VireonAEC, VireonWPLI
 )
 from vireon_core.contracts.plugin import ScientificContractViolation
 import scipy.signal
@@ -94,3 +94,24 @@ def test_rejects_nan():
         VireonCoherence().compute(X, fs)
     with pytest.raises(ScientificContractViolation):
         VireonPLV().compute(X, fs, (8, 12))
+
+def test_wpli_locked():
+    fs = 250
+    t = np.arange(0, 4, 1/fs)
+    # Phase shift of pi/4 means imaginary part is non-zero and consistently of one sign
+    x1 = np.sin(2 * np.pi * 10 * t)
+    x2 = np.sin(2 * np.pi * 10 * t + np.pi/4)
+    X = np.vstack([x1, x2])
+    
+    wpli = VireonWPLI().compute(X, fs=fs, band=(8, 12))
+    assert wpli[0, 1] > 0.8
+    assert 0 <= wpli[0, 1] <= 1.0
+
+def test_wpli_noise():
+    rng = np.random.default_rng(42)
+    fs = 250
+    X = rng.normal(size=(2, 10000))
+    
+    wpli = VireonWPLI().compute(X, fs=fs, band=(8, 12))
+    assert wpli[0, 1] < 0.2
+    assert 0 <= wpli[0, 1] <= 1.0
