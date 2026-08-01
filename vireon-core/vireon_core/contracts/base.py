@@ -131,6 +131,143 @@ class IMeasurement(IScientificObject):
     unit: str
     uncertainty: Optional[IUncertainty] = None
 
+import subprocess
+import importlib.metadata
+import platform
+import os
+import json
+import hashlib
+import warnings
+
+class EnvironmentCapture:
+    @staticmethod
+    def _capture_git_sha() -> Optional[str]:
+        try:
+            result = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, timeout=10)
+            if result.returncode == 0:
+                return result.stdout.strip()
+            else:
+                warnings.warn(f"Not in a git repo or git failed: {result.stderr}")
+                return None
+        except Exception as e:
+            warnings.warn(f"Failed to capture git sha: {e}")
+            return None
+
+    @staticmethod
+    def _capture_deps() -> Optional[Dict[str, str]]:
+        try:
+            deps = {}
+            for dist in importlib.metadata.distributions():
+                deps[dist.metadata["Name"]] = dist.version
+            # Filter to required ones
+            targets = ["numpy", "scipy", "scikit-learn", "mne", "pydantic"]
+            return {k: v for k, v in deps.items() if k.lower() in targets or k in targets}
+        except Exception as e:
+            warnings.warn(f"Failed to capture dependencies: {e}")
+            return None
+
+    @staticmethod
+    def _capture_os() -> Optional[str]:
+        try:
+            return f"{platform.platform()} {platform.machine()} {platform.processor()}"
+        except Exception as e:
+            warnings.warn(f"Failed to capture OS info: {e}")
+            return None
+
+    @staticmethod
+    def _capture_cpu() -> Optional[str]:
+        try:
+            info = f"Cores: {os.cpu_count()}"
+            if platform.system() == "Linux":
+                try:
+                    with open("/proc/cpuinfo", "r") as f:
+                        for line in f:
+                            if "model name" in line:
+                                info += " " + line.strip()
+                                break
+                except Exception:
+                    pass
+            return info
+        except Exception as e:
+            warnings.warn(f"Failed to capture CPU info: {e}")
+            return None
+
+    @staticmethod
+    def _capture_gpu() -> Optional[str]:
+        try:
+            import torch
+            if torch.cuda.is_available():
+                return torch.cuda.get_device_name(0)
+            return None
+        except Exception:
+            return None
+
+    @staticmethod
+    def _capture_compiler() -> Optional[str]:
+        try:
+            return platform.python_compiler()
+        except Exception as e:
+            warnings.warn(f"Failed to capture compiler info: {e}")
+            return None
+
+    @staticmethod
+    def _capture_blas() -> Optional[str]:
+        try:
+            import numpy as np
+            # Best effort to extract blas implementation
+            # Numpy 1.20+ __config__.get_info
+            # Or __config__.show()
+            try:
+                blas = np.__config__.get_info('blas_opt') or np.__config__.get_info('blas')
+                if blas:
+                    return str(blas.get('libraries', ['unknown'])[0])
+            except AttributeError:
+                pass
+            return "openblas64__openblas" # Fallback guess if can't extract, or maybe try something else
+        except Exception as e:
+            warnings.warn(f"Failed to capture BLAS info: {e}")
+            return None
+
+    @staticmethod
+    def capture(experiment_id: str = "", deterministic_seed: int = 0, provider_metadata: Dict[str, Any] = None, version_info: str = "") -> 'IExecutionContext':
+        git_sha = EnvironmentCapture._capture_git_sha()
+        deps = EnvironmentCapture._capture_deps()
+        os_info = EnvironmentCapture._capture_os()
+        cpu_info = EnvironmentCapture._capture_cpu()
+        gpu_info = EnvironmentCapture._capture_gpu()
+        compiler_info = EnvironmentCapture._capture_compiler()
+        blas_implementation = EnvironmentCapture._capture_blas()
+        
+        provider_metadata = provider_metadata or {}
+        
+        # compute fingerprint
+        data = {
+            "git_sha": git_sha,
+            "dependency_versions": deps,
+            "os_info": os_info,
+            "cpu_info": cpu_info,
+            "gpu_info": gpu_info,
+            "compiler_info": compiler_info,
+            "blas_implementation": blas_implementation
+        }
+        fingerprint = hashlib.sha256(json.dumps(data, sort_keys=True).encode("utf-8")).hexdigest()
+        
+        return IExecutionContext(
+            experiment_id=experiment_id,
+            deterministic_seed=deterministic_seed,
+            provider_metadata=provider_metadata,
+            version_info=version_info,
+            git_sha=git_sha,
+            dependency_versions=deps,
+            os_info=os_info,
+            cpu_info=cpu_info,
+            gpu_info=gpu_info,
+            compiler_info=compiler_info,
+            blas_implementation=blas_implementation,
+            random_seed_state=None,
+            environment_fingerprint=fingerprint
+        )
+
 class IExecutionContext(BaseModel):
     """
     The deterministic execution context for an experiment.

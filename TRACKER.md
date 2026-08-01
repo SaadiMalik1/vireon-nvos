@@ -12,8 +12,8 @@
 - [x] T02: DAG execution engine
 - [x] T03: Wire decoder
 - [x] T04: Contract validator
-- [~] T05: Transaction content hash
-- [ ] T06: Real environment capture
+- [x] T05: Transaction content hash
+- [~] T06: Real environment capture
 - [ ] T07: Remove side-channel
 - [ ] T08: Remove hardcoded domain logic
 

@@ -36,15 +36,7 @@ class ExecutionEngine:
         self.provider = experiment.get_provider()
         
         experiment_id = getattr(self.experiment, 'schema', None)
-        experiment_id = experiment_id.id if experiment_id else "unknown_experiment"
-
-        self.execution_context = IExecutionContext(
-            experiment_id=experiment_id,
-            deterministic_seed=seed,
-            provider_metadata={"provider_type": self.provider.__class__.__name__},
-            version_info="vireon-kernel-0.1.0",
-            environment_fingerprint="deterministic-virtual-env"
-        )
+        self.experiment_id_str = experiment_id.id if experiment_id else "unknown_experiment"
 
         self.causal_graph = CausalGraph(seed=seed, clock=self.clock)
         self.observations: List[IObservation] = []
@@ -82,6 +74,14 @@ class ExecutionEngine:
         event_ids: Dict[str, str] = {}
         
         self.provider.start()
+        
+        from vireon_core.contracts.base import EnvironmentCapture
+        self.execution_context = EnvironmentCapture.capture(
+            experiment_id=self.experiment_id_str,
+            deterministic_seed=self.seed,
+            provider_metadata={"provider_type": self.provider.__class__.__name__},
+            version_info="vireon-kernel-0.1.0"
+        )
         
         try:
             for node_id in order:
@@ -192,13 +192,12 @@ class ExecutionEngine:
             else:
                 self.assertions_met[a.name] = False
 
-        experiment_id = getattr(self.experiment, 'schema', None)
-        experiment_id = experiment_id.id if experiment_id else "unknown_experiment"
+        self.execution_context.random_seed_state = self.rng.get_state()
 
-        execution_hash = self._compute_execution_hash(experiment_id, events, self.node_outputs, order)
+        execution_hash = self._compute_execution_hash(self.experiment_id_str, events, self.node_outputs, order)
 
         evidence = IEvidence(
-            experiment_id=experiment_id, 
+            experiment_id=self.experiment_id_str, 
             execution_hash=execution_hash,
             execution_context=self.execution_context,
             telemetry_path=f"evidence/run_{execution_hash}/telemetry.npz",
@@ -213,6 +212,7 @@ class ExecutionEngine:
         hasher = hashlib.sha256()
         hasher.update(experiment_id.encode("utf-8"))
         hasher.update(str(self.seed).encode("utf-8"))
+        hasher.update(self.execution_context.environment_fingerprint.encode("utf-8"))
 
         for evt in events:
             evt_dict = evt.model_dump(exclude={"object_id"})
