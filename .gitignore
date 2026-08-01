@@ -72,3 +72,6 @@ coverage.xml
 
 # Local configs
 config.local.*
+
+# NVOS Implementation
+nvos-imp/
