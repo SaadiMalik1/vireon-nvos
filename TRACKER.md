@@ -52,8 +52,8 @@
 - [x] T36: Wire EEGBCI provider
 - [x] T37: Wire PhysioNet provider
 - [x] T38: Real BIDS conversion
-- [~] T39: Real checksum verification
-- [ ] T40: Real content hash
+- [x] T39: Real checksum verification
+- [~] T40: Real content hash
 - [ ] T41: Downgrade corpus SRL
 - [ ] T42: Fix verify CLI
 - [ ] T43: Fix reproduce CLI

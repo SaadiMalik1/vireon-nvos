@@ -128,7 +128,13 @@ class SleepEDFPlugin(IDatasetPlugin):
         return {"dataset_name": "Sleep-EDF", "subjects": 153}
         
     def generate_hash(self, bids_dir: str) -> str:
-        return hashlib.sha256(b"sleep_edf_mock_hash").hexdigest()
+        h = hashlib.sha256()
+        for root, dirs, files in os.walk(bids_dir):
+            for filename in sorted(files):
+                filepath = os.path.join(root, filename)
+                file_hash = self._compute_file_hash(filepath)
+                h.update(file_hash.encode())
+        return h.hexdigest()
         
     def create_manifest(self, output_path: str) -> None:
         manifest = {
