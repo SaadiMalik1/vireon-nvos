@@ -65,8 +65,8 @@
 - [x] T47: Real sphere model
 - [x] T48: Real BEM model
 - [x] T49: Real ADS1299
-- [~] T50: Delete hardware stubs
-- [ ] T51: Delete disease stubs
+- [x] T50: Delete hardware stubs
+- [~] T51: Delete disease stubs
 - [ ] T52: Delete hardware twins
 - [ ] T53: Delete seizure workflow
 - [ ] T54: Persist failure atlas
