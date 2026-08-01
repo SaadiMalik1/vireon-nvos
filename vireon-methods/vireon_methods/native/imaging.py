@@ -55,21 +55,5 @@ class VireonMinimumNorm:
         }
 
 class VireonLCMV:
-    """
-    Native VIREON implementation of LCMV Beamformer.
-    (Stage 4.3)
-    """
-    plugin_id = "vireon.methods.imaging.lcmv"
-    version = "1.0.0"
-    
-    def inverse(self, data: np.ndarray, leadfield: np.ndarray, data_cov: np.ndarray) -> dict:
-        n_sources = leadfield.shape[1]
-        n_times = data.shape[1]
-        stc = np.random.normal(0, 1, size=(n_sources, n_times))
-        return {
-            "source_estimate": stc,
-            "uncertainty": {
-                "spatial_dispersion": 5.4, # mm
-                "resolution_matrix": np.eye(n_sources) * 0.9
-            }
-        }
+    def __init__(self, *args, **kwargs):
+        raise NotImplementedError("Use vireon_methods.source_localization.vireon_beamforming.VireonLCMV")
