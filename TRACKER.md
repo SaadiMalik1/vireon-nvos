@@ -23,8 +23,8 @@
 - [x] T11: Real stft
 - [x] T12: Real wavelets
 - [x] T13: Real ica
-- [~] T14: Fix CSP plugin
-- [ ] T15: Delete native mocks
+- [x] T14: Fix CSP plugin
+- [~] T15: Delete native mocks
 - [ ] T16: Real FIR filter
 - [ ] T17: Real IIR filter
 - [ ] T18: Real LCMV beamforming
