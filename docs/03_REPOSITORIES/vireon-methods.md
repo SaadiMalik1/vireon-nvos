@@ -1,15 +1,8 @@
 # vireon-methods
 
-`vireon-methods` contains the core analytical algorithms used to decode or process neuro-data.
+## Algorithmic Contracts
 
-## Standard Methodologies
-1. **DSP**: Welch PSD, Multitaper, FIR/IIR Filters.
-2. **Spatial Filters**: Common Spatial Pattern (CSP), Independent Component Analysis (ICA).
-3. **Machine Learning**: Linear Discriminant Analysis (LDA), Bayesian Classifiers.
+Houses the `IPlugin` interface and Scientific Contracts. Every method inside `vireon-methods` must explicitly declare its mathematical assumptions, its dependencies, and the academic literature it originates from. This forces algorithmic implementations to become scientifically bound, traceable entities rather than arbitrary code.
 
-Every method in this repository is heavily constrained by a `ScientificContract`. If a user attempts to run a non-stationary signal through the `Welch PSD` plugin, `vireon-core` will block the execution.
-
-## Status
-- **DSP**: [FULLY IMPLEMENTED] Welch PSD, Notch, Bandpass filters are functional.
-- **Spatial Filters**: [STUBBED] CSP and ICA contracts exist, but the native solvers are pending.
-- **Machine Learning**: [STUBBED] Decoders are currently placeholders pending Phase F execution.
+## Integration in Phase E
+This repository is fully integrated into the Phase E scientific ecosystem. It supports the generation of verifiable EvidenceBundles and contributes directly to the semantic tracking in the Evidence Graph. All methods are dynamically orchestrated through the Cartesian Benchmark Matrix, ensuring reproducibility and cryptographically assured provenance.

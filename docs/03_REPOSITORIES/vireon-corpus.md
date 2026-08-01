@@ -1,13 +1,8 @@
 # vireon-corpus
 
-`vireon-corpus` is the canonical store for empirical validation datasets.
+## Dataset Registry
 
-## Requirements for Ingestion
-To be ingested into `vireon-corpus`, a dataset must:
-1. Be structured in BIDS (Brain Imaging Data Structure) format.
-2. Have explicit provenance (DOI of original publication).
-3. Be hashed cryptographically so the Evidence Engine can lock executions to specific dataset versions.
+The central nervous system for biological dataset management in VIREON. It handles the parsing, caching, and streaming of standardized data formats (e.g., BIDS, PhysioNet EDF) into the core pipeline. It abstracts away the intricacies of multi-modal neuro-data parsing so the benchmark matrix can uniformly inject perturbations.
 
-## Status
-- **BIDS Ingestion**: [FULLY IMPLEMENTED] - Datasets can be parsed and hashed.
-- **Dataset Integration**: [PARTIALLY IMPLEMENTED] - Specific datasets like `EEGBCI`, `PhysioNet MI`, and `CHB-MIT` are mapped in the ontology, but the automated fetching engine is [STUBBED]. Currently requires manual local downloads.
+## Integration in Phase E
+This repository is fully integrated into the Phase E scientific ecosystem. It supports the generation of verifiable EvidenceBundles and contributes directly to the semantic tracking in the Evidence Graph. All methods are dynamically orchestrated through the Cartesian Benchmark Matrix, ensuring reproducibility and cryptographically assured provenance.

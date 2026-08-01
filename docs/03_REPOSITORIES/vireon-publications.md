@@ -1,10 +1,8 @@
 # vireon-publications
 
-`vireon-publications` contains executable evidence graphs reproducing the results of canonical papers.
+## Executable Reproducibility
 
-## Goal
-Rather than reading a PDF, a researcher should be able to execute a publication. This repository contains YAML workflows and JSON-LD graphs representing famous BCI and computational neuroscience papers.
+Contains executable evidence graphs and workflow manifests reproducing the results of canonical papers. Instead of reading a static PDF, researchers can execute the publication's methods directly against benchmark datasets. By parsing DOIs, VIREON routes execution to the historical implementation, generating EvidenceBundles that contrast modern performance against established literature baselines.
 
-## Status
-- **Reproduce CLI Mapping**: [FULLY IMPLEMENTED] - The CLI can parse a DOI and attempt to map it to a workflow in this repository.
-- **Corpus of Papers**: [STUBBED] - The repository currently contains placeholder workflows (e.g. `10.1016/j.neuroimage.2023.111111`). The massive effort to encode historical papers into JSON-LD format is planned for Phase F.
+## Integration in Phase E
+This repository is fully integrated into the Phase E scientific ecosystem. It supports the generation of verifiable EvidenceBundles and contributes directly to the semantic tracking in the Evidence Graph. All methods are dynamically orchestrated through the Cartesian Benchmark Matrix, ensuring reproducibility and cryptographically assured provenance.

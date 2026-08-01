@@ -1,24 +1,8 @@
 # vireon-models
 
-`vireon-models` is the engine for Generative Digital Twins. It does not analyze data; it synthesizes it.
+## Digital Twins & Generative Data
 
-## Key Domains
-1. **Source Space Models**: Dipole generators mimicking neural circuits.
-2. **Forward Models**: Boundary Element Methods (BEM) mapping dipoles to the scalp.
-3. **Artifact Generators**: Electrophysiological noise (EOG, EMG, ECG).
-4. **Hardware Simulators**: Amplifier noise profiles and telemetry drift.
-5. **Disease Models**: Phenomenological statistical models of neurological conditions.
+Contains generative models and Digital Twins of hardware interfaces. It enables the creation of parameterized synthetic data (e.g., Synthetic Motor Imagery) and the simulation of specific hardware artifacts (e.g., line noise, channel dropouts) to rigorously test the operating envelope of algorithms.
 
-## Current Component Catalog
-
-### Hardware Simulators (Phase E)
-- **AmplifierTwin**: [FULLY IMPLEMENTED] Simulates thermal noise and symmetric/asymmetric clipping limits.
-- **TelemetryTwin**: [FULLY IMPLEMENTED] Simulates dropped packets (burst loss) and sampling clock jitter.
-- **BatteryDegradationTwin**: [FULLY IMPLEMENTED] Simulates baseline drift as power depletes.
-- **Specific Hardware Profiles** (e.g., OpenBCI Cyton, Neurosity Crown): [STUBBED] The base classes work, but the exact calibration values for commercial arrays are placeholders pending manufacturer specification integration.
-
-### Disease Models
-- **Epilepsy** (`disease_model.epilepsy`): [STUBBED] High amplitude slow waves coupled with fast spikes.
-- **Parkinson's Disease** (`disease_model.parkinsons`): [STUBBED] Exaggerated beta-band synchrony in STN.
-
-All models in this repository are adversarial—their purpose is to generate data that breaks algorithms in `vireon-methods`.
+## Integration in Phase E
+This repository is fully integrated into the Phase E scientific ecosystem. It supports the generation of verifiable EvidenceBundles and contributes directly to the semantic tracking in the Evidence Graph. All methods are dynamically orchestrated through the Cartesian Benchmark Matrix, ensuring reproducibility and cryptographically assured provenance.

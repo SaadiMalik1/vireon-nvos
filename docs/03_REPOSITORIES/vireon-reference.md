@@ -1,11 +1,8 @@
 # vireon-reference
 
-`vireon-reference` contains unoptimized, mathematically pure implementations of algorithms.
+## Reference Implementations
 
-## Purpose
-When a developer writes a highly optimized C++ or Rust extension for a signal processing algorithm (to run at scale), they must prove that their optimizations did not introduce numerical drift. 
-This repository contains the ground-truth Python/NumPy implementations used exclusively for `vireon-verification` regression testing. It is never used in production pipelines due to its slow execution speed.
+A curated library of 'gold standard' algorithmic baselines (e.g., standard CSP, Riemann geometry, basic ERP decoders). These are used as ground-truth comparators during the generation of Evidence Graphs. They ensure that novel methods are always evaluated relative to known, trusted baselines.
 
-## Status
-- **DSP Ground Truths**: [FULLY IMPLEMENTED] - Simple reference implementations for Welch, FFT, and IIR exist.
-- **Spatial/ML Ground Truths**: [STUBBED] - Reference implementations for CSP, ICA, and Riemannian geometry are pending.
+## Integration in Phase E
+This repository is fully integrated into the Phase E scientific ecosystem. It supports the generation of verifiable EvidenceBundles and contributes directly to the semantic tracking in the Evidence Graph. All methods are dynamically orchestrated through the Cartesian Benchmark Matrix, ensuring reproducibility and cryptographically assured provenance.

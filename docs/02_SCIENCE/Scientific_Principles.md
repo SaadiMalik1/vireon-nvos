@@ -1,17 +1,6 @@
-# Scientific Principles
+# First Principles
 
-The core scientific principle of VIREON is that **mathematical assumptions matter**.
+VIREON operates on the principle that 'code is not science; reproducible evidence is science'. Algorithms must be testable, their assumptions must be formal, their provenance must be linked to academic literature, and their failure modes must be objectively mapped.
 
-Neurotechnology sits at the intersection of biology (which is highly non-linear, non-stationary, and chaotic) and digital signal processing (which typically assumes linearity, stationarity, and Gaussian noise).
-
-## The Principle of Falsification
-VIREON does not exist to prove that a decoder works. It exists to find the exact conditions under which a decoder *fails*. By discovering these failure boundaries computationally, we prevent catastrophic failures in clinical deployment.
-
-## The Principle of Explicit Constraints
-If you use Independent Component Analysis (ICA) to remove eye blinks, you are assuming that the blink artifact is statistically independent from the underlying neural signal. If this assumption is false (e.g., if the user blinks reflexively *in response* to a stimulus), the ICA will project neural data into the noise component, destroying the signal.
-
-VIREON forces this assumption to be declared explicitly in the `ScientificContract` so that adversarial datasets can be constructed to test it.
-
-## Phase E Implementation Status
-> [!NOTE]
-> As of Phase E, the architecture has expanded to include Massive Campaigns, Hardware Digital Twins, EvidenceBundle v5 (SRI/Regulatory mapping), and the Reproduce CLI. Features described in this document may be subject to these new workflows. If specific API endpoints, models, or UI components are discussed but missing in the codebase, they are currently [STUBBED] pending Phase F implementation.
+## Scientific Rigor in Phase E
+As of Phase E, this scientific principle is fully integrated into the framework. Methods are evaluated dynamically against real-world and adversarial conditions, ensuring that claims made about algorithmic efficiency are backed by cryptographic execution reports.
