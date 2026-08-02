@@ -55,6 +55,12 @@ evidence_output/
 benchmarks/output/
 examples/*/output/
 
+# PR Descriptions
+pr_descriptions/
+pr_desc/
+pr-desc/
+pr_desc*.md
+
 # Jupyter
 .ipynb_checkpoints/
 
