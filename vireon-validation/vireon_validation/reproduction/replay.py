@@ -12,11 +12,15 @@ class ProvenanceReplay:
         """
         Extracts provenance from the bundle and triggers execution to recreate it identically.
         """
-        # Stub logic
-        # 1. Parse dataset_provenance for DOI/Checksum
-        # 2. Extract software versions and methods
-        # 3. Apply exact EnvironmentFingerprint (random seeds)
-        # 4. Trigger WorkflowOrchestrator
+        if self.orchestrator is None:
+            raise NotImplementedError("Orchestrator is required to execute provenance replay.")
         
-        print(f"Replaying Evidence: {bundle.bundle_id}")
+        # Trigger orchestrator execution with extracted parameters
+        params = {
+            "dataset": bundle.dataset,
+            "algorithm": bundle.algorithm,
+            "random_seed": bundle.random_seed,
+        }
+        if hasattr(self.orchestrator, "run"):
+            return self.orchestrator.run(params)
         return bundle

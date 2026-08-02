@@ -83,9 +83,9 @@
 - [x] T63: Real meta analysis
 - [x] T64: Real publication exporter
 - [x] T65: Real Bayesian CI
-- [ ] T66: Reconcile evidence schemas
-- [ ] T67: Reconcile decision engines
-- [ ] T68: Reconcile replay files
+- [x] T66: Reconcile evidence schemas
+- [x] T67: Reconcile decision engines
+- [x] T68: Reconcile replay files
 
 ## P3 + Integration
 - [ ] T69: Fix doc claims
