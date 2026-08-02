@@ -75,9 +75,9 @@
 - [x] T57: Fix incubator
 
 ## P1-FRONTEND + DOCS + P2
-- [ ] T58: Fix frontend build
-- [ ] T59: FastAPI backend
-- [ ] T60: Wire frontend to backend
+- [x] T58: Fix frontend build
+- [-] T59: FastAPI backend
+- [-] T60: Wire frontend to backend
 - [ ] T61: Real graph queries
 - [ ] T62: Real evidence service
 - [ ] T63: Real meta analysis

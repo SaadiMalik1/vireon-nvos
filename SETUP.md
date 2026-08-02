@@ -5,7 +5,6 @@ Welcome to the VIREON project! This guide will help you set up the monorepo for 
 ## Prerequisites
 
 - Python 3.14+
-- Node.js 18+ (for frontend)
 - Git
 
 ## 1. Clone the Repository
@@ -43,27 +42,7 @@ To ensure everything is working correctly:
 pytest
 ```
 
-## 4. Frontend Setup
-
-To run the Next.js frontend application (`vireon-lab/frontend`):
-
-```bash
-cd vireon-lab/frontend
-npm install
-npm run dev
-```
-
-The frontend should now be running at `http://localhost:3000`.
-
-## 5. API Configuration
-
-The frontend expects API endpoints. Ensure you have the backend services running and create a `.env.local` file in the `frontend` directory with your API URLs if they differ from the defaults.
-
-```env
-NEXT_PUBLIC_API_URL=http://localhost:8000/api
-```
-
-## 6. Datasets and Benchmarks
+## 4. Datasets and Benchmarks
 
 To fetch standard datasets or run benchmarks, use the CLI tools provided in `vireon-lab`:
 ```bash

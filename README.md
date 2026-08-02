@@ -26,13 +26,7 @@ cd vireon-nvos
 pip install -e .
 ```
 
-To run the Next.js frontend lab:
-
-```bash
-cd vireon-lab/frontend
-npm install
-npm run dev
-```
+Note: The frontend GUI is currently deferred to a future release; VIREON NVOS is operated via its CLI and Python APIs.
 
 ## 📚 Documentation Ecosystem
 
