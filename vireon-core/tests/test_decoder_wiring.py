@@ -45,6 +45,7 @@ class MockExperiment:
 def test_decoder_plugin_is_called():
     """A DECODER_STATE node with a decoder plugin calls predict()."""
     mock_decoder = MockDecoder(returns="left_hand")
+    mock_decoder.fit(np.array([[1]]), np.array([0]))
     pm = PluginManager()
     pm.register_plugin(mock_decoder, config={})
     dag = ExecutionDAG(nodes=[

@@ -23,7 +23,7 @@
 
 ## Tier 3 — Engineering Polish
 - [x] I12: Hypothesis dependency
-- [ ] I13: BLAS capture numpy 2.x
+- [x] I13: BLAS capture numpy 2.x
 - [ ] I14: Dummy sklearn fit fix
 - [ ] I15: GraphCommitter dead attr
 - [ ] I16: Doc purge & plugin test

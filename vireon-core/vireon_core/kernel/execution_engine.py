@@ -1,5 +1,6 @@
 import hashlib
 import json
+import logging
 import numpy as np
 import graphlib
 from typing import List, Dict, Any, Optional
@@ -116,7 +117,6 @@ class ExecutionEngine:
                         try:
                             ContractValidator.validate(plugin, inputs_dict)
                         except ScientificContractViolation as e:
-                            import logging
                             logging.error(f"Contract violation in {node_id}: {e}")
                             evt_id = self.log_event(f"CONTRACT_VIOLATION: {e.violated_assumption}", stage, parents)
                             event_ids[node_id] = evt_id
@@ -130,14 +130,20 @@ class ExecutionEngine:
                                 event_ids[node_id] = evt_id
                             
                         if isinstance(plugin, IDecoder) and stage == "DECODER_STATE":
-                            # Extract signal from inputs
                             signal = inputs_dict
                             if not getattr(plugin, '_fitted', False):
-                                # Dummy fit if labels aren't strictly provided
-                                plugin.fit(np.array([]), np.array([]))
-                            out = plugin.predict(signal)
-                            self.node_outputs[node_id] = out
-                            desc = "Decoder processed signal"
+                                logging.warning(f"Decoder plugin {plugin.plugin_id} not fitted — skipping predict")
+                                self.node_outputs[node_id] = None
+                                desc = f"Decoder {plugin.plugin_id} skipped (unfitted)"
+                            else:
+                                raw_signal = signal
+                                if isinstance(signal, dict) and "sig" in signal and isinstance(signal["sig"], dict) and "data" in signal["sig"]:
+                                    raw_signal = signal["sig"]["data"]
+                                elif isinstance(signal, dict) and len(signal) == 1:
+                                    raw_signal = next(iter(signal.values()))
+                                out = plugin.predict(raw_signal)
+                                self.node_outputs[node_id] = out
+                                desc = "Decoder processed signal"
                         else:
                             out = plugin.execute(inputs_dict)
                             self.node_outputs[node_id] = out
@@ -159,6 +165,8 @@ class ExecutionEngine:
                     obs_timestamp = self.clock.advance()
                     obs = IObservation(timestamp=obs_timestamp, data_source="provider", data=data)
                     self.observations.append(obs)
+                    if not node.plugin_id:
+                        self.node_outputs[node_id] = data
                 
                 evt_id = self.log_event(desc, stage, parents, is_perturbed=is_perturbed)
                 event_ids[node_id] = evt_id

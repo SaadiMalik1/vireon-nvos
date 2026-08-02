@@ -3,7 +3,7 @@ from typing import Dict, Any, List, Type
 
 from vireon_core.contracts.plugin import IMethodPlugin, ScientificReadinessLevel, ScientificContract, PluginCapability
 from vireon_core.contracts.base import IScientificObject, SignalType
-from vireon_core.contracts.decoder import IDecoder
+from vireon_core.contracts.decoder import IDecoder, DecoderNotFittedError
 
 class SklearnLDAPlugin(IMethodPlugin, IDecoder):
     """
@@ -12,6 +12,7 @@ class SklearnLDAPlugin(IMethodPlugin, IDecoder):
     """
     def __init__(self):
         super().__init__()
+        self._fitted = False
         try:
             from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
             self._lda = LinearDiscriminantAnalysis()
@@ -72,11 +73,15 @@ class SklearnLDAPlugin(IMethodPlugin, IDecoder):
         self._fitted = True
         
     def predict(self, X: np.ndarray) -> np.ndarray:
+        if not getattr(self, '_fitted', False):
+            raise DecoderNotFittedError("Decoder must be fitted before predict.")
         if not self._lda:
             raise RuntimeError("scikit-learn is required for SklearnLDAPlugin")
         return self._lda.predict(X)
 
     def predict_proba(self, X: np.ndarray) -> np.ndarray:
+        if not getattr(self, '_fitted', False):
+            raise DecoderNotFittedError("Decoder must be fitted before predict_proba.")
         if not self._lda:
             raise RuntimeError("scikit-learn is required for SklearnLDAPlugin")
         return self._lda.predict_proba(X)
