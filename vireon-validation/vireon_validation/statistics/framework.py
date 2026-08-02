@@ -54,11 +54,44 @@ class StatisticalFramework:
         return (np.mean(group1) - np.mean(group2)) / pooled_se
         
     @staticmethod
-    def bayesian_credible_interval(data: np.ndarray, confidence: float = 0.95) -> tuple:
-        # Stub for Bayesian posterior sampling
-        mean = np.mean(data)
-        std = np.std(data)
-        return (mean - 1.96 * std, mean + 1.96 * std)
+    def bayesian_credible_interval(data: np.ndarray, prior_mean: float = 0.0, 
+                                   prior_var: float = 1e6, cred_mass: float = 0.95) -> dict:
+        """
+        Bayesian credible interval using conjugate normal-normal model.
+        
+        Posterior: N(mu_post, var_post) where:
+        var_post = 1 / (1/prior_var + n/data_var)
+        mu_post = var_post * (prior_mean/prior_var + n*mean/data_var)
+        """
+        import scipy.stats
+        data = np.asarray(data)
+        n = len(data)
+        if n == 0:
+            return {
+                "posterior_mean": float(prior_mean),
+                "posterior_var": float(prior_var),
+                "credible_interval": [float(prior_mean), float(prior_mean)],
+                "cred_mass": float(cred_mass)
+            }
+            
+        data_var = float(np.var(data, ddof=1)) if n > 1 else 1.0
+        if data_var == 0.0:
+            data_var = 1e-10
+        data_mean = float(np.mean(data))
+        
+        var_post = 1.0 / (1.0 / prior_var + n / data_var)
+        mu_post = var_post * (prior_mean / prior_var + n * data_mean / data_var)
+        
+        alpha = (1.0 - cred_mass) / 2.0
+        ci_lower = mu_post + scipy.stats.norm.ppf(alpha) * np.sqrt(var_post)
+        ci_upper = mu_post + scipy.stats.norm.ppf(1.0 - alpha) * np.sqrt(var_post)
+        
+        return {
+            "posterior_mean": float(mu_post),
+            "posterior_var": float(var_post),
+            "credible_interval": [float(ci_lower), float(ci_upper)],
+            "cred_mass": float(cred_mass)
+        }
 
     @staticmethod
     def passing_bablok(x: np.ndarray, y: np.ndarray) -> dict:

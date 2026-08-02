@@ -81,8 +81,8 @@
 - [x] T61: Real graph queries
 - [x] T62: Real evidence service
 - [x] T63: Real meta analysis
-- [ ] T64: Real publication exporter
-- [ ] T65: Real Bayesian CI
+- [x] T64: Real publication exporter
+- [x] T65: Real Bayesian CI
 - [ ] T66: Reconcile evidence schemas
 - [ ] T67: Reconcile decision engines
 - [ ] T68: Reconcile replay files
