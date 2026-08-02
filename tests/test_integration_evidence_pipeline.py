@@ -55,7 +55,31 @@ def test_demo_measures_runtime():
     bundle = _load_evidence()
     assert bundle["runtime_sec"] > 0.0, "runtime_sec is 0 — not measured"
 
-def _run_demo():
+def test_demo_deterministic_replay():
+    """Running the demo twice with the same seed must produce the same evidence_hash."""
+    _run_demo()
+    with open(OUTPUT_PATH) as f:
+        hash1 = json.load(f)["evidence_hash"]
+    
+    _run_demo()
+    with open(OUTPUT_PATH) as f:
+        hash2 = json.load(f)["evidence_hash"]
+    
+    assert hash1 == hash2, f"Non-deterministic: {hash1} != {hash2}"
+
+def test_demo_different_seed_different_hash():
+    """Different seeds should produce different hashes (proving the hash is meaningful)."""
+    _run_demo(extra_env={"VIREON_SEED": "42"})
+    with open(OUTPUT_PATH) as f:
+        hash1 = json.load(f)["evidence_hash"]
+    
+    _run_demo(extra_env={"VIREON_SEED": "43"})
+    with open(OUTPUT_PATH) as f:
+        hash2 = json.load(f)["evidence_hash"]
+        
+    assert hash1 != hash2, "Different seeds produced same hash"
+
+def _run_demo(extra_env=None):
     """Run the demo and ensure output/evidence.json exists."""
     env = os.environ.copy()
     env["PYTHONPATH"] = ":".join([
@@ -69,6 +93,8 @@ def _run_demo():
         os.path.join(REPO_ROOT, "vireon-corpus"),
     ])
     env["MPLBACKEND"] = "Agg"
+    if extra_env:
+        env.update(extra_env)
     result = subprocess.run(
         [sys.executable, DEMO_PATH],
         cwd=REPO_ROOT, env=env, capture_output=True, text=True, timeout=120
@@ -79,3 +105,4 @@ def _run_demo():
 def _load_evidence():
     with open(OUTPUT_PATH) as f:
         return json.load(f)
+

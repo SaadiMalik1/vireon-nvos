@@ -10,7 +10,7 @@
 - [x] I01: Matrix populates evidence bundle
 - [x] I02: Demo passes real data
 - [x] I03: CSP+LDA produces real CCC
-- [ ] I04: Integration test — real evidence
+- [x] I04: Integration test — real evidence
 - [ ] I05: Integration test — deterministic replay
 - [ ] I06: CI integration gate
 

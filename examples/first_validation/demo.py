@@ -70,6 +70,8 @@ def main():
     print("  VIREON - NATIVE NEUROSCIENCE EVIDENCE ENGINE    ")
     print("==================================================")
     
+    seed = int(os.environ.get("VIREON_SEED", "42"))
+    
     print("\n[1] Loading PhysioNet Motor Imagery Dataset...")
     try:
         provider = PhysioNetMotorImageryProvider(subject_id=1, run_id=4)
@@ -80,7 +82,7 @@ def main():
         data_source = "PhysioNet (real)"
     except (FileNotFoundError, ConnectionError, Exception):
         print("    PhysioNet not available; using deterministic synthetic data with ERD pattern.")
-        X, y = _generate_synthetic_motor_imagery(seed=42)
+        X, y = _generate_synthetic_motor_imagery(seed=seed)
         sample_rate = 250.0
         data_source = "Synthetic (deterministic, with ERD)"
     
@@ -93,7 +95,7 @@ def main():
     print(f"    Validation Papers: {', '.join(csp.contract.validation_papers)}")
     
     print("\n[3] Building Cartesian Benchmark Matrix...")
-    matrix = BenchmarkMatrix(seed=42)
+    matrix = BenchmarkMatrix(seed=seed)
     matrix.add_method(csp)
     matrix.add_dataset("MotorImagery", data=X, labels=y)
     matrix.add_perturbation(WhiteNoisePerturbation(name="WhiteNoise", severity=0.5))
