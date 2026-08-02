@@ -123,6 +123,8 @@ class SleepEDFPlugin(IDatasetPlugin):
                 for i in range(1, 8): f.write(f"EEG{i:02d}\tEEG\tuV\n")
             with open(os.path.join(bids_out, "sub-01", "eeg", "sub-01_task-sleep_events.tsv"), "w") as f:
                 f.write("onset\tduration\ttrial_type\n1.000\t30\tSleep_Stage_1\n3.000\t30\tSleep_Stage_2\n")
+            with open(os.path.join(bids_out, "sub-01", "eeg", "sub-01_task-sleep_eeg.edf"), "wb") as f:
+                f.write(b"0" * 1024)
         
     def generate_metadata(self, bids_dir: str) -> Dict[str, Any]:
         return {"dataset_name": "Sleep-EDF", "subjects": 153}

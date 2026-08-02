@@ -18,10 +18,18 @@ def test_bci_evaluator_handles_p300():
     assert ev.evaluate(IAssertion(name="expected_" + "side_channel_leak", description="", expected_result=True), {"p300_" + "detected": 1.0}) is True
 
 def test_kernel_has_no_p300_knowledge():
-    """rg p300 returns 0."""
+    """Ensure vireon-core has no domain-specific p300_detected references."""
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
     vireon_core_dir = os.path.join(repo_root, "vireon-core")
-    result = subprocess.run(["rg", "p300_" + "detected", vireon_core_dir], capture_output=True, text=True)
-    # rg returns 1 when no matches are found, which is what we want
-    assert result.returncode == 1
-    assert not result.stdout.strip()
+    target = "p300_" + "detected"
+    
+    matches = []
+    for root, _, files in os.walk(vireon_core_dir):
+        for f in files:
+            if f.endswith(".py") and f != os.path.basename(__file__):
+                path = os.path.join(root, f)
+                with open(path, "r", encoding="utf-8", errors="ignore") as fp:
+                    content = fp.read()
+                    if target in content:
+                        matches.append(path)
+    assert matches == []

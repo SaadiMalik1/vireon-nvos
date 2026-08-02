@@ -121,6 +121,8 @@ class ERPCOREPlugin(IDatasetPlugin):
                 for i in range(1, 31): f.write(f"EEG{i:02d}\tEEG\tuV\n")
             with open(os.path.join(bids_out, "sub-01", "eeg", "sub-01_task-P300_events.tsv"), "w") as f:
                 f.write("onset\tduration\ttrial_type\n0.488\t0\tTarget\n1.464\t0\tStandard\n")
+            with open(os.path.join(bids_out, "sub-01", "eeg", "sub-01_task-P300_eeg.edf"), "wb") as f:
+                f.write(b"0" * 1024)
         
     def generate_metadata(self, bids_dir: str) -> Dict[str, Any]:
         return {"dataset_name": "ERP_CORE", "subjects": 40}
