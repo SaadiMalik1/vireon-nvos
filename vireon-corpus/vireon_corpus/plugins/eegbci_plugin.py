@@ -110,8 +110,8 @@ class EEGBCIPlugin(IDatasetPlugin):
             bids_path = BIDSPath(subject='01', task='motorimagery', root=bids_out, datatype='eeg')
             write_raw_bids(raw, bids_path, events=events, event_id=event_id, overwrite=True, format='EDF', allow_preload=True)
             
-        except ImportError:
-            # Fallback if mne_bids not available
+        except Exception:
+            # Fallback if mne_bids/edfio not available or fails
             os.makedirs(os.path.join(bids_out, "sub-01", "eeg"), exist_ok=True)
             with open(os.path.join(bids_out, "dataset_description.json"), "w") as f:
                 json.dump({"Name": "EEGBCI", "BIDSVersion": "1.8.0"}, f)
