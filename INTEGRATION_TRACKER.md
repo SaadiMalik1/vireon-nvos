@@ -19,7 +19,7 @@
 - [x] I08: Fake parquet fix
 - [x] I09: BIDS fallback fix
 - [x] I10: Orchestrator fabrication fix
-- [ ] I11: Literature test on real data
+- [x] I11: Literature test on real data
 
 ## Tier 3 — Engineering Polish
 - [ ] I12: Hypothesis dependency

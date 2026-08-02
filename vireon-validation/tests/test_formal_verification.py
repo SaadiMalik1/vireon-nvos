@@ -1,5 +1,7 @@
 import pytest
 import numpy as np
+
+hypothesis = pytest.importorskip("hypothesis")
 from hypothesis import given, settings, strategies as st
 from hypothesis.extra.numpy import arrays
 
