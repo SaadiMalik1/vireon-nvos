@@ -18,7 +18,7 @@
 - [x] I07: Unseeded RNG fix
 - [x] I08: Fake parquet fix
 - [x] I09: BIDS fallback fix
-- [ ] I10: Orchestrator fabrication fix
+- [x] I10: Orchestrator fabrication fix
 - [ ] I11: Literature test on real data
 
 ## Tier 3 — Engineering Polish
