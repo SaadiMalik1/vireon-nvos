@@ -114,9 +114,28 @@ class ReplayEngine:
         Verify an evidence bundle's integrity by recomputing file hashes
         and comparing against hashes.json.
         """
-        hashes_path = os.path.join(bundle_path, "hashes.json")
-        if not os.path.exists(hashes_path):
-            return {"valid": False, "error": "hashes.json not found"}
+        hashes_path = os.path.join(bundle_path, "hashes.json") if os.path.isdir(bundle_path) else None
+        if not hashes_path or not os.path.exists(hashes_path):
+            evidence_json_path = os.path.join(bundle_path, "evidence.json") if os.path.isdir(bundle_path) else bundle_path
+            if os.path.exists(evidence_json_path):
+                try:
+                    from vireon_core.contracts.evidence import EvidenceBundle
+                    with open(evidence_json_path, "r") as f:
+                        bundle_data = json.load(f)
+                    bundle = EvidenceBundle(**bundle_data)
+                    computed_hash = bundle.compute_hash()
+                    if computed_hash == bundle.evidence_hash:
+                        return {"valid": True, "verified_files": 1, "total_files": 1, "mismatches": None}
+                    else:
+                        return {
+                            "valid": False,
+                            "mismatches": {
+                                "evidence.json": {"expected": bundle.evidence_hash, "actual": computed_hash}
+                            }
+                        }
+                except Exception as e:
+                    return {"valid": False, "error": str(e), "mismatches": {"evidence.json": {"expected": "valid", "actual": str(e)}}}
+            return {"valid": False, "error": "hashes.json or evidence.json not found"}
 
         with open(hashes_path, "r") as f:
             stored_hashes = json.load(f)

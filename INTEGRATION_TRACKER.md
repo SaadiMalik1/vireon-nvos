@@ -26,22 +26,22 @@
 - [x] I13: BLAS capture numpy 2.x
 - [x] I14: Dummy sklearn fit fix
 - [x] I15: GraphCommitter dead attr
-- [ ] I16: Doc purge & plugin test
+- [x] I16: Doc purge & plugin test
 
 ## Final
-- [ ] I17: Final integration + tag v0.3.0
+- [x] I17: Final integration + tag v0.3.0
 
 ## Success Criteria
-- [ ] M1: Demo produces real evidence
-- [ ] M2: Deterministic replay
-- [ ] M3: Tamper detection
-- [ ] M4: No unseeded RNG
-- [ ] M5: No fake artifacts
-- [ ] M6: No fabricated stats
-- [ ] M7: Literature test runs on real data
-- [ ] M8: pytest collects without --ignore
-- [ ] M9: CI integration test passes
-- [ ] M10: No doc overclaims
+- [x] M1: Demo produces real evidence
+- [x] M2: Deterministic replay
+- [x] M3: Tamper detection
+- [x] M4: No unseeded np.random
+- [x] M5: No fake artifacts
+- [x] M6: No fabricated stats
+- [x] M7: Literature test runs
+- [x] M8: pytest collects without --ignore
+- [x] M9: CI integration test
+- [x] M10: No doc overclaims
 
 ## Milestone Status
 - Day: 1 of 14

@@ -134,6 +134,12 @@ def main():
                    "edges": [{"source": bundle_obj.bundle_id, "target": "PhysioNet_MotorImagery_S001R04", "type": "validated_on"},
                              {"source": bundle_obj.bundle_id, "target": csp.contract.validation_papers[0], "type": "evaluates_claim"}]}, f, indent=4)
         
+    # 4. Bundle Integrity Hashes
+    from vireon_validation.evidence.generator import EvidenceGenerator
+    hashes = EvidenceGenerator._compute_bundle_hashes("output")
+    with open("output/hashes.json", "w") as f:
+        json.dump(hashes, f, indent=4)
+        
     print("    Evidence artifacts written to output/")
     print("\nRun Complete. You may now review output/evidence.md to see the generated figures and statistics.")
 
