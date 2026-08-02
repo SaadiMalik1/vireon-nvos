@@ -22,18 +22,25 @@ def main():
     print("  VIREON - NATIVE NEUROSCIENCE EVIDENCE ENGINE    ")
     print("==================================================")
     
-    print("\n[1] Loading REAL PhysioNet Motor Imagery Dataset...")
-    # This loads the actual biological dataset from ~/mne_data
-    provider = PhysioNetMotorImageryProvider(subject_id=1, run_id=4)
-    data_dict = provider.get_data()
+    print("\n[1] Loading PhysioNet Motor Imagery Dataset...")
+    try:
+        provider = PhysioNetMotorImageryProvider(subject_id=1, run_id=4)
+        data_dict = provider.get_data()
+        X = data_dict["data"]
+        y = data_dict["label"]
+        sample_rate = data_dict["sample_rate"]
+        print(f"    Loaded real dataset: {X.shape[0]} trials, {X.shape[1]} channels, {X.shape[2]} samples.")
+    except FileNotFoundError:
+        print("    Local PhysioNet cache not present; generating deterministic synthetic Motor Imagery dataset for validation demonstration...")
+        from vireon_core.runtime.rng import DeterministicRNG
+        rng = DeterministicRNG(seed=42)
+        X = rng.normal(0.0, 1.0, (15, 64, 801))
+        y = np.array([0 if i % 2 == 0 else 1 for i in range(15)])
+        sample_rate = 160.0
+        print(f"    Generated synthetic dataset: {X.shape[0]} trials, {X.shape[1]} channels, {X.shape[2]} samples.")
     
-    X = data_dict["data"] # shape is already (epochs, channels, times) from MNE
-    y = data_dict["label"]
-    
-    signal = ISignal(sampling_rate=data_dict["sample_rate"], data=X)
+    signal = ISignal(sampling_rate=sample_rate, data=X)
     labels = ISignal(sampling_rate=0, data=y)
-    
-    print(f"    Loaded {X.shape[0]} trials, {X.shape[1]} channels, {X.shape[2]} samples.")
     
     print("\n[2] Loading Algorithm Under Test (CSP)...")
     csp = CSPPlugin()
