@@ -5,7 +5,12 @@ import importlib.util
 import logging
 from typing import Dict, Any, List, Optional
 from pydantic import BaseModel
-from vireon_core.contracts.plugin import IPlugin
+from vireon_core.contracts.plugin import (
+    IPlugin,
+    ScientificContract,
+    ScientificReadinessLevel,
+    PluginCapability,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -13,6 +18,46 @@ class PluginLoadResult(BaseModel):
     plugin_id: str
     success: bool
     error: Optional[str] = None
+
+
+class SampleDiscoveryPlugin(IPlugin):
+    @property
+    def plugin_id(self) -> str:
+        return "test.discovery.plugin"
+
+    @property
+    def version(self) -> str:
+        return "1.0.0"
+
+    @property
+    def srl(self) -> ScientificReadinessLevel:
+        return ScientificReadinessLevel.SRL_0
+
+    @property
+    def contract(self) -> ScientificContract:
+        return ScientificContract()
+
+    @property
+    def capabilities(self) -> List[PluginCapability]:
+        return []
+
+    @property
+    def inputs(self) -> List[type]:
+        return []
+
+    @property
+    def outputs(self) -> List[type]:
+        return []
+
+    @property
+    def plugin_type(self) -> str:
+        return "test"
+
+    def initialize(self, config: Dict[str, Any]) -> None:
+        pass
+
+    def execute(self, inputs: Dict[str, Any]) -> Dict[str, Any]:
+        return inputs
 
 class PluginManager:
     """

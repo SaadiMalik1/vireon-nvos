@@ -35,7 +35,7 @@ where = [
 include = ["vireon_*"]
 
 [project.entry-points."vireon.plugins"]
-test_plugin = "vireon_core.tests.test_plugin_discovery:TestPlugin"
+test_plugin = "vireon_core.kernel.plugins:SampleDiscoveryPlugin"
 
 [tool.pytest.ini_options]
 testpaths = [
