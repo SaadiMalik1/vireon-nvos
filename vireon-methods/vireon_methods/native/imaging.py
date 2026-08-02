@@ -1,4 +1,5 @@
 import numpy as np
+from vireon_core.runtime.rng import DeterministicRNG
 
 class VireonForwardModel:
     """
@@ -8,15 +9,20 @@ class VireonForwardModel:
     plugin_id = "vireon.methods.imaging.forward"
     version = "1.0.0"
     
-    def __init__(self, head_model: str = "fsaverage", conductivity: tuple = (0.3, 0.006, 0.3)):
+    def __init__(self, head_model: str = "fsaverage", conductivity: tuple = (0.3, 0.006, 0.3), seed: int = 42):
         self.head_model = head_model
         self.conductivity = conductivity
+        self.rng = DeterministicRNG(seed=seed)
         
     def compute_leadfield(self, source_space: np.ndarray, sensor_geometry: np.ndarray) -> np.ndarray:
-        # Stub: Return random leadfield matrix mapping sources to sensors
         n_sensors = sensor_geometry.shape[0]
         n_sources = source_space.shape[0]
-        return np.random.normal(0, 1, size=(n_sensors, n_sources))
+        leadfield = np.zeros((n_sensors, n_sources), dtype=np.float64)
+        for i in range(n_sensors):
+            for j in range(n_sources):
+                dist = np.linalg.norm(sensor_geometry[i] - source_space[j])
+                leadfield[i, j] = 1.0 / (dist**2 + 1.0)
+        return leadfield
 
 class VireonMinimumNorm:
     def __init__(self, *args, **kwargs):

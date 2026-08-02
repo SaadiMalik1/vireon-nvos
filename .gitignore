@@ -50,6 +50,8 @@ tmp/
 results/
 artifacts/
 reports/
+output/
+evidence_output/
 benchmarks/output/
 
 # Jupyter

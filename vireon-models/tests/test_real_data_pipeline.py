@@ -52,8 +52,9 @@ class TestRealDataPipeline(unittest.TestCase):
 
         # Evidence bundle should contain real telemetry
         with tempfile.TemporaryDirectory() as tmpdir:
+            provider_data = scenario.get_provider().get_data()
             gen = EvidenceGenerator(evidence, tmpdir)
-            bundle_path = gen.generate_bundle()
+            bundle_path = gen.generate_bundle(raw_provider_data=provider_data)
 
             # Check manifest has signal metadata
             with open(os.path.join(bundle_path, "manifest.json")) as f:

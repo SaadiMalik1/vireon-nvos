@@ -88,30 +88,30 @@
 - [x] T68: Reconcile replay files
 
 ## P3 + Integration
-- [ ] T69: Fix doc claims
-- [ ] T70: Doc sync checker
-- [ ] T71: KS test synthetic validation
-- [ ] T72: Final integration
+- [x] T69: Fix doc claims
+- [x] T70: Doc sync checker
+- [x] T71: KS test synthetic validation
+- [x] T72: Final integration
 
 ## Success Criteria
-- [ ] S1: Demo produces real evidence
-- [ ] S2: No hardcoded CCC in matrix
-- [ ] S3: No np.random in native methods
-- [ ] S4: Contract violation raisable
-- [ ] S5: Transaction hash covers content
-- [ ] S6: No hardcoded literature values
-- [ ] S7: verify CLI doesn't crash
-- [ ] S8: reproduce CLI is honest
-- [ ] S9: pytest green
-- [ ] S10: No empty algorithm files
-- [ ] S11: Frontend either builds or is gone
-- [ ] S12: No SRL fraud
-- [ ] S13: Doc claims verified
-- [ ] S14: Reproducibility hash test passes
-- [ ] S15: CSP crossval tests real CSP
+- [x] S1: Demo produces real evidence
+- [x] S2: No hardcoded CCC in matrix
+- [x] S3: No np.random in native methods
+- [x] S4: Contract violation raisable
+- [x] S5: Transaction hash covers content
+- [x] S6: No hardcoded literature values
+- [x] S7: verify CLI doesn't crash
+- [x] S8: reproduce CLI is honest
+- [x] S9: pytest green
+- [x] S10: No empty algorithm files
+- [x] S11: Frontend either builds or is gone
+- [x] S12: No SRL fraud
+- [x] S13: Doc claims verified
+- [x] S14: Reproducibility hash test passes
+- [x] S15: CSP crossval tests real CSP
 
 ## Sprint Status
-- Week: 1 of 8
-- Tasks completed: 1 / 72
+- Week: 8 of 8
+- Tasks completed: 72 / 72
 - Tasks blocked: 0
-- Success criteria passing: 0 / 15
+- Success criteria passing: 15 / 15

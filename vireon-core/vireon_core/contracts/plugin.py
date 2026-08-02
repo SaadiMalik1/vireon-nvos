@@ -56,7 +56,7 @@ STATIONARITY_PVALUE_THRESHOLD = 0.05  # threshold for ADF stationarity test
 class ContractValidator:
     @staticmethod
     def validate(plugin: 'IPlugin', inputs: dict) -> None:
-        contract = plugin.contract
+        contract = getattr(plugin, 'contract', None)
         import numpy as np
 
         def iter_arrays(inps):
@@ -84,6 +84,9 @@ class ContractValidator:
                     details="Signal contains Inf values",
                     remediation="Clip or remove Inf values before processing"
                 )
+
+        if contract is None:
+            return
 
         for cond in contract.failure_conditions:
             if "nperseg" in cond.lower() and hasattr(plugin, 'nperseg'):
