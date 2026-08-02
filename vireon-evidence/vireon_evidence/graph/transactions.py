@@ -117,8 +117,8 @@ class GraphCommitter:
             self.graph.add_relationship(workflow_node_id, node.node_id, "comprises_algorithm")
             self.graph.add_relationship(workflow_node_id, dataset_node_id, "validated_on_dataset")
             
-        for p in transaction.bundle.perturbations:
-            perturb_node_id = f"perturbation_{p}"
+        if transaction.bundle.perturbation:
+            perturb_node_id = f"perturbation_{transaction.bundle.perturbation}"
             self.graph.add_relationship(node.node_id, perturb_node_id, "subject_to")
             
         if transaction.bundle.pass_fail == "FAIL":

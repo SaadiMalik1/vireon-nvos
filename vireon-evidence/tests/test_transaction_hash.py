@@ -12,7 +12,7 @@ def create_bundle(verdict="PASS"):
         method_provenance=[],
         dataset_provenance=DatasetProvenance(dataset_id="x", version="1", checksum="abc", acquisition_date="2023", modalities=[], sampling_rate=1.0, doi="x", bids_version="x", download_url="x", hash_checksum="x"),
         assumptions=[],
-        perturbations=[],
+        perturbation="none",
         clinical_domains_supported=[],
         known_limitations=[],
         statistical_agreement={"rmse": 0.0},
