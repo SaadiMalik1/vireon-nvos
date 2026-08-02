@@ -19,8 +19,20 @@ class BenchmarkMatrix:
         self.methods: List[CanonicalMethod] = []
         self.perturbations: List[Callable] = []
         
-    def add_dataset(self, dataset_name: str, dataset: Any = None):
-        self.datasets[dataset_name] = dataset
+    def add_dataset(self, dataset_id: str, data: Any = None, labels: Any = None):
+        """Add a dataset to the matrix.
+        
+        Args:
+            dataset_id: Name of the dataset.
+            data: Signal array or dataset object, or None.
+            labels: Labels array if data is an array, or None.
+        """
+        if data is not None:
+            if labels is None and not hasattr(data, "labels") and not (isinstance(data, tuple) and len(data) == 2):
+                raise ValueError(f"labels required when data is provided for {dataset_id}")
+            self.datasets[dataset_id] = {"data": data, "labels": labels}
+        else:
+            self.datasets[dataset_id] = None
         
     def add_method(self, method: CanonicalMethod):
         self.methods.append(method)
@@ -117,15 +129,44 @@ class BenchmarkMatrix:
 
         results = []
         for method in self.methods:
-            for dataset_id, dataset in self.datasets.items():
-                if dataset is not None and hasattr(dataset, "data"):
-                    base_data = dataset.data
-                    labels = getattr(dataset, "labels", None)
-                elif dataset is not None and isinstance(dataset, tuple) and len(dataset) == 2:
-                    base_data, labels = dataset
+            for dataset_id, dataset_info in self.datasets.items():
+                if dataset_info is None:
+                    # No data provided
+                    bundle = self._build_evidence_bundle(
+                        method=method,
+                        dataset_id=dataset_id,
+                        dataset=None,
+                        pert_name="None",
+                        perturbed=None,
+                        result=None,
+                        ccc=0.0,
+                        rmse=float('inf'),
+                        runtime=0.0,
+                        success=False,
+                        error="No data provided to add_dataset"
+                    )
+                    bundle_dict = bundle.model_dump()
+                    bundle_dict["success"] = False
+                    bundle_dict["error"] = "No data provided to add_dataset"
+                    results.append(bundle_dict)
+                    continue
+
+                if isinstance(dataset_info, dict):
+                    base_data = dataset_info.get("data")
+                    labels = dataset_info.get("labels")
+                    if not isinstance(base_data, np.ndarray) and hasattr(base_data, "data"):
+                        if labels is None:
+                            labels = getattr(base_data, "labels", None)
+                        base_data = base_data.data
+                elif not isinstance(dataset_info, np.ndarray) and hasattr(dataset_info, "data"):
+                    base_data = dataset_info.data
+                    labels = getattr(dataset_info, "labels", None)
+                elif isinstance(dataset_info, tuple) and len(dataset_info) == 2:
+                    base_data, labels = dataset_info
                 else:
-                    base_data = dataset
+                    base_data = dataset_info
                     labels = None
+
                 
                 if base_data is not None:
                     try:
@@ -135,7 +176,10 @@ class BenchmarkMatrix:
                 else:
                     reference_result = None
                 
-                perts_to_run = [(None, "None")] + [(p, p.__name__ if hasattr(p, '__name__') else str(p)) for p in self.perturbations]
+                perts_to_run = [(None, "None")] + [
+                    (p, getattr(p, "name", None) or (p.__name__ if hasattr(p, "__name__") else str(p)))
+                    for p in self.perturbations
+                ]
                 
                 for pert, pert_name in perts_to_run:
                     if base_data is not None:
@@ -174,7 +218,7 @@ class BenchmarkMatrix:
                     bundle = self._build_evidence_bundle(
                         method=method,
                         dataset_id=dataset_id,
-                        dataset=dataset,
+                        dataset=dataset_info,
                         pert_name=pert_name,
                         perturbed=perturbed,
                         result=result,

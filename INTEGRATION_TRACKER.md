@@ -7,7 +7,7 @@
 - [!] Blocked (see BLOCKED.md)
 
 ## Tier 1 — Research-Blocking
-- [ ] I01: Matrix populates evidence bundle
+- [x] I01: Matrix populates evidence bundle
 - [ ] I02: Demo passes real data
 - [ ] I03: CSP+LDA produces real CCC
 - [ ] I04: Integration test — real evidence
