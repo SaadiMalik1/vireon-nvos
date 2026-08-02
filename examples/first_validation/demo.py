@@ -87,7 +87,7 @@ def main():
     print(f"    Loaded {X.shape[0]} trials, {X.shape[1]} channels, {X.shape[2]} samples. Source: {data_source}")
     
     print("\n[2] Loading Algorithm Under Test (CSP)...")
-    csp = CSPPlugin()
+    csp = CSPPlugin(n_components=2)
     print(f"    Purpose: {csp.contract.purpose}")
     print(f"    Assumptions: {', '.join(csp.contract.mathematical_assumptions)}")
     print(f"    Validation Papers: {', '.join(csp.contract.validation_papers)}")

@@ -104,6 +104,80 @@ class BenchmarkMatrix:
             figures={}
         )
 
+    def _compute_reference_cv_scores(self, X: np.ndarray, y: np.ndarray, n_components: int = 4) -> np.ndarray:
+        """Compute per-fold reference accuracy using MNE CSP + LDA."""
+        from mne.decoding import CSP as MNE_CSP
+        from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+        from sklearn.model_selection import StratifiedKFold
+        from sklearn.pipeline import make_pipeline
+        
+        cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=self.seed)
+        clf = make_pipeline(
+            MNE_CSP(n_components=n_components, reg=None, log=True),
+            LinearDiscriminantAnalysis()
+        )
+        scores = []
+        for train_idx, test_idx in cv.split(X, y):
+            clf.fit(X[train_idx], y[train_idx])
+            scores.append(clf.score(X[test_idx], y[test_idx]))
+        return np.array(scores)
+
+    def _compute_reference_accuracy(self, X: np.ndarray, y: np.ndarray, n_components: int = 4) -> float:
+        """Compute mean reference accuracy."""
+        scores = self._compute_reference_cv_scores(X, y, n_components=n_components)
+        return float(np.mean(scores))
+
+    def _compute_method_cv_scores(self, method: Any, X: np.ndarray, y: np.ndarray) -> np.ndarray:
+        """Compute per-fold method accuracy using Method + LDA under identical CV splits."""
+        from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+        from sklearn.model_selection import StratifiedKFold
+        
+        cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=self.seed)
+        scores = []
+        for train_idx, test_idx in cv.split(X, y):
+            if hasattr(method, "__class__"):
+                try:
+                    fold_method = method.__class__(
+                        n_components=getattr(method, "n_components", 4),
+                        norm_trace=getattr(method, "norm_trace", False)
+                    )
+                except Exception:
+                    fold_method = method
+            else:
+                fold_method = method
+
+            train_feats = fold_method.execute({"signal": X[train_idx], "labels": y[train_idx]})
+            test_feats = fold_method.execute({"signal": X[test_idx], "labels": None})
+            
+            lda = LinearDiscriminantAnalysis()
+            lda.fit(train_feats, y[train_idx])
+            scores.append(lda.score(test_feats, y[test_idx]))
+        return np.array(scores)
+
+    def _compute_method_accuracy(self, method: Any, X: np.ndarray, y: np.ndarray) -> float:
+        """Compute mean method accuracy."""
+        scores = self._compute_method_cv_scores(method, X, y)
+        return float(np.mean(scores))
+
+    def _compute_ccc_vector(self, method_scores: np.ndarray, reference_scores: np.ndarray) -> float:
+        """Lin's CCC between two score vectors."""
+        method_scores = np.asarray(method_scores, dtype=float)
+        reference_scores = np.asarray(reference_scores, dtype=float)
+        if np.array_equal(method_scores, reference_scores):
+            return 1.0
+        mean_m = np.mean(method_scores)
+        mean_r = np.mean(reference_scores)
+        var_m = np.var(method_scores, ddof=1)
+        var_r = np.var(reference_scores, ddof=1)
+        if var_m == 0 and var_r == 0:
+            return 1.0 if mean_m == mean_r else 0.0
+        cov = np.mean((method_scores - mean_m) * (reference_scores - mean_r))
+        denom = var_m + var_r + (mean_m - mean_r)**2
+        if denom == 0:
+            return 1.0
+        ccc = (2 * cov) / denom
+        return float(np.clip(ccc, -1.0, 1.0))
+
     def execute_matrix(self) -> List[Dict[str, Any]]:
         """
         Runs the Cartesian product of methods x datasets x perturbations.
@@ -167,7 +241,6 @@ class BenchmarkMatrix:
                     base_data = dataset_info
                     labels = None
 
-                
                 if base_data is not None:
                     try:
                         reference_result = method.execute({"signal": base_data, "labels": labels})
@@ -204,7 +277,26 @@ class BenchmarkMatrix:
                         error = str(e)
                     runtime = time.perf_counter() - start
                     
-                    if success and reference_result is not None and result is not None and np.shape(result) == np.shape(reference_result):
+                    if success and base_data is not None and labels is not None:
+                        try:
+                            n_comp = getattr(method, "n_components", 4)
+                            # When n_components represents pairs (like in native CSP), total components is 2*n_comp if 2*n_comp <= channels
+                            if hasattr(method, "n_components") and method.n_components * 2 <= perturbed.shape[1]:
+                                m_comp = method.n_components * 2
+                            else:
+                                m_comp = n_comp
+                            method_scores = self._compute_method_cv_scores(method, perturbed, labels)
+                            ref_scores = self._compute_reference_cv_scores(perturbed, labels, n_components=m_comp)
+                            ccc = self._compute_ccc_vector(method_scores, ref_scores)
+                            rmse = float(np.sqrt(np.mean((method_scores - ref_scores) ** 2)))
+                        except Exception:
+                            if reference_result is not None and result is not None and np.shape(result) == np.shape(reference_result):
+                                ccc = float(compute_ccc(result, reference_result))
+                                rmse = float(compute_rmse(result, reference_result))
+                            else:
+                                ccc = 0.0
+                                rmse = float('inf')
+                    elif success and reference_result is not None and result is not None and np.shape(result) == np.shape(reference_result):
                         try:
                             ccc = float(compute_ccc(result, reference_result))
                             rmse = float(compute_rmse(result, reference_result))

@@ -8,7 +8,7 @@
 
 ## Tier 1 — Research-Blocking
 - [x] I01: Matrix populates evidence bundle
-- [ ] I02: Demo passes real data
+- [x] I02: Demo passes real data
 - [ ] I03: CSP+LDA produces real CCC
 - [ ] I04: Integration test — real evidence
 - [ ] I05: Integration test — deterministic replay
