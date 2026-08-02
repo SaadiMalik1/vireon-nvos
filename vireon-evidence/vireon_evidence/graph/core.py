@@ -50,3 +50,39 @@ class EvidenceGraph:
         if self._graph.has_node(node_id):
             return self._graph.nodes[node_id]
         return None
+
+    def get_methods(self, method_type: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Get all method nodes, optionally filtered by method_type."""
+        methods = []
+        for node_id, data in self._graph.nodes(data=True):
+            if data.get("node_type") == "Method":
+                m_type = data.get("metadata", {}).get("type") or data.get("type")
+                if method_type is None or m_type == method_type:
+                    methods.append({"node_id": node_id, **data})
+        return methods
+
+    def get_evidence_for_method(self, method_id: str) -> List[Dict[str, Any]]:
+        """
+        Get all evidence bundle nodes linked to a method.
+        Checks edges (method -> bundle or bundle -> method) and node metadata.
+        """
+        bundles = []
+        if not self._graph.has_node(method_id):
+            return bundles
+
+        # Check direct successors and predecessors
+        candidates = set(self._graph.successors(method_id)).union(self._graph.predecessors(method_id))
+        for neighbor in candidates:
+            data = self._graph.nodes[neighbor]
+            if data.get("node_type") == "EvidenceBundle":
+                bundles.append({"node_id": neighbor, **data})
+
+        # Also check any bundle in graph that explicitly tags method_id
+        for node_id, data in self._graph.nodes(data=True):
+            if data.get("node_type") == "EvidenceBundle":
+                meta = data.get("metadata", {})
+                if meta.get("method_id") == method_id:
+                    if not any(b["node_id"] == node_id for b in bundles):
+                        bundles.append({"node_id": node_id, **data})
+
+        return bundles

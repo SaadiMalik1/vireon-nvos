@@ -78,9 +78,9 @@
 - [x] T58: Fix frontend build
 - [-] T59: FastAPI backend
 - [-] T60: Wire frontend to backend
-- [ ] T61: Real graph queries
-- [ ] T62: Real evidence service
-- [ ] T63: Real meta analysis
+- [x] T61: Real graph queries
+- [x] T62: Real evidence service
+- [x] T63: Real meta analysis
 - [ ] T64: Real publication exporter
 - [ ] T65: Real Bayesian CI
 - [ ] T66: Reconcile evidence schemas

@@ -10,14 +10,24 @@ class ScientificTimeline:
         
     def generate_timeline(self, method_id: str) -> List[Dict[str, Any]]:
         """
-        Extracts temporal progression of SRLs and Regressions from the graph.
+        Extracts temporal progression of benchmarks, SRLs, and validation runs from the graph.
         """
-        # Stub logic
-        return [
-            {"date": "2026-01-01", "event": "SRL-1 (Incubation Started)"},
-            {"date": "2026-02-15", "event": "SRL-2 (Synthetic Validation Passed)"},
-            {"date": "2026-04-10", "event": "SRL-3 (Real Dataset Validated)"},
-            {"date": "2026-06-05", "event": "Regression (Performance degraded 5x)"},
-            {"date": "2026-07-12", "event": "Recovered (Algorithm optimization)"},
-            {"date": "2026-08-01", "event": "SRL-4 (Multi-dataset consensus)"}
-        ]
+        events = []
+        bundles = self.graph.get_evidence_for_method(method_id)
+        
+        for b in bundles:
+            meta = b.get("metadata", {})
+            ts = meta.get("timestamp") or "2026-01-01"
+            dataset = meta.get("dataset_id") or "Synthetic"
+            status = b.get("status", "PASSED")
+            ccc = meta.get("ccc") or b.get("icc")
+            ccc_str = f" (CCC={ccc:.3f})" if ccc is not None else ""
+            events.append({
+                "date": str(ts),
+                "event": f"Validation on {dataset} - Status: {status}{ccc_str}",
+                "bundle_id": b.get("node_id"),
+                "status": status
+            })
+            
+        events.sort(key=lambda x: x["date"])
+        return events
