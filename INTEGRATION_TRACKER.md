@@ -22,11 +22,11 @@
 - [x] I11: Literature test on real data
 
 ## Tier 3 — Engineering Polish
-- [ ] I12: Hypothesis dependency
-- [ ] I13: BLAS capture
-- [ ] I14: Dummy fit fix
-- [ ] I15: Dead attribute fix
-- [ ] I16: Doc overclaim purge
+- [x] I12: Hypothesis dependency
+- [ ] I13: BLAS capture numpy 2.x
+- [ ] I14: Dummy sklearn fit fix
+- [ ] I15: GraphCommitter dead attr
+- [ ] I16: Doc purge & plugin test
 
 ## Final
 - [ ] I17: Final integration + tag v0.3.0

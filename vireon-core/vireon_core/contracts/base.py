@@ -232,16 +232,45 @@ class EnvironmentCapture:
     def _capture_blas() -> Optional[str]:
         try:
             import numpy as np
-            # Best effort to extract blas implementation
-            # Numpy 1.20+ __config__.get_info
-            # Or __config__.show()
+            # 1. numpy 2.x: np.__config__.CONFIG
+            if hasattr(np, '__config__') and hasattr(np.__config__, 'CONFIG'):
+                config = getattr(np.__config__, 'CONFIG', {})
+                build_deps = config.get("Build Dependencies", {})
+                blas_info = build_deps.get("blas")
+                if isinstance(blas_info, dict):
+                    name = blas_info.get("name")
+                    if name:
+                        return str(name)
+                elif isinstance(blas_info, str) and blas_info:
+                    return blas_info
+                
+                for key, val in build_deps.items():
+                    if "blas" in key.lower():
+                        if isinstance(val, dict) and "name" in val:
+                            return str(val["name"])
+                        elif isinstance(val, str):
+                            return val
+
+            # 2. numpy 1.x: np.__config__.get_info
+            if hasattr(np, '__config__') and hasattr(np.__config__, 'get_info'):
+                try:
+                    blas = np.__config__.get_info('blas_opt') or np.__config__.get_info('blas')
+                    if blas and 'libraries' in blas and blas['libraries']:
+                        return str(blas['libraries'][0])
+                except Exception:
+                    pass
+
+            # 3. threadpoolctl fallback
             try:
-                blas = np.__config__.get_info('blas_opt') or np.__config__.get_info('blas')
-                if blas:
-                    return str(blas.get('libraries', ['unknown'])[0])
-            except AttributeError:
+                import threadpoolctl
+                info = threadpoolctl.threadpool_info()
+                for item in info:
+                    if 'blas' in item.get('filepath', '').lower() or 'openblas' in item.get('prefix', '').lower():
+                        return item.get('prefix', 'unknown')
+            except ImportError:
                 pass
-            return "openblas64__openblas" # Fallback guess if can't extract, or maybe try something else
+
+            return None
         except Exception as e:
             warnings.warn(f"Failed to capture BLAS info: {e}")
             return None
