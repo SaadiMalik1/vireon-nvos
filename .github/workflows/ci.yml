@@ -7,39 +7,64 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-and-test:
+  unit-tests:
     runs-on: ubuntu-latest
-    
     strategy:
       matrix:
         python-version: ["3.10", "3.11", "3.12"]
-    
     steps:
     - uses: actions/checkout@v4
-    
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
-        
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest pytest-cov hypothesis
+        pip install -r requirements.txt
+        pip install hypothesis pytest pytest-cov
         pip install -e .
-        
-    - name: Run tests with pytest
+    - name: Run unit tests
       env:
         VIREON_HOME: ${{ github.workspace }}
+        MPLBACKEND: Agg
       run: |
-        pytest
-
-    - name: Verify doc sync
+        pytest --tb=short -q
+  
+  integration-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    - name: Install dependencies
       run: |
-        python scripts/check_doc_sync.py
-
-    - name: Run first validation demo
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install hypothesis pytest
+        pip install -e .
+    - name: Run integration tests
       env:
         MPLBACKEND: Agg
       run: |
-        python examples/first_validation/demo.py
+        pytest tests/test_integration_evidence_pipeline.py -v --tb=long
+    
+    - name: Run doc sync checker
+      run: |
+        python scripts/check_doc_sync.py
+    
+    - name: Verify no regressions (grep gates)
+      run: |
+        # No hardcoded evidence_hash
+        ! rg 'evidence_hash\s*=\s*""' vireon-validation/ vireon-core/
+        # No fake parquet
+        ! rg "PARQUET_STUB_DATA" vireon-validation/
+        # No fabricated failure counts
+        ! rg "failures_logged.*int\(total_runs" vireon-validation/
+        # No unseeded np.random in perturbations
+        ! rg "np\.random\.(normal|uniform|choice)" vireon-validation/vireon_validation/perturbations/
+        # No "fully integrated" overclaim
+        ! rg "fully integrated into the Phase E" docs/
+        echo "All grep gates passed"
