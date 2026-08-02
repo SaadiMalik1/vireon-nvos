@@ -71,8 +71,8 @@
 - [x] T53: Delete seizure workflow
 - [x] T54: Persist failure atlas
 - [x] T55: Delete literature verifier
-- [~] T56: Delete methodological validator
-- [ ] T57: Fix incubator
+- [x] T56: Delete methodological validator
+- [~] T57: Fix incubator
 
 ## P1-FRONTEND + DOCS + P2
 - [ ] T58: Fix frontend build
