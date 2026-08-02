@@ -12,7 +12,7 @@
 - [x] I03: CSP+LDA produces real CCC
 - [x] I04: Integration test — real evidence
 - [x] I05: Integration test — deterministic replay
-- [ ] I06: CI integration gate
+- [x] I06: CI integration gate
 
 ## Tier 2 — Scientific Integrity
 - [ ] I07: Unseeded RNG fix
