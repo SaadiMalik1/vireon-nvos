@@ -69,8 +69,8 @@
 - [x] T51: Delete disease stubs
 - [x] T52: Delete hardware twins
 - [x] T53: Delete seizure workflow
-- [~] T54: Persist failure atlas
-- [ ] T55: Delete literature verifier
+- [x] T54: Persist failure atlas
+- [~] T55: Delete literature verifier
 - [ ] T56: Delete methodological validator
 - [ ] T57: Fix incubator
 
