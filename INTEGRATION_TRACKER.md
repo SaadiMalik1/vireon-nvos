@@ -15,7 +15,7 @@
 - [x] I06: CI integration gate
 
 ## Tier 2 — Scientific Integrity
-- [ ] I07: Unseeded RNG fix
+- [x] I07: Unseeded RNG fix
 - [ ] I08: Fake parquet fix
 - [ ] I09: BIDS fallback fix
 - [ ] I10: Orchestrator fabrication fix

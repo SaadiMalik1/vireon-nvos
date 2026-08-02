@@ -85,24 +85,31 @@ class EvidenceGenerator:
         return str(run_dir)
 
     def _write_telemetry(self, bundle_dir: str, raw_data):
-        """Write telemetry as numpy .npz if real data, otherwise write a stub."""
+        """Write telemetry as numpy .npz if real data available. Skip if no data."""
         import numpy as np
-
-        telemetry_path = os.path.join(bundle_dir, "telemetry.npz")
 
         if isinstance(raw_data, dict) and isinstance(raw_data.get("data"), np.ndarray):
             # Real telemetry: save the numpy array with metadata
+            telemetry_path = os.path.join(bundle_dir, "telemetry.npz")
             np.savez_compressed(
                 telemetry_path,
                 data=raw_data["data"],
                 sample_rate=np.array([raw_data.get("sample_rate", 250.0)]),
                 num_channels=np.array([raw_data.get("num_channels", 1)]),
             )
+            # If pyarrow is available, optionally save valid parquet
+            try:
+                import pyarrow as pa
+                import pyarrow.parquet as pq
+                data_flat = raw_data["data"].ravel()
+                table = pa.table({"signal": pa.array(data_flat)})
+                parquet_path = os.path.join(bundle_dir, "telemetry.parquet")
+                pq.write_table(table, parquet_path)
+            except (ImportError, Exception):
+                pass
         else:
-            # Stub for backward compatibility with mock providers
-            stub_path = os.path.join(bundle_dir, "telemetry.parquet")
-            with open(stub_path, "w") as f:
-                f.write("PARQUET_STUB_DATA")
+            # If no telemetry data is provided, do not create fake artifact stubs
+            pass
 
     @staticmethod
     def _compute_bundle_hashes(bundle_dir: str) -> Dict[str, str]:
