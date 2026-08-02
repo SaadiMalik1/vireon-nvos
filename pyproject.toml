@@ -35,7 +35,7 @@ where = [
 include = ["vireon_*"]
 
 [project.entry-points."vireon.plugins"]
-# Plugins will be registered here as they're implemented
+test_plugin = "vireon_core.tests.test_plugin_discovery:TestPlugin"
 
 [tool.pytest.ini_options]
 testpaths = [

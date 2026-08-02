@@ -25,7 +25,7 @@
 - [x] I12: Hypothesis dependency
 - [x] I13: BLAS capture numpy 2.x
 - [x] I14: Dummy sklearn fit fix
-- [ ] I15: GraphCommitter dead attr
+- [x] I15: GraphCommitter dead attr
 - [ ] I16: Doc purge & plugin test
 
 ## Final
