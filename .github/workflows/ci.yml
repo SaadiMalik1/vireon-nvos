@@ -33,3 +33,13 @@ jobs:
         VIREON_HOME: ${{ github.workspace }}
       run: |
         pytest
+
+    - name: Verify doc sync
+      run: |
+        python scripts/check_doc_sync.py
+
+    - name: Run first validation demo
+      env:
+        MPLBACKEND: Agg
+      run: |
+        python examples/first_validation/demo.py

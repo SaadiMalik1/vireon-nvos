@@ -53,6 +53,7 @@ reports/
 output/
 evidence_output/
 benchmarks/output/
+examples/*/output/
 
 # Jupyter
 .ipynb_checkpoints/

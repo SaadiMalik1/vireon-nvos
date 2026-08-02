@@ -34,3 +34,37 @@ include = ["vireon_*"]
 
 [project.entry-points."vireon.plugins"]
 # Plugins will be registered here as they're implemented
+
+[tool.pytest.ini_options]
+testpaths = [
+    "vireon-core/tests",
+    "vireon-models/tests",
+    "vireon-lab/tests",
+    "vireon-methods/tests",
+    "vireon-validation/tests",
+    "vireon-evidence/tests",
+    "vireon-knowledge/tests",
+    "vireon-corpus/tests"
+]
+norecursedirs = [
+    ".*",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "env",
+    "benchmarks/output",
+    "results",
+    "evidence_output"
+]
+pythonpath = [
+    ".",
+    "vireon-core",
+    "vireon-models",
+    "vireon-lab",
+    "vireon-methods",
+    "vireon-validation",
+    "vireon-evidence",
+    "vireon-knowledge",
+    "vireon-corpus"
+]

@@ -3,12 +3,12 @@ import os
 import json
 import numpy as np
 
-# Ensure vireon modules can be imported if running directly from repo root
-sys.path.insert(0, os.path.abspath('../../vireon-core'))
-sys.path.insert(0, os.path.abspath('../../vireon-models'))
-sys.path.insert(0, os.path.abspath('../../vireon-methods'))
-sys.path.insert(0, os.path.abspath('../../vireon-validation'))
-sys.path.insert(0, os.path.abspath('../../vireon-evidence'))
+# Ensure vireon modules can be imported regardless of execution working directory
+repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+for pkg in ['vireon-core', 'vireon-models', 'vireon-lab', 'vireon-methods', 'vireon-validation', 'vireon-evidence', 'vireon-knowledge', 'vireon-corpus']:
+    pkg_path = os.path.join(repo_root, pkg)
+    if pkg_path not in sys.path:
+        sys.path.insert(0, pkg_path)
 
 from vireon_core.contracts.base import ISignal
 from vireon_models.providers.datasets import PhysioNetMotorImageryProvider
