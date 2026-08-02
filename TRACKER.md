@@ -43,7 +43,7 @@
 - [x] T29: Real sleep staging test
 - [x] T30: Real ICC
 - [x] T31: Implement Passing-Bablok
-- [~] T32: Implement MCC
+- [x] T32: Implement MCC
 
 ## P0-CORPUS + CLI
 - [x] T33: Rename BCI provider
@@ -72,7 +72,7 @@
 - [x] T54: Persist failure atlas
 - [x] T55: Delete literature verifier
 - [x] T56: Delete methodological validator
-- [~] T57: Fix incubator
+- [x] T57: Fix incubator
 
 ## P1-FRONTEND + DOCS + P2
 - [ ] T58: Fix frontend build

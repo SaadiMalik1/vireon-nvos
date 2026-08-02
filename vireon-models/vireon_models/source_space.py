@@ -163,13 +163,29 @@ class BEMModel(IHeadModel):
     def compute_leadfield(self, dipole_positions: np.ndarray, electrode_positions: np.ndarray) -> np.ndarray:
         try:
             import mne
+            import os
         except ImportError:
             raise RuntimeError("BEMModel requires MNE-Python and FreeSurfer dependencies. (Tier 2). Please install 'mne'.")
             
-        # If mne is installed, this would load the bem_file_path and construct the forward solution
-        # Since this is a native validation platform, we expect the MNE environment to be present
-        # for Tier 2 execution.
-        raise RuntimeError("BEM geometry file parsing requires an active FreeSurfer subject directory.")
+        data_path = mne.datasets.sample.data_path(verbose=False)
+        subject = "sample"
+        subjects_dir = os.path.join(data_path, "subjects")
+        
+        bem_model = mne.make_bem_model(subject, ico=4, conductivity=(0.3,),
+                                        subjects_dir=subjects_dir)
+        bem = mne.make_bem_solution(bem_model)
+        
+        src = mne.setup_volume_source_space(subject, subjects_dir=subjects_dir)
+        
+        info_path = os.path.join(data_path, 'MEG', 'sample', 'sample_audvis_raw.fif')
+        trans_path = os.path.join(data_path, 'MEG', 'sample', 'sample_audvis_raw-trans.fif')
+        
+        info = mne.io.read_info(info_path, verbose=False)
+        fwd = mne.make_forward_solution(info, trans=trans_path, src=src, bem=bem,
+                                        meg=False, eeg=True, mindist=5.0, n_jobs=1, verbose=False)
+        
+        leadfield = fwd['sol']['data']
+        return leadfield
 
 class PatientSpecificModel(IHeadModel):
     """
@@ -198,7 +214,7 @@ class PatientSpecificModel(IHeadModel):
         try:
             import simnibs
         except ImportError:
-            raise RuntimeError("PatientSpecificModel requires advanced FEM solvers like SimNIBS. (Tier 3). Please install 'simnibs'.")
+            raise ImportError("PatientSpecificModel requires advanced FEM solvers like SimNIBS (Tier 3). Please install 'simnibs'.")
             
         raise RuntimeError("FEM mesh parsing requires a valid SimNIBS output volume.")
 
