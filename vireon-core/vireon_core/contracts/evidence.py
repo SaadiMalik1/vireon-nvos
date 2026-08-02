@@ -1,7 +1,9 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 from typing import Dict, Any, List, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 import uuid
+import hashlib
+import json
 
 class SoftwareProvenance(BaseModel):
     vireon_version: str
@@ -25,7 +27,7 @@ class MethodProvenance(BaseModel):
 class EnvironmentFingerprint(BaseModel):
     hardware_info: Dict[str, str]
     random_seed: int
-    execution_timestamp: datetime = Field(default_factory=datetime.utcnow)
+    execution_timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class RegulatoryProfile(BaseModel):
     fda_gmlp_compliance: str = Field(default="")
@@ -43,7 +45,7 @@ class EvidenceBundle(BaseModel):
     replay_hash: str = Field(default="")
     graph_commit_id: str = Field(default="")
     cryptographic_signature: str = Field(default="")
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     
     # Benchmarking Topology
     algorithm: str = Field(default="")
@@ -92,7 +94,7 @@ class EvidenceBundle(BaseModel):
     
     # Scientific Verdict
     acceptance_criteria: Dict[str, Any] = Field(default_factory=dict)
-    pass_fail: str = Field(default="FAIL")
+    pass_fail: str = Field(default="PENDING")
     srl_recommendation: str = Field(default="SRL-1")
     scientific_reproducibility_index: float = Field(default=0.0) # SRI Score (Phase E)
     
@@ -104,7 +106,7 @@ class EvidenceBundle(BaseModel):
     report_path: str = Field(default="")
     
     # Legacy fields (maintained for backward compat)
-    conclusion_verdict: str = Field(default="")
+    conclusion_verdict: str = Field(default="PENDING")
     dataset_provenance: DatasetProvenance = Field(default_factory=lambda: DatasetProvenance(dataset_id="", bids_version="", hash_checksum="", doi="", download_url=""))
     software_provenance: SoftwareProvenance = Field(default_factory=lambda: SoftwareProvenance(vireon_version="", python_version="", os_info="", dependencies={}))
     method_provenance: List[MethodProvenance] = Field(default_factory=list)
@@ -114,3 +116,29 @@ class EvidenceBundle(BaseModel):
     statistical_agreement: Dict[str, float] = Field(default_factory=dict)
     benchmark_results: Dict[str, Any] = Field(default_factory=dict)
     figures: Dict[str, str] = Field(default_factory=dict) # e.g., Base64 or Paths to ROC, spectra
+
+    @model_validator(mode='after')
+    def validate_and_sync_bundle(self):
+        # Auto-compute evidence_hash if algorithm+dataset are set but hash is empty
+        if self.algorithm and self.dataset and not self.evidence_hash:
+            payload = {
+                "bundle_id": self.bundle_id,
+                "algorithm": self.algorithm,
+                "dataset": self.dataset,
+                "ccc": self.statistical_agreement.get("ccc", 0.0),
+                "random_seed": self.random_seed,
+            }
+            self.evidence_hash = hashlib.sha256(
+                json.dumps(payload, sort_keys=True, default=str).encode()
+            ).hexdigest()
+
+        # Sync conclusion_verdict and pass_fail
+        if self.pass_fail != "PENDING" and self.conclusion_verdict == "PENDING":
+            self.conclusion_verdict = self.pass_fail
+        elif self.conclusion_verdict != "PENDING" and self.pass_fail == "PENDING":
+            self.pass_fail = self.conclusion_verdict
+        elif self.conclusion_verdict != self.pass_fail:
+            self.conclusion_verdict = self.pass_fail
+            
+        return self
+
