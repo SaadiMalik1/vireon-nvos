@@ -7,14 +7,14 @@
 - [!] Blocked
 
 ## Workstream A — Algorithm Validation Suite
-- [~] S01: FFT validation suite
-- [ ] S02: STFT + wavelet validation
-- [ ] S03: FIR + IIR filter validation
-- [ ] S04: ICA + CSP validation
-- [ ] S05: Beamforming + source localization validation
-- [ ] S06: Connectivity validation
-- [ ] S07: Algorithm validation report (PDF)
-- [ ] S08: CI algorithm regression gate
+- [x] S01: FFT validation suite
+- [x] S02: STFT + wavelet validation
+- [x] S03: FIR + IIR filter validation
+- [x] S04: ICA + CSP validation
+- [x] S05: Beamforming + source localization validation
+- [x] S06: Connectivity validation
+- [x] S07: Algorithm validation report (PDF)
+- [x] S08: CI algorithm regression gate
 
 ## Workstream B — Literature Reproduction
 - [ ] S09: Welch 1967
@@ -47,9 +47,10 @@
 - [ ] S30: Final integration + tag v0.4.0
 
 ## Success Criteria
-- [ ] V1-V15 (see playbook §2)
+- [x] V1: All 11 native algorithms validated against reference with declared tolerances (0 regressions)
+- [ ] V2-V15 (see playbook §2)
 
 ## Milestone Status
-- Week: 1 of 6
-- Tasks completed: 0 / 30
-- Success criteria passing: 0 / 15
+- Week: 2 of 6
+- Tasks completed: 8 / 30
+- Success criteria passing: 1 / 15

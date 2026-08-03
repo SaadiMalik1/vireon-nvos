@@ -142,3 +142,10 @@ class VireonICA:
         if self._mixing is None:
             raise ValueError("Model not fitted yet.")
         return self._mixing
+
+    @property
+    def mean_(self) -> np.ndarray:
+        """Mean of features across samples."""
+        if self._mean is None:
+            raise ValueError("Model not fitted yet.")
+        return self._mean
