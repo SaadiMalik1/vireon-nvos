@@ -131,3 +131,11 @@ def test_evidence_service(populated_graph):
     assert profile["total_benchmarks"] == 2
     assert "chb_mit" in profile["datasets"] or "CHB-MIT" in profile["datasets"] or "chb_mit" in profile["datasets"]
     assert profile["metrics"]["ccc"] > 0.99
+
+
+def test_query_methods_by_dataset_and_metric_threshold(populated_graph):
+    qe = ScientificQueryEngine(populated_graph)
+    results = qe.query_methods_by_dataset_and_metric("chb_mit", min_ccc=0.99)
+    assert len(results) >= 1
+    assert results[0]["method"] == "mne_csp"
+    assert results[0]["ccc"] >= 0.99

@@ -1,48 +1,109 @@
-import networkx as nx
+import sqlite3
+import json
 from typing import List, Dict, Any, Optional
+import networkx as nx
 from vireon_evidence.ontology.nodes import EvidenceNode, DatasetNode, MethodNode, EvidenceBundleNode, ScientificClaimNode
+
 
 class EvidenceGraph:
     """
-    The Scientific Evidence Graph.
+    The Scientific Evidence Graph with optional SQLite persistence.
     Uses networkx to store nodes (datasets, methods, evidence bundles, claims) and directed edges (relationships).
     """
-    def __init__(self):
+    def __init__(self, db_path: Optional[str] = None):
         self._graph = nx.DiGraph()
-        
-    def add_node(self, node: EvidenceNode):
-        self._graph.add_node(node.node_id, **node.model_dump())
-        
+        self.db_path = db_path
+        self.conn = None
+        if db_path:
+            self._init_db()
+            self._load_from_db()
+
+    def _init_db(self):
+        self.conn = sqlite3.connect(self.db_path)
+        self.conn.execute("""
+            CREATE TABLE IF NOT EXISTS nodes (
+                node_id TEXT PRIMARY KEY,
+                node_type TEXT,
+                data JSON
+            )
+        """)
+        self.conn.execute("""
+            CREATE TABLE IF NOT EXISTS edges (
+                source TEXT,
+                target TEXT,
+                relation TEXT,
+                PRIMARY KEY (source, target, relation)
+            )
+        """)
+        self.conn.commit()
+
+    def _load_from_db(self):
+        if not self.conn:
+            return
+        cur = self.conn.execute("SELECT node_id, data FROM nodes")
+        for node_id, data_json in cur:
+            data = json.loads(data_json)
+            self._graph.add_node(node_id, **data)
+        cur = self.conn.execute("SELECT source, target, relation FROM edges")
+        for source, target, relation in cur:
+            self._graph.add_edge(source, target, relation=relation, type=relation)
+
+    def add_node(self, node: Any):
+        if hasattr(node, "model_dump"):
+            data = node.model_dump()
+            node_id = getattr(node, "node_id", str(node))
+            node_type = getattr(node, "node_type", "Unknown")
+        elif isinstance(node, dict):
+            data = node
+            node_id = node.get("node_id", str(node))
+            node_type = node.get("node_type", "Unknown")
+        else:
+            data = {"node_id": str(node)}
+            node_id = str(node)
+            node_type = "Unknown"
+
+        self._graph.add_node(node_id, **data)
+        if self.conn:
+            self.conn.execute(
+                "INSERT OR REPLACE INTO nodes VALUES (?, ?, ?)",
+                (node_id, str(node_type), json.dumps(data, default=str))
+            )
+            self.conn.commit()
+
     def add_relationship(self, source_id: str, target_id: str, relationship_type: str):
-        self._graph.add_edge(source_id, target_id, type=relationship_type)
-        
+        self._graph.add_edge(source_id, target_id, relation=relationship_type, type=relationship_type)
+        if self.conn:
+            self.conn.execute(
+                "INSERT OR REPLACE INTO edges VALUES (?, ?, ?)",
+                (str(source_id), str(target_id), str(relationship_type))
+            )
+            self.conn.commit()
+
+    def persist(self):
+        """Flush in-memory graph to SQLite."""
+        if self.conn:
+            self.conn.commit()
+
+    def list_nodes(self) -> List[str]:
+        return list(self._graph.nodes)
+
     def query_methods_by_dataset(self, dataset_id: str) -> List[Dict[str, Any]]:
         """
         Query example: which methods have been executed on this dataset?
-        Graph path: Dataset <-[used_in]- Benchmark <-[executed_with]- Method
         """
-        # Real query logic: Dataset <-[used_in]- Execution <-[executed_with]- Method
-        # Or checking all paths from any MethodNode to the DatasetNode
         results = []
         if not self._graph.has_node(dataset_id):
             return results
-            
+
         for node, data in self._graph.nodes(data=True):
-            if data.get("type") == "method":
-                # Find if there is a path from the method to the dataset
+            if data.get("type") == "method" or data.get("node_type") == "Method":
                 if nx.has_path(self._graph, node, dataset_id):
-                    # We can also extract the exact path to verify it matches Execution -> used_in
-                    paths = nx.all_simple_paths(self._graph, node, dataset_id)
-                    valid_paths = []
-                    for path in paths:
-                        # Validate path types
-                        valid_paths.append(path)
-                    
-                    if valid_paths:
+                    paths = list(nx.all_simple_paths(self._graph, node, dataset_id))
+                    if paths:
                         results.append({
                             "method_id": node,
                             "method_name": data.get("name", node),
-                            "paths": valid_paths
+                            "paths": paths
                         })
         return results
 
@@ -64,20 +125,17 @@ class EvidenceGraph:
     def get_evidence_for_method(self, method_id: str) -> List[Dict[str, Any]]:
         """
         Get all evidence bundle nodes linked to a method.
-        Checks edges (method -> bundle or bundle -> method) and node metadata.
         """
         bundles = []
         if not self._graph.has_node(method_id):
             return bundles
 
-        # Check direct successors and predecessors
         candidates = set(self._graph.successors(method_id)).union(self._graph.predecessors(method_id))
         for neighbor in candidates:
             data = self._graph.nodes[neighbor]
             if data.get("node_type") == "EvidenceBundle":
                 bundles.append({"node_id": neighbor, **data})
 
-        # Also check any bundle in graph that explicitly tags method_id
         for node_id, data in self._graph.nodes(data=True):
             if data.get("node_type") == "EvidenceBundle":
                 meta = data.get("metadata", {})

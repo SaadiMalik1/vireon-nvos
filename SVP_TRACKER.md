@@ -31,11 +31,11 @@
 - [x] S18: Statistical rigor integration test
 
 ## Workstream D — Evidence Infrastructure
-- [ ] S19: SQLite-persistent evidence graph
-- [ ] S20: Evidence registry
-- [ ] S21: DOI minting
-- [ ] S22: Complex graph queries
-- [ ] S23: Evidence export formats (JSON-LD, RDF, BibTeX)
+- [x] S19: SQLite-persistent evidence graph
+- [x] S20: Evidence registry
+- [x] S21: DOI minting
+- [x] S22: Complex graph queries
+- [x] S23: Evidence export formats (JSON-LD, RDF, BibTeX)
 
 ## Workstream E — Publication Pipeline + API + Docs
 - [ ] S24: LaTeX paper generator
@@ -50,9 +50,10 @@
 - [x] V1: All 11 native algorithms validated against reference with declared tolerances (0 regressions)
 - [x] V2: ≥4 canonical literature reproductions pass with evidence bundles (Welch 1967, Ramoser 2000, Hyvärinen 2000, Vinck 2011)
 - [x] V3: Bootstrap CIs, permutation tests, effect sizes, and FDR correction integrated (S14-S18)
-- [ ] V4-V15 (see playbook §2)
+- [x] V4: SQLite-persistent evidence graph, registry, DOI minting, and multi-format exports working (S19-S23)
+- [ ] V5-V15 (see playbook §2)
 
 ## Milestone Status
-- Week: 4 of 6
-- Tasks completed: 18 / 30
-- Success criteria passing: 3 / 15
+- Week: 5 of 6
+- Tasks completed: 23 / 30
+- Success criteria passing: 4 / 15
