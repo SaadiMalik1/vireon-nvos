@@ -24,11 +24,11 @@
 - [x] S13: Literature reproduction report
 
 ## Workstream C — Statistical Rigor
-- [ ] S14: Bootstrap CIs
-- [ ] S15: Permutation testing
-- [ ] S16: Effect sizes
-- [ ] S17: Multiple comparison correction (FDR)
-- [ ] S18: Statistical rigor integration test
+- [x] S14: Bootstrap CIs
+- [x] S15: Permutation testing
+- [x] S16: Effect sizes
+- [x] S17: Multiple comparison correction (FDR)
+- [x] S18: Statistical rigor integration test
 
 ## Workstream D — Evidence Infrastructure
 - [ ] S19: SQLite-persistent evidence graph
@@ -49,9 +49,10 @@
 ## Success Criteria
 - [x] V1: All 11 native algorithms validated against reference with declared tolerances (0 regressions)
 - [x] V2: ≥4 canonical literature reproductions pass with evidence bundles (Welch 1967, Ramoser 2000, Hyvärinen 2000, Vinck 2011)
-- [ ] V3-V15 (see playbook §2)
+- [x] V3: Bootstrap CIs, permutation tests, effect sizes, and FDR correction integrated (S14-S18)
+- [ ] V4-V15 (see playbook §2)
 
 ## Milestone Status
-- Week: 3 of 6
-- Tasks completed: 13 / 30
-- Success criteria passing: 2 / 15
+- Week: 4 of 6
+- Tasks completed: 18 / 30
+- Success criteria passing: 3 / 15

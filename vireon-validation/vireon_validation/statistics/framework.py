@@ -1,9 +1,37 @@
 import numpy as np
 
+
+def lin_concordance_correlation(x: np.ndarray, y: np.ndarray) -> float:
+    """Lin's Concordance Correlation Coefficient (CCC).
+    
+    Reference: Lin, L. I. (1989). A concordance correlation coefficient to evaluate reproducibility.
+    Biometrics, 45(1), 255-268.
+    """
+    x = np.asarray(x, dtype=float).ravel()
+    y = np.asarray(y, dtype=float).ravel()
+    if np.array_equal(x, y):
+        return 1.0
+    x_m = np.mean(x)
+    y_m = np.mean(y)
+    x_v = np.var(x, ddof=1) if len(x) > 1 else np.var(x)
+    y_v = np.var(y, ddof=1) if len(y) > 1 else np.var(y)
+    if x_v == 0.0 and y_v == 0.0:
+        return 1.0 if x_m == y_m else 0.0
+    cov = np.cov(x, y)[0, 1] if len(x) > 1 else 0.0
+    denom = x_v + y_v + (x_m - y_m) ** 2
+    if denom == 0.0:
+        return 0.0
+    return float(2.0 * cov / denom)
+
+
 class StatisticalFramework:
     """
     Publishable biostatistical validation framework (Phase D).
     """
+
+    @staticmethod
+    def lin_concordance_correlation(x: np.ndarray, y: np.ndarray) -> float:
+        return lin_concordance_correlation(x, y)
     
     @staticmethod
     def bland_altman_agreement(method_a: np.ndarray, method_b: np.ndarray) -> dict:

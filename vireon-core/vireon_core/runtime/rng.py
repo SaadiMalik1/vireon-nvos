@@ -48,6 +48,14 @@ class DeterministicRNG:
     def integer(self, low: int, high: int, size: Optional[Tuple[int, ...]] = None) -> Any:
         return self._generator.integers(low, high, size)
 
+    def permutation(self, x: Any) -> Any:
+        return self._generator.permutation(x)
+
+    def choice(self, a: Any, size: Optional[Any] = None, replace: bool = True, p: Optional[Any] = None) -> Any:
+        return self._generator.choice(a, size=size, replace=replace, p=p)
+
+    def beta(self, a: float, b: float, size: Optional[Tuple[int, ...]] = None) -> Any:
+        return self._generator.beta(a, b, size)
 
     def get_state(self) -> dict:
         return {
