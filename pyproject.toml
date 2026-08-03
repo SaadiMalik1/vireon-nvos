@@ -30,7 +30,8 @@ where = [
     "vireon-validation",
     "vireon-lab",
     "vireon-corpus",
-    "vireon-evidence"
+    "vireon-evidence",
+    "vireon-api"
 ]
 include = ["vireon_*"]
 
@@ -48,6 +49,7 @@ testpaths = [
     "vireon-evidence/tests",
     "vireon-knowledge/tests",
     "vireon-corpus/tests",
+    "vireon-api/tests",
     "vireon-verification"
 ]
 norecursedirs = [
@@ -70,5 +72,6 @@ pythonpath = [
     "vireon-validation",
     "vireon-evidence",
     "vireon-knowledge",
-    "vireon-corpus"
+    "vireon-corpus",
+    "vireon-api"
 ]

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>VIREON Evidence Dashboard</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 2em; background: #0f172a; color: #f8fafc; }
+        h1, h2 { color: #38bdf8; }
+        .bundle { border: 1px solid #334155; border-radius: 8px; padding: 1em; margin: 1em 0; background: #1e293b; }
+        .pass { color: #4ade80; font-weight: bold; }
+        .fail { color: #f87171; font-weight: bold; }
+        button { background: #38bdf8; color: #0f172a; border: none; padding: 10px 18px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-bottom: 1em; }
+        button:hover { background: #7dd3fc; }
+        table { border-collapse: collapse; width: 100%; margin-top: 1em; background: #1e293b; border-radius: 8px; overflow: hidden; }
+        th, td { border: 1px solid #334155; padding: 10px; text-align: left; }
+        th { background: #0f172a; color: #94a3b8; }
+    </style>
+</head>
+<body>
+    <h1>VIREON Evidence Dashboard</h1>
+    <button id="runBtn" onclick="runBenchmark()">Run CSP Benchmark</button>
+    <h2>Evidence Bundles</h2>
+    <table id="bundles">
+        <thead>
+            <tr><th>Hash</th><th>Algorithm</th><th>Dataset</th><th>CCC</th><th>Status</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        async function loadBundles() {
+            try {
+                const resp = await fetch('/api/evidence');
+                const bundles = await resp.json();
+                const tbody = document.querySelector('#bundles tbody');
+                tbody.innerHTML = '';
+                bundles.forEach(b => {
+                    const row = tbody.insertRow();
+                    const hash = b.evidence_hash ? b.evidence_hash.substring(0, 16) + '...' : (b.bundle_id || 'N/A');
+                    row.insertCell().textContent = hash;
+                    row.insertCell().textContent = b.algorithm || b.method || '';
+                    row.insertCell().textContent = b.dataset || '';
+                    const ccc = b.statistical_agreement?.ccc ?? b.ccc ?? 'N/A';
+                    row.insertCell().textContent = typeof ccc === 'number' ? ccc.toFixed(4) : ccc;
+                    const status = row.insertCell();
+                    status.textContent = b.pass_fail || 'UNKNOWN';
+                    status.className = b.pass_fail === 'PASS' ? 'pass' : 'fail';
+                });
+            } catch (err) {
+                console.error("Failed to load bundles:", err);
+            }
+        }
+        async function runBenchmark() {
+            const btn = document.getElementById('runBtn');
+            btn.disabled = true;
+            btn.textContent = 'Running...';
+            try {
+                const resp = await fetch('/api/benchmark', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({algorithm: 'csp', dataset: 'synthetic', seed: 42})
+                });
+                const result = await resp.json();
+                alert(`Benchmark complete: CCC=${result.ccc?.toFixed(4)}, Status=${result.pass_fail}`);
+                await loadBundles();
+            } catch (err) {
+                alert(`Benchmark error: ${err}`);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Run CSP Benchmark';
+            }
+        }
+        loadBundles();
+    </script>
+</body>
+</html>

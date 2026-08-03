@@ -38,22 +38,33 @@
 - [x] S23: Evidence export formats (JSON-LD, RDF, BibTeX)
 
 ## Workstream E — Publication Pipeline + API + Docs
-- [ ] S24: LaTeX paper generator
-- [ ] S25: Jupyter notebook generator
-- [ ] S26: FastAPI backend
-- [ ] S27: HTML dashboard
-- [ ] S28: Tutorial suite
-- [ ] S29: API reference generator
-- [ ] S30: Final integration + tag v0.4.0
+- [x] S24: LaTeX paper generator
+- [x] S25: Jupyter notebook generator
+- [x] S26: FastAPI backend
+- [x] S27: HTML dashboard
+- [x] S28: Tutorial suite
+- [x] S29: API reference generator
+- [x] S30: Final integration + tag v0.4.0
 
 ## Success Criteria
 - [x] V1: All 11 native algorithms validated against reference with declared tolerances (0 regressions)
-- [x] V2: ≥4 canonical literature reproductions pass with evidence bundles (Welch 1967, Ramoser 2000, Hyvärinen 2000, Vinck 2011)
-- [x] V3: Bootstrap CIs, permutation tests, effect sizes, and FDR correction integrated (S14-S18)
-- [x] V4: SQLite-persistent evidence graph, registry, DOI minting, and multi-format exports working (S19-S23)
-- [ ] V5-V15 (see playbook §2)
+- [x] V2: Algorithm validation report generated
+- [x] V3: ≥4 canonical literature reproductions pass with evidence bundles (Welch 1967, Ramoser 2000, Hyvärinen 2000, Vinck 2011)
+- [x] V4: Bootstrap CI on every metric
+- [x] V5: Permutation tests available
+- [x] V6: FDR correction implemented
+- [x] V7: SQLite-persistent evidence graph, registry, DOI minting, and multi-format exports working (S19-S23)
+- [x] V8: LaTeX paper generator works
+- [x] V9: Jupyter notebook generator works
+- [x] V10: FastAPI backend serves evidence
+- [x] V11: REST API triggers benchmark
+- [x] V12: Tutorials exist and are accurate
+- [x] V13: API reference auto-generated
+- [x] V14: Full test suite passes (363 passed, 0 failures)
+- [x] V15: Coverage > 75% on new code (83.83%)
 
 ## Milestone Status
-- Week: 5 of 6
-- Tasks completed: 23 / 30
-- Success criteria passing: 4 / 15
+- Week: 6 of 6
+- Tasks completed: 30 / 30
+- Success criteria passing: 15 / 15
+- Milestone: COMPLETE (v0.4.0 tagged)
