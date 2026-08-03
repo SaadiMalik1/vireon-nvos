@@ -17,11 +17,11 @@
 - [x] S08: CI algorithm regression gate
 
 ## Workstream B — Literature Reproduction
-- [ ] S09: Welch 1967
-- [ ] S10: Ramoser 2000 (CSP)
-- [ ] S11: Hyvärinen & Oja 2000 (FastICA)
-- [ ] S12: Vinck 2011 (wPLI)
-- [ ] S13: Literature reproduction report
+- [x] S09: Welch 1967
+- [x] S10: Ramoser 2000 (CSP)
+- [x] S11: Hyvärinen & Oja 2000 (FastICA)
+- [x] S12: Vinck 2011 (wPLI)
+- [x] S13: Literature reproduction report
 
 ## Workstream C — Statistical Rigor
 - [ ] S14: Bootstrap CIs
@@ -48,9 +48,10 @@
 
 ## Success Criteria
 - [x] V1: All 11 native algorithms validated against reference with declared tolerances (0 regressions)
-- [ ] V2-V15 (see playbook §2)
+- [x] V2: ≥4 canonical literature reproductions pass with evidence bundles (Welch 1967, Ramoser 2000, Hyvärinen 2000, Vinck 2011)
+- [ ] V3-V15 (see playbook §2)
 
 ## Milestone Status
-- Week: 2 of 6
-- Tasks completed: 8 / 30
-- Success criteria passing: 1 / 15
+- Week: 3 of 6
+- Tasks completed: 13 / 30
+- Success criteria passing: 2 / 15

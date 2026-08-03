@@ -176,11 +176,11 @@ class VireonWPLI:
                     
                 num = np.abs(np.sum(imag_Sxy))
                 den = np.sum(np.abs(imag_Sxy))
-                
-                if den == 0:
+                total_pwr = np.sum(np.abs(Sxy[idx] if band is not None else Sxy))
+                if den < 1e-12 or (total_pwr > 0 and den / (total_pwr + 1e-20) < 1e-6):
                     wpli = 0.0
                 else:
-                    wpli = num / den
+                    wpli = float(num / den)
                     
                 wpli_matrix[i, j] = wpli
                 wpli_matrix[j, i] = wpli
