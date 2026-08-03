@@ -87,6 +87,12 @@ class CSPPlugin(IPlugin):
                     
                 covs.append(cov)
                 
+            # Regularize covariance to handle singular matrices (e.g., from channel dropout)
+            n_ch = covs[0].shape[0]
+            reg = 1e-6 * np.trace(covs[0]) / n_ch  # scale-relative regularization
+            covs[0] += reg * np.eye(n_ch)
+            covs[1] += reg * np.eye(n_ch)
+
             # Solve generalized eigenvalue problem: C1 * W = lambda * (C1 + C2) * W
             evals, evecs = eigh(covs[0], covs[0] + covs[1])
             

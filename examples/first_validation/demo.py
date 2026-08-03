@@ -27,42 +27,64 @@ def _generate_pink_noise(n: int, rng: DeterministicRNG) -> np.ndarray:
     noise = np.fft.irfft(spectrum, n=n)
     return noise / (np.std(noise) + 1e-10)  # normalize
 
-def _generate_synthetic_motor_imagery(seed: int = 42, n_epochs: int = 40, n_channels: int = 8, 
+def _generate_synthetic_motor_imagery(seed: int = 42, n_epochs: int = 60, n_channels: int = 16,
                                       n_samples: int = 250, fs: float = 250.0):
-    """Generate synthetic motor imagery data with a real ERD/ERS pattern.
-    
-    Class 0 (left hand): high mu-band (8-12 Hz) power in central channels.
-    Class 1 (right hand): low mu-band power (ERD) in central channels.
-    
-    This ensures CSP can find a discriminative spatial filter.
+    """Generate synthetic motor imagery data with a realistic ERD/ERS pattern.
+
+    Class 0 (left hand): moderate mu-band (10 Hz) power, lateralized to left hemisphere.
+    Class 1 (right hand): moderate mu-band power, lateralized to right hemisphere.
+
+    The contrast is deliberately moderate (not trivially separable) so that
+    CSP+LDA achieves ~75-85% accuracy, giving a non-trivial CCC.
     """
     rng = DeterministicRNG(seed)
-    
+
     X = np.zeros((n_epochs, n_channels, n_samples))
     y = np.array([0, 1] * (n_epochs // 2))
-    
+
     t = np.arange(n_samples) / fs
     mu_freq = 10.0  # Hz
-    
+
+    # Channel groups (simulating 10-20 layout with 16 channels)
+    left_hemi = [3, 4, 5, 6]    # left hemisphere
+    right_hemi = [9, 10, 11, 12] # right hemisphere
+    central = [7, 8]             # central (Cz region)
+
     for i in range(n_epochs):
-        # Background 1/f noise
+        # Background 1/f pink noise (~2 µV std) — realistic EEG background
         for ch in range(n_channels):
-            X[i, ch] = _generate_pink_noise(n_samples, rng) * 0.5
-        
+            X[i, ch] = _generate_pink_noise(n_samples, rng) * 2.0
+
+        # Add white noise (~0.5 µV) — sensor noise
+        for ch in range(n_channels):
+            X[i, ch] += rng.normal(0, 0.5, n_samples)
+
         if y[i] == 0:
-            # Class 0: high mu power (ERS) — stronger in central channels
-            mu_power = 8.0  # µV
+            # Class 0: ERD in left hemisphere (mu power suppressed), normal in right
             for ch in range(n_channels):
-                if ch in (2, 3, 4, 5):  # central channels
-                    X[i, ch] += mu_power * np.sin(2 * np.pi * mu_freq * t)
+                if ch in left_hemi:
+                    mu_power = 1.5  # ERD: reduced mu
+                elif ch in right_hemi:
+                    mu_power = 4.0  # Normal mu
                 else:
-                    X[i, ch] += 2.0 * np.sin(2 * np.pi * mu_freq * t)
+                    mu_power = 3.0
+                # Add frequency jitter for realism
+                freq_jitter = mu_freq + rng.normal(0, 0.3)
+                phase = rng.uniform(0, 2 * np.pi)
+                X[i, ch] += mu_power * np.sin(2 * np.pi * freq_jitter * t + phase)
         else:
-            # Class 1: low mu power (ERD) — weaker everywhere
-            mu_power = 1.5  # µV
+            # Class 1: ERD in right hemisphere, normal in left
             for ch in range(n_channels):
-                X[i, ch] += mu_power * np.sin(2 * np.pi * mu_freq * t)
-    
+                if ch in right_hemi:
+                    mu_power = 1.5  # ERD
+                elif ch in left_hemi:
+                    mu_power = 4.0  # Normal
+                else:
+                    mu_power = 3.0
+                freq_jitter = mu_freq + rng.normal(0, 0.3)
+                phase = rng.uniform(0, 2 * np.pi)
+                X[i, ch] += mu_power * np.sin(2 * np.pi * freq_jitter * t + phase)
+
     return X, y
 
 def main():
@@ -101,7 +123,73 @@ def main():
     matrix.add_perturbation(WhiteNoisePerturbation(name="WhiteNoise", severity=0.5))
     matrix.add_perturbation(LineNoisePerturbation(severity=0.8, freq=60.0))
     matrix.add_perturbation(ChannelDropoutPerturbation(name="ChannelDropout", severity=0.2))
-    
+
+    # Also run a Welch PSD benchmark: Vireon Welch vs scipy Welch
+    print("\n[3b] Running Spectral Benchmark (Vireon Welch vs scipy)...")
+    from vireon_methods.spectral.vireon_welch import VireonWelch
+    import scipy.signal
+    # Use channel 0 of first epoch as test signal
+    test_signal = X[0, 0, :]
+    f_v, psd_v = VireonWelch(fs=sample_rate, nperseg=128).compute(test_signal)
+    f_s, psd_s = scipy.signal.welch(test_signal, fs=sample_rate, nperseg=128, window='hann',
+                                     noverlap=64, detrend='constant', scaling='density')
+    welch_rmse = float(np.sqrt(np.mean((psd_v - psd_s) ** 2)))
+    welch_max_rel = float(np.max(np.abs(psd_v - psd_s) / (np.abs(psd_s) + 1e-20)))
+    print(f"    Vireon Welch vs scipy: RMSE={welch_rmse:.2e}, max_rel_err={welch_max_rel:.2e}")
+    print(f"    Match (rtol=1e-7): {'YES' if welch_max_rel < 1e-7 else 'NO'}")
+
+    # Run ICA benchmark: Vireon ICA vs sklearn FastICA
+    print("\n[3c] Running ICA Benchmark (Vireon ICA vs sklearn FastICA)...")
+    from vireon_methods.spatial.vireon_ica import VireonICA
+    from sklearn.decomposition import FastICA
+    # Use a subset of channels for ICA (needs n_samples >= n_channels)
+    ica_data = X[:, :8, :].reshape(-1, X.shape[2]).T  # (n_samples, 8 channels)
+    ica_data = ica_data[:1000]  # limit for speed
+    try:
+        vireon_ica = VireonICA(n_components=4)
+        vireon_components = vireon_ica.fit_transform(ica_data)
+        sklearn_ica = FastICA(n_components=4, random_state=42, max_iter=200)
+        sklearn_components = sklearn_ica.fit_transform(ica_data)
+        # Compare subspaces via SVD of cross-correlation matrix
+        cross_corr = np.corrcoef(vireon_components.T, sklearn_components.T)[:4, 4:]
+        from numpy.linalg import svd
+        _, sv, _ = svd(cross_corr)
+        subspace_match = float(np.min(sv))
+        print(f"    ICA subspace match (min singular value): {subspace_match:.6f}")
+        print(f"    Match (>0.95): {'YES' if subspace_match > 0.95 else 'NO'}")
+    except Exception as e:
+        print(f"    ICA benchmark skipped: {e}")
+
+    # Run perturbation severity sweep
+    print("\n[3d] Running Perturbation Severity Sweep...")
+    severity_results = []
+    for sev in [0.0, 0.1, 0.3, 0.5, 1.0, 2.0, 5.0]:
+        if sev == 0.0:
+            perturbed = X.copy()
+            pert_name = "baseline"
+        else:
+            pert = WhiteNoisePerturbation(name=f"WN_{sev}", severity=sev, seed=seed)
+            perturbed = pert.apply(X)
+            pert_name = f"noise_{sev}"
+        try:
+            from sklearn.model_selection import StratifiedKFold
+            from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+            cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=seed)
+            scores = []
+            for train_idx, test_idx in cv.split(perturbed, y):
+                fold_csp = CSPPlugin(n_components=2)
+                train_feats = fold_csp.execute({"signal": perturbed[train_idx], "labels": y[train_idx]})
+                test_feats = fold_csp.execute({"signal": perturbed[test_idx], "labels": None})
+                lda = LinearDiscriminantAnalysis()
+                lda.fit(train_feats, y[train_idx])
+                scores.append(lda.score(test_feats, y[test_idx]))
+            acc = float(np.mean(scores))
+            severity_results.append({"severity": sev, "label": pert_name, "accuracy": acc})
+            print(f"    {pert_name:<12} | Accuracy: {acc:.4f}")
+        except Exception as e:
+            print(f"    {pert_name:<12} | ERROR: {e}")
+            severity_results.append({"severity": sev, "label": pert_name, "accuracy": 0.0, "error": str(e)})
+
     print("\n[4] Executing Perturbation Sweeps...")
     bundles_dict = matrix.execute_matrix()
     
@@ -139,9 +227,57 @@ def main():
     hashes = EvidenceGenerator._compute_bundle_hashes("output")
     with open("output/hashes.json", "w") as f:
         json.dump(hashes, f, indent=4)
-        
+
+    # 5. Multi-bundle summary (all perturbation results, not just baseline)
+    all_bundles_summary = []
+    for b in bundles_dict:
+        all_bundles_summary.append({
+            "bundle_id": b.get("bundle_id", ""),
+            "evidence_hash": b.get("evidence_hash", ""),
+            "perturbation": b.get("benchmark_results", {}).get("perturbation", "Unknown"),
+            "ccc": b.get("statistical_agreement", {}).get("ccc", 0.0),
+            "rmse": b.get("statistical_agreement", {}).get("rmse", 0.0),
+            "runtime_sec": b.get("runtime_sec", 0.0),
+            "pass_fail": b.get("pass_fail", "UNKNOWN"),
+        })
+    with open("output/all_bundles_summary.json", "w") as f:
+        json.dump(all_bundles_summary, f, indent=2)
+
+    # 6. Benchmark summary report
+    with open("output/benchmark_report.md", "w") as f:
+        f.write("# VIREON Benchmark Report\n\n")
+        f.write(f"**Dataset:** {data_source} ({X.shape[0]} trials, {X.shape[1]} channels, {X.shape[2]} samples)\n")
+        f.write(f"**Algorithm:** CSP+LDA (n_components=2)\n")
+        f.write(f"**Seed:** {seed}\n\n")
+        f.write("## Spectral Benchmark (Vireon Welch vs scipy)\n\n")
+        f.write(f"- RMSE: {welch_rmse:.2e}\n")
+        f.write(f"- Max relative error: {welch_max_rel:.2e}\n")
+        f.write(f"- Match (rtol=1e-7): {'YES' if welch_max_rel < 1e-7 else 'NO'}\n\n")
+        f.write("## ICA Benchmark (Vireon ICA vs sklearn FastICA)\n\n")
+        try:
+            f.write(f"- Subspace match (min SVD): {subspace_match:.6f}\n")
+            f.write(f"- Match (>0.95): {'YES' if subspace_match > 0.95 else 'NO'}\n\n")
+        except NameError:
+            f.write("- Skipped (error in ICA computation)\n\n")
+        f.write("## Perturbation Robustness Sweep\n\n")
+        f.write("| Severity | Label | Accuracy |\n")
+        f.write("|----------|-------|----------|\n")
+        for r in severity_results:
+            f.write(f"| {r['severity']} | {r['label']} | {r['accuracy']:.4f} |\n")
+        f.write("\n## Evidence Bundles (CSP+LDA vs MNE Reference)\n\n")
+        f.write("| Perturbation | CCC | RMSE | Runtime (s) | Status |\n")
+        f.write("|--------------|-----|------|-------------|--------|\n")
+        for b in all_bundles_summary:
+            f.write(f"| {b['perturbation']} | {b['ccc']:.4f} | {b['rmse']:.4f} | {b['runtime_sec']:.4f} | {b['pass_fail']} |\n")
+        f.write(f"\n**Baseline evidence_hash:** `{all_bundles_summary[0]['evidence_hash'][:32]}...`\n")
+
     print("    Evidence artifacts written to output/")
-    print("\nRun Complete. You may now review output/evidence.md to see the generated figures and statistics.")
+    print(f"    - evidence.json (baseline bundle with cryptographic hash)")
+    print(f"    - evidence.md (formatted report)")
+    print(f"    - all_bundles_summary.json ({len(all_bundles_summary)} bundles)")
+    print(f"    - benchmark_report.md (multi-algorithm benchmark summary)")
+    print(f"    - hashes.json (bundle integrity hashes)")
+    print("\nRun Complete. Review output/benchmark_report.md for the full summary.")
 
 if __name__ == "__main__":
     main()
