@@ -39,6 +39,7 @@ test_plugin = "vireon_core.kernel.plugins:SampleDiscoveryPlugin"
 
 [tool.pytest.ini_options]
 testpaths = [
+    "tests",
     "vireon-core/tests",
     "vireon-models/tests",
     "vireon-lab/tests",
@@ -46,7 +47,8 @@ testpaths = [
     "vireon-validation/tests",
     "vireon-evidence/tests",
     "vireon-knowledge/tests",
-    "vireon-corpus/tests"
+    "vireon-corpus/tests",
+    "vireon-verification"
 ]
 norecursedirs = [
     ".*",
