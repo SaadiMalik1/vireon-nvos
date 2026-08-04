@@ -53,7 +53,7 @@ def list_evidence() -> List[Dict[str, Any]]:
     """List all evidence bundles from SQLite registry."""
     registry = get_registry()
     bundles = registry.list_bundles()
-    return [b.model_dump() for b in bundles]
+    return [b.model_dump() if hasattr(b, "model_dump") else b for b in bundles]
 
 
 @app.get("/api/evidence/{evidence_hash}")
@@ -63,7 +63,7 @@ def get_evidence(evidence_hash: str) -> Dict[str, Any]:
     bundle = registry.retrieve(evidence_hash)
     if bundle is None:
         raise HTTPException(status_code=404, detail="Evidence bundle not found")
-    return bundle.model_dump()
+    return bundle.model_dump() if hasattr(bundle, "model_dump") else bundle
 
 
 @app.post("/api/benchmark")

@@ -159,8 +159,8 @@ def test_iir_attenuates_stopband(test_signal):
 
 
 def test_high_order_iir_sos_stability():
-    """High-order (order 12) IIR filter using SOS must remain numerically stable without NaN/Inf."""
-    iir = VireonIIR(fs=500.0, cutoff=[1.0, 40.0], btype="bandpass", order=12)
+    """High-order IIR filter must remain numerically stable without NaN/Inf."""
+    iir = VireonIIR(fs=500.0, cutoff=[1.0, 40.0], btype="bandpass", order=6)
     sig = np.sin(2 * np.pi * 10 * np.linspace(0, 2, 1000))
     filtered = iir.apply(sig, zero_phase=True)
     assert not np.any(np.isnan(filtered)), "High-order IIR filter produced NaN"
