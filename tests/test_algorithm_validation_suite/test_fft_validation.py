@@ -243,3 +243,15 @@ def test_pure_dc_signal():
     f, psd = VireonFFT(fs=fs, detrend="constant").compute(sig)
     # After subtracting mean, signal is all zeros → PSD = 0
     assert np.allclose(psd, 0, atol=1e-20), "Pure DC signal after detrending should have zero PSD"
+
+
+def test_fft_ccc_matches_scipy(test_signal):
+    """VireonFFT PSD must match scipy.signal.periodogram with Lin's CCC > 0.9999."""
+    from vireon_validation.statistics.framework import lin_concordance_correlation
+
+    fs, sig = test_signal
+    f_v, psd_v = VireonFFT(fs=fs, window="hann", detrend="constant").compute(sig)
+    f_sp, psd_sp = scipy.signal.periodogram(sig, fs=fs, window="hann", detrend="constant")
+
+    ccc = lin_concordance_correlation(psd_v, psd_sp)
+    assert ccc > 0.9999, f"VireonFFT vs scipy.signal.periodogram CCC {ccc:.6f} <= 0.9999"

@@ -177,3 +177,43 @@ def test_imaginary_coherence_zero_lag():
     X = np.vstack([ch1, ch2])
     icoh = VireonImaginaryCoherence().compute(X, fs=fs, band=(8, 12))
     assert icoh[0, 1] < 0.2, f"Imaginary coherence {icoh[0, 1]:.3f} > 0.2 for zero lag"
+
+
+# ===== Reference Cross-Validation Tests =====
+
+from vireon_validation.statistics.framework import lin_concordance_correlation
+
+
+def test_coherence_matches_scipy_reference(phase_locked_signals):
+    """VireonCoherence must match scipy.signal.coherence within 0.05 absolute difference."""
+    import scipy.signal
+
+    X, fs, _ = phase_locked_signals
+    v_coh = VireonCoherence().compute(X, fs=fs, band=(8, 12))[0, 1]
+
+    f_sp, Cxy_sp = scipy.signal.coherence(X[0], X[1], fs=fs, nperseg=256)
+    idx_sp = (f_sp >= 8) & (f_sp <= 12)
+    sp_coh = float(np.mean(Cxy_sp[idx_sp]))
+
+    assert abs(v_coh - sp_coh) < 0.05, f"VireonCoherence {v_coh:.4f} vs scipy {sp_coh:.4f} diff > 0.05"
+
+
+def test_plv_wpli_matches_analytical_reference(phase_locked_signals):
+    """VireonPLV and VireonWPLI must match analytical Hilbert transform reference (CCC > 0.95)."""
+    import scipy.signal
+
+    X, fs, phase_diff = phase_locked_signals
+    v_plv = VireonPLV().compute(X, fs=fs, band=(8, 12))[0, 1]
+    v_wpli = VireonWPLI().compute(X, fs=fs, band=(8, 12))[0, 1]
+
+    # Analytical Hilbert PLV
+    sos = scipy.signal.butter(4, [8, 12], btype="bandpass", fs=fs, output="sos")
+    x1_f = scipy.signal.sosfilt(sos, X[0])
+    x2_f = scipy.signal.sosfilt(sos, X[1])
+    h1 = scipy.signal.hilbert(x1_f)
+    h2 = scipy.signal.hilbert(x2_f)
+    dphase = np.angle(h1) - np.angle(h2)
+    ref_plv = float(np.abs(np.mean(np.exp(1j * dphase))))
+
+    assert abs(v_plv - ref_plv) < 0.10, f"PLV {v_plv:.4f} vs Hilbert ref {ref_plv:.4f} diff > 0.10"
+    assert v_wpli > 0.70, f"wPLI {v_wpli:.4f} <= 0.70 for phase-locked signals"

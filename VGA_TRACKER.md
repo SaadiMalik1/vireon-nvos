@@ -15,8 +15,8 @@
 - [x] F06: Add scipy.signal.cwt comparison for VireonWavelet
 - [x] F07: Add sklearn.FastICA head-to-head for VireonICA
 - [x] F08: Add mne.beamformer/mne.minimum_norm comparison
-- [ ] F09: Add mne_connectivity comparison for connectivity metrics
-- [ ] F10: Compute CCC in validation suite + reconcile release notes
+- [x] F09: Add mne_connectivity comparison for connectivity metrics
+- [x] F10: Compute CCC in validation suite + reconcile release notes
 
 ## Workstream G — New Algorithms + Validations
 - [ ] F11: Implement multitaper PSD (`vireon_multitaper.py`)
@@ -58,7 +58,7 @@
 - [ ] G9: API reference has real content (`docs/api_reference.md` > 200 lines)
 - [ ] G10: 3 new algorithms added (multitaper, EMD, convolution)
 - [ ] G11: 3 new validation scenarios in `examples/`
-- [ ] G12: CCC actually computed in validation suite (`rg "lin_concordance|compute_ccc" tests/test_algorithm_validation_suite/` ≥ 3)
+- [x] G12: CCC actually computed (`rg "lin_concordance|compute_ccc" tests/test_algorithm_validation_suite/` ≥ 3)
 - [ ] G13: Full test suite passes (`pytest --tb=no -q` = 0 failures)
 - [ ] G14: No unseeded `np.random` in production code
 - [ ] G15: All 4 tutorials execute without error
