@@ -14,7 +14,7 @@
 - [x] F05: Add scipy.signal.stft comparison for VireonSTFT
 - [x] F06: Add scipy.signal.cwt comparison for VireonWavelet
 - [x] F07: Add sklearn.FastICA head-to-head for VireonICA
-- [ ] F08: Add mne.beamformer/mne.minimum_norm comparison
+- [x] F08: Add mne.beamformer/mne.minimum_norm comparison
 - [ ] F09: Add mne_connectivity comparison for connectivity metrics
 - [ ] F10: Compute CCC in validation suite + reconcile release notes
 

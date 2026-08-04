@@ -125,6 +125,9 @@ def test_mne_output_shape(forward_setup):
     )
 
 
+from vireon_validation.statistics.framework import lin_concordance_correlation
+
+
 def test_mne_deterministic(forward_setup):
     """MNE inverse must produce deterministic source estimates."""
     L, X, _, _ = forward_setup
@@ -133,3 +136,39 @@ def test_mne_deterministic(forward_setup):
     mne2 = VireonMinimumNorm(leadfield=L, snr=3.0)
     est2 = mne2.fit(X)
     assert np.array_equal(est1, est2), "MNE estimates not deterministic"
+
+
+def test_lcmv_matches_scipy_reference(forward_setup):
+    """VireonLCMV source estimates must match scipy pinv reference with CCC > 0.99."""
+    import scipy.linalg
+
+    L, X, _, _ = forward_setup
+    lcmv = VireonLCMV(leadfield=L, reg=0.01).fit(X)
+    est_v = lcmv.apply(X)
+
+    C = np.cov(X) + 0.01 * np.eye(X.shape[0])
+    C_inv = scipy.linalg.pinv(C)
+    W = np.zeros((L.shape[0], L.shape[1]))
+    for j in range(L.shape[1]):
+        lj = L[:, j]
+        W[:, j] = (C_inv @ lj) / (lj.T @ C_inv @ lj)
+    est_ref = W.T @ X
+
+    ccc = lin_concordance_correlation(est_v.ravel(), est_ref.ravel())
+    assert ccc > 0.99, f"VireonLCMV vs scipy reference CCC {ccc:.6f} <= 0.99"
+
+
+def test_mne_matches_scipy_reference(forward_setup):
+    """VireonMinimumNorm source estimates must match scipy solve reference with CCC > 0.99."""
+    import scipy.linalg
+
+    L, X, _, _ = forward_setup
+    mne_mod = VireonMinimumNorm(leadfield=L, snr=3.0)
+    est_v = mne_mod.fit(X)
+
+    Gamma = L @ L.T + (1.0 / 9.0) * np.eye(L.shape[0])
+    W = scipy.linalg.solve(Gamma.T, L).T
+    est_ref = W @ X
+
+    ccc = lin_concordance_correlation(est_v.ravel(), est_ref.ravel())
+    assert ccc > 0.99, f"VireonMinimumNorm vs scipy reference CCC {ccc:.6f} <= 0.99"
