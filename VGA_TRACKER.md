@@ -9,7 +9,7 @@
 ## Workstream F — Fix All Audit Findings
 - [x] F01: Generate validation report (run script, commit `reports/`)
 - [x] F02: Add PhysioNet download to CI
-- [ ] F03: Fix Tutorial 02 (3 broken imports)
+- [x] F03: Fix Tutorial 02 (3 broken imports)
 - [ ] F04: Fix Tutorial 03 (non-existent function)
 - [ ] F05: Add scipy.signal.stft comparison for VireonSTFT
 - [ ] F06: Add scipy.signal.cwt comparison for VireonWavelet
@@ -51,7 +51,7 @@
 - [ ] G2: All algorithms have reference comparison (scipy/MNE/sklearn imported across suite)
 - [x] G3: Validation report generated (`reports/algorithm_validation_report.md` > 200 lines)
 - [x] G4: PhysioNet data in CI (`.github/workflows/ci.yml` downloads eegbci data)
-- [ ] G5: Tutorial 02 executes without ImportError
+- [x] G5: Tutorial 02 executes without ImportError
 - [ ] G6: Tutorial 03 executes without error
 - [ ] G7: FastAPI persists to SQLite (evidence survives restart)
 - [ ] G8: DOIMinter renamed honestly to EvidenceIdentifier
