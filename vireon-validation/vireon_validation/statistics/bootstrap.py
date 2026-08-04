@@ -45,6 +45,19 @@ def bootstrap_ci(
     return float(point_estimate), ci_lower, ci_upper
 
 
+def compute_bootstrap_ci(
+    data: np.ndarray,
+    statistic_fn: Callable,
+    n_resamples: int = 1000,
+    seed: int = 42,
+    **kwargs
+) -> Tuple[float, float, list[float]]:
+    """Compute point estimate, variance, and 95% bootstrap CI for legacy callers."""
+    point_est, ci_l, ci_u = bootstrap_ci(data, statistic_fn, n_bootstrap=n_resamples, seed=seed)
+    var = float((ci_u - ci_l) ** 2 / 3.8416) if ci_u != ci_l else 0.0
+    return point_est, var, [ci_l, ci_u]
+
+
 def bootstrap_ccc_ci(
     x: np.ndarray,
     y: np.ndarray,

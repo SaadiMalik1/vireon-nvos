@@ -156,3 +156,13 @@ def test_iir_attenuates_stopband(test_signal):
     assert attenuation_db < -20, (
         f"60 Hz attenuation only {attenuation_db:.1f} dB, need < -20 dB"
     )
+
+
+def test_high_order_iir_sos_stability():
+    """High-order (order 12) IIR filter using SOS must remain numerically stable without NaN/Inf."""
+    iir = VireonIIR(fs=500.0, cutoff=[1.0, 40.0], btype="bandpass", order=12)
+    sig = np.sin(2 * np.pi * 10 * np.linspace(0, 2, 1000))
+    filtered = iir.apply(sig, zero_phase=True)
+    assert not np.any(np.isnan(filtered)), "High-order IIR filter produced NaN"
+    assert not np.any(np.isinf(filtered)), "High-order IIR filter produced Inf"
+    assert np.max(np.abs(filtered)) < 5.0, "High-order IIR filter blew up"

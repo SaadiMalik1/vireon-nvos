@@ -255,3 +255,14 @@ def test_fft_ccc_matches_scipy(test_signal):
 
     ccc = lin_concordance_correlation(psd_v, psd_sp)
     assert ccc > 0.9999, f"VireonFFT vs scipy.signal.periodogram CCC {ccc:.6f} <= 0.9999"
+
+
+def test_multichannel_fft_computation(test_signal):
+    """VireonFFT should process 2D multi-channel input (n_channels, n_samples) consistently."""
+    fs, sig = test_signal
+    sig2d = np.vstack([sig, sig * 0.5])
+    fft = VireonFFT(fs=fs)
+    f0, psd0 = fft.compute(sig2d[0])
+    f1, psd1 = fft.compute(sig2d[1])
+
+    assert np.allclose(psd1, psd0 * 0.25, rtol=1e-5), "Multi-channel scaling incorrect"

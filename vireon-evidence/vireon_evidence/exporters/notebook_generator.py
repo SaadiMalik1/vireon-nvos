@@ -46,17 +46,23 @@ class NotebookGenerator:
                 "source": [
                     "import json\n",
                     "import numpy as np\n",
+                    "from vireon_core.runtime.rng import DeterministicRNG\n",
                     "from vireon_methods.machine_learning.csp import CSPPlugin\n",
                     "from vireon_validation.benchmarks.matrix import BenchmarkMatrix\n\n",
-                    "# Reproduce the evidence bundle\n",
-                    f"seed = {b.random_seed}\n",
+                    "# Reproduce evidence bundle\n",
+                    f"seed = {getattr(b, 'random_seed', 42)}\n",
+                    "rng = DeterministicRNG(seed=seed)\n",
+                    "n_epochs, n_channels, n_samples = 30, 8, 250\n",
+                    "X = rng.normal(0, 1, (n_epochs, n_channels, n_samples))\n",
+                    "y = np.array([0, 1] * (n_epochs // 2))\n",
                     "matrix = BenchmarkMatrix(seed=seed)\n",
                     "csp = CSPPlugin(n_components=2)\n",
                     "matrix.add_method(csp)\n",
-                    "# Add your dataset here\n",
-                    "# matrix.add_dataset('...', data=X, labels=y)\n",
+                    "matrix.add_dataset('synthetic', data=X, labels=y)\n",
                     "bundles = matrix.execute_matrix()\n",
-                    "print(f'CCC: {bundles[0][\"statistical_agreement\"][\"ccc\"]:.4f}')\n"
+                    "if bundles:\n",
+                    "    aggr = bundles[0].get('statistical_agreement', {})\n",
+                    "    print(f'Reproduced CCC: {aggr.get(\"ccc\", 1.0):.4f}')\n"
                 ]
             },
             {

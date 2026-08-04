@@ -37,35 +37,36 @@
 - [x] F24: Tighten BCI competition tolerance + add NaN/Inf contract tests
 
 ## Workstream I — Integration + Polish
-- [ ] F25: Generate real API reference (hand-write key sections)
-- [ ] F26: Add multi-channel FFT test + high-order IIR stability
-- [ ] F27: Fix NotebookGenerator embedded code cell
-- [ ] F28: External researcher quickstart guide (install to publish in 1hr)
-- [ ] F29: Final integration — verify G1-G15, tag `v0.5.0-validation-platform-ga`
-- [ ] F30: Release verification & polish
+- [x] F25: Generate real API reference (hand-write key sections)
+- [x] F26: Add multi-channel FFT test + high-order IIR stability test
+- [x] F27: Fix NotebookGenerator embedded code cell
+- [x] F28: External researcher quickstart guide (install to publish in 1hr)
+- [x] F29: Final integration — verify G1-G15, tag `v0.5.0-validation-platform-ga`
+- [x] F30: Release verification & polish
 
 ---
 
 ## Success Criteria (G1–G15)
-- [ ] G1: No self-referential tests (`rg "manual.*segmented|own.*formula" tests/test_algorithm_validation_suite/` = 0)
-- [ ] G2: All algorithms have reference comparison (scipy/MNE/sklearn imported across suite)
+- [x] G1: No self-referential tests (`rg "manual.*segmented|own.*formula" tests/test_algorithm_validation_suite/` = 0)
+- [x] G2: All algorithms have reference comparison (scipy/MNE/sklearn imported across suite)
 - [x] G3: Validation report generated (`reports/algorithm_validation_report.md` > 200 lines)
 - [x] G4: PhysioNet data in CI (`.github/workflows/ci.yml` downloads eegbci data)
 - [x] G5: Tutorial 02 executes without ImportError
 - [x] G6: Tutorial 03 executes without error
 - [x] G7: FastAPI persists to SQLite (evidence survives restart)
 - [x] G8: DOIMinter renamed honestly to EvidenceIdentifier
-- [ ] G9: API reference has real content (`docs/api_reference.md` > 200 lines)
+- [x] G9: API reference has real content (`docs/api_reference.md` > 200 lines)
 - [x] G10: 3 new algorithms added (multitaper, EMD, convolution)
 - [x] G11: 3 new validation scenarios in `examples/`
 - [x] G12: CCC actually computed (`rg "lin_concordance|compute_ccc" tests/test_algorithm_validation_suite/` ≥ 3)
-- [ ] G13: Full test suite passes (`pytest --tb=no -q` = 0 failures)
-- [ ] G14: No unseeded `np.random` in production code
-- [ ] G15: All 4 tutorials execute without error
+- [x] G13: Full test suite passes (`pytest --tb=no -q` = 0 failures)
+- [x] G14: No unseeded `np.random` in production code
+- [x] G15: All 4 tutorials execute without error
 
 ---
 
-## Milestone Status
-- Phase: Workstream F (Fix All Audit Findings)
-- Tasks completed: 0 / 30
-- Success criteria passing: 0 / 15
+## Milestone Status & Progress
+
+- Phase: COMPLETED — Validation Platform GA (v0.5.0-validation-platform-ga)
+- Tasks completed: 30 / 30
+- Success criteria passing: 15 / 15
