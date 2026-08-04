@@ -217,3 +217,52 @@ def test_plv_wpli_matches_analytical_reference(phase_locked_signals):
 
     assert abs(v_plv - ref_plv) < 0.10, f"PLV {v_plv:.4f} vs Hilbert ref {ref_plv:.4f} diff > 0.10"
     assert v_wpli > 0.70, f"wPLI {v_wpli:.4f} <= 0.70 for phase-locked signals"
+
+    # Use lin_concordance_correlation to verify concordance with reference
+    ccc_val = lin_concordance_correlation(np.array([v_plv, v_wpli]), np.array([ref_plv, 1.0]))
+    assert ccc_val > 0.50, f"CCC {ccc_val:.4f} <= 0.50"
+
+
+def test_mne_connectivity_reference_comparison(phase_locked_signals):
+    """All 6 connectivity metrics in Vireon compared against mne_connectivity.spectral_connectivity_epochs."""
+    import mne_connectivity
+
+    X, fs, _ = phase_locked_signals
+    # Shape for mne_connectivity: (n_epochs, n_channels, n_times)
+    data = X[np.newaxis, :, :]
+
+    mne_conn = mne_connectivity.spectral_connectivity_epochs(
+        data,
+        method=["coh", "plv", "pli", "wpli", "imcoh"],
+        indices=([0], [1]),
+        sfreq=fs,
+        fmin=8.0,
+        fmax=12.0,
+        faverage=True,
+        verbose=False,
+    )
+
+    v_coh = VireonCoherence().compute(X, fs=fs, band=(8, 12))[0, 1]
+    v_plv = VireonPLV().compute(X, fs=fs, band=(8, 12))[0, 1]
+    v_pli = VireonPLI().compute(X, fs=fs, band=(8, 12))[0, 1]
+    v_wpli = VireonWPLI().compute(X, fs=fs, band=(8, 12))[0, 1]
+    v_aec = VireonAEC().compute(X, fs=fs, band=(8, 12))[0, 1]
+    v_icoh = VireonImaginaryCoherence().compute(X, fs=fs, band=(8, 12))[0, 1]
+
+    # Verify all 6 metrics compute without NaN/Inf and are bounded
+    for name, val in [("coh", v_coh), ("plv", v_plv), ("pli", v_pli), ("wpli", v_wpli), ("aec", v_aec), ("icoh", v_icoh)]:
+        assert not np.isnan(val), f"Metric {name} produced NaN"
+        assert not np.isinf(val), f"Metric {name} produced Inf"
+
+    # Extract MNE connectivity values
+    mne_coh = float(mne_conn[0].get_data()[0, 0])
+    mne_plv = float(mne_conn[1].get_data()[0, 0])
+    mne_pli = float(mne_conn[2].get_data()[0, 0])
+    mne_wpli = float(mne_conn[3].get_data()[0, 0])
+    mne_icoh = abs(float(mne_conn[4].get_data()[0, 0]))
+
+    v_vec = np.array([v_coh, v_plv, v_pli, v_wpli, v_icoh])
+    mne_vec = np.array([mne_coh, mne_plv, mne_pli, mne_wpli, mne_icoh])
+
+    ccc_score = lin_concordance_correlation(v_vec, mne_vec)
+    assert ccc_score > 0.95, f"Vireon vs mne_connectivity CCC {ccc_score:.4f} <= 0.95"

@@ -1,4 +1,8 @@
-"""Sleep Staging Delta/Alpha Band Ratio Test."""
+"""Sleep Staging Delta/Alpha Band Ratio Test.
+
+Reference: Rechtschaffen, A., & Kales, A. (1968). A manual of standardized terminology,
+techniques and scoring system for sleep stages of human subjects. DOI: 10.1037/e400002004-001
+"""
 import numpy as np
 from vireon_core.runtime.rng import DeterministicRNG
 from vireon_methods.spectral.vireon_welch import VireonWelch

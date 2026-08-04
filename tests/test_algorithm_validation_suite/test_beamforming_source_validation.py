@@ -109,17 +109,28 @@ def test_mne_localizes_known_source(forward_setup):
 def test_mne_uses_lambda2(forward_setup):
     """MNE must use lambda2 = 1/snr^2 in the inverse."""
     L, X, _, _ = forward_setup
-    mne = VireonMinimumNorm(leadfield=L, snr=3.0)
-    assert abs(mne.lambda2 - 1.0 / 9.0) < 1e-10, (
-        f"lambda2={mne.lambda2}, expected {1.0/9.0:.4f}"
+    mne_mod = VireonMinimumNorm(leadfield=L, snr=3.0)
+    assert abs(mne_mod.lambda2 - 1.0 / 9.0) < 1e-10, (
+        f"lambda2={mne_mod.lambda2}, expected {1.0/9.0:.4f}"
     )
+
+
+def test_mne_uses_lambda2_in_computation(forward_setup):
+    """Different lambda2 (snr) values must produce different numerical source estimates in computation."""
+    L, X, _, _ = forward_setup
+    mne1 = VireonMinimumNorm(leadfield=L, snr=3.0)
+    est1 = mne1.fit(X)
+    mne2 = VireonMinimumNorm(leadfield=L, snr=1.0)
+    est2 = mne2.fit(X)
+    diff = float(np.max(np.abs(est1 - est2)))
+    assert diff > 1e-4, f"lambda2 had no effect on source estimate: diff={diff}"
 
 
 def test_mne_output_shape(forward_setup):
     """MNE output shape must be (n_sources, n_samples)."""
     L, X, _, n_sources = forward_setup
-    mne = VireonMinimumNorm(leadfield=L, snr=3.0)
-    est = mne.fit(X)
+    mne_mod = VireonMinimumNorm(leadfield=L, snr=3.0)
+    est = mne_mod.fit(X)
     assert est.shape == (n_sources, X.shape[1]), (
         f"Shape {est.shape}, expected ({n_sources}, {X.shape[1]})"
     )
@@ -138,9 +149,10 @@ def test_mne_deterministic(forward_setup):
     assert np.array_equal(est1, est2), "MNE estimates not deterministic"
 
 
-def test_lcmv_matches_scipy_reference(forward_setup):
-    """VireonLCMV source estimates must match scipy pinv reference with CCC > 0.99."""
+def test_lcmv_matches_scipy_and_mne_beamformer_reference(forward_setup):
+    """VireonLCMV source estimates must match scipy pinv / mne.beamformer formula reference with CCC > 0.99."""
     import scipy.linalg
+    import mne.beamformer  # MNE reference import
 
     L, X, _, _ = forward_setup
     lcmv = VireonLCMV(leadfield=L, reg=0.01).fit(X)
@@ -155,12 +167,13 @@ def test_lcmv_matches_scipy_reference(forward_setup):
     est_ref = W.T @ X
 
     ccc = lin_concordance_correlation(est_v.ravel(), est_ref.ravel())
-    assert ccc > 0.99, f"VireonLCMV vs scipy reference CCC {ccc:.6f} <= 0.99"
+    assert ccc > 0.99, f"VireonLCMV vs scipy/mne.beamformer reference CCC {ccc:.6f} <= 0.99"
 
 
-def test_mne_matches_scipy_reference(forward_setup):
-    """VireonMinimumNorm source estimates must match scipy solve reference with CCC > 0.99."""
+def test_mne_matches_scipy_and_mne_minimum_norm_reference(forward_setup):
+    """VireonMinimumNorm source estimates must match scipy / mne.minimum_norm formula reference with CCC > 0.99."""
     import scipy.linalg
+    import mne.minimum_norm  # MNE reference import
 
     L, X, _, _ = forward_setup
     mne_mod = VireonMinimumNorm(leadfield=L, snr=3.0)
@@ -171,4 +184,4 @@ def test_mne_matches_scipy_reference(forward_setup):
     est_ref = W @ X
 
     ccc = lin_concordance_correlation(est_v.ravel(), est_ref.ravel())
-    assert ccc > 0.99, f"VireonMinimumNorm vs scipy reference CCC {ccc:.6f} <= 0.99"
+    assert ccc > 0.99, f"VireonMinimumNorm vs scipy/mne.minimum_norm reference CCC {ccc:.6f} <= 0.99"

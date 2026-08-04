@@ -43,17 +43,17 @@ def test_emd_reconstructs_original_signal():
     assert max_diff < 1e-10, f"EMD reconstruction error {max_diff:.3e} > 1e-10"
 
 
-def test_convolution_matches_numpy():
-    """VireonConvolution convolve and correlate must match numpy outputs with Lin's CCC > 0.9999."""
-    x = np.array([1.0, 2.0, 3.0, 4.0, 5.0])
+def test_convolution_matches_numpy_and_scipy_fftconvolve():
+    """VireonConvolution convolve and correlate must match scipy.signal.fftconvolve with Lin's CCC > 0.9999."""
+    x = np.array([1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0])
     h = np.array([0.5, 1.0, 0.5])
 
     conv = VireonConvolution(mode="full")
     y_conv = conv.convolve(x, h)
-    y_np_conv = np.convolve(x, h, mode="full")
+    y_sp_conv = scipy.signal.fftconvolve(x, h, mode="full")
 
-    ccc_conv = lin_concordance_correlation(y_conv, y_np_conv)
-    assert ccc_conv > 0.9999, f"Convolve CCC {ccc_conv:.6f} <= 0.9999"
+    ccc_conv = lin_concordance_correlation(y_conv, y_sp_conv)
+    assert ccc_conv > 0.9999, f"Convolve vs scipy.signal.fftconvolve CCC {ccc_conv:.6f} <= 0.9999"
 
     y_corr = conv.correlate(x, h)
     y_np_corr = np.correlate(x, h, mode="full")

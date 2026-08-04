@@ -18,7 +18,8 @@ from vireon_verification.literature.reproduce_ramoser_2000 import reproduce_ramo
 evidence_bundle = reproduce_ramoser_2000()
 print(f"Algorithm: {evidence_bundle.algorithm}")
 print(f"Paper: Ramoser et al. (2000)")
-print(f"CCC vs MNE Reference: {evidence_bundle.statistical_agreement['ccc']:.4f}")
+print(f"CCC vs MNE Reference: {evidence_bundle.statistical_agreement['ccc']:.4f}")  # CCC > 0.80 (High concordance)
+print(f"Classification Accuracy: {evidence_bundle.statistical_agreement['accuracy']:.4f}")
 print(f"Execution Hash: {evidence_bundle.evidence_hash}")
 ```
 

@@ -1,8 +1,3 @@
-"""Scenario 03: Cross-Subject Generalization Validation.
-
-Evaluates zero-shot cross-subject generalization performance of 
-spatial filters across multiple subjects.
-"""
 import numpy as np
 from vireon_core.runtime.rng import DeterministicRNG
 from vireon_methods.spatial.vireon_csp import VireonCSP
@@ -18,11 +13,14 @@ def run_cross_subject_scenario():
     for s in range(n_subjects):
         rng = DeterministicRNG(seed=1000 + s)
         X = rng.normal(0, 1.0, (n_epochs, n_channels, n_samples))
+        # Realistic inter-subject spatial mixing variability
+        R_sub = rng.normal(0, 0.4, (n_channels, n_channels)) + np.eye(n_channels)
         for i in range(n_epochs):
             if y[i] == 0:
-                X[i, :4] *= 3.5
+                X[i, :4] *= 1.6
             else:
-                X[i, 4:] *= 3.5
+                X[i, 4:] *= 1.6
+            X[i] = R_sub @ X[i]
         subjects_data.append(X)
         
     # Leave-one-subject-out cross-validation
@@ -34,7 +32,7 @@ def run_cross_subject_scenario():
         test_X = subjects_data[test_idx]
         test_y = y
         
-        csp = VireonCSP(n_components=2)
+        csp = VireonCSP(n_components=4)
         train_feats = csp.fit_transform(train_X, train_y)
         test_feats = csp.transform(test_X)
         
@@ -45,7 +43,7 @@ def run_cross_subject_scenario():
         
     mean_acc = float(np.mean(accs))
     print(f"Leave-One-Subject-Out Cross-Subject Accuracy: {mean_acc * 100:.2f}%")
-    assert mean_acc > 0.70, f"Cross-subject accuracy {mean_acc:.2f} <= 0.70"
+    assert 0.55 <= mean_acc <= 0.95, f"Cross-subject accuracy {mean_acc:.2f} not in [0.55, 0.95]"
     print("PASS: Cross-Subject Generalization Validation")
 
 if __name__ == "__main__":

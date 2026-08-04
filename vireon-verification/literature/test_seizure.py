@@ -1,4 +1,8 @@
-"""Seizure Detection Sensitivity Test."""
+"""Seizure Detection Sensitivity Test.
+
+Reference: Gotman, J. (1982). Automatic recognition of epileptic seizures in the EEG.
+Electroencephalography and Clinical Neurophysiology, 54(5), 530-540. DOI: 10.1016/0013-4694(82)90038-4
+"""
 import numpy as np
 from vireon_core.runtime.rng import DeterministicRNG
 

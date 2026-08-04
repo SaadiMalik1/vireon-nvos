@@ -1,4 +1,8 @@
-"""ERP P300 Latency Reproduction Test."""
+"""ERP P300 Latency Reproduction Test.
+
+Reference: Polich, J. (2007). Updating P300: an integrative theory of P3a and P3b.
+Clinical Neurophysiology, 118(10), 2128-2148. DOI: 10.1016/j.clinph.2007.04.019
+"""
 import numpy as np
 from vireon_core.runtime.rng import DeterministicRNG
 from vireon_methods.spectral.vireon_fft import VireonFFT
