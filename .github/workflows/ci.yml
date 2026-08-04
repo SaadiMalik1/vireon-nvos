@@ -63,7 +63,7 @@ jobs:
         "
     - name: Run literature reproduction tests
       run: |
-        pytest vireon-verification/literature/test_bci_competition.py -v
+        pytest vireon-verification/literature/ -v
 
     - name: Run doc sync checker
       run: |

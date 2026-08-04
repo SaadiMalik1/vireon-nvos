@@ -7,8 +7,8 @@
 ---
 
 ## Workstream F — Fix All Audit Findings
-- [ ] F01: Generate validation report (run script, commit `reports/`)
-- [ ] F02: Add PhysioNet download to CI
+- [x] F01: Generate validation report (run script, commit `reports/`)
+- [x] F02: Add PhysioNet download to CI
 - [ ] F03: Fix Tutorial 02 (3 broken imports)
 - [ ] F04: Fix Tutorial 03 (non-existent function)
 - [ ] F05: Add scipy.signal.stft comparison for VireonSTFT
@@ -49,8 +49,8 @@
 ## Success Criteria (G1–G15)
 - [ ] G1: No self-referential tests (`rg "manual.*segmented|own.*formula" tests/test_algorithm_validation_suite/` = 0)
 - [ ] G2: All algorithms have reference comparison (scipy/MNE/sklearn imported across suite)
-- [ ] G3: Validation report generated (`reports/algorithm_validation_report.md` > 200 lines)
-- [ ] G4: PhysioNet data in CI (`.github/workflows/ci.yml` downloads eegbci data)
+- [x] G3: Validation report generated (`reports/algorithm_validation_report.md` > 200 lines)
+- [x] G4: PhysioNet data in CI (`.github/workflows/ci.yml` downloads eegbci data)
 - [ ] G5: Tutorial 02 executes without ImportError
 - [ ] G6: Tutorial 03 executes without error
 - [ ] G7: FastAPI persists to SQLite (evidence survives restart)
