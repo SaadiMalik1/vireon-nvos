@@ -50,6 +50,7 @@ tmp/
 results/
 artifacts/
 reports/
+!reports/algorithm_validation_report.md
 output/
 evidence_output/
 benchmarks/output/
