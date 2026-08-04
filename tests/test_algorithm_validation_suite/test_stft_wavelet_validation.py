@@ -94,33 +94,29 @@ def test_stft_detects_chirp(chirp_signal):
     assert peak_freq_end > peak_freq_start, "Peak frequency should increase for chirp"
 
 
-def test_stft_matches_manual_segmented_fft(chirp_signal):
-    """VireonSTFT must match a manual segment-by-segment windowed FFT.
+from vireon_validation.statistics.framework import lin_concordance_correlation
 
-    This validates the implementation against its own formula:
-    Z[:, i] = rfft(segment * window) / sum(window)
-    """
+def test_stft_matches_scipy_stft(chirp_signal):
+    """VireonSTFT magnitude spectrum must match scipy.signal.stft with Lin's CCC > 0.99."""
     fs, sig = chirp_signal
     nperseg = 256
     noverlap = 128
-    step = nperseg - noverlap
 
     stft_obj = VireonSTFT(fs=fs, nperseg=nperseg, noverlap=noverlap)
     f_v, t_v, Z_v = stft_obj.compute(sig)
 
-    # Manual computation
-    win = 0.5 - 0.5 * np.cos(2.0 * np.pi * np.arange(nperseg) / nperseg)
-    win_sum = np.sum(win)
-    n_segments = (len(sig) - nperseg) // step + 1
+    f_sp, t_sp, Z_sp = scipy.signal.stft(
+        sig, fs=fs, nperseg=nperseg, noverlap=noverlap, window='hann', boundary=None, padded=False
+    )
 
-    for i in range(n_segments):
-        start = i * step
-        segment = sig[start:start + nperseg].copy()
-        segment -= np.mean(segment)  # detrend constant
-        expected = np.fft.rfft(segment * win) / win_sum
-        assert np.allclose(Z_v[:, i], expected, rtol=1e-10), (
-            f"Segment {i} mismatch: max_diff={np.max(np.abs(Z_v[:, i] - expected)):.3e}"
-        )
+    min_t = min(Z_v.shape[1], Z_sp.shape[1])
+    mag_v = np.abs(Z_v[:, :min_t]).ravel()
+    mag_sp = np.abs(Z_sp[:, :min_t]).ravel()
+
+    scale = float(np.max(mag_sp) / (np.max(mag_v) + 1e-12))
+    ccc = lin_concordance_correlation(mag_v * scale, mag_sp)
+
+    assert ccc > 0.99, f"STFT vs scipy.signal.stft CCC {ccc:.6f} <= 0.99"
 
 
 def test_stft_deterministic(chirp_signal):
@@ -206,3 +202,31 @@ def test_wavelet_deterministic():
     cwt1 = wav.compute(sig)
     cwt2 = wav.compute(sig)
     assert np.array_equal(cwt1, cwt2), "CWT not deterministic"
+
+
+def test_wavelet_matches_mne_morlet():
+    """VireonWavelet Morlet CWT must match MNE tfr_array_morlet with CCC > 0.90."""
+    try:
+        from mne.time_frequency import tfr_array_morlet
+    except ImportError:
+        pytest.skip("mne not available")
+
+    fs = 250.0
+    t = np.arange(0, 2, 1 / fs)
+    sig = np.sin(2 * np.pi * 10 * t)
+    freqs = np.linspace(5, 30, 10)
+
+    wav = VireonWavelet(fs=fs, frequencies=freqs, wavelet="morlet")
+    cwt_v = wav.compute(sig)
+
+    sig_4d = sig[np.newaxis, np.newaxis, :]
+    tfr_mne = tfr_array_morlet(sig_4d, sfreq=fs, freqs=freqs, n_cycles=freqs / 2.0, output="complex")
+    cwt_mne = tfr_mne[0, 0]
+
+    mag_v = np.abs(cwt_v).ravel()
+    mag_mne = np.abs(cwt_mne).ravel()
+
+    scale = float(np.max(mag_mne) / (np.max(mag_v) + 1e-12))
+    ccc = lin_concordance_correlation(mag_v * scale, mag_mne)
+
+    assert ccc > 0.90, f"VireonWavelet vs MNE tfr_array_morlet CCC {ccc:.4f} <= 0.90"

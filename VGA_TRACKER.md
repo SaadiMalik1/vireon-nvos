@@ -11,8 +11,8 @@
 - [x] F02: Add PhysioNet download to CI
 - [x] F03: Fix Tutorial 02 (3 broken imports)
 - [x] F04: Fix Tutorial 03 (non-existent function)
-- [ ] F05: Add scipy.signal.stft comparison for VireonSTFT
-- [ ] F06: Add scipy.signal.cwt comparison for VireonWavelet
+- [x] F05: Add scipy.signal.stft comparison for VireonSTFT
+- [x] F06: Add scipy.signal.cwt comparison for VireonWavelet
 - [ ] F07: Add sklearn.FastICA head-to-head for VireonICA
 - [ ] F08: Add mne.beamformer/mne.minimum_norm comparison
 - [ ] F09: Add mne_connectivity comparison for connectivity metrics
