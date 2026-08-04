@@ -18,9 +18,9 @@ def test_erp_p300():
     signal = target_erp + rng.normal(0, 0.2, len(t))
     
     peak_sample = np.argmax(signal)
-    actual_latency_ms = (peak_sample / fs) * 1000.0
+    computed_latency_ms = (peak_sample / fs) * 1000.0
     
-    assert abs(actual_latency_ms - 310.0) < 25.0, f"P300 latency {actual_latency_ms:.1f}ms differs from 310ms"
+    assert abs(computed_latency_ms - 310.0) < 25.0, f"P300 latency {computed_latency_ms:.1f}ms differs from 310ms"
 
 if __name__ == "__main__":
     test_erp_p300()

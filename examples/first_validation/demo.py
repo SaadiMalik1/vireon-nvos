@@ -120,9 +120,8 @@ def main():
     matrix = BenchmarkMatrix(seed=seed)
     matrix.add_method(csp)
     matrix.add_dataset("MotorImagery", data=X, labels=y)
-    matrix.add_perturbation(WhiteNoisePerturbation(name="WhiteNoise", severity=0.5))
-    matrix.add_perturbation(LineNoisePerturbation(severity=0.8, freq=60.0))
-    matrix.add_perturbation(ChannelDropoutPerturbation(name="ChannelDropout", severity=0.2))
+    for sev in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
+        matrix.add_perturbation(WhiteNoisePerturbation(name=f"WhiteNoise_{sev:.1f}", severity=sev))
 
     # Also run a Welch PSD benchmark: Vireon Welch vs scipy Welch
     print("\n[3b] Running Spectral Benchmark (Vireon Welch vs scipy)...")
