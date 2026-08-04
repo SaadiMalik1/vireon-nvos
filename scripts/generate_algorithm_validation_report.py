@@ -98,9 +98,33 @@ ALGORITHMS = [
         "name": "Connectivity (6 metrics)",
         "file": "connectivity/vireon_connectivity.py",
         "class": "VireonCoherence/PLV/PLI/wPLI/AEC/iCoh",
-        "reference": "analytical formulas",
+        "reference": "scipy.signal.coherence / Hilbert",
         "tolerance": "phase-locked > 0.9, noise < 0.2",
         "test_file": "tests/test_algorithm_validation_suite/test_connectivity_validation.py",
+    },
+    {
+        "name": "Multitaper PSD",
+        "file": "spectral/vireon_multitaper.py",
+        "class": "VireonMultitaper",
+        "reference": "scipy.signal.windows.dpss",
+        "tolerance": "peak freq < 1.0 Hz diff",
+        "test_file": "tests/test_algorithm_validation_suite/test_new_algorithms_validation.py",
+    },
+    {
+        "name": "Empirical Mode Decomposition",
+        "file": "time_frequency/vireon_emd.py",
+        "class": "VireonEMD",
+        "reference": "Huang et al. (1998) sifting",
+        "tolerance": "reconstruction error < 1e-10",
+        "test_file": "tests/test_algorithm_validation_suite/test_new_algorithms_validation.py",
+    },
+    {
+        "name": "Convolution / Correlation",
+        "file": "signal_processing/vireon_convolution.py",
+        "class": "VireonConvolution",
+        "reference": "np.convolve / np.correlate",
+        "tolerance": "Lin's CCC > 0.9999",
+        "test_file": "tests/test_algorithm_validation_suite/test_new_algorithms_validation.py",
     },
 ]
 
@@ -111,6 +135,7 @@ TEST_FILES = [
     "tests/test_algorithm_validation_suite/test_ica_csp_validation.py",
     "tests/test_algorithm_validation_suite/test_beamforming_source_validation.py",
     "tests/test_algorithm_validation_suite/test_connectivity_validation.py",
+    "tests/test_algorithm_validation_suite/test_new_algorithms_validation.py",
 ]
 
 

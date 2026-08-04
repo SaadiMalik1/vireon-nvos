@@ -19,14 +19,14 @@
 - [x] F10: Compute CCC in validation suite + reconcile release notes
 
 ## Workstream G — New Algorithms + Validations
-- [ ] F11: Implement multitaper PSD (`vireon_multitaper.py`)
-- [ ] F12: Implement empirical mode decomposition (`vireon_emd.py`)
-- [ ] F13: Implement convolution/correlation (`vireon_convolution.py`)
-- [ ] F14: Add real-time streaming validation scenario
-- [ ] F15: Add multi-session validation (test-retest reliability)
-- [ ] F16: Add cross-subject generalization validation
-- [ ] F17: Add adversarial robustness validation (Martinovic P300 attack)
-- [ ] F18: Add new algorithms to validation suite + report
+- [x] F11: Implement multitaper PSD (`vireon_multitaper.py`)
+- [x] F12: Implement empirical mode decomposition (`vireon_emd.py`)
+- [x] F13: Implement convolution/correlation (`vireon_convolution.py`)
+- [x] F14: Add real-time streaming validation scenario
+- [x] F15: Add multi-session validation (test-retest reliability)
+- [x] F16: Add cross-subject generalization validation
+- [x] F17: Add adversarial robustness validation (Martinovic P300 attack)
+- [x] F18: Add new algorithms to validation suite + report
 
 ## Workstream H — Infrastructure Hardening
 - [ ] F19: Wire FastAPI to SQLite EvidenceRegistry
@@ -56,8 +56,8 @@
 - [ ] G7: FastAPI persists to SQLite (evidence survives restart)
 - [ ] G8: DOIMinter renamed honestly to EvidenceIdentifier
 - [ ] G9: API reference has real content (`docs/api_reference.md` > 200 lines)
-- [ ] G10: 3 new algorithms added (multitaper, EMD, convolution)
-- [ ] G11: 3 new validation scenarios in `examples/`
+- [x] G10: 3 new algorithms added (multitaper, EMD, convolution)
+- [x] G11: 3 new validation scenarios in `examples/`
 - [x] G12: CCC actually computed (`rg "lin_concordance|compute_ccc" tests/test_algorithm_validation_suite/` ≥ 3)
 - [ ] G13: Full test suite passes (`pytest --tb=no -q` = 0 failures)
 - [ ] G14: No unseeded `np.random` in production code
