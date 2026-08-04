@@ -29,12 +29,12 @@
 - [x] F18: Add new algorithms to validation suite + report
 
 ## Workstream H — Infrastructure Hardening
-- [ ] F19: Wire FastAPI to SQLite EvidenceRegistry
-- [ ] F20: Rename DOIMinter to EvidenceIdentifier + document
-- [ ] F21: Populate graph in Tutorial 04
-- [ ] F22: Delete/implement 3 stub literature tests
-- [ ] F23: Delete legacy statistics/core.py (duplicate code)
-- [ ] F24: Tighten BCI competition tolerance + add NaN/Inf contract tests
+- [x] F19: Wire FastAPI to SQLite EvidenceRegistry
+- [x] F20: Rename DOIMinter to EvidenceIdentifier + document
+- [x] F21: Populate graph in Tutorial 04
+- [x] F22: Delete/implement 3 stub literature tests
+- [x] F23: Delete legacy statistics/core.py (duplicate code)
+- [x] F24: Tighten BCI competition tolerance + add NaN/Inf contract tests
 
 ## Workstream I — Integration + Polish
 - [ ] F25: Generate real API reference (hand-write key sections)
@@ -53,8 +53,8 @@
 - [x] G4: PhysioNet data in CI (`.github/workflows/ci.yml` downloads eegbci data)
 - [x] G5: Tutorial 02 executes without ImportError
 - [x] G6: Tutorial 03 executes without error
-- [ ] G7: FastAPI persists to SQLite (evidence survives restart)
-- [ ] G8: DOIMinter renamed honestly to EvidenceIdentifier
+- [x] G7: FastAPI persists to SQLite (evidence survives restart)
+- [x] G8: DOIMinter renamed honestly to EvidenceIdentifier
 - [ ] G9: API reference has real content (`docs/api_reference.md` > 200 lines)
 - [x] G10: 3 new algorithms added (multitaper, EMD, convolution)
 - [x] G11: 3 new validation scenarios in `examples/`

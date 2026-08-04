@@ -1,9 +1,9 @@
-from vireon_evidence.doi import DOIMinter
+from vireon_evidence.doi import EvidenceIdentifier
 from vireon_core.contracts.evidence import EvidenceBundle
 
 
 def test_mint_doi():
-    minter = DOIMinter(prefix="10.5072/vireon")
+    minter = EvidenceIdentifier(prefix="10.5072/vireon")
     bundle = EvidenceBundle(
         evidence_hash="abcdef1234567890extrahash",
         algorithm="VireonICA",
@@ -14,7 +14,7 @@ def test_mint_doi():
 
 
 def test_mint_with_metadata():
-    minter = DOIMinter(prefix="10.5072/vireon")
+    minter = EvidenceIdentifier(prefix="10.5072/vireon")
     bundle = EvidenceBundle(
         evidence_hash="abcdef1234567890extrahash",
         algorithm="VireonICA",

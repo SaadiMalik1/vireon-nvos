@@ -17,12 +17,15 @@ for pkg in ["vireon-core", "vireon-models", "vireon-methods", "vireon-validation
 from vireon_core.runtime.rng import DeterministicRNG
 from vireon_methods.machine_learning.csp import CSPPlugin
 from vireon_validation.benchmarks.matrix import BenchmarkMatrix
+from vireon_evidence.registry.core import EvidenceRegistry
+from vireon_core.contracts.evidence import EvidenceBundle
 
 app = FastAPI(title="VIREON Evidence API", version="0.4.0")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
-# In-memory evidence store
-_evidence_store: Dict[str, Any] = {}
+def get_registry() -> EvidenceRegistry:
+    db_path = os.environ.get("VIREON_DB_PATH", "evidence_registry.db")
+    return EvidenceRegistry(db_path=db_path)
 
 
 class BenchmarkRequest(BaseModel):
@@ -47,16 +50,20 @@ def health():
 
 @app.get("/api/evidence")
 def list_evidence() -> List[Dict[str, Any]]:
-    """List all evidence bundles."""
-    return list(_evidence_store.values())
+    """List all evidence bundles from SQLite registry."""
+    registry = get_registry()
+    bundles = registry.list_bundles()
+    return [b.model_dump() for b in bundles]
 
 
 @app.get("/api/evidence/{evidence_hash}")
 def get_evidence(evidence_hash: str) -> Dict[str, Any]:
-    """Retrieve a specific evidence bundle."""
-    if evidence_hash not in _evidence_store:
+    """Retrieve a specific evidence bundle from SQLite registry."""
+    registry = get_registry()
+    bundle = registry.retrieve(evidence_hash)
+    if bundle is None:
         raise HTTPException(status_code=404, detail="Evidence bundle not found")
-    return _evidence_store[evidence_hash]
+    return bundle.model_dump()
 
 
 @app.post("/api/benchmark")
@@ -82,14 +89,21 @@ def run_benchmark(req: BenchmarkRequest) -> Dict[str, Any]:
     bundles = matrix.execute_matrix()
 
     if bundles:
-        bundle = bundles[0]
-        h = bundle.get("evidence_hash") or bundle.get("bundle_id")
-        _evidence_store[h] = bundle
-        stat_aggr = bundle.get("statistical_agreement", {})
+        raw_b = bundles[0]
+        h = raw_b.get("evidence_hash") or raw_b.get("bundle_id")
+        stat_aggr = raw_b.get("statistical_agreement", {})
+        eb = EvidenceBundle(
+            evidence_hash=h,
+            algorithm=raw_b.get("algorithm", "csp"),
+            dataset=raw_b.get("dataset", req.dataset),
+            statistical_agreement=stat_aggr,
+        )
+        registry = get_registry()
+        registry.register(eb)
         return {
             "evidence_hash": h,
             "ccc": stat_aggr.get("ccc", 1.0),
-            "pass_fail": bundle.get("pass_fail", "PASS"),
+            "pass_fail": raw_b.get("pass_fail", "PASS"),
         }
 
     raise HTTPException(status_code=500, detail="Benchmark failed")

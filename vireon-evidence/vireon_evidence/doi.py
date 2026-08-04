@@ -2,9 +2,9 @@ from typing import Dict, Any
 from vireon_core.contracts.evidence import EvidenceBundle
 
 
-class DOIMinter:
+class EvidenceIdentifier:
     """
-    DOI Minter for VIREON evidence bundles (DataCite format).
+    Evidence Identifier for VIREON evidence bundles (DataCite DOI format).
     """
     def __init__(self, prefix: str = "10.5072/vireon"):
         self.prefix = prefix

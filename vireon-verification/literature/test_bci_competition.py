@@ -33,7 +33,7 @@ def test_bci_competition_reproduction():
     accuracy = float(scores.mean())
     
     expected = 0.70  # reference literature value
-    tolerance = 0.25  # statistical tolerance for small sample slice
-    
+    tolerance = 0.15  # tightened statistical tolerance
+
     assert abs(accuracy - expected) < tolerance, \
         f"Accuracy {accuracy:.2f} not within {tolerance} of expected {expected}"
