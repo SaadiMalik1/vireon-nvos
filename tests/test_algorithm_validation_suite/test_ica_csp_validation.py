@@ -85,6 +85,26 @@ def test_ica_deterministic(mixed_signals):
     assert np.allclose(S1, S2), "VireonICA output must be deterministic"
 
 
+def test_ica_matches_sklearn_fastica(mixed_signals):
+    """VireonICA output subspace must match sklearn.decomposition.FastICA with SVD > 0.95."""
+    try:
+        from sklearn.decomposition import FastICA
+    except ImportError:
+        pytest.skip("sklearn not available")
+
+    X, _, _ = mixed_signals
+    v_ica = VireonICA(n_components=3).fit(X)
+    S_v = v_ica.transform(X)
+
+    sk_ica = FastICA(n_components=3, random_state=42).fit(X)
+    S_sk = sk_ica.transform(X)
+
+    cross_corr = np.corrcoef(S_v.T, S_sk.T)[:3, 3:]
+    _, sv, _ = svd(np.abs(cross_corr))
+    min_sv = float(np.min(sv))
+    assert min_sv > 0.95, f"VireonICA vs sklearn FastICA subspace match {min_sv:.4f} <= 0.95"
+
+
 # ===== CSP Tests =====
 
 @pytest.fixture
