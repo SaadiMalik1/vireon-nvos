@@ -10,7 +10,7 @@
 - [x] F01: Generate validation report (run script, commit `reports/`)
 - [x] F02: Add PhysioNet download to CI
 - [x] F03: Fix Tutorial 02 (3 broken imports)
-- [ ] F04: Fix Tutorial 03 (non-existent function)
+- [x] F04: Fix Tutorial 03 (non-existent function)
 - [ ] F05: Add scipy.signal.stft comparison for VireonSTFT
 - [ ] F06: Add scipy.signal.cwt comparison for VireonWavelet
 - [ ] F07: Add sklearn.FastICA head-to-head for VireonICA
@@ -52,7 +52,7 @@
 - [x] G3: Validation report generated (`reports/algorithm_validation_report.md` > 200 lines)
 - [x] G4: PhysioNet data in CI (`.github/workflows/ci.yml` downloads eegbci data)
 - [x] G5: Tutorial 02 executes without ImportError
-- [ ] G6: Tutorial 03 executes without error
+- [x] G6: Tutorial 03 executes without error
 - [ ] G7: FastAPI persists to SQLite (evidence survives restart)
 - [ ] G8: DOIMinter renamed honestly to EvidenceIdentifier
 - [ ] G9: API reference has real content (`docs/api_reference.md` > 200 lines)

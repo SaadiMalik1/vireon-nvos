@@ -33,7 +33,8 @@ where = [
     "vireon-lab",
     "vireon-corpus",
     "vireon-evidence",
-    "vireon-api"
+    "vireon-api",
+    "vireon-verification"
 ]
 include = ["vireon_*"]
 
@@ -75,5 +76,6 @@ pythonpath = [
     "vireon-evidence",
     "vireon-knowledge",
     "vireon-corpus",
-    "vireon-api"
+    "vireon-api",
+    "vireon-verification"
 ]
