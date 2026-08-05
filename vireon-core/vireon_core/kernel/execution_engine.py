@@ -34,19 +34,7 @@ class ExecutionEngine:
         self.signal_metrics_func = signal_metrics_func
         self.plugin_manager = plugin_manager or PluginManager()
         self.assertion_evaluator = assertion_evaluator or DefaultAssertionEvaluator()
-        if knowledge_graph is None:
-            try:
-                from vireon_knowledge.engine import KnowledgeGraph
-                import os
-                # Find the root of vireon_knowledge, assuming standard structure
-                # vireon-knowledge/vireon_knowledge
-                import vireon_knowledge
-                kg_root = os.path.dirname(vireon_knowledge.__file__)
-                self.knowledge_graph = KnowledgeGraph(kg_root)
-            except ImportError:
-                self.knowledge_graph = None
-        else:
-            self.knowledge_graph = knowledge_graph
+        self.knowledge_graph = knowledge_graph
             
         self.rng = DeterministicRNG(seed=seed)
         self.clock = DeterministicClock(mode=ClockMode.VIRTUAL, step_dt_ms=1.0)

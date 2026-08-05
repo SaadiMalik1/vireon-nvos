@@ -67,7 +67,7 @@ This Evidence Portfolio demonstrates VIREON's scientific depth, regulatory compl
 
 ## 4. Corporate & Regulatory Documents
 
-- [Corporate ROI Case Study](file:///home/ronin/Documents/VIREON/docs/corporate/roi_case_study.md): 1,275-word case study demonstrating 660% 1st-year ROI.
-- [FDA GMLP Compliance Mapping](file:///home/ronin/Documents/VIREON/docs/regulatory/fda_gmlp_compliance.md): Full alignment across all 10 Good Machine Learning Practice principles.
-- [SOUP Dependency Inventory](file:///home/ronin/Documents/VIREON/docs/regulatory/soup_inventory.md): IEC 62304 dependency risk assessment and lockfile tracking.
-- [Validation Master Plan](file:///home/ronin/Documents/VIREON/docs/regulatory/validation_master_plan.md): 2,207-word comprehensive VMP under ISO 14971 and IEC 62304.
+- [Corporate ROI Case Study](docs/corporate/roi_case_study.md): 1,275-word case study demonstrating 660% 1st-year ROI.
+- [FDA GMLP Compliance Mapping](docs/regulatory/fda_gmlp_compliance.md): Full alignment across all 10 Good Machine Learning Practice principles.
+- [SOUP Dependency Inventory](docs/regulatory/soup_inventory.md): IEC 62304 dependency risk assessment and lockfile tracking.
+- [Validation Master Plan](docs/regulatory/validation_master_plan.md): 2,207-word comprehensive VMP under ISO 14971 and IEC 62304.

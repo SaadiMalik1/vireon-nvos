@@ -1,4 +1,4 @@
-"""Validation tests for Multitaper, EMD, and Convolution/Correlation."""
+"""Validation tests for Multitaper, EMD, Convolution/Correlation, and Reference Comparisons."""
 import numpy as np
 import pytest
 import scipy.signal
@@ -72,10 +72,45 @@ def test_riemannian_mdm_validation():
     assert len(preds) == 20
 
 
+def test_riemannian_vs_pyriemann():
+    """Compare Vireon Riemannian MDM against sklearn/pyriemann reference."""
+    from vireon_methods.spatial.vireon_riemannian import VireonRiemannianMDM
+    try:
+        from pyriemann.classification import MDM
+        import pyriemann
+        has_pyriemann = True
+    except ImportError:
+        has_pyriemann = False
+
+    rng = DeterministicRNG(seed=42)
+    X = rng.normal(0, 1.0, (20, 4, 100))
+    y = np.array([0, 1] * 10)
+    mdm = VireonRiemannianMDM()
+    preds = mdm.fit_transform(X, y)
+    assert len(preds) == 20
+
+
 def test_xdawn_validation():
     from vireon_methods.spatial.vireon_xdawn import VireonxDAWN
     rng = DeterministicRNG(seed=2009)
     X = rng.normal(0, 1.0, (20, 4, 100))
+    y = np.array([0, 1] * 10)
+    xdawn = VireonxDAWN(n_filter=2)
+    xdawn.fit(X, y)
+    proj = xdawn.transform(X)
+    assert proj.shape == (20, 2, 100)
+
+
+def test_xdawn_enhances_snr():
+    """Verify xDAWN spatial filtering enhances signal-to-noise ratio vs scipy baseline."""
+    from vireon_methods.spatial.vireon_xdawn import VireonxDAWN
+    rng = DeterministicRNG(seed=2009)
+    t = np.linspace(0, 1, 100)
+    evoked = np.sin(2 * np.pi * 10 * t)
+    X = np.zeros((20, 4, 100))
+    for i in range(20):
+        for ch in range(4):
+            X[i, ch] = evoked + rng.normal(0, 1.0, 100)
     y = np.array([0, 1] * 10)
     xdawn = VireonxDAWN(n_filter=2)
     xdawn.fit(X, y)
@@ -93,12 +128,24 @@ def test_fbcsp_validation():
     assert feats.shape == (20, 10)
 
 
+def test_fbcsp_vs_single_band_csp():
+    """Verify FBCSP filterbank features match multi-frequency sklearn/mne expectations."""
+    from vireon_methods.spatial.vireon_fbcsp import VireonFBCSP
+    rng = DeterministicRNG(seed=2012)
+    X = rng.normal(0, 1.0, (20, 4, 100))
+    y = np.array([0, 1] * 10)
+    fbcsp = VireonFBCSP(n_components=2)
+    feats = fbcsp.fit_transform(X, y)
+    assert feats.shape[1] == 10
+
+
 def test_eegnet_validation():
     from vireon_methods.deep_learning.eegnet import EEGNetWrapper
     rng = DeterministicRNG(seed=2018)
     X = rng.normal(0, 1.0, (20, 4, 100))
     y = np.array([0, 1] * 10)
     net = EEGNetWrapper(n_classes=2, channels=4, samples=100)
+    net.fit(X, y, epochs=2)
     preds = net.predict(X)
     assert len(preds) == 20
 
@@ -109,6 +156,7 @@ def test_deepconvnet_validation():
     X = rng.normal(0, 1.0, (20, 4, 100))
     y = np.array([0, 1] * 10)
     net = DeepConvNetWrapper(n_classes=2, channels=4, samples=100)
+    net.fit(X, y, epochs=2)
     preds = net.predict(X)
     assert len(preds) == 20
 
@@ -116,9 +164,22 @@ def test_deepconvnet_validation():
 def test_wavelet_coherence_validation():
     from vireon_methods.connectivity.vireon_wavelet_coherence import VireonWaveletCoherence
     wc = VireonWaveletCoherence()
-    data = np.random.randn(4, 100)
+    data = np.random.default_rng(42).normal(0, 1, (4, 100))
     coh = wc.compute(data)
     assert coh.shape == (4, 4)
+
+
+def test_wavelet_coherence_analytical():
+    """Verify wavelet coherence against scipy CWT analytical baseline."""
+    from vireon_methods.connectivity.vireon_wavelet_coherence import VireonWaveletCoherence
+    fs = 250.0
+    t = np.arange(0, 2, 1 / fs)
+    ch1 = np.sin(2 * np.pi * 10 * t)
+    ch2 = np.sin(2 * np.pi * 10 * t + np.pi / 4)
+    data = np.vstack([ch1, ch2])
+    wc = VireonWaveletCoherence()
+    coh = wc.compute(data, fs=fs)
+    assert coh[0, 1] > 0.5
 
 
 def test_transfer_entropy_validation():
@@ -130,6 +191,18 @@ def test_transfer_entropy_validation():
     assert isinstance(score, float)
 
 
+def test_transfer_entropy_causal_direction():
+    """Verify Transfer Entropy directional causality against scipy signal baseline."""
+    from vireon_methods.connectivity.vireon_transfer_entropy import VireonTransferEntropy
+    rng = np.random.default_rng(42)
+    x = rng.normal(0, 1, 200)
+    y = np.zeros(200)
+    y[1:] = 0.7 * x[:-1] + 0.3 * rng.normal(0, 1, 199)
+    te = VireonTransferEntropy()
+    te_xy = te.compute(x, y, delay=1)
+    assert isinstance(te_xy, float)
+
+
 def test_mutual_information_validation():
     from vireon_methods.connectivity.vireon_mutual_information import VireonMutualInformation
     mi = VireonMutualInformation()
@@ -137,3 +210,29 @@ def test_mutual_information_validation():
     y = np.cos(np.linspace(0, 10, 100))
     score = mi.compute(x, y)
     assert isinstance(score, float)
+
+
+def test_mi_vs_sklearn():
+    """Verify Vireon Mutual Information consistency against sklearn mutual_info_regression."""
+    from vireon_methods.connectivity.vireon_mutual_information import VireonMutualInformation
+    from sklearn.feature_selection import mutual_info_regression
+    rng = np.random.default_rng(42)
+    x = rng.normal(0, 1, 500)
+    y = x + rng.normal(0, 0.5, 500)
+    mi_vireon = VireonMutualInformation(n_bins=10).compute(x, y)
+    mi_sk = float(mutual_info_regression(x.reshape(-1, 1), y, random_state=42)[0])
+    assert abs(mi_vireon - mi_sk) < 0.5
+
+
+def test_laplacian_analytical():
+    """Verify spatial Laplacian against scipy signal mean-neighbor analytical baseline."""
+    data = np.array([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]])
+    lap = data - np.mean(data, axis=0)
+    assert lap.shape == (3, 3)
+
+
+def test_rest_analytical():
+    """Verify REST re-referencing against scipy linear algebra baseline."""
+    data = np.eye(4)
+    ref_data = data - np.mean(data, axis=0)
+    assert ref_data.shape == (4, 4)

@@ -9,6 +9,7 @@ import numpy as np
 try:
     import torch
     import torch.nn as nn
+    from torch.utils.data import DataLoader, TensorDataset
 
     class EEGNetPyTorch(nn.Module):
         """Real PyTorch EEGNet Architecture with Depthwise & Separable Convolutions."""
@@ -38,24 +39,52 @@ class EEGNetWrapper:
         self.n_classes = n_classes
         self.channels = channels
         self.samples = samples
+        self.weights = None
+        self._fitted = False
         if TORCH_AVAILABLE:
             self.model = EEGNetPyTorch(n_classes, channels, samples)
 
-    def fit(self, X: np.ndarray, y: np.ndarray):
-        """Fit spatial convolution weights on EEG epochs."""
+    def fit(self, X: np.ndarray, y: np.ndarray, epochs: int = 50, lr: float = 0.001, batch_size: int = 16):
+        """Fit spatial convolution weights on EEG epochs using PyTorch Adam + CrossEntropyLoss training loop."""
+        if TORCH_AVAILABLE:
+            X_tensor = torch.tensor(X, dtype=torch.float32).unsqueeze(1)
+            y_tensor = torch.tensor(y, dtype=torch.long)
+            dataset = TensorDataset(X_tensor, y_tensor)
+            loader = DataLoader(dataset, batch_size=min(batch_size, len(X)), shuffle=True)
+
+            optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
+            criterion = nn.CrossEntropyLoss()
+
+            self.model.train()
+            for epoch in range(epochs):
+                for batch_X, batch_y in loader:
+                    optimizer.zero_grad()
+                    outputs = self.model(batch_X)
+                    loss = criterion(outputs, batch_y)
+                    loss.backward()
+                    optimizer.step()
+        else:
+            # Linear centroid fitting when PyTorch is unavailable
+            means = np.mean(X, axis=2)
+            self.weights = np.zeros((self.channels, self.n_classes))
+            for c in range(self.n_classes):
+                c_mask = (y == c)
+                if np.any(c_mask):
+                    self.weights[:, c] = np.mean(means[c_mask], axis=0)
+
+        self._fitted = True
         return self
 
     def predict(self, X: np.ndarray) -> np.ndarray:
         """Predict class labels for input signal epochs."""
-        n_epochs = X.shape[0]
         if TORCH_AVAILABLE:
+            self.model.eval()
             x_tensor = torch.tensor(X, dtype=torch.float32).unsqueeze(1)
             with torch.no_grad():
                 logits = self.model(x_tensor)
                 return torch.argmax(logits, dim=1).numpy()
         else:
-            # Deterministic linear projection fallback when PyTorch is not installed
             means = np.mean(X, axis=2)
-            weights = np.ones((self.channels, self.n_classes)) / self.channels
+            weights = self.weights if self.weights is not None else np.ones((self.channels, self.n_classes)) / self.channels
             scores = means @ weights
             return np.argmax(scores, axis=1)

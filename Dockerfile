@@ -1,4 +1,4 @@
-# Multi-stage Dockerfile for VIREON Neurotechnology Validation OS v1.0.0
+# Multi-stage Dockerfile for VIREON Neurotechnology Validation OS v1.0.1
 # Stage 1: Build & Dependency Installation Stage
 FROM python:3.11-slim AS builder
 
@@ -28,5 +28,7 @@ WORKDIR /app
 
 COPY --from=builder /install /install
 COPY . /app/
+
+RUN pip install --no-cache-dir .
 
 CMD ["pytest", "--tb=no", "-q"]

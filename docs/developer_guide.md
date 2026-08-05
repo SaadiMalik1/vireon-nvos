@@ -197,7 +197,7 @@ To preserve architectural integrity and avoid unexpected regressions (Rule R9), 
 2. `vireon-core/vireon_core/contracts/evidence.py`: Pydantic `EvidenceBundle` schema definitions.
 3. `vireon-core/vireon_core/runtime/rng.py`: `DeterministicRNG` seed-locked random number generator.
 4. `vireon-core/vireon_core/kernel/plugins.py`: Plugin loader and discovery engine.
-5. `vireon-models/vireon_models/signal.py`: Core signal containers and matrix validators.
+5. `vireon-core/vireon_core/contracts/base.py`: Core signal contracts, interface specifications, and execution DAG containers.
 6. `vireon-methods/vireon_methods/spectral/vireon_welch.py`: Native Welch PSD implementation.
 7. `vireon-methods/vireon_methods/spectral/vireon_multitaper.py`: Native Thomson Multitaper implementation.
 8. `vireon-methods/vireon_methods/spatial/vireon_csp.py`: Native Common Spatial Pattern filter.

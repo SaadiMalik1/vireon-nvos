@@ -351,7 +351,7 @@ from vireon_core.contracts.evidence import EvidenceBundle
 def bundle_to_json_ld(bundle: EvidenceBundle) -> str:
     """Convert EvidenceBundle object to JSON-LD linked data document."""
     context = {
-        "@context": "https://vireon.org/schemas/evidence/v1/",
+        "@context": "https://github.com/SaadiMalik1/vireon-nvos/schemas/evidence/v1/",
         "@type": "NeuroEvidenceBundle",
         "bundleId": bundle.bundle_id,
         "evidenceHash": bundle.evidence_hash,

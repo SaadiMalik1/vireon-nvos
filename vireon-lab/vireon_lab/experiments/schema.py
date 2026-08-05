@@ -3,7 +3,7 @@ import yaml
 import numpy as np
 
 from vireon_core.contracts import IExperimentDef, IProvider
-from vireon_lab.experiments.base import ExperimentSchema
+from vireon_core.contracts.experiment import ExperimentSchema
 from vireon_lab.experiments.types import NormalExperiment, FaultExperiment, AttackExperiment, AgencyExperiment, LifecycleExperiment
 
 # A simple mock provider for testing
@@ -15,16 +15,8 @@ class MockProvider(IProvider):
     def get_data(self) -> Any:
         return {"data": np.zeros((100, 2))}
 
-def load_experiment_from_yaml(filepath: str) -> IExperimentDef:
-    """
-    Loads an experiment from a YAML file and returns the correct IExperimentDef subclass based on type.
-    """
-    with open(filepath, 'r') as f:
-        data = yaml.safe_load(f)
-    
-    schema = ExperimentSchema(**data)
-    
-    # Factory logic based on classification.type
+def load_experiment_from_schema(schema: ExperimentSchema) -> IExperimentDef:
+    """Factory logic based on classification.type."""
     s_type = schema.classification.get("type", "normal")
     
     if s_type == "normal":
@@ -38,5 +30,11 @@ def load_experiment_from_yaml(filepath: str) -> IExperimentDef:
     elif s_type == "lifecycle":
         return LifecycleExperiment(schema)
     else:
-        # Default fallback
         return NormalExperiment(schema)
+
+def load_experiment_from_yaml(filepath: str) -> IExperimentDef:
+    """Loads an experiment from a YAML file and returns the correct IExperimentDef subclass."""
+    with open(filepath, 'r') as f:
+        data = yaml.safe_load(f)
+    schema = ExperimentSchema(**data)
+    return load_experiment_from_schema(schema)

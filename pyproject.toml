@@ -4,10 +4,23 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vireon-nvos"
-version = "1.0.0"
-description = "Validation, Integrity, Research Engine for Open Neuro Interfaces"
+version = "1.0.1"
+description = "VIREON — Neurotechnology Validation Operating System"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
 authors = [
     {name = "VIREON Authors"}
+]
+keywords = ["eeg", "bci", "neuroscience", "validation", "signal-processing"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering"
 ]
 dependencies = [
     "numpy",
@@ -22,6 +35,10 @@ dependencies = [
     "fastapi>=0.100.0",
     "httpx>=0.24.0"
 ]
+
+[project.urls]
+Repository = "https://github.com/SaadiMalik1/vireon-nvos"
+Issues = "https://github.com/SaadiMalik1/vireon-nvos/issues"
 
 [tool.setuptools.packages.find]
 where = [

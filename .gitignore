@@ -55,6 +55,8 @@ output/
 evidence_output/
 benchmarks/output/
 examples/*/output/
+*.db
+site/
 
 # PR Descriptions
 pr_descriptions/

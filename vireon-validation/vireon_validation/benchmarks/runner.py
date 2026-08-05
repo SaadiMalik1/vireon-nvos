@@ -1,7 +1,6 @@
 import os
 import glob
-from vireon_core.kernel.execution_engine import ExecutionEngine
-from vireon_lab.experiments.schema import load_experiment_from_yaml
+from vireon_core.contracts.experiment import load_experiment_from_yaml
 
 class BenchmarkRunner:
     def __init__(self, scenarios_dir: str, output_dir: str, seed: int = 42):

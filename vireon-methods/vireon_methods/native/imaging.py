@@ -12,7 +12,6 @@ class VireonForwardModel:
     def __init__(self, head_model: str = "fsaverage", conductivity: tuple = (0.3, 0.006, 0.3), seed: int = 42):
         self.head_model = head_model
         self.conductivity = conductivity
-        self.rng = DeterministicRNG(seed=seed)
         
     def compute_leadfield(self, source_space: np.ndarray, sensor_geometry: np.ndarray) -> np.ndarray:
         n_sensors = sensor_geometry.shape[0]
@@ -24,10 +23,3 @@ class VireonForwardModel:
                 leadfield[i, j] = 1.0 / (dist**2 + 1.0)
         return leadfield
 
-class VireonMinimumNorm:
-    def __init__(self, *args, **kwargs):
-        raise NotImplementedError("Use vireon_methods.source_localization.vireon_source_localization.VireonMinimumNorm")
-
-class VireonLCMV:
-    def __init__(self, *args, **kwargs):
-        raise NotImplementedError("Use vireon_methods.source_localization.vireon_beamforming.VireonLCMV")
