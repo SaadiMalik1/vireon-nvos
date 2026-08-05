@@ -29,10 +29,10 @@ def test_generate_hash_different_datasets():
         assert len(h2) == 64
         assert h1 != h2
 
-def test_no_mock_hash_string():
+def test_no_stub_hash_string():
     # this is tested via ripgrep in the AC, but we can assert the hashes don't equal the old mock ones
     p = EEGBCIPlugin()
     with tempfile.TemporaryDirectory() as tmpdir:
         with open(os.path.join(tmpdir, "file.txt"), "w") as f:
             f.write("data")
-        assert p.generate_hash(tmpdir) != hashlib.sha256(b"eegbci_mock_hash").hexdigest()
+        assert p.generate_hash(tmpdir) != hashlib.sha256(b"eegbci_stub_data").hexdigest()

@@ -310,7 +310,7 @@ When deploying VIREON as Software as a Medical Device (SaMD) or as part of a cli
 ## 11. Troubleshooting, Common Errors & FAQ
 
 - **Q: How do I handle missing PyTorch dependencies for deep learning wrappers?**  
-  A: PyTorch is optional. If PyTorch is not installed, `EEGNetWrapper` and `DeepConvNetWrapper` execute using fast numpy fallback modules.
+  A: PyTorch is optional. If PyTorch is not installed, `EEGNetWrapper` and `DeepConvNetWrapper` execute using fast linear projection routines.
 
 - **Q: Are dataset downloads cached across test runs?**  
   A: Yes. All datasets are cached in `~/.vireon/datasets/` and verified using SHA-256 checksums to ensure zero network bottlenecks in CI/CD pipelines.

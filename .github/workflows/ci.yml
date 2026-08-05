@@ -52,15 +52,8 @@ jobs:
         pytest tests/test_integration_evidence_pipeline.py -v --tb=long
     
     - name: Download PhysioNet test data
-      continue-on-error: true
       run: |
-        python -c "
-        import mne
-        try:
-            mne.datasets.eegbci.load_data(1, [4, 8], verbose=False)
-        except Exception as e:
-            print(f'PhysioNet download unavailable: {e}')
-        "
+        python -c "import mne; mne.datasets.eegbci.load_data(1, [4, 8], verbose=False)"
     - name: Run literature reproduction tests
       run: |
         pytest vireon-verification/literature/ -v
