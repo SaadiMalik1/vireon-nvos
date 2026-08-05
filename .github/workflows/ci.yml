@@ -53,7 +53,18 @@ jobs:
     
     - name: Download PhysioNet test data
       run: |
-        python -c "import mne; mne.datasets.eegbci.load_data(1, [4, 8], update_path=True, verbose=False)"
+        python -c "
+        import time, mne
+        for attempt in range(5):
+            try:
+                mne.datasets.eegbci.load_data(1, [4, 8, 12], update_path=True, verbose=False)
+                break
+            except Exception as e:
+                print(f'Attempt {attempt+1} failed: {e}. Retrying in 5s...')
+                time.sleep(5)
+        else:
+            raise RuntimeError('PhysioNet download failed after 5 attempts.')
+        "
     - name: Run literature reproduction tests
       run: |
         pytest vireon-verification/literature/ -v
