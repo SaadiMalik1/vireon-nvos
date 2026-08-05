@@ -1,61 +1,18 @@
-site_name: VIREON NVOS
-site_description: Neurotechnology Validation Operating System
-repo_url: https://github.com/vireon/vireon-nvos
-
+site_name: VIREON Documentation
+site_url: https://vireon.org/
+site_description: Validation, Integrity, Research Engine for Open Neuro Interfaces
 theme:
   name: material
-  features:
-    - navigation.sections
-    - navigation.expand
-    - navigation.top
-    - search.suggest
-    - search.highlight
-    - search.share
-    - content.code.copy
-    - content.code.annotate
   palette:
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
-
-markdown_extensions:
-  - admonition
-  - pymdownx.details
-  - pymdownx.superfences
-  - pymdownx.highlight:
-      anchor_linenums: true
-      line_spans: __span
-      pygments_lang_class: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.magiclink
-  - pymdownx.tasklist:
-      custom_checkbox: true
-  - def_list
-  - pymdownx.tasklist:
-      custom_checkbox: true
-  - pymdownx.arithmatex:
-      generic: true
-
-extra_javascript:
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-
+    scheme: slate
+    primary: indigo
+    accent: cyan
 plugins:
   - search
-  - mkdocstrings:
-      handlers:
-        python:
-          paths: [vireon-core, vireon-models, vireon-methods]
-
-
+nav:
+  - Home: index.md
+  - User Guide: user_guide.md
+  - Developer Guide: developer_guide.md
+  - Plugin SDK: plugin_sdk.md
+  - API Reference: api_reference.md
+  - Reproducibility Guide: reproducibility_guide.md

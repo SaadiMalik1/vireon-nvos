@@ -60,3 +60,80 @@ def test_convolution_matches_numpy_and_scipy_fftconvolve():
 
     ccc_corr = lin_concordance_correlation(y_corr, y_np_corr)
     assert ccc_corr > 0.9999, f"Correlate CCC {ccc_corr:.6f} <= 0.9999"
+
+
+def test_riemannian_mdm_validation():
+    from vireon_methods.spatial.vireon_riemannian import VireonRiemannianMDM
+    rng = DeterministicRNG(seed=2012)
+    X = rng.normal(0, 1.0, (20, 4, 100))
+    y = np.array([0, 1] * 10)
+    mdm = VireonRiemannianMDM()
+    preds = mdm.fit_transform(X, y)
+    assert len(preds) == 20
+
+
+def test_xdawn_validation():
+    from vireon_methods.spatial.vireon_xdawn import VireonxDAWN
+    rng = DeterministicRNG(seed=2009)
+    X = rng.normal(0, 1.0, (20, 4, 100))
+    y = np.array([0, 1] * 10)
+    xdawn = VireonxDAWN(n_filter=2)
+    xdawn.fit(X, y)
+    proj = xdawn.transform(X)
+    assert proj.shape == (20, 2, 100)
+
+
+def test_fbcsp_validation():
+    from vireon_methods.spatial.vireon_fbcsp import VireonFBCSP
+    rng = DeterministicRNG(seed=2012)
+    X = rng.normal(0, 1.0, (20, 4, 100))
+    y = np.array([0, 1] * 10)
+    fbcsp = VireonFBCSP(n_components=2)
+    feats = fbcsp.fit_transform(X, y)
+    assert feats.shape == (20, 10)
+
+
+def test_eegnet_validation():
+    from vireon_methods.deep_learning.eegnet import EEGNetWrapper
+    rng = DeterministicRNG(seed=2018)
+    X = rng.normal(0, 1.0, (20, 4, 100))
+    y = np.array([0, 1] * 10)
+    net = EEGNetWrapper(n_classes=2, channels=4, samples=100)
+    preds = net.predict(X)
+    assert len(preds) == 20
+
+
+def test_deepconvnet_validation():
+    from vireon_methods.deep_learning.deepconvnet import DeepConvNetWrapper
+    rng = DeterministicRNG(seed=2017)
+    X = rng.normal(0, 1.0, (20, 4, 100))
+    y = np.array([0, 1] * 10)
+    net = DeepConvNetWrapper(n_classes=2, channels=4, samples=100)
+    preds = net.predict(X)
+    assert len(preds) == 20
+
+
+def test_wavelet_coherence_validation():
+    from vireon_methods.connectivity.vireon_wavelet_coherence import VireonWaveletCoherence
+    wc = VireonWaveletCoherence()
+    data = np.random.randn(4, 100)
+    coh = wc.compute(data)
+    assert coh.shape == (4, 4)
+
+
+def test_transfer_entropy_validation():
+    from vireon_methods.connectivity.vireon_transfer_entropy import VireonTransferEntropy
+    te = VireonTransferEntropy()
+    x = np.sin(np.linspace(0, 10, 100))
+    y = np.cos(np.linspace(0, 10, 100))
+    score = te.compute(x, y)
+    assert isinstance(score, float)
+
+
+def test_mutual_information_validation():
+    from vireon_methods.connectivity.vireon_mutual_information import VireonMutualInformation
+    mi = VireonMutualInformation()
+    x = np.sin(np.linspace(0, 10, 100))
+    y = np.cos(np.linspace(0, 10, 100))
+    score = mi.compute(x, y)
+    assert isinstance(score, float)
