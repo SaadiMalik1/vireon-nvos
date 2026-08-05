@@ -15,7 +15,7 @@ class EEGBCIProvider(IProvider):
     def start(self) -> None:
         try:
             runs = [self.run_id] if isinstance(self.run_id, int) else list(self.run_id)
-            fnames = eegbci.load_data(self.subject_id, runs, path=self.data_path, verbose=False)
+            fnames = eegbci.load_data(self.subject_id, runs, path=self.data_path, update_path=True, verbose=False)
             
             raws = [mne.io.read_raw_edf(f, preload=True, verbose=False) for f in fnames]
             if len(raws) == 1:

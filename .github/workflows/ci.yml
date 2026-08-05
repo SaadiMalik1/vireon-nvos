@@ -53,7 +53,7 @@ jobs:
     
     - name: Download PhysioNet test data
       run: |
-        python -c "import mne; mne.datasets.eegbci.load_data(1, [4, 8], verbose=False)"
+        python -c "import mne; mne.datasets.eegbci.load_data(1, [4, 8], update_path=True, verbose=False)"
     - name: Run literature reproduction tests
       run: |
         pytest vireon-verification/literature/ -v

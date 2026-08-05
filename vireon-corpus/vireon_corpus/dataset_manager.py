@@ -66,7 +66,7 @@ class DatasetManager:
         
         try:
             # Load real PhysioNet Motor Imagery EEG via MNE
-            raw_files = mne.datasets.eegbci.load_data(subject, runs, verbose=False)
+            raw_files = mne.datasets.eegbci.load_data(subject, runs, update_path=True, verbose=False)
             raw = mne.io.read_raw_edf(raw_files[0], preload=True, verbose=False)
             data_arr = raw.get_data()
             n_channels, n_samples = data_arr.shape

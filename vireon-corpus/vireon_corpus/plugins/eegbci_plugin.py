@@ -58,7 +58,7 @@ class EEGBCIPlugin(IDatasetPlugin):
         from mne.datasets import eegbci
         print("Downloading EEGBCI via MNE...")
         # Fetch only subject 1 to save time for verification
-        eegbci.load_data(1, [1, 2, 3, 4], path=os.path.join(cache_dir, "originals"))
+        eegbci.load_data(1, [1, 2, 3, 4], path=os.path.join(cache_dir, "originals"), update_path=True)
 
     def verify_checksum(self, dataset_path: str, expected_checksum: str = None) -> bool:
         checksums_file = os.path.join(dataset_path, "checksums.sha256")
