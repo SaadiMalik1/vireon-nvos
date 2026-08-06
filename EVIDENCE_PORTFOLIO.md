@@ -1,6 +1,6 @@
 # VIREON Evidence Portfolio — Executive Summary & Portfolio Overview
 
-**Release Version:** `v0.6.0-evidence-portfolio`  
+**Release Version:** `v1.0.3`  
 **Target Repository:** `github.com/SaadiMalik1/vireon-nvos`  
 **Status:** 100% Verified (29/29 Tasks E01-E29, 15/15 Criteria P1-P15)
 

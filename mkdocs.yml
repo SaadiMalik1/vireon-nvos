@@ -1,5 +1,5 @@
 site_name: VIREON Documentation
-site_url: https://vireon.org/
+site_url: https://github.com/SaadiMalik1/vireon-nvos
 site_description: Validation, Integrity, Research Engine for Open Neuro Interfaces
 theme:
   name: material

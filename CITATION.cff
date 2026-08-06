@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: "If you use VIREON in your research or clinical software, please cite it as below."
 title: "VIREON: Validation, Integrity, Research Engine for Open Neuro Interfaces"
-version: 1.0.1
-date-released: 2026-08-05
+version: 1.0.3
+date-released: 2026-08-06
 authors:
   - family-names: "Malik"
     given-names: "Saadi"

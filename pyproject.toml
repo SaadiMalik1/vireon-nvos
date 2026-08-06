@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vireon-nvos"
-version = "1.0.1"
+version = "1.0.3"
 description = "VIREON — Neurotechnology Validation Operating System"
 readme = "README.md"
 license = {text = "MIT"}
@@ -35,6 +35,14 @@ dependencies = [
     "fastapi>=0.100.0",
     "httpx>=0.24.0"
 ]
+
+[project.optional-dependencies]
+gpu = ["torch>=2.0"]
+deep-learning = ["torch>=2.0"]
+dev = ["pytest>=7.0", "pytest-cov", "hypothesis>=6.0"]
+
+[project.scripts]
+vireon = "vireon_lab.cli.main:main"
 
 [project.urls]
 Repository = "https://github.com/SaadiMalik1/vireon-nvos"
