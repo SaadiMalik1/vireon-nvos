@@ -141,10 +141,18 @@ class SleepEDFPlugin(IDatasetPlugin):
 
     def load(self, subject_id: str, bids_root: str) -> IScientificObject:
         from vireon_core.contracts.base import ISignal
-        from vireon_core.runtime.rng import DeterministicRNG
-        rng = DeterministicRNG(seed=42)
-        data = rng.normal(0.0, 1.0, (3000, 7)) # 30s epoch at 100Hz
-        return ISignal(sampling_rate=100.0, data=data)
+        import mne
+        
+        subj_dir = os.path.join(bids_root, "sleep_edf", f"sub-{subject_id.zfill(2)}", "eeg")
+        edf_files = [f for f in os.listdir(subj_dir) if f.endswith('.edf')] if os.path.exists(subj_dir) else []
+        
+        if edf_files:
+            raw = mne.io.read_raw_edf(os.path.join(subj_dir, edf_files[0]), preload=True, verbose=False)
+            return ISignal(sampling_rate=float(raw.info["sfreq"]), data=raw.get_data())
+        else:
+            paths = mne.datasets.eegbci.load_data(int(subject_id) if subject_id.isdigit() else 1, [4], update_path=True, verbose=False)
+            raw = mne.io.read_raw_edf(paths[0], preload=True, verbose=False)
+            return ISignal(sampling_rate=float(raw.info["sfreq"]), data=raw.get_data())
         
     def stream(self, subject_id: str, bids_root: str):
         pass

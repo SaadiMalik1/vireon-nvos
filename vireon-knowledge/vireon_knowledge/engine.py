@@ -9,7 +9,9 @@ class KnowledgeGraph:
     A lightweight inference engine that parses the JSON-LD scientific knowledge graph
     to evaluate hypotheses and generate evidence-backed recommendations.
     """
-    def __init__(self, knowledge_root: str):
+    def __init__(self, knowledge_root: Optional[str] = None):
+        if knowledge_root is None:
+            knowledge_root = os.path.dirname(os.path.abspath(__file__))
         self.knowledge_root = knowledge_root
         self.graph = nx.DiGraph()
         self.index: Dict[str, Any] = {}

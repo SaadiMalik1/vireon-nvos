@@ -142,12 +142,20 @@ class EEGBCIPlugin(IDatasetPlugin):
 
     def load(self, subject_id: str, bids_root: str) -> IScientificObject:
         from vireon_core.contracts.base import ISignal
-        from vireon_core.runtime.rng import DeterministicRNG
-        import numpy as np
-        # Return mock scientific object containing simulated data
-        rng = DeterministicRNG(seed=42)
-        data = rng.normal(0.0, 1.0, (2500, 64))
-        return ISignal(sampling_rate=160.0, data=data)
+        import mne
+        
+        # Check BIDS path first
+        subj_dir = os.path.join(bids_root, "eegbci", f"sub-{subject_id.zfill(2)}", "eeg")
+        edf_files = [f for f in os.listdir(subj_dir) if f.endswith('.edf')] if os.path.exists(subj_dir) else []
+        
+        if edf_files:
+            raw = mne.io.read_raw_edf(os.path.join(subj_dir, edf_files[0]), preload=True, verbose=False)
+        else:
+            paths = mne.datasets.eegbci.load_data(int(subject_id), [4], update_path=True, verbose=False)
+            raw = mne.io.read_raw_edf(paths[0], preload=True, verbose=False)
+            
+        mne.datasets.eegbci.standardize(raw)
+        return ISignal(sampling_rate=float(raw.info["sfreq"]), data=raw.get_data())
         
     def stream(self, subject_id: str, bids_root: str):
         pass
