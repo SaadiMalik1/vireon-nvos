@@ -1,0 +1,18 @@
+{
+    "index": {
+        "10.1109/TAU.1967.1161901": {
+            "title": "Welch's Method for PSD Estimation",
+            "authors": ["P.D. Welch"],
+            "year": 1967,
+            "doi": "10.1109/TAU.1967.1161901",
+            "paper": "The use of fast Fourier transform for the estimation of power spectra",
+            "target_method": "VireonWelch",
+            "dataset": "SyntheticSignalProvider",
+            "claim": "Welch method provides smooth PSD estimate with reduced variance.",
+            "metrics": {
+                "psd_rmse": 0.0,
+                "peak_frequency_hz": 10.0
+            }
+        }
+    }
+}

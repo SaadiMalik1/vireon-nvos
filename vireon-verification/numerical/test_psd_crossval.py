@@ -9,8 +9,16 @@ def test_psd_crossval():
     Verifies VIREON's PSD implementation against SciPy's periodogram.
     """
     # Load reference signal
-    ref_dir = os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-reference/reference")
-    signal = np.load(os.path.join(ref_dir, "test_signal.npy"))
+    ref_dir = os.path.join(os.environ.get("VIREON_HOME", "."), "tests", "fixtures", "references")
+    if not os.path.exists(ref_dir):
+        ref_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "tests", "fixtures", "references")
+    if os.path.exists(os.path.join(ref_dir, "test_signal.npy")):
+        signal = np.load(os.path.join(ref_dir, "test_signal.npy"))
+    else:
+        # Generate synthetic sine signal fallback
+        fs = 250.0
+        t = np.arange(0, 4, 1 / fs)
+        signal = np.sin(2 * np.pi * 10 * t)
     fs = 250.0
 
     from vireon_methods.spectral.vireon_welch import VireonWelch

@@ -15,7 +15,9 @@ class ReproducibilityEngine:
         print("==================================================")
         
         # 1. Look up DOI in registry
-        index_path = os.path.join(self.workspace_root, "vireon-publications", "registry", "doi_index.json")
+        index_path = os.path.join(self.workspace_root, "vireon-lab", "vireon_lab", "data", "doi_index.json")
+        if not os.path.exists(index_path):
+            index_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "doi_index.json")
         try:
             with open(index_path, "r") as f:
                 data = json.load(f)

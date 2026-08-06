@@ -13,10 +13,11 @@ def generate_psd_reference():
     
     freqs, psd = welch(signal, fs=fs, nperseg=256)
     
-    os.makedirs(os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-reference/reference"), exist_ok=True)
-    np.save(os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-reference/reference/test_signal.npy"), signal)
-    np.save(os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-reference/reference/scipy_psd.npy"), psd)
-    np.save(os.path.join(os.environ.get("VIREON_HOME", "."), "vireon-reference/reference/scipy_psd_freqs.npy"), freqs)
+    out_dir = os.path.join(os.environ.get("VIREON_HOME", "."), "tests/fixtures/references")
+    os.makedirs(out_dir, exist_ok=True)
+    np.save(os.path.join(out_dir, "test_signal.npy"), signal)
+    np.save(os.path.join(out_dir, "scipy_psd.npy"), psd)
+    np.save(os.path.join(out_dir, "scipy_psd_freqs.npy"), freqs)
     print("Generated PSD references.")
 
 if __name__ == "__main__":
