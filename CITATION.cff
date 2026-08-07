@@ -6,6 +6,7 @@ date-released: 2026-08-06
 authors:
   - family-names: "Malik"
     given-names: "Saadi"
+    orcid: "https://orcid.org/0009-0004-0774-6611"
 repository-code: "https://github.com/SaadiMalik1/vireon-nvos"
 license: "MIT"
 keywords:
