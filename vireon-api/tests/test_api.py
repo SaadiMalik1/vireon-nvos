@@ -13,7 +13,22 @@ def test_health():
     response = client.get("/api/health")
     assert response.status_code == 200
     assert response.json()["status"] == "ok"
-    assert response.json()["version"] == "0.4.0"
+    assert response.json()["version"] == "1.1.0"
+
+
+def test_api_key_auth(monkeypatch):
+    monkeypatch.setenv("VIREON_API_KEY", "secret_key_123")
+    # Request without key -> 401
+    resp = client.get("/api/algorithms")
+    assert resp.status_code == 401
+
+    # Request with invalid key -> 401
+    resp = client.get("/api/algorithms", headers={"X-API-Key": "wrong_key"})
+    assert resp.status_code == 401
+
+    # Request with valid key -> 200
+    resp = client.get("/api/algorithms", headers={"X-API-Key": "secret_key_123"})
+    assert resp.status_code == 200
 
 
 def test_dashboard():

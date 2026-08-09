@@ -1,8 +1,10 @@
 """FastAPI backend for VIREON evidence platform."""
 import os
 import sys
+import secrets
 from typing import Optional, Dict, Any, List
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends, Security
+from fastapi.security import APIKeyHeader
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
@@ -20,8 +22,30 @@ from vireon_validation.benchmarks.matrix import BenchmarkMatrix
 from vireon_evidence.registry.core import EvidenceRegistry
 from vireon_core.contracts.evidence import EvidenceBundle
 
-app = FastAPI(title="VIREON Evidence API", version="0.4.0")
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+API_KEY_HEADER = APIKeyHeader(name="X-API-Key", auto_error=False)
+
+
+async def verify_api_key(api_key: Optional[str] = Security(API_KEY_HEADER)):
+    """Verify API key. Skips verification if VIREON_API_KEY env var is not set."""
+    expected_key = os.environ.get("VIREON_API_KEY")
+    if not expected_key:
+        return True
+    if not api_key or not secrets.compare_digest(api_key, expected_key):
+        raise HTTPException(status_code=401, detail="Invalid or missing API key")
+    return True
+
+
+app = FastAPI(title="VIREON Evidence API", version="1.1.0")
+
+allowed_origins = os.environ.get("VIREON_CORS_ORIGINS", "http://localhost:3000,http://localhost:8000").split(",")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_credentials=True,
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
+)
+
 
 def get_registry() -> EvidenceRegistry:
     db_path = os.environ.get("VIREON_DB_PATH", "evidence_registry.db")
@@ -45,11 +69,11 @@ def dashboard():
 
 @app.get("/api/health")
 def health():
-    return {"status": "ok", "version": "0.4.0"}
+    return {"status": "ok", "version": "1.1.0"}
 
 
 @app.get("/api/evidence")
-def list_evidence() -> List[Dict[str, Any]]:
+def list_evidence(_: bool = Depends(verify_api_key)) -> List[Dict[str, Any]]:
     """List all evidence bundles from SQLite registry."""
     registry = get_registry()
     bundles = registry.list_bundles()
@@ -57,7 +81,7 @@ def list_evidence() -> List[Dict[str, Any]]:
 
 
 @app.get("/api/evidence/{evidence_hash}")
-def get_evidence(evidence_hash: str) -> Dict[str, Any]:
+def get_evidence(evidence_hash: str, _: bool = Depends(verify_api_key)) -> Dict[str, Any]:
     """Retrieve a specific evidence bundle from SQLite registry."""
     registry = get_registry()
     bundle = registry.retrieve(evidence_hash)
@@ -67,7 +91,7 @@ def get_evidence(evidence_hash: str) -> Dict[str, Any]:
 
 
 @app.post("/api/benchmark")
-def run_benchmark(req: BenchmarkRequest) -> Dict[str, Any]:
+def run_benchmark(req: BenchmarkRequest, _: bool = Depends(verify_api_key)) -> Dict[str, Any]:
     """Run a benchmark and return the evidence bundle summary."""
     import numpy as np
 
@@ -92,14 +116,6 @@ def run_benchmark(req: BenchmarkRequest) -> Dict[str, Any]:
         raw_b = bundles[0]
         h = raw_b.get("evidence_hash") or raw_b.get("bundle_id")
         stat_aggr = raw_b.get("statistical_agreement", {})
-        eb = EvidenceBundle(
-            evidence_hash=h,
-            algorithm=raw_b.get("algorithm", "csp"),
-            dataset=raw_b.get("dataset", req.dataset),
-            statistical_agreement=stat_aggr,
-        )
-        registry = get_registry()
-        registry.register(eb)
         return {
             "evidence_hash": h,
             "ccc": stat_aggr.get("ccc", 1.0),
@@ -110,7 +126,7 @@ def run_benchmark(req: BenchmarkRequest) -> Dict[str, Any]:
 
 
 @app.get("/api/algorithms")
-def list_algorithms() -> List[Dict[str, str]]:
+def list_algorithms(_: bool = Depends(verify_api_key)) -> List[Dict[str, str]]:
     """List available algorithms."""
     return [
         {"id": "csp", "name": "CSP+LDA", "srl": "SRL_2", "reference": "mne.decoding.CSP"},
