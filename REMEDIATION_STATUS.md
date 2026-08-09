@@ -41,4 +41,4 @@
 
 | Task ID | Title | Status | Commit | Notes |
 |---------|-------|--------|--------|-------|
-| P4-1 | Add MNE-Python Compatibility Layer | DONE | 27b2584 | Added mne_to_vireon and vireon_to_mne converters in vireon_core.compat.mne_adapter |
+| P4-1 | Add MNE-Python Compatibility Layer | DONE | bd53084 | Added mne_to_vireon and vireon_to_mne converters in vireon_core.compat.mne_adapter |
