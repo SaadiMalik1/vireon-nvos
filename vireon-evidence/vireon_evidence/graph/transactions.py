@@ -1,18 +1,38 @@
+from typing import Optional
 from vireon_core.contracts.evidence import EvidenceBundle
 from vireon_evidence.graph.core import EvidenceGraph
 import datetime
 
 class EvidenceTransaction:
-    """
-    Immutable transaction for appending to the Evidence Graph.
+    """Immutable transaction for appending to the Evidence Graph.
     Operates like a Git commit.
+
+    The transaction_hash is computed from bundle_id, message, bundle_json,
+    and parent_hash (if set) — NOT wall-clock time. This ensures that committing
+    the same bundle twice produces identical transaction hashes.
     """
-    def __init__(self, bundle: EvidenceBundle, message: str = ""):
+
+    _sequence_counter = 0
+
+    def __init__(
+        self,
+        bundle: EvidenceBundle,
+        message: str = "",
+        parent_hash: Optional[str] = None,
+        sequence_number: Optional[int] = None,
+    ):
         self.bundle = bundle
         self.message = message
-        self.timestamp = datetime.datetime.utcnow().isoformat()
+        self.parent_hash = parent_hash
+        if sequence_number is not None:
+            self.sequence_number = sequence_number
+        else:
+            EvidenceTransaction._sequence_counter += 1
+            self.sequence_number = EvidenceTransaction._sequence_counter
+        self.wall_clock = datetime.datetime.utcnow().isoformat()
+        self.timestamp = self.wall_clock
         self.transaction_hash = self._compute_hash()
-        
+
     def _compute_hash(self) -> str:
         import hashlib
         bundle_json = self.bundle.model_dump_json(
@@ -20,6 +40,8 @@ class EvidenceTransaction:
             serialize_as_any=True,
         )
         payload = f"{self.bundle.bundle_id}:{self.message}:{bundle_json}"
+        if self.parent_hash:
+            payload += f":{self.parent_hash}"
         return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
     def verify_integrity(self, bundle: EvidenceBundle) -> bool:
@@ -29,6 +51,8 @@ class EvidenceTransaction:
             serialize_as_any=True,
         )
         payload = f"{bundle.bundle_id}:{self.message}:{bundle_json}"
+        if self.parent_hash:
+            payload += f":{self.parent_hash}"
         computed_hash = hashlib.sha256(payload.encode("utf-8")).hexdigest()
         return self.transaction_hash == computed_hash
 
