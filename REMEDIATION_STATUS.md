@@ -43,3 +43,4 @@
 |---------|-------|--------|--------|-------|
 | P4-1 | Add MNE-Python Compatibility Layer | DONE | bd53084 | Added mne_to_vireon and vireon_to_mne converters in vireon_core.compat.mne_adapter |
 | P4-3 | Expand Knowledge Graph Rule Coverage | DONE | 8969d90 | Expanded rules.jsonld with FIR, CSP, and WaveletCoherence rules and added assumptions.jsonld |
+| P4-4 | Add Property-Based Tests with Hypothesis | DONE | ac66cf7 | Added Hypothesis property test suites for Welch, CSP, ICA, and evidence hashes |
