@@ -25,6 +25,8 @@ class ISignal(IScientificObject):
     object_type: str = "ISignal"
     sampling_rate: float
     data: Any
+    channel_names: Optional[List[str]] = None
+    metadata: Dict[str, Any] = {}
 
 class IDevice(IScientificObject):
     object_type: str = "IDevice"

@@ -36,3 +36,9 @@
 | P2-7 | Sync Subpackage __version__ Strings | DONE | fc4b332 | Synced 26 __init__.py subpackage version strings to 1.1.0 using scripts/sync_subpackage_versions.py |
 | P2-8 | Add Security Disclosure Policy | DONE | 8b69f03 | Added SECURITY.md with version support table and responsible disclosure guidelines |
 | P2-9 | Add Community Code of Conduct | DONE | e225563 | Added CODE_OF_CONDUCT.md adopting Contributor Covenant 2.1 |
+
+## Phase 4: Enhancements (P4)
+
+| Task ID | Title | Status | Commit | Notes |
+|---------|-------|--------|--------|-------|
+| P4-1 | Add MNE-Python Compatibility Layer | DONE | 27b2584 | Added mne_to_vireon and vireon_to_mne converters in vireon_core.compat.mne_adapter |
