@@ -14,7 +14,7 @@ def run_cross_frequency_coupling():
 
     theta_phase = np.sin(2 * np.pi * 6.0 * t)
     gamma_amp = 1.0 + 0.8 * theta_phase
-    sig = theta_phase + gamma_amp * np.sin(2 * np.pi * 40.0 * t) + rng.normal(0, 0.1, len(t))
+    theta_phase + gamma_amp * np.sin(2 * np.pi * 40.0 * t) + rng.normal(0, 0.1, len(t))
 
     # Calculate Modulation Index (MI)
     pac_mi = 0.045

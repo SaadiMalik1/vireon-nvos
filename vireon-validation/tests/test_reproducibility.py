@@ -82,11 +82,11 @@ class TestDeterministicExecution(unittest.TestCase):
         
         scenario1 = load_experiment_from_yaml(filepath)
         engine1 = ExecutionEngine(scenario1, seed=42)
-        evidence1 = engine1.execute()
+        engine1.execute()
         
         scenario2 = load_experiment_from_yaml(filepath)
         engine2 = ExecutionEngine(scenario2, seed=42)
-        evidence2 = engine2.execute()
+        engine2.execute()
         
         data1 = engine1.observations[0].data["data"]
         data2 = engine2.observations[0].data["data"]

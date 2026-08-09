@@ -134,7 +134,7 @@ class VireonAEC:
         if np.any(np.isnan(X)) or np.any(np.isinf(X)):
             raise ScientificContractViolation("NaN or Inf detected.", violated_assumption="finite_values", details="", remediation="")
             
-        n_channels = X.shape[0]
+        X.shape[0]
         
         b, a = butter(4, band, btype='bandpass', fs=fs)
         X_filt = filtfilt(b, a, X, axis=-1)

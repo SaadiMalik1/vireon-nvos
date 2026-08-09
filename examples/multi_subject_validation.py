@@ -40,13 +40,12 @@ def run_subject_benchmark(subject_id: int, seed: int = 42) -> list:
     """Run CSP+LDA benchmark for a single subject. Returns list of bundle dicts."""
     print(f"\n  Subject {subject_id}:")
 
-    data_source = "PhysioNet (real)"
     try:
         provider = PhysioNetMotorImageryProvider(subject_id=subject_id, run_id=4)
         data_dict = provider.get_data()
         X = data_dict["data"]
         y = data_dict["label"]
-        sample_rate = data_dict.get("sample_rate", 160.0)
+        data_dict.get("sample_rate", 160.0)
         print(f"    Loaded {X.shape[0]} trials, {X.shape[1]} channels (PhysioNet)")
     except Exception as e:
         # Fallback: generate deterministic synthetic data with different seed per subject
@@ -69,8 +68,7 @@ def run_subject_benchmark(subject_id: int, seed: int = 42) -> list:
                 for ch in range(n_channels):
                     mu_power = 2.0 if ch < 8 else 3.0
                     X[i, ch] += mu_power * np.sin(2 * np.pi * (10 + rng.normal(0, 0.5)) * t + rng.uniform(0, 2*np.pi))
-        sample_rate = 250.0
-        data_source = f"Synthetic (seed={seed + subject_id * 1000})"
+        f"Synthetic (seed={seed + subject_id * 1000})"
 
     csp = CSPPlugin(n_components=2)
     matrix = BenchmarkMatrix(seed=seed)
@@ -186,7 +184,7 @@ def main():
 
     print("\n[6] Running Meta-Analysis...")
     try:
-        meta = ContinuousMetaAnalysis(graph)
+        ContinuousMetaAnalysis(graph)
         # Get all CCC values from baseline (no perturbation) bundles
         baseline_cccs = []
         for b in all_bundles:

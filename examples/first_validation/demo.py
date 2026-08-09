@@ -47,7 +47,6 @@ def _generate_synthetic_motor_imagery(seed: int = 42, n_epochs: int = 60, n_chan
     # Channel groups (simulating 10-20 layout with 16 channels)
     left_hemi = [3, 4, 5, 6]    # left hemisphere
     right_hemi = [9, 10, 11, 12] # right hemisphere
-    central = [7, 8]             # central (Cz region)
 
     for i in range(n_epochs):
         # Background 1/f pink noise (~2 µV std) — realistic EEG background

@@ -31,5 +31,5 @@ class EvidenceIdentifier:
             "publication_year": 2025,
             "resource_type": "Dataset",
             "description": f"Evidence bundle with CCC={ccc}",
-            "url": f"https://vireon.org/evidence/{bundle.evidence_hash}"
+            "url": f"https://saadimalik1.github.io/vireon-nvos/evidence/{bundle.evidence_hash}"
         }

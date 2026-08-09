@@ -10,7 +10,6 @@ from vireon_core.contracts.evidence import EvidenceBundle
 
 def run_realtime_bci():
     rng = DeterministicRNG(seed=2026)
-    fs = 250.0
     buffer_size = 62  # 250 ms chunk
     n_channels = 8
 
@@ -20,7 +19,7 @@ def run_realtime_bci():
         t0 = time.perf_counter()
         chunk = rng.normal(0, 1.0, (n_channels, buffer_size))
         # Process chunk
-        cov = np.cov(chunk)
+        np.cov(chunk)
         t1 = time.perf_counter()
         latencies_ms.append((t1 - t0) * 1000.0)
 

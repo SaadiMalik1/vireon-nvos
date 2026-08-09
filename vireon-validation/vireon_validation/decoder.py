@@ -36,7 +36,6 @@ class DecoderEvaluator:
         try:
             import mne
             from mne.decoding import CSP
-            has_mne = True
         except ImportError:
             raise RuntimeError(
                 "MNE is required for DecoderEvaluator. CSP feature extraction "

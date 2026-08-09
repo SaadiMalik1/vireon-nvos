@@ -13,7 +13,7 @@ from vireon_methods.spatial.vireon_ica import VireonICA
 
 def test_makeig_1996():
     """ICA blind source separation recovers mixed independent signals."""
-    rng = DeterministicRNG(seed=1996)
+    DeterministicRNG(seed=1996)
     t = np.linspace(0, 1, 500)
     s1 = np.sin(2 * np.pi * 10 * t)
     s2 = np.sign(np.sin(2 * np.pi * 3 * t))

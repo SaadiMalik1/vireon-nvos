@@ -1,6 +1,6 @@
 {
     "@context": {
-        "vk": "https://vireon.org/knowledge/rules#"
+        "vk": "https://saadimalik1.github.io/vireon-nvos/knowledge/rules#"
     },
     "@id": "vk:ValidationRules",
     "rules": [

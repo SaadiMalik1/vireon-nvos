@@ -46,7 +46,7 @@ def test_dag_cycle_detection():
     """A cyclic DAG raises ValueError."""
     # We construct a cyclic graph directly because validation might catch it on init.
     with pytest.raises(ValueError, match="cycle"):
-        dag = ExecutionDAG(nodes=[
+        ExecutionDAG(nodes=[
             DAGNode(node_id="a", stage="INTENTION", inputs=["c"]),
             DAGNode(node_id="b", stage="SIGNAL", inputs=["a"]),
             DAGNode(node_id="c", stage="DECODER_STATE", inputs=["b"]),
@@ -73,7 +73,7 @@ def test_plugin_node_calls_execute():
     ])
     
     engine = ExecutionEngine(experiment=MockExperiment(), plugin_manager=pm)
-    result = engine.execute(dag=dag)
+    engine.execute(dag=dag)
     assert engine.node_outputs["n1"] == "hello"
 
 def test_linear_dag_backward_compat():

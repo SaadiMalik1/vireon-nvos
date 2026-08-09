@@ -53,7 +53,7 @@ def test_decoder_plugin_is_called():
         DAGNode(node_id="dec", stage="DECODER_STATE", plugin_id="mock.decoder", inputs=["sig"]),
     ])
     engine = ExecutionEngine(experiment=MockExperiment(), plugin_manager=pm)
-    result = engine.execute(dag=dag)
+    engine.execute(dag=dag)
     assert mock_decoder.predict_called
     assert engine.node_outputs["dec"] == "left_hand"
 

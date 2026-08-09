@@ -11,4 +11,4 @@ def test_build_physionet_provider_not_found():
     }
     
     with pytest.raises(FileNotFoundError, match="PhysioNet data not found"):
-        provider = _build_provider(config)
+        _build_provider(config)

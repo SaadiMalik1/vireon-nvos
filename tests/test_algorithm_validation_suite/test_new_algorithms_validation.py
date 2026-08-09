@@ -77,9 +77,8 @@ def test_riemannian_vs_pyriemann():
     try:
         from pyriemann.classification import MDM
         import pyriemann
-        has_pyriemann = True
     except ImportError:
-        has_pyriemann = False
+        pass
 
     rng = DeterministicRNG(seed=42)
     X = rng.normal(0, 1.0, (20, 4, 100))

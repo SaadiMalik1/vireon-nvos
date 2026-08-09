@@ -49,14 +49,13 @@ class EvidenceRegistry:
             timestamp = str(getattr(bundle, "timestamp", ""))
             algorithm = getattr(bundle, "algorithm", "") or getattr(bundle, "method_id", "")
             dataset = getattr(bundle, "dataset", "")
-            bundle_dict = bundle.model_dump()
+            bundle.model_dump()
         elif isinstance(bundle, dict):
             bundle_json = json.dumps(bundle, default=str)
             evidence_hash = bundle.get("evidence_hash", "")
             timestamp = str(bundle.get("timestamp", ""))
             algorithm = bundle.get("algorithm", "") or bundle.get("method_id", "")
             dataset = bundle.get("dataset", "")
-            bundle_dict = bundle
         else:
             raise TypeError("Bundle must be an EvidenceBundle instance or dict")
 

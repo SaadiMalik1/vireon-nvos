@@ -35,7 +35,7 @@ class StatisticalFramework:
     
     @staticmethod
     def bland_altman_agreement(method_a: np.ndarray, method_b: np.ndarray) -> dict:
-        mean = np.mean([method_a, method_b], axis=0)
+        np.mean([method_a, method_b], axis=0)
         diff = method_a - method_b
         md = np.mean(diff)
         sd = np.std(diff, axis=0)
@@ -56,7 +56,7 @@ class StatisticalFramework:
         grand_mean = ratings.mean()
 
         ss_between = n * np.sum((mean_per_rater - grand_mean)**2)
-        ss_within = np.sum((ratings - mean_per_subject[:, None])**2)
+        np.sum((ratings - mean_per_subject[:, None])**2)
         ss_subjects = k * np.sum((mean_per_subject - grand_mean)**2)
         ss_total = np.sum((ratings - grand_mean)**2)
         ss_residual = ss_total - ss_subjects - ss_between

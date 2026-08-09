@@ -1,6 +1,6 @@
 {
     "@context": {
-        "vk": "https://vireon.org/knowledge/ontology#"
+        "vk": "https://saadimalik1.github.io/vireon-nvos/knowledge/ontology#"
     },
     "@id": "vk:Methodology",
     "methods": {

@@ -13,7 +13,7 @@ from vireon_methods.spatial.vireon_ica import VireonICA
 
 def test_delorme_2004():
     """EEGLAB artifact component identification and matrix reconstruction."""
-    rng = DeterministicRNG(seed=2004)
+    DeterministicRNG(seed=2004)
     t = np.linspace(0, 2, 500)
     # EEG + EOG artifact (blink peak)
     eeg = np.sin(2 * np.pi * 10 * t)

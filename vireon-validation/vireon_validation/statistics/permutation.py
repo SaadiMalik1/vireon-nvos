@@ -29,7 +29,8 @@ def permutation_test(
         {"statistic": observed, "p_value": p, "null_distribution": dist, "n_permutations": n}
     """
     if statistic is None:
-        statistic = lambda g1, g2: np.mean(g1) - np.mean(g2)
+        def statistic(g1, g2):
+            return np.mean(g1) - np.mean(g2)
 
     rng = DeterministicRNG(seed)
     group1 = np.asarray(group1, dtype=float)

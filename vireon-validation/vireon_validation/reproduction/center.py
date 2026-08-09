@@ -16,7 +16,7 @@ class UniversalReproductionCenter:
         from vireon_validation.benchmarks.orchestrator import WorkflowOrchestrator
         workflow = WorkflowOrchestrator(manifest)
         
-        results = workflow.execute()
+        workflow.execute()
         
         return f"Reproduction completed for {uri}. Generated evidence exported."
 

@@ -32,7 +32,7 @@ def main():
     parser.add_argument("--device-version", default="1.1.0")
     parser.add_argument("--manufacturer", default="VIREON Project")
     parser.add_argument("--address", default="N/A")
-    parser.add_argument("--email", default="maintainers@vireon.org")
+    parser.add_argument("--email", default="maintainers@users.noreply.github.com")
     parser.add_argument("--predicate", default=None, help="Predicate device for substantial equivalence")
     parser.add_argument("--no-tests", action="store_true", help="Skip pytest execution")
     args = parser.parse_args()

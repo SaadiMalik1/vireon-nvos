@@ -24,7 +24,7 @@ class StringConstraintEvaluator:
         passed = True
         reasons = []
         evaluated_constraints = 0
-        total_constraints = len(expected)
+        len(expected)
         
         for key, expected_val in expected.items():
             # simple string-based evaluation constraint handling

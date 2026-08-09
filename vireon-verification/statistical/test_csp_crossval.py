@@ -23,7 +23,7 @@ def test_csp_crossval():
     data = rng.normal(0.0, 1.0, (2500, 4))
     
     # Mock some labels (100 trials, 2 classes)
-    y = rng.integer(0, 2, 100)
+    rng.integer(0, 2, 100)
     # Inject spatial pattern in class 1 (every odd second)
     for i in range(1, 10, 2):
         start = int(i * fs)

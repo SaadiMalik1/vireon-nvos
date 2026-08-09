@@ -16,7 +16,7 @@ def test_export_to_jsonld():
     assert jsonld["@context"] == "https://schema.org"
     assert jsonld["@type"] == "Dataset"
     assert jsonld["name"] == "VIREON Evidence: VireonWelch"
-    assert "https://vireon.org/evidence/abcdef1234567890abcdef1234567890" in jsonld["@id"]
+    assert "https://saadimalik1.github.io/vireon-nvos/evidence/abcdef1234567890abcdef1234567890" in jsonld["@id"]
 
 
 def test_export_to_bibtex():

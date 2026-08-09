@@ -53,7 +53,7 @@ def test_pli():
     assert pli[0, 1] > 0.95
     
 def test_aec():
-    rng = np.random.default_rng(42)
+    np.random.default_rng(42)
     fs = 250
     t = np.arange(0, 4, 1/fs)
     # same envelope, different carriers

@@ -16,7 +16,7 @@ If you discover a security vulnerability in VIREON, please report it responsibly
 
 **Do NOT report security vulnerabilities through public GitHub issues.**
 
-Instead, please report security issues via email to security@vireon.org or directly to project maintainers.
+Instead, please report security issues via email to security@users.noreply.github.com or directly to project maintainers.
 
 ### Please Include:
 - A description of the vulnerability and its potential impact.

@@ -16,7 +16,7 @@ class DummyScenario(IExperimentDef):
 
 def test_experiment_creation():
     scenario = DummyScenario()
-    device = ReferenceDevice(name="DummyADC", specs={"channels": 8})
+    ReferenceDevice(name="DummyADC", specs={"channels": 8})
     
     experiment = IExperiment(
         hypothesis="Signal processing correctly identifies artifacts",

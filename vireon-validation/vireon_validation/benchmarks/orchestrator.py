@@ -88,9 +88,9 @@ class MassiveCampaignOrchestrator:
                                 try:
                                     # Attempt loading synthetic fixture or real dataset
                                     try:
-                                        data_dict = dataset_mgr.load_synthetic_fixture(key=dataset_key, seed=seed)
+                                        dataset_mgr.load_synthetic_fixture(key=dataset_key, seed=seed)
                                     except Exception:
-                                        data_dict = {"data": None}
+                                        pass
 
                                     bundle = EvidenceBundle(
                                         algorithm=target,

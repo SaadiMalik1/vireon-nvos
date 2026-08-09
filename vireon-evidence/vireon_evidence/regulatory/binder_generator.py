@@ -33,7 +33,7 @@ class BinderConfig(BaseModel):
     predicate_device: Optional[str] = Field(default=None, description="Substantial equivalence predicate")
     manufacturer_name: str = Field(default="VIREON Project", description="Manufacturer name")
     manufacturer_address: str = Field(default="N/A", description="Manufacturer address")
-    contact_email: str = Field(default="maintainers@vireon.org", description="Contact email")
+    contact_email: str = Field(default="maintainers@users.noreply.github.com", description="Contact email")
     regulatory_class: str = Field(default="II", description="Regulatory class I, II, or III")
 
 
