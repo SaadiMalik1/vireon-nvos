@@ -160,14 +160,24 @@ Evidence bundles are committed to a local or enterprise SQLite database (`Eviden
 
 To ensure seamless inspection readiness for FDA, EU Notified Body, or ISO auditors, the following inspection binder procedure is enforced:
 
-### 10.1 Inspection Package Generation
-Prior to audit submission or on-site inspection, executing `python examples/example_regulatory_submission.py` generates the complete digital audit binder containing:
-- Signed Validation Master Plan (`docs/regulatory/validation_master_plan.md`)
-- FDA GMLP Compliance Mapping (`docs/regulatory/fda_gmlp_compliance.md`)
-- Complete SOUP Inventory (`docs/regulatory/soup_inventory.md`)
-- Corporate ROI Case Study (`docs/corporate/roi_case_study.md`)
-- Executive Evidence Portfolio (`EVIDENCE_PORTFOLIO.md`)
-- Complete Pytest Execution Log showing 100% test pass rate across 360+ tests.
+### 10.1 Audit Binder Generation
+Executing `python examples/example_regulatory_submission.py --output ./audit_binder` generates a directory containing:
+- `cover_sheet.json` — Device and manufacturer metadata
+- `vmp.md` — Validation Master Plan (rendered from this template)
+- `soup_inventory.md` — SOUP inventory auto-generated from `pyproject.toml`
+- `gmlp_compliance.md` — Mapping of all 10 FDA GMLP principles to VIREON artifacts
+- `evidence_summary.json` — Aggregate statistics over all registered EvidenceBundles
+- `evidence_bundles/<hash>.json` — Individual bundle exports
+- `test_results/junit.xml` — Pytest results in JUnit format
+- `signature_block.txt` — Placeholder for 21 CFR Part 11 digital signature
+- `manifest.json` — Index of all binder files
+
+This binder is a starting point for a 510(k) submission but is NOT a substitute for regulatory review by qualified professionals. The binder does NOT include:
+- FDA eCopy formatting (requires FDA Assembler)
+- Digital signature (requires 21 CFR Part 11 compliant signing)
+- Substantial equivalence comparison (requires predicate device selection)
+- Clinical evaluation report (requires clinical data)
+- Labeling (requires device-specific labels)
 
 ### 10.2 Continuous Inspection Readiness
 Because VIREON embeds verification tests directly into CI/CD build pipelines, the software system remains in a constant state of inspection readiness. Any code commit violating numerical contracts, hardcoding test metrics, or failing reference cross-validations is automatically blocked prior to merge.

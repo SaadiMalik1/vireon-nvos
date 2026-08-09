@@ -11,6 +11,10 @@ from vireon_evidence.exceptions import (
     EvidenceAlreadyRegisteredError,
     EvidenceTamperError,
 )
+from vireon_evidence.regulatory.binder_generator import (
+    RegulatoryBinderGenerator,
+    BinderConfig,
+)
 
 __version__ = "1.0.3"
 __all__ = [
@@ -18,4 +22,5 @@ __all__ = [
     "EvidenceIdentifier", "LaTeXReportGenerator", "NotebookGenerator",
     "export_to_jsonld", "export_to_bibtex",
     "VireonEvidenceError", "EvidenceAlreadyRegisteredError", "EvidenceTamperError",
+    "RegulatoryBinderGenerator", "BinderConfig",
 ]
