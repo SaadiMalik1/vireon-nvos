@@ -30,7 +30,7 @@ This Evidence Portfolio demonstrates VIREON's scientific depth, regulatory compl
 | Tallon-Baudry et al. (1997) — Gamma Activity | Cognitive | Classic | `10.1523/JNEUROSCI.17-02-00722.1997` | ✅ PASSED |
 | Klimesch (1999) — Alpha/Theta Oscillations | Cognitive | Classic | `10.1016/S0169-2607(99)00005-4` | ✅ PASSED |
 | Hyvarinen & Oja (2000) — FastICA | Methodology | Classic | `10.1016/S0893-6080(00)00026-5` | ✅ PASSED |
-| Ramoser et al. (2000) — CSP BCI | BCI | Classic | `10.1016/S0169-2607(99)00048-0` | ✅ PASSED |
+| Ramoser et al. (2000) — CSP BCI | BCI | Classic | `10.1109/86.84781` | ✅ PASSED |
 | Delorme & Makeig (2004) — EEGLAB Pipeline | Methodology | Classic | `10.1016/j.jneumeth.2003.10.009` | ✅ PASSED |
 | Nunez & Srinivasan (2006) — Spectral Power | Cognitive | Classic | `10.1093/acprof:oso/9780195050387.001.0001` | ✅ PASSED |
 | Blankertz et al. (2008) — BCI Comp III | BCI | Classic | `10.1109/MSP.2008.4408441` | ✅ PASSED |

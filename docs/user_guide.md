@@ -408,7 +408,7 @@ where $MS_S$ is Mean Square for Subjects, $MS_E$ is Mean Square for Error, and $
 6. Klimesch, W. (1999). EEG alpha and theta oscillations reflect cognitive and memory performance: a review and analysis. Brain Res. Rev., 29(2-3), 169-195. DOI: 10.1016/S0169-2607(99)00005-4
 7. Lachaux, J. P., Rodriguez, E., Martinerie, J., & Varela, F. J. (1999). Measuring phase synchrony in brain signals. Hum. Brain Mapp., 8(4), 194-208. DOI: 10.1002/(SICI)1097-0193(1999)8:4<194::AID-HBM4>3.0.CO;2-C
 8. Hyvarinen, A., & Oja, E. (2000). Independent component analysis: algorithms and applications. Neural Netw., 13(4-5), 411-430. DOI: 10.1016/S0893-6080(00)00026-5
-9. Ramoser, H., Muller-Gerking, J., & Pfurtscheller, G. (2000). Optimal spatial filtering of single trial EEG during imagined hand movement. IEEE Trans. Rehabil. Eng., 8(4), 441-446. DOI: 10.1016/S0169-2607(99)00048-0
+9. Ramoser, H., Muller-Gerking, J., & Pfurtscheller, G. (2000). Optimal spatial filtering of single trial EEG during imagined hand movement. IEEE Trans. Rehabil. Eng., 8(4), 441-446. DOI: 10.1109/86.84781
 10. Schreiber, T. (2000). Measuring information transfer. Phys. Rev. Lett., 85(2), 461-464. DOI: 10.1103/PhysRevLett.85.461
 11. Delorme, A., & Makeig, S. (2004). EEGLAB: an open source toolbox for analysis of single-trial EEG dynamics. J. Neurosci. Methods, 134(1), 9-21. DOI: 10.1016/j.jneumeth.2003.10.009
 12. Kraskov, A., Stogbauer, H., & Grassberger, P. (2004). Estimating mutual information. Phys. Rev. E, 69(6), 066138. DOI: 10.1103/PhysRevE.69.066138

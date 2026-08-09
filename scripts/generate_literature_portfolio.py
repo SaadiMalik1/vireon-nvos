@@ -16,7 +16,7 @@ def generate_portfolio():
         ("Klimesch 1999", "Cognitive", "10.1016/S0169-2607(99)00005-4"),
         ("Lachaux 1999", "Connectivity", "10.1002/(SICI)1097-0193(1999)8:4<194::AID-HBM4>3.0.CO;2-C"),
         ("Hyvarinen 2000", "Methodology", "10.1016/S0893-6080(00)00026-5"),
-        ("Ramoser 2000", "BCI", "10.1016/S0169-2607(99)00048-0"),
+        ("Ramoser 2000", "BCI", "10.1109/86.84781"),
         ("Schreiber 2000", "Connectivity", "10.1103/PhysRevLett.85.461"),
         ("Delorme 2004", "Methodology", "10.1016/j.jneumeth.2003.10.009"),
         ("Kraskov 2004", "Connectivity", "10.1103/PhysRevE.69.066138"),
