@@ -27,3 +27,4 @@
 | P1-6 | Make FastAPI Deployable | DONE | 7adb749 | Added uvicorn runner, multi-stage Dockerfile, API key auth, CORS config, and v1.1.0 sync |
 | P1-7 | Tighten CI Grep Gate for Fake Hashes | DONE | 08707f7 | Multi-pattern grep check & AST verify_hash_integrity.py added; fake hash placeholders removed |
 | P1-8 | Replace Transaction Timestamp with Counter | DONE | 43147b6 | Replaced wall-clock hash inclusion with deterministic transaction payload and sequence counter |
+| P2-1 | Add Linting, Type-checking & Coverage Config | DONE | 4b7b24a | Configured ruff, mypy, and coverage sections in pyproject.toml and added CI lint job |

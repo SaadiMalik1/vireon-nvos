@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vireon-nvos"
-version = "1.0.3"
+version = "1.1.0"
 description = "VIREON — Neurotechnology Validation Operating System"
 readme = "README.md"
 license = {text = "MIT"}
@@ -41,7 +41,7 @@ dependencies = [
 [project.optional-dependencies]
 gpu = ["torch>=2.0"]
 deep-learning = ["torch>=2.0"]
-dev = ["pytest>=7.0", "pytest-cov", "hypothesis>=6.0"]
+dev = ["pytest>=7.0", "pytest-cov", "hypothesis>=6.0", "ruff", "mypy"]
 
 [project.scripts]
 vireon = "vireon_lab.cli.main:main"
@@ -105,4 +105,29 @@ pythonpath = [
     "vireon-corpus",
     "vireon-api",
     "vireon-verification"
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = false
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+exclude = ["site/", "build/", "dist/"]
+
+[tool.coverage.run]
+source = ["vireon_core", "vireon_methods", "vireon_validation", "vireon_evidence"]
+omit = ["*/tests/*", "*/test_*.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "pass"
 ]

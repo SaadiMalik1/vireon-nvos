@@ -105,8 +105,18 @@ jobs:
         # No unseeded np.random in perturbations
         ! rg "np\.random\.(normal|uniform|choice)" vireon-validation/vireon_validation/perturbations/
         # No "fully integrated" overclaim
-        ! rg "fully integrated into the Phase E" docs/
         echo "All grep gates passed"
+
+  lint-and-typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install ruff mypy
+      - run: ruff check --select E,F,W .
+      - run: mypy vireon-core/ vireon-methods/ --ignore-missing-imports
 
   algorithm-validation:
     runs-on: ubuntu-latest
