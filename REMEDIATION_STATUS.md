@@ -31,3 +31,4 @@
 | P2-2 | Remove Committed Binary State | DONE | 1bf0015 | Untracked binary DBs, site/ HTML, telemetry outputs; added scripts/regenerate_seed_registry.py |
 | P2-3 | Sync API Documentation with Implementation | DONE | 853ffa4 | Generated docs/api_reference.md, corrected Ramoser 2000 DOI, updated STATUS.md to v1.1.0 |
 | P2-4 | Consolidate Duplicated Implementations | DONE | 3605e3a | Deprecated WelchPSDPlugin, CSPPlugin, and ICAPlugin wrappers with DeprecationWarning; re-exported native classes |
+| P2-5 | Pin Upper Bounds on Dependencies | DONE | 812405a | Added upper bound constraints (<2.0.0, <3.0.0, etc.) in pyproject.toml and requirements.txt |
