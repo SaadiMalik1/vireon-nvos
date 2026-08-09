@@ -6,7 +6,7 @@
 | P0-2 | Complete EEGNet Architecture Implementation | DONE | 6e1840e | Completed EEGNet (Lawhern 2018) and DeepConvNet (Schirrmeister 2017) architectures |
 | P0-3 | Fix Signal Metrics Window Overlap Formula | PENDING | — | — |
 | P0-4 | Fix DatasetManager Path Traversal & Key Dispatch Bug | DONE | 258da6f | Rewrote DatasetManager.load_dataset to dispatch by key without silent synthetic fallbacks |
-| P0-5 | Fix DatasetManager Path Traversal Vulnerability | PENDING | — | — |
+| P0-5 | Replace INSERT OR REPLACE with INSERT OR IGNORE in Evidence Registry | DONE | 121611d | Replaced INSERT OR REPLACE with INSERT OR IGNORE, added EvidenceAlreadyRegisteredError and update_bundle append-only path |
 | P0-6 | Fix Wavelet Coherence Phase Alignment | PENDING | — | — |
 | P0-7 | Implement Real Transfer Entropy with Past Conditioning | PENDING | — | — |
 | P0-8 | Implement Real Mutual Information (Kraskov KSG Estimator) | DONE | dbc622f | Implemented Kraskov 2004 k-NN MI estimator |

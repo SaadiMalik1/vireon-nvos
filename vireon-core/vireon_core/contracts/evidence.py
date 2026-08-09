@@ -45,6 +45,9 @@ class EvidenceBundle(BaseModel):
     replay_hash: str = Field(default="")
     graph_commit_id: str = Field(default="")
     cryptographic_signature: str = Field(default="")
+    supersedes: Optional[str] = Field(default=None, description="Hash of the bundle this one supersedes")
+    update_reason: Optional[str] = Field(default=None, description="Reason for updating bundle")
+    update_timestamp: Optional[str] = Field(default=None, description="Timestamp when update occurred")
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     
     # Benchmarking Topology
