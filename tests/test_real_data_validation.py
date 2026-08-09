@@ -11,7 +11,7 @@ def dataset_mgr():
 
 
 def test_real_data_physionet_csp(dataset_mgr):
-    ds = dataset_mgr.load_dataset("physionet_bci")
+    ds = dataset_mgr.load_synthetic_fixture("physionet_bci")
     csp = VireonCSP(n_components=4)
     feats = csp.fit_transform(ds["data"], ds["labels"])
     assert feats.shape == (40, 4)
