@@ -24,4 +24,9 @@ The base module defines the fundamental `IScientificObject` payloads (like `ISig
 
 
 ## Phase E Implementation Status
+
 > [!NOTE]
+> **Status: Complete (v1.0.3)**
+>
+> REST API is implemented in vireon-api/ with 6 endpoints.
+> CLI is implemented in vireon-lab/cli/ with 4 subcommands.

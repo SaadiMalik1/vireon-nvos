@@ -17,4 +17,8 @@ Every `IPlugin` must define a `ScientificContract`. This contract explicitly lis
 
 
 ## Phase E Implementation Status
+
 > [!NOTE]
+> **Status: Accepted & Implemented (v1.0.3)**
+>
+> Architectural Decision Record validated against core codebase.

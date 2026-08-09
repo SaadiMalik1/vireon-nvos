@@ -17,4 +17,9 @@ A critical challenge in signal modeling is non-stationarity. Brain states shift 
 VIREON's generative models (`vireon-models`) allow researchers to explicitly schedule state transitions to test how adaptive decoders handle concept drift.
 
 ## Phase E Implementation Status
+
 > [!NOTE]
+> **Status: Partial (v1.0.3)**
+>
+> Scientific principles are implemented in vireon-core/contracts/ and vireon-knowledge/.
+> Runtime contract enforcement is production-ready.

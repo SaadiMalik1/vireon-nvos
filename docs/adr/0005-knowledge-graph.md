@@ -18,4 +18,8 @@ For example: `[vk:Artifact:ElectrodePop] -> (VIOLATES) -> [vk:Assumption:Station
 
 
 ## Phase E Implementation Status
+
 > [!NOTE]
+> **Status: Accepted & Implemented (v1.0.3)**
+>
+> Architectural Decision Record validated against core codebase.

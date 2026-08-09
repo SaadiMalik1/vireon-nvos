@@ -43,4 +43,9 @@ When generating evidence, numerical results (e.g., "Accuracy: 95%") are insuffic
 
 
 ## Phase E Implementation Status
+
 > [!NOTE]
+> **Status: Partial (v1.0.3)**
+>
+> Scientific principles are implemented in vireon-core/contracts/ and vireon-knowledge/.
+> Runtime contract enforcement is production-ready.

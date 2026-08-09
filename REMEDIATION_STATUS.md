@@ -23,3 +23,4 @@
 | P1-2 | Pin BLAS Threads via threadpoolctl | DONE | 5415e5d | Added pinned_blas_threads context manager and blas_thread_count field |
 | P1-3 | Wire the GPU API | DONE | e4b09b7 | Wired get_torch_device, is_gpu_available, and to_device into EEGNet & DeepConvNet wrappers with CLI --gpu flag |
 | P1-4 | Implement MassiveCampaignOrchestrator | DONE | 2572ed3 | Implemented Cartesian campaign execution with EvidenceRegistry and FailureAtlas integration |
+| P1-5 | Fill 35 Empty Doc Stubs | DONE | 298ebc8 | Filled all 35 Phase E documentation stubs with family-specific status notes |

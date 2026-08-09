@@ -20,4 +20,9 @@ Any new algorithmic method introduced to VIREON must have:
 
 
 ## Phase E Implementation Status
+
 > [!NOTE]
+> **Status: Partial (v1.0.3)**
+>
+> Scientific principles are implemented in vireon-core/contracts/ and vireon-knowledge/.
+> Runtime contract enforcement is production-ready.

@@ -21,4 +21,8 @@ Every plugin must declare its SRL.
 
 
 ## Phase E Implementation Status
+
 > [!NOTE]
+> **Status: Accepted & Implemented (v1.0.3)**
+>
+> Architectural Decision Record validated against core codebase.

@@ -17,4 +17,8 @@ The VIREON kernel (`vireon-core`) will contain zero scientific logic. Instead, i
 
 
 ## Phase E Implementation Status
+
 > [!NOTE]
+> **Status: Accepted & Implemented (v1.0.3)**
+>
+> Architectural Decision Record validated against core codebase.

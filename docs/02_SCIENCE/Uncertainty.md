@@ -9,4 +9,9 @@ By utilizing the `vireon-validation` adversarial generator to slowly increase th
 Ideally, as the Signal-to-Noise Ratio (SNR) drops, the decoder's confidence should drop proportionally before its accuracy drops. A model that remains 99% confident while its accuracy drops to chance (50%) is poorly calibrated and clinically unsafe.
 
 ## Phase E Implementation Status
+
 > [!NOTE]
+> **Status: Partial (v1.0.3)**
+>
+> Scientific principles are implemented in vireon-core/contracts/ and vireon-knowledge/.
+> Runtime contract enforcement is production-ready.

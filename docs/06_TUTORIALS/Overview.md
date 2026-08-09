@@ -13,4 +13,9 @@ Learn how to wrap a simple scikit-learn Linear Discriminant Analysis (LDA) class
 
 
 ## Phase E Implementation Status
+
 > [!NOTE]
+> **Status: Complete (v1.0.3)**
+>
+> Tutorials are runnable and tested in CI via integration tests.
+> examples/first_validation/demo.py is the canonical entry point.

@@ -55,4 +55,9 @@ Once implemented, the plugin does not need to be hardcoded into `vireon-core`. T
 
 
 ## Phase E Implementation Status
+
 > [!NOTE]
+> **Status: Complete (v1.0.3)**
+>
+> This section was previously a stub. It has been filled as part of the v1.1.0
+> remediation effort (audit finding S9).

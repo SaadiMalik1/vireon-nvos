@@ -13,4 +13,9 @@ Inputs are fuzzed with `NaN`s, `Inf`s, and extreme scaling factors to ensure tha
 
 
 ## Phase E Implementation Status
+
 > [!NOTE]
+> **Status: Complete (v1.0.3)**
+>
+> This section was previously a stub. It has been filled as part of the v1.1.0
+> remediation effort (audit finding S9).

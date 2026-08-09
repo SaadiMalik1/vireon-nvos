@@ -12,4 +12,9 @@ Where $\mathbf{\Sigma}_1$ and $\mathbf{\Sigma}_2$ are the spatial covariance mat
 *Assumption*: CSP assumes that the noise covariance is stationary between the two classes. If an artifact (e.g. jaw clenching) is present in class 1 but not class 2, CSP will learn to decode the artifact, not the neural signal. VIREON validates CSP implementations by explicitly injecting asymmetric artifacts.
 
 ## Phase E Implementation Status
+
 > [!NOTE]
+> **Status: Partial (v1.0.3)**
+>
+> Scientific principles are implemented in vireon-core/contracts/ and vireon-knowledge/.
+> Runtime contract enforcement is production-ready.

@@ -24,4 +24,9 @@ The VIREON ecosystem is intentionally fragmented into domain-specific repositori
 - **`vireon-lab`**: Interactive Jupyter notebooks and the `vireon reproduce [DOI]` CLI for one-command paper replication.
 
 ## Phase E Implementation Status
+
 > [!NOTE]
+> **Status: Complete (v1.0.3)**
+>
+> Architecture as documented is implemented across the 10 vireon-* packages.
+> ADRs (docs/adr/) are up-to-date with the codebase.
