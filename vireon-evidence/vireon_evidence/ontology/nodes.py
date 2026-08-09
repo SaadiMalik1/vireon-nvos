@@ -1,5 +1,8 @@
 from pydantic import BaseModel
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from vireon_core.contracts.evidence import EvidenceBundle
 
 class EvidenceNode(BaseModel):
     node_id: str

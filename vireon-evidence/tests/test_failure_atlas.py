@@ -23,6 +23,9 @@ class TestFailureAtlas(unittest.TestCase):
             self.assertIsNotNone(retrieved)
             self.assertEqual(retrieved["method_id"], "method_a")
             self.assertEqual(retrieved["reproducibility_hash"], h)
+            
+            atlas1.close()
+            atlas2.close()
 
     def test_list_failures_filter(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -40,3 +43,5 @@ class TestFailureAtlas(unittest.TestCase):
             self.assertEqual(len(method_a_f), 2)
             for f in method_a_f:
                 self.assertEqual(f["method_id"], "method_a")
+                
+            atlas.close()

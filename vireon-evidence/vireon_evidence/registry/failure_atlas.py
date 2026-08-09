@@ -22,6 +22,11 @@ class FailureAtlas:
         """)
         self.conn.commit()
 
+    def close(self):
+        """Close the database connection to release file locks."""
+        if self.conn:
+            self.conn.close()
+
     def register_failure(self, failure: Union[dict, str] = None, *args, **kwargs) -> str:
         if isinstance(failure, dict):
             failure_record = failure.copy()

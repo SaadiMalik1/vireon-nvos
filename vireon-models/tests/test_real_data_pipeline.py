@@ -66,9 +66,9 @@ class TestRealDataPipeline(unittest.TestCase):
             # Check telemetry.npz exists and contains real data
             npz_path = os.path.join(bundle_path, "telemetry.npz")
             self.assertTrue(os.path.exists(npz_path))
-            loaded = np.load(npz_path)
-            self.assertIn("data", loaded)
-            self.assertEqual(loaded["data"].shape, (500, 8))  # 2s * 250Hz = 500, 8ch
+            with np.load(npz_path) as loaded:
+                self.assertIn("data", loaded)
+                self.assertEqual(loaded["data"].shape, (500, 8))  # 2s * 250Hz = 500, 8ch
 
     def test_motor_imagery_scenario(self):
         """Execute the motor imagery ERD scenario with MotorImageryProvider."""

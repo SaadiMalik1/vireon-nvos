@@ -1,6 +1,7 @@
 import os
 import glob
 from vireon_core.contracts.experiment import load_experiment_from_yaml
+from vireon_core.kernel.execution_engine import ExecutionEngine
 
 class BenchmarkRunner:
     def __init__(self, scenarios_dir: str, output_dir: str, seed: int = 42):
@@ -17,7 +18,7 @@ class BenchmarkRunner:
 
         for filepath in scenario_files:
             try:
-                experiment = load_experiment_from_yaml(filepath)
+                load_experiment_from_yaml(filepath)
                 # In a real implementation we would run the experiment via the engine.
                 # Here we just parse to verify validity.
                 # result = self.engine.run(experiment)

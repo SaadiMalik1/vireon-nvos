@@ -112,6 +112,8 @@ class ExperimentRunner:
                     measurements=avg_measurements,
                     assertions_met={}
                 )
+                from vireon_validation.decision import DecisionEngine
+                decision_engine = DecisionEngine(rules)
                 decision = decision_engine.evaluate(dummy_evidence)
                 
                 # Validation Graph

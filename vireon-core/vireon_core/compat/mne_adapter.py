@@ -9,9 +9,11 @@ Example:
     signal = mne_to_vireon(raw)  # ISignal wrapper
     psd, freqs = VireonWelch(fs=raw.info["sfreq"], nperseg=512).compute(signal.data)
 """
-from typing import Union
-import numpy as np
+from typing import Union, TYPE_CHECKING
 from vireon_core.contracts.base import ISignal
+
+if TYPE_CHECKING:
+    import mne
 
 
 def mne_to_vireon(mne_obj: Union["mne.io.BaseRaw", "mne.BaseEpochs"]) -> ISignal:
