@@ -23,7 +23,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install hypothesis pytest pytest-cov
+        pip install hypothesis pytest pytest-cov pytest-asyncio
         pip install -e .
     - name: Regenerate seed registry
       run: python scripts/regenerate_seed_registry.py
@@ -46,7 +46,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install hypothesis pytest
+        pip install hypothesis pytest pytest-asyncio
         pip install -e .
     - name: Run integration tests
       env:
@@ -133,7 +133,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install hypothesis pytest pytest-cov mne-bids pyarrow
+        pip install hypothesis pytest pytest-cov pytest-asyncio mne-bids pyarrow
         pip install -e .
     - name: Run algorithm validation suite
       env:

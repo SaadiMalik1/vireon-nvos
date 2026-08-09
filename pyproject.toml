@@ -41,7 +41,7 @@ dependencies = [
 [project.optional-dependencies]
 gpu = ["torch>=2.0"]
 deep-learning = ["torch>=2.0"]
-dev = ["pytest>=7.0", "pytest-cov", "hypothesis>=6.0", "ruff", "mypy"]
+dev = ["pytest>=7.0", "pytest-cov", "hypothesis>=6.0", "pytest-asyncio", "ruff", "mypy"]
 
 [project.scripts]
 vireon = "vireon_simple.cli:main"
