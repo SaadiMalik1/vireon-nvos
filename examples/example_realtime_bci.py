@@ -27,7 +27,6 @@ def run_realtime_bci():
 
     mean_latency = float(np.mean(latencies_ms))
     bundle = EvidenceBundle(
-        evidence_hash="realtime_bci_low_latency_hash",
         algorithm="Real-Time BCI Processing",
         dataset="Streaming Buffer Bench",
         statistical_agreement={"mean_latency_ms": mean_latency}

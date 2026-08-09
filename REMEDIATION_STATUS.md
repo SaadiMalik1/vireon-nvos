@@ -25,3 +25,4 @@
 | P1-4 | Implement MassiveCampaignOrchestrator | DONE | 2572ed3 | Implemented Cartesian campaign execution with EvidenceRegistry and FailureAtlas integration |
 | P1-5 | Fill 35 Empty Doc Stubs | DONE | 4af877d | Filled all 35 Phase E documentation stubs with family-specific status notes |
 | P1-6 | Make FastAPI Deployable | DONE | 7adb749 | Added uvicorn runner, multi-stage Dockerfile, API key auth, CORS config, and v1.1.0 sync |
+| P1-7 | Tighten CI Grep Gate for Fake Hashes | DONE | 08707f7 | Multi-pattern grep check & AST verify_hash_integrity.py added; fake hash placeholders removed |

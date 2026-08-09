@@ -73,10 +73,31 @@ jobs:
       run: |
         python scripts/check_doc_sync.py
     
+    - name: Verify no fake evidence hashes
+      run: |
+        PATTERNS=(
+          'evidence_hash\s*=\s*""'
+          'evidence_hash\s*=\s*["'\'']dummy["'\'']'
+          'evidence_hash\s*=\s*["'\'']realtime_.*_hash["'\'']'
+          'evidence_hash\s*=\s*["'\'']regulatory_.*_hash["'\'']'
+          'execution_hash\s*=\s*["'\'']dummy["'\'']'
+        )
+        for pattern in "${PATTERNS[@]}"; do
+          matches=$(grep -rnE "$pattern" vireon-*/ examples/ 2>/dev/null || true)
+          if [ -n "$matches" ]; then
+            echo "FAIL: Found fake hash pattern: $pattern"
+            echo "$matches"
+            exit 1
+          fi
+        done
+        echo "All hash patterns clean."
+
+    - name: Verify evidence hash integrity
+      run: |
+        python3 scripts/verify_hash_integrity.py
+
     - name: Verify no regressions (grep gates)
       run: |
-        # No hardcoded evidence_hash
-        ! rg 'evidence_hash\s*=\s*""' vireon-validation/ vireon-core/
         # No fake parquet
         ! rg "PARQUET_STUB_DATA" vireon-validation/
         # No fabricated failure counts

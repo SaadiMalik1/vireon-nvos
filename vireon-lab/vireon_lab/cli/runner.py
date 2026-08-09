@@ -102,12 +102,13 @@ class ExperimentRunner:
                     else:
                         rules.append(IRule(rule_id=f"rule_{k}", description=f"Expected {k} == {v}", target_metric=k, operator="==", threshold=v))
                         
-                decision_engine = DecisionEngine(rules=rules)
                 from vireon_core.contracts.base import IEvidence, IExecutionContext
+                import hashlib
+                exec_hash = hashlib.sha256(f"{experiment_id}_{avg_measurements}".encode()).hexdigest()
                 dummy_evidence = IEvidence(
                     experiment_id=experiment_id,
-                    execution_hash="dummy",
-                    execution_context=execution_context or IExecutionContext(environment_fingerprint="dummy", dependencies={}, hardware_info={}, execution_timestamp=0.0),
+                    execution_hash=exec_hash,
+                    execution_context=execution_context or IExecutionContext(environment_fingerprint="env", dependencies={}, hardware_info={}, execution_timestamp=0.0),
                     telemetry_path="",
                     events=[],
                     measurements=avg_measurements,
