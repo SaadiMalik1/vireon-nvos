@@ -7,7 +7,7 @@ from vireon_validation.statistics.multiple_comparisons import benjamini_hochberg
 from vireon_validation.evidence.generator import EvidenceGenerator
 from vireon_validation.metrics import generate_signal_metrics
 
-__version__ = "1.0.2"
+__version__ = "1.1.0"
 __all__ = [
     "BenchmarkMatrix", "bootstrap_ci", "permutation_test", "cohens_d",
     "benjamini_hochberg", "EvidenceGenerator", "generate_signal_metrics"

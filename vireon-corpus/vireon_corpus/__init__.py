@@ -7,7 +7,7 @@ from vireon_corpus.exceptions import (
     DatasetValidationError,
 )
 
-__version__ = "1.0.3"
+__version__ = "1.1.0"
 __all__ = [
     "DatasetManager",
     "VireonCorpusError",

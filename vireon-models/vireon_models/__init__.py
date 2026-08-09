@@ -5,7 +5,7 @@ from vireon_models.providers.datasets import (
 from vireon_models.providers.mne_provider import MNEProvider
 from vireon_models.providers.eegbci_provider import EEGBCIProvider
 
-__version__ = "1.0.2"
+__version__ = "1.1.0"
 __all__ = [
     "SyntheticSignalProvider", "MotorImageryProvider", "SyntheticMotorImageryProvider",
     "PhysioNetMotorImageryProvider", "MNEProvider", "EEGBCIProvider"

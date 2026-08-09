@@ -16,7 +16,7 @@ from vireon_evidence.regulatory.binder_generator import (
     BinderConfig,
 )
 
-__version__ = "1.0.3"
+__version__ = "1.1.0"
 __all__ = [
     "EvidenceGraph", "EvidenceTransaction", "EvidenceRegistry",
     "EvidenceIdentifier", "LaTeXReportGenerator", "NotebookGenerator",

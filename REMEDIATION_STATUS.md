@@ -33,3 +33,4 @@
 | P2-4 | Consolidate Duplicated Implementations | DONE | 3605e3a | Deprecated WelchPSDPlugin, CSPPlugin, and ICAPlugin wrappers with DeprecationWarning; re-exported native classes |
 | P2-5 | Pin Upper Bounds on Dependencies | DONE | 812405a | Added upper bound constraints (<2.0.0, <3.0.0, etc.) in pyproject.toml and requirements.txt |
 | P2-6 | Delete Root Scratch Files | DONE | 77d7df9 | Removed scratch_bids.py, parse_phase_c.py, parse_transcript.py, and test_bem.py |
+| P2-7 | Sync Subpackage __version__ Strings | DONE | fc4b332 | Synced 26 __init__.py subpackage version strings to 1.1.0 using scripts/sync_subpackage_versions.py |

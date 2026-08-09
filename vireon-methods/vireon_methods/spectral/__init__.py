@@ -5,5 +5,5 @@ from vireon_methods.spectral.vireon_stft import VireonSTFT
 from vireon_methods.spectral.vireon_wavelets import VireonWavelet
 from vireon_methods.spectral.vireon_multitaper import VireonMultitaper
 
-__version__ = "1.0.2"
+__version__ = "1.1.0"
 __all__ = ["VireonWelch", "VireonFFT", "VireonSTFT", "VireonWavelet", "VireonMultitaper"]
