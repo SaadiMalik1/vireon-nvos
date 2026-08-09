@@ -9,7 +9,7 @@
 | P0-5 | Fix DatasetManager Path Traversal Vulnerability | PENDING | — | — |
 | P0-6 | Fix Wavelet Coherence Phase Alignment | PENDING | — | — |
 | P0-7 | Implement Real Transfer Entropy with Past Conditioning | PENDING | — | — |
-| P0-8 | Implement Real Mutual Information | PENDING | — | — |
+| P0-8 | Implement Real Mutual Information (Kraskov KSG Estimator) | DONE | dbc622f | Implemented Kraskov 2004 k-NN MI estimator |
 | P0-9 | Fix Benchmark Matrix Metric Hash Determination | PENDING | — | — |
 | P0-10 | Add Leadfield Matrix Validation to MinimumNorm and LCMV | PENDING | — | — |
 | P0-11 | Fix Replay Engine Command Line Path Resolution | PENDING | — | — |
