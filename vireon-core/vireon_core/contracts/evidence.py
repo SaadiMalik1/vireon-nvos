@@ -27,6 +27,7 @@ class MethodProvenance(BaseModel):
 class EnvironmentFingerprint(BaseModel):
     hardware_info: Dict[str, str]
     random_seed: int
+    blas_thread_count: int = Field(default=1, description="Number of BLAS threads used")
     execution_timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class RegulatoryProfile(BaseModel):

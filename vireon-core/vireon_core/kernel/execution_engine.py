@@ -12,6 +12,30 @@ from vireon_core.runtime.rng import DeterministicRNG
 from vireon_core.runtime.clock import DeterministicClock, ClockMode
 from vireon_core.kernel.plugins import PluginManager
 
+import os
+from contextlib import contextmanager
+from threadpoolctl import threadpool_limits
+
+
+@contextmanager
+def pinned_blas_threads(num_threads: int = 1):
+    """Pin BLAS threads to ensure deterministic float-summation order."""
+    old_env = {k: os.environ.get(k) for k in
+               ['OMP_NUM_THREADS', 'MKL_NUM_THREADS', 'OPENBLAS_NUM_THREADS',
+                'NUMEXPR_NUM_THREADS', 'VECLIB_MAXIMUM_THREADS']}
+    for k in old_env:
+        os.environ[k] = str(num_threads)
+    try:
+        with threadpool_limits(limits=num_threads):
+            yield
+    finally:
+        for k, v in old_env.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+
+
 class ExecutionEngine:
     """
     The canonical execution model loop.
@@ -22,14 +46,15 @@ class ExecutionEngine:
     when the same seed is used.
     """
     @classmethod
-    def run(cls, experiment: IExperimentDef, seed: int = 42, agency_validator_cls=None, signal_metrics_func=None, dag: Optional[ExecutionDAG] = None, plugin_manager: Optional[PluginManager] = None, assertion_evaluator=None, knowledge_graph=None) -> IEvidence:
-        engine = cls(experiment, seed, agency_validator_cls, signal_metrics_func, plugin_manager, assertion_evaluator, knowledge_graph)
+    def run(cls, experiment: IExperimentDef, seed: int = 42, agency_validator_cls=None, signal_metrics_func=None, dag: Optional[ExecutionDAG] = None, plugin_manager: Optional[PluginManager] = None, assertion_evaluator=None, knowledge_graph=None, blas_threads: int = 1) -> IEvidence:
+        engine = cls(experiment, seed, agency_validator_cls, signal_metrics_func, plugin_manager, assertion_evaluator, knowledge_graph, blas_threads=blas_threads)
         return engine.execute(dag)
 
-    def __init__(self, experiment: IExperimentDef, seed: int = 42, agency_validator_cls=None, signal_metrics_func=None, plugin_manager: Optional[PluginManager] = None, assertion_evaluator=None, knowledge_graph=None):
+    def __init__(self, experiment: IExperimentDef, seed: int = 42, agency_validator_cls=None, signal_metrics_func=None, plugin_manager: Optional[PluginManager] = None, assertion_evaluator=None, knowledge_graph=None, blas_threads: int = 1):
         from vireon_core.contracts.base import DefaultAssertionEvaluator
         self.experiment = experiment
         self.seed = seed
+        self.blas_threads = blas_threads
         self.agency_validator_cls = agency_validator_cls
         self.signal_metrics_func = signal_metrics_func
         self.plugin_manager = plugin_manager or PluginManager()
@@ -71,6 +96,10 @@ class ExecutionEngine:
         ExecutionEngine._topological_order(dag)
 
     def execute(self, dag: Optional[ExecutionDAG] = None) -> IEvidence:
+        with pinned_blas_threads(self.blas_threads):
+            return self._execute_internal(dag)
+
+    def _execute_internal(self, dag: Optional[ExecutionDAG] = None) -> IEvidence:
         if dag is None:
             dag = ExecutionDAG.from_stages()
             

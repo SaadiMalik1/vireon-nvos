@@ -20,6 +20,6 @@
 | Task ID | Title | Status | Commit | Notes |
 |---------|-------|--------|--------|-------|
 | P1-1 | Add PyTorch Determinism Settings | DONE | 6fa04c9 | Added manual_seed, cudnn.deterministic, cudnn.benchmark, deterministic_algorithms, seeded DataLoader |
-| P1-2 | Pin BLAS Threads via threadpoolctl | PENDING | — | — |
+| P1-2 | Pin BLAS Threads via threadpoolctl | DONE | 5415e5d | Added pinned_blas_threads context manager and blas_thread_count field |
 | P1-3 | Wire the GPU API | PENDING | — | — |
 | P1-4 | Implement MassiveCampaignOrchestrator | PENDING | — | — |
