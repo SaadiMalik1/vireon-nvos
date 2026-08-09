@@ -1,7 +1,5 @@
-import pytest
 from vireon_core.contracts.evidence import EvidenceBundle, DatasetProvenance
 from vireon_evidence.graph.transactions import EvidenceTransaction
-from pydantic import BaseModel
 
 def create_bundle(verdict="PASS"):
     return EvidenceBundle(

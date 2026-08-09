@@ -1,5 +1,5 @@
-from pydantic import BaseModel, Field
-from typing import Dict, List, Optional, Any
+from pydantic import BaseModel
+from typing import Dict, List, Optional
 
 class ReferenceImplementation(BaseModel):
     name: str

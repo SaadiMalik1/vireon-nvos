@@ -10,7 +10,6 @@ No user configuration needed. Just `pip install vireon-nvos[gpu]` and
 VIREON automatically uses whatever accelerator is present.
 """
 import logging
-import os
 import platform
 import subprocess
 from typing import Any, Dict, Optional

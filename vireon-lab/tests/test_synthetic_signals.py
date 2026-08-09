@@ -1,6 +1,5 @@
-import pytest
 import numpy as np
-from vireon_lab.synthetic.generators import OscillationGenerator, CognitiveGenerator, ClinicalGenerator, ArtifactGenerator
+from vireon_lab.synthetic.generators import OscillationGenerator, CognitiveGenerator, ArtifactGenerator
 
 def test_alpha_rhythm():
     sfreq = 250

@@ -1,7 +1,5 @@
 import yaml
-import argparse
 import sys
-from vireon_core.contracts.evidence import EvidenceBundle
 
 class CampaignCLI:
     """
@@ -28,7 +26,6 @@ class CampaignCLI:
         print("Applying perturbations...")
         
         from vireon_validation.benchmarks.matrix import BenchmarkMatrix
-        from vireon_core.contracts.evidence import MethodProvenance
         from collections import namedtuple
         
         print(f"Starting Campaign: {algorithm} vs {reference}")

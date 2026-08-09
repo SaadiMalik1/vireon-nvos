@@ -78,7 +78,7 @@ def test_csp_crossval():
     else:
         ci_low, ci_high = 0.0, 0.0
 
-    print(f"CSP Cross-Validation vs MNE")
+    print("CSP Cross-Validation vs MNE")
     print(f"Mean Max Correlation (Permutation matched): {corr:.6f}")
 
     assert np.all(max_corrs > 0.9), "CSP feature correlation too low after matching"

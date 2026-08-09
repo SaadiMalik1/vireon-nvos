@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Dict, Any, List, Optional
+from typing import Optional
 from vireon_core.runtime.rng import DeterministicRNG
 
 class BrainNetwork:

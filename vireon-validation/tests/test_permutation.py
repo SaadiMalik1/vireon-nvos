@@ -1,5 +1,4 @@
 import numpy as np
-import pytest
 from vireon_core.runtime.rng import DeterministicRNG
 from vireon_validation.statistics.permutation import (
     permutation_test,

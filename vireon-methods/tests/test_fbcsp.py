@@ -1,7 +1,5 @@
 import numpy as np
-import pytest
 from vireon_methods.spatial.vireon_fbcsp import VireonFBCSP
-from vireon_methods.spatial.vireon_csp import VireonCSP
 
 
 def test_fbcsp_applies_band_specific_filters():

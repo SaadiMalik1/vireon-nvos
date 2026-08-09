@@ -10,7 +10,7 @@ class ReproducibilityEngine:
         
     def reproduce_doi(self, doi: str):
         print("==================================================")
-        print(f"  VIREON INDEPENDENT REPRODUCIBILITY ENGINE")
+        print("  VIREON INDEPENDENT REPRODUCIBILITY ENGINE")
         print(f"  Target: {doi}")
         print("==================================================")
         
@@ -62,7 +62,7 @@ class ReproducibilityEngine:
         max_dev = max(deviations.values()) if deviations else 0.0
         
         # 6. Report honestly
-        print(f"Compiling Independent Verdict...")
+        print("Compiling Independent Verdict...")
         for k, v in expected.items():
             act = actual_measurements.get(k, 0.0)
             print(f"  {k}: Expected={v:.4f}, Actual={act:.4f}, Diff={abs(act - v):.4f}")

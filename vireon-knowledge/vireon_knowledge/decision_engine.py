@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import List
 from pydantic import BaseModel
 from vireon_core.contracts.base import IEvidence
 from vireon_knowledge.rules import IRule

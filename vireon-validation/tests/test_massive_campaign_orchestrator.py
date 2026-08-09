@@ -1,4 +1,3 @@
-import pytest
 from vireon_validation.benchmarks.orchestrator import MassiveCampaignOrchestrator
 from vireon_evidence.registry.core import EvidenceRegistry
 from vireon_evidence.registry.failure_atlas import FailureAtlas

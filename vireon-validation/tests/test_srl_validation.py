@@ -1,4 +1,3 @@
-import pytest
 from vireon_validation.srl_automation import validate_srl_claim
 from vireon_core.contracts.plugin import ScientificReadinessLevel, ScientificContract
 

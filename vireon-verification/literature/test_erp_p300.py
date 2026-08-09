@@ -5,7 +5,6 @@ Clinical Neurophysiology, 118(10), 2128-2148. DOI: 10.1016/j.clinph.2007.04.019
 """
 import numpy as np
 from vireon_core.runtime.rng import DeterministicRNG
-from vireon_methods.spectral.vireon_fft import VireonFFT
 
 def test_erp_p300():
     """ERP P300 component peak latency detection."""

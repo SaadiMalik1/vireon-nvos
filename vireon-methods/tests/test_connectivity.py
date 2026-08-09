@@ -1,10 +1,9 @@
 import numpy as np
 import pytest
 from vireon_methods.connectivity.vireon_connectivity import (
-    VireonCoherence, VireonImaginaryCoherence, VireonPLV, VireonPLI, VireonAEC, VireonWPLI
+    VireonCoherence, VireonPLV, VireonPLI, VireonAEC, VireonWPLI
 )
 from vireon_core.contracts.plugin import ScientificContractViolation
-import scipy.signal
 
 def test_coherence():
     rng = np.random.default_rng(42)

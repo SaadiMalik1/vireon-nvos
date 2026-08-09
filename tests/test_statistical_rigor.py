@@ -4,7 +4,6 @@ import os
 import subprocess
 import sys
 import numpy as np
-import pytest
 from vireon_core.runtime.rng import DeterministicRNG
 
 

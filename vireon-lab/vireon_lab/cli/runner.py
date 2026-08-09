@@ -1,11 +1,9 @@
 import os
 from datetime import datetime
-from typing import List, Optional
 
 from vireon_core.kernel.execution_engine import ExecutionEngine
 from vireon_lab.cli.registry import ExperimentRegistry, CampaignRegistry
 from vireon_lab.cli.generators import CSVGenerator, PlotGenerator, PaperGenerator, ProvenanceGenerator
-from vireon_knowledge.decision_engine import DecisionEngine
 from vireon_validation.evidence_quality import EvidenceQualityEngine
 
 class ExperimentRunner:

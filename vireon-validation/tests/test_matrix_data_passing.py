@@ -1,6 +1,4 @@
-import pytest
 import numpy as np
-from vireon_core.contracts.evidence import EvidenceBundle
 from vireon_core.runtime.rng import DeterministicRNG
 from vireon_validation.benchmarks.matrix import BenchmarkMatrix
 from vireon_methods.machine_learning.csp import CSPPlugin

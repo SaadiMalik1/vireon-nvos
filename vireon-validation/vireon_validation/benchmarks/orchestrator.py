@@ -1,4 +1,4 @@
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, Optional
 import yaml
 from vireon_evidence.registry.core import EvidenceRegistry
 from vireon_evidence.registry.failure_atlas import FailureAtlas

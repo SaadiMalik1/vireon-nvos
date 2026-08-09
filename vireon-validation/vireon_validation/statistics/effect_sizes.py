@@ -3,7 +3,7 @@
 Reference: Cohen, J. (1988). Statistical Power Analysis for the Behavioral Sciences.
 """
 import numpy as np
-from typing import Optional, List
+from typing import List
 
 
 def cohens_d(group1: np.ndarray, group2: np.ndarray, pooled: bool = True) -> float:

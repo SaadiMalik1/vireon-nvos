@@ -1,4 +1,3 @@
-import pytest
 from vireon_validation.benchmarks.orchestrator import MassiveCampaignOrchestrator, WorkflowOrchestrator
 
 def test_massive_campaign_failures_logged_is_real():

@@ -1,6 +1,5 @@
 import json
 import os
-import glob
 
 def populate():
     print("=== VIREON Knowledge Graph Synthesis ===")

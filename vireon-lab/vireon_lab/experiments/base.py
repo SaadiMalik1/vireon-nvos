@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Dict, Any, Optional, List, Union
+from typing import Dict, Any, Optional, List
 from vireon_core.contracts import IExperimentDef, IProvider, IStimulus, IAssertion
 
 class ExperimentSchema(BaseModel):

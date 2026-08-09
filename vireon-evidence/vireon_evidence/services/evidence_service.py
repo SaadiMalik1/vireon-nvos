@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Dict, Any, List
+from typing import Dict, Any
 from vireon_evidence.graph.core import EvidenceGraph
 
 class EvidenceService:

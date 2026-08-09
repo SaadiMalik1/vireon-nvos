@@ -1,5 +1,4 @@
 import numpy as np
-from vireon_core.runtime.rng import DeterministicRNG
 from vireon_methods.spectral.vireon_welch import VireonWelch
 from vireon_validation.statistics.framework import lin_concordance_correlation
 

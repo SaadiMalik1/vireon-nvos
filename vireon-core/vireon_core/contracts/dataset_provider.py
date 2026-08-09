@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Dict, Any, Optional, Tuple
+from typing import Dict, Any, Tuple
 import numpy as np
 
 class IDatasetProvider(ABC):

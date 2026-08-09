@@ -1,4 +1,3 @@
-import pytest
 import numpy as np
 from vireon_core.contracts.evidence import EvidenceBundle
 from vireon_core.runtime.rng import DeterministicRNG

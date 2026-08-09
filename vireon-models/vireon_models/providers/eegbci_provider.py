@@ -1,9 +1,8 @@
 import os
-from typing import Tuple, Any, Dict, Union, List
+from typing import Any, Dict, Union, List
 import mne
 from mne.datasets import eegbci
 from vireon_core.contracts import IProvider
-import numpy as np
 
 class EEGBCIProvider(IProvider):
     def __init__(self, subject_id: int = 1, run_id: Union[int, List[int]] = 1, data_path: str = None):

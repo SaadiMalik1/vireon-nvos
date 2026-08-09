@@ -1,6 +1,5 @@
 """Validation tests for Multitaper, EMD, Convolution/Correlation, and Reference Comparisons."""
 import numpy as np
-import pytest
 import scipy.signal
 
 from vireon_core.runtime.rng import DeterministicRNG

@@ -1,4 +1,3 @@
-import pytest
 import os
 import tempfile
 from vireon_corpus.plugins.eegbci_plugin import EEGBCIPlugin

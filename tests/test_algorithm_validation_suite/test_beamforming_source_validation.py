@@ -152,7 +152,6 @@ def test_mne_deterministic(forward_setup):
 def test_lcmv_matches_scipy_and_mne_beamformer_reference(forward_setup):
     """VireonLCMV source estimates must match scipy pinv / mne.beamformer formula reference with CCC > 0.99."""
     import scipy.linalg
-    import mne.beamformer  # MNE reference import
 
     L, X, _, _ = forward_setup
     lcmv = VireonLCMV(leadfield=L, reg=0.01).fit(X)
@@ -173,7 +172,6 @@ def test_lcmv_matches_scipy_and_mne_beamformer_reference(forward_setup):
 def test_mne_matches_scipy_and_mne_minimum_norm_reference(forward_setup):
     """VireonMinimumNorm source estimates must match scipy / mne.minimum_norm formula reference with CCC > 0.99."""
     import scipy.linalg
-    import mne.minimum_norm  # MNE reference import
 
     L, X, _, _ = forward_setup
     mne_mod = VireonMinimumNorm(leadfield=L, snr=3.0)

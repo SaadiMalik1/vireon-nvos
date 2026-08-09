@@ -1,6 +1,5 @@
 import numpy as np
 from abc import ABC, abstractmethod
-from vireon_core.contracts.base import IUncertainty
 from vireon_core.runtime.rng import DeterministicRNG
 
 class IHardwareStage(ABC):

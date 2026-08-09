@@ -1,5 +1,4 @@
 """Evidence export formats (JSON-LD, BibTeX, RDF/Turtle)."""
-import json
 from typing import Dict, Any
 from vireon_core.contracts.evidence import EvidenceBundle
 

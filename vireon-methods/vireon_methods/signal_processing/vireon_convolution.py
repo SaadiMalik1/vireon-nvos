@@ -1,5 +1,4 @@
 import numpy as np
-from typing import Union
 from vireon_core.contracts.plugin import ScientificContractViolation
 
 class VireonConvolution:

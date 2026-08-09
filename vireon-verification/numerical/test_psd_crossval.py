@@ -2,7 +2,6 @@ import numpy as np
 import os
 import scipy.signal
 import scipy.stats
-from vireon_validation.metrics import compute_psd
 
 def test_psd_crossval():
     """
@@ -43,7 +42,7 @@ def test_psd_crossval():
     else:
         ci_low, ci_high = 0.0, 0.0
 
-    print(f"PSD Cross-Validation vs SciPy")
+    print("PSD Cross-Validation vs SciPy")
     print(f"RMSE: {rmse:.8e}")
     print(f"MAE: {mae:.8e}")
     print(f"Max Error: {max_err:.8e}")

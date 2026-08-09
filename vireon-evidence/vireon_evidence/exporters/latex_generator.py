@@ -1,5 +1,4 @@
 """Generate a LaTeX paper from an evidence bundle."""
-from typing import Any
 from datetime import datetime
 from vireon_core.contracts.evidence import EvidenceBundle
 

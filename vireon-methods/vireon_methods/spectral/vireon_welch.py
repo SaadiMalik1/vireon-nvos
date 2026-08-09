@@ -1,6 +1,6 @@
 import numpy as np
 from typing import Tuple
-from vireon_core.contracts.plugin import ContractValidator, ScientificContractViolation
+from vireon_core.contracts.plugin import ScientificContractViolation
 
 class VireonWelch:
     """Native Welch PSD implementation.

@@ -1,5 +1,4 @@
 import numpy as np
-from vireon_core.runtime.rng import DeterministicRNG
 
 class VireonForwardModel:
     """

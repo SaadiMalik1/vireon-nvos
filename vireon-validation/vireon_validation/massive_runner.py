@@ -9,7 +9,7 @@ def main():
     orchestrator = MassiveCampaignOrchestrator.from_yaml(yaml_content)
     results = orchestrator.execute()
     
-    print(f"=== MASSIVE CAMPAIGN EXECUTION ===")
+    print("=== MASSIVE CAMPAIGN EXECUTION ===")
     print(f"Total Factorial Runs Executed: {results['total_factorial_runs']}")
     print(f"Operational Envelopes Generated: {results['operational_envelopes_generated']}")
     print(f"Failures Logged to FailureAtlas: {results['failures_logged']}")

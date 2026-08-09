@@ -2,7 +2,6 @@ import pytest
 from vireon_corpus.dataset_manager import DatasetManager
 from vireon_corpus.exceptions import (
     UnknownDatasetError,
-    DatasetDownloadError,
 )
 
 

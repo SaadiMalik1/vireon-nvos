@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from vireon_validation.incubator import NativeAlgorithmIncubator, run_gauntlet
+from vireon_validation.incubator import run_gauntlet
 
 class DummyPassingPlugin:
     def __init__(self, name="DummyPassing"):

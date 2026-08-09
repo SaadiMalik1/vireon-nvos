@@ -16,16 +16,13 @@ Produces a directory structure with:
     manifest.json            # Index of all binder files
 """
 import json
-import os
 import subprocess
 from pathlib import Path
 from datetime import datetime, timezone
-from typing import Optional, List, Dict, Any
-import numpy as np
+from typing import Optional
 
 from pydantic import BaseModel, Field
 
-from vireon_core.contracts.evidence import EvidenceBundle
 from vireon_evidence.registry.core import EvidenceRegistry
 
 

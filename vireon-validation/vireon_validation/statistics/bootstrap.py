@@ -4,7 +4,7 @@ Reference: Efron, B., & Tibshirani, R. J. (1994). An Introduction to the Bootstr
 Chapman & Hall/CRC.
 """
 import numpy as np
-from typing import Callable, Tuple, Optional, Dict, Any
+from typing import Callable, Tuple, Dict, Any
 from vireon_core.runtime.rng import DeterministicRNG
 
 

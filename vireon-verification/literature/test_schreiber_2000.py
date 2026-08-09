@@ -4,7 +4,6 @@ Reference: Schreiber, T. (2000). Measuring information transfer. Physical Review
 DOI: 10.1103/PhysRevLett.85.461
 """
 import numpy as np
-import pytest
 from vireon_methods.connectivity.vireon_transfer_entropy import VireonTransferEntropy
 
 

@@ -1,5 +1,4 @@
 import numpy as np
-import pytest
 from vireon_validation.statistics.framework import StatisticalFramework
 
 def test_mcc_perfect():

@@ -1,4 +1,3 @@
-import pytest
 from vireon_validation.decision import StringConstraintEvaluator
 from vireon_core.contracts.base import IMeasurement
 from unittest.mock import Mock

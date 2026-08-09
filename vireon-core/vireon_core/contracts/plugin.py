@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Dict, Any, Type, List, Optional
+from typing import Dict, Any, Type, List
 from pydantic import BaseModel
 from enum import IntEnum
 from vireon_core.contracts.base import IScientificObject, SignalType

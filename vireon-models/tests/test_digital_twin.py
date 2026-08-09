@@ -1,4 +1,3 @@
-import pytest
 import numpy as np
 from vireon_models.patient import DigitalPatient, BrainNetwork
 from vireon_models.forward import RandomMixingMatrix

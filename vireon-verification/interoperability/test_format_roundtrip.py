@@ -1,6 +1,5 @@
 import os
 import json
-import numpy as np
 import time
 
 def test_interoperability():

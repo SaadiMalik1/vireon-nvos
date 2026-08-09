@@ -5,7 +5,6 @@ interface classification by Riemannian geometry. IEEE Transactions on Biomedical
 DOI: 10.1109/TBME.2011.2172216
 """
 import numpy as np
-from typing import Optional
 
 
 class VireonRiemannianMDM:

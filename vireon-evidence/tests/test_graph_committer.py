@@ -1,4 +1,3 @@
-import pytest
 from vireon_core.contracts.evidence import EvidenceBundle, DatasetProvenance, MethodProvenance
 from vireon_evidence.graph.core import EvidenceGraph
 from vireon_evidence.graph.transactions import EvidenceTransaction, GraphCommitter

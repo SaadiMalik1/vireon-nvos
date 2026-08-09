@@ -1,4 +1,4 @@
-from typing import List, Dict, Any, Callable, Optional
+from typing import List, Dict, Any, Callable
 import uuid
 import time
 import hashlib

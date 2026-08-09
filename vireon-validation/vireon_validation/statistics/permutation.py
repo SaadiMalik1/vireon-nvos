@@ -4,7 +4,7 @@ Reference: Maris, E., & Oostenveld, R. (2007). Nonparametric statistical testing
 of EEG- and MEG-data. Journal of Neuroscience Methods, 164(1), 177-190.
 """
 import numpy as np
-from typing import Callable, Optional, Tuple, Dict, Any
+from typing import Callable, Optional, Dict, Any
 from scipy import stats
 from scipy.ndimage import label
 from vireon_core.runtime.rng import DeterministicRNG

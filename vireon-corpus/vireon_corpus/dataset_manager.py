@@ -8,7 +8,6 @@ from vireon_core.runtime.rng import DeterministicRNG
 from vireon_corpus.exceptions import (
     UnknownDatasetError,
     DatasetDownloadError,
-    DatasetValidationError,
 )
 
 

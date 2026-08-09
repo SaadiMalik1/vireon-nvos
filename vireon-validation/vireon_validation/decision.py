@@ -1,5 +1,5 @@
 from typing import List, Dict, Any
-from vireon_core.contracts.base import IMeasurement, IDecision, AssertionEvaluator, IAssertion, DefaultAssertionEvaluator
+from vireon_core.contracts.base import IMeasurement, IDecision, IAssertion, DefaultAssertionEvaluator
 
 class BCIAssertionEvaluator(DefaultAssertionEvaluator):
     def evaluate(self, assertion: IAssertion, measurements: dict) -> bool:

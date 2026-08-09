@@ -1,7 +1,6 @@
 import pytest
-import numpy as np
 from vireon_evidence.graph.core import EvidenceGraph
-from vireon_evidence.ontology.nodes import MethodNode, DatasetNode, EvidenceBundleNode, ScientificClaimNode, PublicationNode
+from vireon_evidence.ontology.nodes import MethodNode, DatasetNode, EvidenceBundleNode, PublicationNode
 from vireon_evidence.queries.leaderboard import ScientificLeaderboard, LeaderboardCategory
 from vireon_evidence.queries.query_engine import ScientificQueryEngine
 from vireon_evidence.queries.explorer import EvidenceExplorer

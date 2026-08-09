@@ -10,12 +10,11 @@ for pkg in ['vireon-core', 'vireon-models', 'vireon-lab', 'vireon-methods', 'vir
     if pkg_path not in sys.path:
         sys.path.insert(0, pkg_path)
 
-from vireon_core.contracts.base import ISignal
 from vireon_core.runtime.rng import DeterministicRNG
 from vireon_models.providers.datasets import PhysioNetMotorImageryProvider
 from vireon_methods.machine_learning.csp import CSPPlugin
 from vireon_validation.benchmarks.matrix import BenchmarkMatrix
-from vireon_validation.perturbations.library import WhiteNoisePerturbation, ChannelDropoutPerturbation, LineNoisePerturbation
+from vireon_validation.perturbations.library import WhiteNoisePerturbation
 from vireon_evidence.exporters.report_generator import MultiFormatReportGenerator
 
 def _generate_pink_noise(n: int, rng: DeterministicRNG) -> np.ndarray:
@@ -246,7 +245,7 @@ def main():
     with open("output/benchmark_report.md", "w") as f:
         f.write("# VIREON Benchmark Report\n\n")
         f.write(f"**Dataset:** {data_source} ({X.shape[0]} trials, {X.shape[1]} channels, {X.shape[2]} samples)\n")
-        f.write(f"**Algorithm:** CSP+LDA (n_components=2)\n")
+        f.write("**Algorithm:** CSP+LDA (n_components=2)\n")
         f.write(f"**Seed:** {seed}\n\n")
         f.write("## Spectral Benchmark (Vireon Welch vs scipy)\n\n")
         f.write(f"- RMSE: {welch_rmse:.2e}\n")
@@ -271,11 +270,11 @@ def main():
         f.write(f"\n**Baseline evidence_hash:** `{all_bundles_summary[0]['evidence_hash'][:32]}...`\n")
 
     print("    Evidence artifacts written to output/")
-    print(f"    - evidence.json (baseline bundle with cryptographic hash)")
-    print(f"    - evidence.md (formatted report)")
+    print("    - evidence.json (baseline bundle with cryptographic hash)")
+    print("    - evidence.md (formatted report)")
     print(f"    - all_bundles_summary.json ({len(all_bundles_summary)} bundles)")
-    print(f"    - benchmark_report.md (multi-algorithm benchmark summary)")
-    print(f"    - hashes.json (bundle integrity hashes)")
+    print("    - benchmark_report.md (multi-algorithm benchmark summary)")
+    print("    - hashes.json (bundle integrity hashes)")
     print("\nRun Complete. Review output/benchmark_report.md for the full summary.")
 
 if __name__ == "__main__":

@@ -17,7 +17,6 @@ Test:
 import os
 import sys
 import numpy as np
-import pytest
 
 repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 for pkg in ['vireon-core', 'vireon-methods', 'vireon-validation']:

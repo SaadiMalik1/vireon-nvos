@@ -1,5 +1,4 @@
-import pytest
-from vireon_core.contracts.base import IEvidence, IMeasurement, IExecutionContext, IEvent
+from vireon_core.contracts.base import IEvidence, IMeasurement, IExecutionContext
 from vireon_knowledge.rules import FDA_Guidance
 from vireon_knowledge.decision_engine import DecisionEngine
 

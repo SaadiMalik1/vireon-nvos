@@ -1,5 +1,4 @@
 import numpy as np
-from typing import Optional
 from vireon_core.contracts.base import ISignal
 from vireon_core.runtime.rng import DeterministicRNG
 

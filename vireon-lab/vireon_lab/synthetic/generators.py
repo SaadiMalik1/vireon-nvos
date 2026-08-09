@@ -1,5 +1,4 @@
 import numpy as np
-from typing import Dict, Any, List, Optional
 from scipy.signal import butter, filtfilt
 
 from vireon_core.contracts.base import ISignal

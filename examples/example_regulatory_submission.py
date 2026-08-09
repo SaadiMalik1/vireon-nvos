@@ -18,8 +18,6 @@ The generated binder is suitable as a starting point for a 510(k) submission
 but is NOT a substitute for regulatory review by qualified professionals.
 """
 import argparse
-import sys
-from pathlib import Path
 
 from vireon_evidence.regulatory.binder_generator import (
     RegulatoryBinderGenerator, BinderConfig,

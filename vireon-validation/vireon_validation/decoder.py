@@ -1,6 +1,6 @@
 import numpy as np
 import time
-from typing import Dict, Any, Tuple
+from typing import Dict, Tuple
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import (
@@ -72,7 +72,7 @@ class DecoderEvaluator:
                 y_true_all.extend(y_test)
                 y_pred_all.extend(y_pred)
                 y_prob_all.extend(y_prob)
-            except ValueError as e:
+            except ValueError:
                 # E.g. The number of samples must be more than the number of classes.
                 continue
             

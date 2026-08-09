@@ -12,7 +12,6 @@ from vireon_validation.metrics import (
     generate_signal_metrics,
     BANDS,
 )
-from vireon_core.contracts.base import IMeasurement
 
 
 class TestSNR(unittest.TestCase):

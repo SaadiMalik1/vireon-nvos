@@ -1,4 +1,3 @@
-import pytest
 import numpy as np
 from vireon_core.contracts.base import EnvironmentCapture
 

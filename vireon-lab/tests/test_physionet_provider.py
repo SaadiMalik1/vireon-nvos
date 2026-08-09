@@ -1,6 +1,5 @@
 import pytest
 from vireon_lab.experiments.base import _build_provider
-import os
 
 def test_build_physionet_provider_not_found():
     config = {

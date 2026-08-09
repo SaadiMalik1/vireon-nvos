@@ -32,7 +32,7 @@ def main():
         print(f"Error: Scenarios directory '{args.scenarios_dir}' does not exist.")
         sys.exit(1)
 
-    print(f"Starting VIREON Benchmark Suite...")
+    print("Starting VIREON Benchmark Suite...")
     print(f"Scenarios Dir : {args.scenarios_dir}")
     print(f"Output Dir    : {args.output_dir}")
     print(f"Global Seed   : {args.seed}")

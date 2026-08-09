@@ -5,7 +5,6 @@ Demonstrates low-latency buffer streaming and spatial filtering for real-time BC
 import numpy as np
 import time
 from vireon_core.runtime.rng import DeterministicRNG
-from vireon_methods.spatial.vireon_csp import VireonCSP
 from vireon_core.contracts.evidence import EvidenceBundle
 
 

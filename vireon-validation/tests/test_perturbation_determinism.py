@@ -1,11 +1,8 @@
 import numpy as np
-import pytest
 from vireon_core.runtime.rng import DeterministicRNG
 from vireon_validation.perturbations.library import (
     WhiteNoisePerturbation,
     ChannelDropoutPerturbation,
-    LineNoisePerturbation,
-    QuantizationPerturbation,
 )
 
 def test_white_noise_perturbation_deterministic():

@@ -1,7 +1,7 @@
 import time
 import tracemalloc
 import numpy as np
-from typing import Dict, Any, Type
+from typing import Dict, Any
 from scipy.stats import pearsonr
 
 from vireon_core.contracts.plugin import IMethodPlugin
@@ -209,7 +209,6 @@ class MethodComparisonEngine:
         )
         
         def hash_dict(d):
-            import json
             h = {}
             for k, v in d.items():
                 if hasattr(v, 'data'):

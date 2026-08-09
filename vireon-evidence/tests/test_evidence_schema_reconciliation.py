@@ -1,5 +1,4 @@
-import pytest
-from vireon_core.contracts.evidence import EvidenceBundle, DatasetProvenance
+from vireon_core.contracts.evidence import EvidenceBundle
 from vireon_evidence.ontology.nodes import EvidenceBundleNode
 
 def test_evidence_bundle_to_node_and_back():

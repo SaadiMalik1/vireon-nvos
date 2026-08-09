@@ -2,7 +2,6 @@ import sqlite3
 import json
 from typing import List, Dict, Any, Optional
 import networkx as nx
-from vireon_evidence.ontology.nodes import EvidenceNode, DatasetNode, MethodNode, EvidenceBundleNode, ScientificClaimNode
 
 
 class EvidenceGraph:

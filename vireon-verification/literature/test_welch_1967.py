@@ -15,7 +15,6 @@ Test:
 import os
 import sys
 import numpy as np
-import pytest
 import scipy.signal
 
 repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))

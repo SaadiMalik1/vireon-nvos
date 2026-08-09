@@ -217,7 +217,7 @@ def main():
     with open("output/multi_subject_report.md", "w") as f:
         f.write("# VIREON Multi-Subject Validation Report\n\n")
         f.write(f"**Subjects:** {subjects}\n")
-        f.write(f"**Algorithm:** CSP+LDA (n_components=2)\n")
+        f.write("**Algorithm:** CSP+LDA (n_components=2)\n")
         f.write(f"**Seed:** {seed}\n")
         f.write(f"**Total bundles:** {len(all_bundles)}\n\n")
         f.write("## Per-Subject Results\n\n")
@@ -237,14 +237,14 @@ def main():
             f.write(f"- 95% CI: [{np.mean(ccc_array) - 1.96 * np.std(ccc_array, ddof=1) / np.sqrt(len(baseline_cccs)):.4f}, "
                     f"{np.mean(ccc_array) + 1.96 * np.std(ccc_array, ddof=1) / np.sqrt(len(baseline_cccs)):.4f}]\n")
 
-        f.write(f"\n## Evidence Graph\n\n")
+        f.write("\n## Evidence Graph\n\n")
         f.write(f"- Nodes: {n_nodes}\n")
         f.write(f"- Edges: {n_edges}\n")
-        f.write(f"- All bundles have cryptographic evidence hashes\n")
+        f.write("- All bundles have cryptographic evidence hashes\n")
 
-    print(f"\n[7] Output written to output/")
+    print("\n[7] Output written to output/")
     print(f"    - multi_subject_bundles.json ({len(all_bundles)} bundles)")
-    print(f"    - multi_subject_report.md (summary with meta-analysis)")
+    print("    - multi_subject_report.md (summary with meta-analysis)")
     print(f"\n{'=' * 60}")
     print("  Multi-Subject Validation Complete")
     print(f"{'=' * 60}")

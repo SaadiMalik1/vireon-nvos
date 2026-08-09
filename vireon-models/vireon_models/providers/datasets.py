@@ -406,8 +406,6 @@ class PhysioNetMotorImageryProvider(IProvider):
         
         import os
         import mne
-        import numpy as np
-        from vireon_core.runtime.rng import DeterministicRNG
 
         mne_data = os.path.expanduser("~/mne_data")
         file_path = os.path.join(mne_data, "MNE-eegbci-data", "files", "eegmmidb", "1.0.0", 
@@ -430,7 +428,6 @@ class PhysioNetMotorImageryProvider(IProvider):
         self.epochs = epochs
         
     def get_data(self) -> dict:
-        import numpy as np
         # get_data() on MNE epochs returns (n_epochs, n_channels, n_times)
         X = self.epochs.get_data(copy=True)
         # convert labels to 0 and 1

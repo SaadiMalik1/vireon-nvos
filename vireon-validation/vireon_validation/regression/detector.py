@@ -1,4 +1,4 @@
-from typing import Dict, Any, List
+from typing import List
 from vireon_core.contracts.evidence import EvidenceBundle
 
 class ScientificRegressionError(Exception):
@@ -29,7 +29,7 @@ class ScientificRegressionDetector:
             raise ScientificRegressionError(f"Statistical Regression: CCC degraded from {baseline.statistical_agreement.get('ccc')} to {new_bundle.statistical_agreement.get('ccc')}")
             
         if new_bundle.statistical_agreement.get("rmse", 0.0) > baseline.statistical_agreement.get("rmse", 0.0) * 1.5:
-            raise ScientificRegressionError(f"Numerical Regression: RMSE increased significantly.")
+            raise ScientificRegressionError("Numerical Regression: RMSE increased significantly.")
             
         # 2. Performance & Memory Regression
         base_time = baseline.benchmark_results.get("test_execution_time_sec", 0.0)

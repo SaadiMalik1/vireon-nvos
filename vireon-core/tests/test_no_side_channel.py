@@ -1,12 +1,11 @@
 import os
 import json
-import pytest
 import tempfile
 import numpy as np
 
 from vireon_core.kernel.execution_engine import ExecutionEngine
 from vireon_validation.evidence.generator import EvidenceGenerator
-from vireon_core.contracts.base import IExperimentDef, IProvider, IObservation, IEvidence, IExecutionContext
+from vireon_core.contracts.base import IExperimentDef, IProvider
 
 class MockProvider(IProvider):
     def start(self): pass

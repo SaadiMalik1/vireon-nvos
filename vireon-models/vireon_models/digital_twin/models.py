@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 from typing import Any, Dict
-from pydantic import BaseModel
 import numpy as np
 
 class IPatientModel(ABC):

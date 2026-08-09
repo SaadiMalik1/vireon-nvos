@@ -1,7 +1,6 @@
 import os
 import mne
-import numpy as np
-from typing import Any, Dict
+from typing import Any
 
 from vireon_core.contracts import IProvider
 

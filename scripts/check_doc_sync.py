@@ -6,7 +6,6 @@ Usage: python scripts/check_doc_sync.py [--docs-dir docs/] [--repo-root .]
 Exit 0 if all claims verified, exit 1 if drift detected.
 """
 import sys
-import os
 from pathlib import Path
 from typing import List, Dict, Any
 

@@ -1,5 +1,4 @@
 import numpy as np
-import pytest
 from vireon_methods.machine_learning.csp import CSPPlugin
 from vireon_core.contracts.plugin import ScientificReadinessLevel
 

@@ -1,7 +1,5 @@
 import os
 import json
-import pytest
-import numpy as np
 from vireon_validation.benchmarks.meta_analysis import MetaAnalysisEngine, PublicationExporter
 
 def test_meta_analysis_engine():

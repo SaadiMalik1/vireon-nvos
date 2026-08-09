@@ -7,7 +7,6 @@ import json
 import os
 import subprocess
 import sys
-import pytest
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEMO_PATH = os.path.join(REPO_ROOT, "examples", "first_validation", "demo.py")

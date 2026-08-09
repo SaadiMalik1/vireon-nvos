@@ -1,4 +1,3 @@
-import pytest
 import os
 import networkx as nx
 from vireon_knowledge.engine import KnowledgeGraph

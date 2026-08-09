@@ -1,5 +1,3 @@
-import pytest
-import numpy as np
 from vireon_validation.benchmarks.matrix import BenchmarkMatrix
 from vireon_methods.machine_learning.csp import CSPPlugin
 

@@ -5,7 +5,6 @@ Measuring phase synchrony in brain signals. Human Brain Mapping, 8(4), 194-208.
 DOI: 10.1002/(SICI)1097-0193(1999)8:4<194::AID-HBM4>3.0.CO;2-C
 """
 import numpy as np
-import pytest
 from vireon_methods.connectivity.vireon_wavelet_coherence import VireonWaveletCoherence
 
 

@@ -1,4 +1,3 @@
-import subprocess
 import os
 
 from vireon_core.contracts.base import IAssertion, DefaultAssertionEvaluator

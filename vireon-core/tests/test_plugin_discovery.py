@@ -1,10 +1,8 @@
-import pytest
-import os
 import importlib.metadata
 from importlib.metadata import EntryPoint
 from typing import Dict, Any, List, Type
 
-from vireon_core.kernel.plugins import PluginManager, PluginLoadResult
+from vireon_core.kernel.plugins import PluginManager
 from vireon_core.contracts.plugin import IPlugin, ScientificContract, ScientificReadinessLevel, PluginCapability
 
 class TestPlugin(IPlugin):
