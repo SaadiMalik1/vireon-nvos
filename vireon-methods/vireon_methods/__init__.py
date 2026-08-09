@@ -7,11 +7,10 @@ from vireon_methods.spectral.vireon_multitaper import VireonMultitaper
 from vireon_methods.filtering.vireon_fir import VireonFIR
 from vireon_methods.filtering.vireon_iir import VireonIIR
 from vireon_methods.spatial.vireon_ica import VireonICA
-from vireon_methods.spatial.vireon_csp import VireonCSP
+from vireon_methods.spatial.vireon_csp import VireonCSP, VireonCSP as CSPPlugin
 from vireon_methods.spatial.vireon_riemannian import VireonRiemannianMDM
 from vireon_methods.spatial.vireon_xdawn import VireonxDAWN
 from vireon_methods.spatial.vireon_fbcsp import VireonFBCSP
-from vireon_methods.machine_learning.csp import CSPPlugin
 from vireon_methods.source_localization.vireon_source_localization import VireonMinimumNorm
 from vireon_methods.source_localization.vireon_beamforming import VireonLCMV
 from vireon_methods.connectivity.vireon_connectivity import VireonCoherence, VireonPLV, VireonPLI, VireonWPLI, VireonAEC
