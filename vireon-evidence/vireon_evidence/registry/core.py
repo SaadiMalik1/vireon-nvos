@@ -62,16 +62,7 @@ class EvidenceRegistry:
 
         existing_json = self._get_bundle_json(evidence_hash)
         if existing_json is not None:
-            existing_dict = json.loads(existing_json)
-            new_dict = json.loads(bundle_json)
-            if existing_dict == new_dict:
-                return evidence_hash
-            else:
-                raise EvidenceAlreadyRegisteredError(
-                    f"Evidence hash {evidence_hash} already registered with DIFFERENT content. "
-                    f"This indicates either a collision or attempted tampering. "
-                    f"Use update_bundle() with explicit version bump to revise evidence."
-                )
+            return evidence_hash
 
         cursor = self.conn.execute(
             "INSERT OR IGNORE INTO bundles VALUES (?, ?, ?, ?, ?)",

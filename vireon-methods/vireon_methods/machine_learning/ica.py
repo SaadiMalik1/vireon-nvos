@@ -4,7 +4,7 @@ This module provided an ICAPlugin wrapper. The native implementation
 in vireon_ica.py is validated to match FastICA and offers the same API.
 """
 import warnings
-from vireon_core.contracts.plugin import IPlugin, PluginCapability, ScientificContract
+from vireon_core.contracts.plugin import IPlugin, PluginCapability, ScientificContract, ScientificReadinessLevel
 
 
 class ICAPlugin(IPlugin):
@@ -15,6 +15,35 @@ class ICAPlugin(IPlugin):
             DeprecationWarning,
             stacklevel=2,
         )
+
+    @property
+    def plugin_id(self) -> str:
+        return "vk:Method:MachineLearning:ICA"
+
+    @property
+    def version(self) -> str:
+        return "1.0.0"
+
+    @property
+    def plugin_type(self) -> str:
+        return "Method"
+
+    @property
+    def srl(self) -> ScientificReadinessLevel:
+        return ScientificReadinessLevel.SRL_3
+
+    @property
+    def inputs(self):
+        from vireon_core.contracts.base import ISignal
+        return [ISignal]
+
+    @property
+    def outputs(self):
+        from vireon_core.contracts.base import ISignal
+        return [ISignal]
+
+    def initialize(self, config=None):
+        pass
 
     @property
     def capabilities(self):

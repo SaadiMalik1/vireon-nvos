@@ -40,15 +40,12 @@ class BenchmarkMatrix:
     def add_perturbation(self, perturbation: Callable):
         self.perturbations.append(perturbation)
         
-    def _build_evidence_bundle(self, method: Optional[CanonicalMethod], dataset_id: str, dataset: Any,
-                               pert_name: str, perturbed: Any, result: Any,
-                               ccc: float, rmse: float, runtime: float,
-                               success: bool, error: Optional[str]) -> EvidenceBundle:
-        """Build a fully-populated EvidenceBundle with real evidence_hash."""
-        method_id = getattr(method, "plugin_id", "unknown") if method else "unknown"
-        method_ver = getattr(method, "version", "1.0") if method else "1.0"
-        bundle_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, f"{dataset_id}:{method_id}:{pert_name}:{self.seed}"))
-        
+    def _build_evidence_bundle(self, method: Any, dataset_id: str, dataset: Any, pert_name: str, perturbed: Any, result: Any, ccc: float, rmse: float, runtime: float, success: bool, error: str) -> EvidenceBundle:
+        """Helper to create EvidenceBundle for matrix results."""
+        method_id = getattr(method, "plugin_id", getattr(method, "name", str(type(method).__name__)))
+        method_ver = getattr(method, "version", "1.0.0")
+        bundle_id = str(uuid.uuid5(uuid.NAMESPACE_URL, f"{method_id}:{dataset_id}:{pert_name}:{self.seed}"))
+
         def compute_real_hash(x):
             if x is None:
                 return hashlib.sha256(b"none").hexdigest()

@@ -5,7 +5,7 @@ in vireon_welch.py is validated to match scipy within 1e-10 RMSE and offers
 the same API plus scientific contract enforcement.
 """
 import warnings
-from vireon_core.contracts.plugin import IPlugin, PluginCapability, ScientificContract
+from vireon_core.contracts.plugin import IPlugin, PluginCapability, ScientificContract, ScientificReadinessLevel
 
 
 class WelchPSDPlugin(IPlugin):
@@ -18,6 +18,35 @@ class WelchPSDPlugin(IPlugin):
         )
         self.fs = fs
         self.nperseg = nperseg
+
+    @property
+    def plugin_id(self) -> str:
+        return "vk:Method:Spectral:WelchPSD"
+
+    @property
+    def version(self) -> str:
+        return "1.0.0"
+
+    @property
+    def plugin_type(self) -> str:
+        return "Method"
+
+    @property
+    def srl(self) -> ScientificReadinessLevel:
+        return ScientificReadinessLevel.SRL_3
+
+    @property
+    def inputs(self):
+        from vireon_core.contracts.base import ISignal
+        return [ISignal]
+
+    @property
+    def outputs(self):
+        from vireon_core.contracts.base import ISignal
+        return [ISignal]
+
+    def initialize(self, config=None):
+        pass
 
     @property
     def capabilities(self):

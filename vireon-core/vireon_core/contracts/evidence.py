@@ -13,9 +13,9 @@ class SoftwareProvenance(BaseModel):
 
 class DatasetProvenance(BaseModel):
     dataset_id: str
-    doi: Optional[str]
+    doi: Optional[str] = None
     bids_version: str
-    download_url: Optional[str]
+    download_url: Optional[str] = None
     hash_checksum: str
 
 class MethodProvenance(BaseModel):

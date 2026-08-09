@@ -114,7 +114,9 @@ def run_benchmark(req: BenchmarkRequest, _: bool = Depends(verify_api_key)) -> D
 
     if bundles:
         raw_b = bundles[0]
-        h = raw_b.get("evidence_hash") or raw_b.get("bundle_id")
+        registry = get_registry()
+        bundle_obj = EvidenceBundle(**raw_b) if isinstance(raw_b, dict) else raw_b
+        h = registry.register(bundle_obj)
         stat_aggr = raw_b.get("statistical_agreement", {})
         return {
             "evidence_hash": h,
