@@ -92,16 +92,9 @@ except ImportError:
 class EEGNetWrapper:
     """Production Wrapper for Lawhern 2018 EEGNet Deep Learning Architecture."""
 
-    def __init__(
-        self,
-        n_classes: int = 2,
-        channels: int = 8,
-        samples: int = 250,
-        lr: float = 0.001,
-        batch_size: int = 16,
-        epochs: int = 50,
-        seed: int = 42,
-    ):
+    def __init__(self, n_classes: int = 2, channels: int = 8, samples: int = 250,
+                 lr: float = 0.001, batch_size: int = 16, epochs: int = 50, seed: int = 42,
+                 use_gpu: bool = True):
         self.n_classes = n_classes
         self.channels = channels
         self.samples = samples
@@ -109,6 +102,7 @@ class EEGNetWrapper:
         self.batch_size = batch_size
         self.epochs = epochs
         self.seed = seed
+        self.use_gpu = use_gpu
         self.model = None
         self.weights = None
         self._fitted = False
@@ -125,6 +119,7 @@ class EEGNetWrapper:
         batch_size = batch_size if batch_size is not None else self.batch_size
 
         if TORCH_AVAILABLE:
+            from vireon_core.runtime.hardware import get_torch_device, is_gpu_available, to_device
             torch.manual_seed(self.seed)
             if torch.cuda.is_available():
                 torch.cuda.manual_seed_all(self.seed)
@@ -132,12 +127,12 @@ class EEGNetWrapper:
                 torch.backends.cudnn.benchmark = False
             torch.use_deterministic_algorithms(True, warn_only=True)
 
-            device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-            self.model = EEGNetPyTorch(
+            device = get_torch_device() if (self.use_gpu and is_gpu_available()) else torch.device("cpu")
+            self.model = to_device(EEGNetPyTorch(
                 n_classes=self.n_classes,
                 channels=self.channels,
                 samples=self.samples,
-            ).to(device)
+            ), device=device)
 
             X_tensor = torch.tensor(X, dtype=torch.float32)
             if X_tensor.dim() == 3:

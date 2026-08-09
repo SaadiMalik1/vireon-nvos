@@ -18,6 +18,8 @@ def main():
     experiment_parser.add_argument("experiment_cmd", choices=["run"], help="Run experiments")
     experiment_parser.add_argument("--campaign", type=str, default="all", help="Campaign name or specific experiment id to run (default: all)")
     experiment_parser.add_argument("--repetitions", type=int, default=1, help="Number of repetitions per experiment")
+    experiment_parser.add_argument("--gpu", action="store_true", default=True, help="Use GPU hardware acceleration if available (default: True)")
+    experiment_parser.add_argument("--no-gpu", action="store_false", dest="gpu", help="Disable GPU hardware acceleration")
     
     verify_parser = subparsers.add_parser("verify", help="Verify reproducibility bundle integrity")
     verify_parser.add_argument("--bundle", type=str, required=True, help="Path to the evidence bundle directory")

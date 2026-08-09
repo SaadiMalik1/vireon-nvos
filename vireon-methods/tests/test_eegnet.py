@@ -25,3 +25,15 @@ def test_eegnet_wrapper_fit_predict():
     preds = net.predict(X)
     assert preds.shape == (20,)
     assert set(preds).issubset({0, 1})
+
+
+def test_eegnet_uses_gpu_when_available():
+    """Verify EEGNet model is on CUDA when GPU is available."""
+    pytest.importorskip("torch")
+    import torch
+    if not torch.cuda.is_available():
+        pytest.skip("No GPU available")
+    net = EEGNetWrapper(use_gpu=True, channels=8, samples=250)
+    net.fit(np.random.randn(20, 8, 250).astype(np.float32),
+            np.array([0] * 10 + [1] * 10))
+    assert next(net.model.parameters()).is_cuda, "Model should be on CUDA"
