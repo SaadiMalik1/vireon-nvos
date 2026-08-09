@@ -1,5 +1,8 @@
 from dataclasses import dataclass
-from typing import Literal
+from typing import Literal, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from vireon_simple.api import ExperimentResult
 
 @dataclass
 class ScorecardDimension:

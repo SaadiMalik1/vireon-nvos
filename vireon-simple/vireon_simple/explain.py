@@ -1,3 +1,8 @@
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from vireon_simple.api import ExperimentResult
+
 def generate_report(result: "ExperimentResult", format: str = "text") -> str:
     from vireon_simple.terminology import humanize
     
