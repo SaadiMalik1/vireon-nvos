@@ -5,7 +5,7 @@
 | P0-1 | Fix VireonFBCSP to Apply Band-Pass Filters Per Band | DONE | 205faa9 | Applied bandpass filters per frequency band before CSP feature extraction |
 | P0-2 | Complete EEGNet Architecture Implementation | DONE | 6e1840e | Completed EEGNet (Lawhern 2018) and DeepConvNet (Schirrmeister 2017) architectures |
 | P0-3 | Fix Signal Metrics Window Overlap Formula | PENDING | — | — |
-| P0-4 | Fix Evidence Graph NetworkX Node Deletion Bug | PENDING | — | — |
+| P0-4 | Fix DatasetManager Path Traversal & Key Dispatch Bug | DONE | 258da6f | Rewrote DatasetManager.load_dataset to dispatch by key without silent synthetic fallbacks |
 | P0-5 | Fix DatasetManager Path Traversal Vulnerability | PENDING | — | — |
 | P0-6 | Fix Wavelet Coherence Phase Alignment | PENDING | — | — |
 | P0-7 | Implement Real Transfer Entropy with Past Conditioning | PENDING | — | — |
