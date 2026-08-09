@@ -16,6 +16,8 @@ class VireonCSP:
         """
         Fit CSP filters on epoched data (epochs, channels, times).
         """
+        X = np.asarray(X)
+        y = np.asarray(y)
         classes = np.unique(y)
         if len(classes) != 2:
             raise ValueError(f"CSP requires exactly 2 classes, got {len(classes)}")
@@ -52,6 +54,7 @@ class VireonCSP:
         """
         Apply CSP filters and return log-variance features.
         """
+        X = np.asarray(X)
         if self.filters_ is None:
             raise ValueError("CSP model not fitted.")
         
