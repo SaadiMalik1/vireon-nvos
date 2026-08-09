@@ -44,4 +44,4 @@
 | P4-1 | Add MNE-Python Compatibility Layer | DONE | bd53084 | Added mne_to_vireon and vireon_to_mne converters in vireon_core.compat.mne_adapter |
 | P4-3 | Expand Knowledge Graph Rule Coverage | DONE | 8969d90 | Expanded rules.jsonld with FIR, CSP, and WaveletCoherence rules and added assumptions.jsonld |
 | P4-4 | Add Property-Based Tests with Hypothesis | DONE | 0f1b26d | Added Hypothesis property test suites for Welch, CSP, ICA, and evidence hashes |
-| P4-5 | Add macOS and Windows CI Matrix | DONE | 9ff2ace | Added os matrix [ubuntu-latest, macos-latest, windows-latest] in .github/workflows/ci.yml |
+| P4-5 | Add macOS and Windows CI Matrix | DONE | ca9e9be | Added os matrix [ubuntu-latest, macos-latest, windows-latest] in .github/workflows/ci.yml |
