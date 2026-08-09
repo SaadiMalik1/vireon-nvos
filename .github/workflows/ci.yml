@@ -24,6 +24,8 @@ jobs:
         pip install -r requirements.txt
         pip install hypothesis pytest pytest-cov
         pip install -e .
+    - name: Regenerate seed registry
+      run: python scripts/regenerate_seed_registry.py
     - name: Run unit tests
       env:
         VIREON_HOME: ${{ github.workspace }}

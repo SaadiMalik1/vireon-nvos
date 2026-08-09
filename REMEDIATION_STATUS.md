@@ -28,3 +28,4 @@
 | P1-7 | Tighten CI Grep Gate for Fake Hashes | DONE | 08707f7 | Multi-pattern grep check & AST verify_hash_integrity.py added; fake hash placeholders removed |
 | P1-8 | Replace Transaction Timestamp with Counter | DONE | 43147b6 | Replaced wall-clock hash inclusion with deterministic transaction payload and sequence counter |
 | P2-1 | Add Linting, Type-checking & Coverage Config | DONE | 4b7b24a | Configured ruff, mypy, and coverage sections in pyproject.toml and added CI lint job |
+| P2-2 | Remove Committed Binary State | DONE | 1bf0015 | Untracked binary DBs, site/ HTML, telemetry outputs; added scripts/regenerate_seed_registry.py |
