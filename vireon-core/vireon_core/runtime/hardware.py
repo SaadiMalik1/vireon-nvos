@@ -62,7 +62,7 @@ def get_device_info() -> Dict[str, Any]:
     - gpu_memory_gb: Total GPU memory (if available)
     """
     device = get_device()
-    info = {
+    info: Dict[str, Any] = {
         "device": device,
         "gpu_name": None,
         "gpu_vendor": None,

@@ -81,11 +81,11 @@ class VireonIIR:
             bw = w2 - w1
             
             if self.btype == "bandpass":
-                p_a = []
+                p_a_list = []
                 for p_k in p:
                     val = np.sqrt(bw**2 * p_k**2 - 4 * w0**2 + 0j)
-                    p_a.append((bw * p_k + val) / 2)
-                    p_a.append((bw * p_k - val) / 2)
+                    p_a_list.append((bw * p_k + val) / 2)
+                    p_a_list.append((bw * p_k - val) / 2)
                 p_a = np.array(p_a)
                 
                 z_a = np.zeros(N)
@@ -96,11 +96,11 @@ class VireonIIR:
                 k_d = k_a * (2 * fs)**N / np.prod(2 * fs - p_a)
                 
             else: # bandstop
-                p_a = []
+                p_a_list = []
                 for p_k in p:
                     val = np.sqrt((bw / p_k)**2 - 4 * w0**2 + 0j)
-                    p_a.append((bw / p_k + val) / 2)
-                    p_a.append((bw / p_k - val) / 2)
+                    p_a_list.append((bw / p_k + val) / 2)
+                    p_a_list.append((bw / p_k - val) / 2)
                 p_a = np.array(p_a)
                 
                 z_a = np.concatenate([1j * w0 * np.ones(N), -1j * w0 * np.ones(N)])

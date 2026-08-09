@@ -29,7 +29,7 @@ class IDecoder(ABC):
         """
         if not getattr(self, '_fitted', False):
             raise DecoderNotFittedError("Decoder must be fitted before predict.")
-        pass
+        return np.array([])
 
     @abstractmethod
     def predict_proba(self, X: np.ndarray) -> np.ndarray:
@@ -39,4 +39,4 @@ class IDecoder(ABC):
         """
         if not getattr(self, '_fitted', False):
             raise DecoderNotFittedError("Decoder must be fitted before predict_proba.")
-        pass
+        return np.array([])

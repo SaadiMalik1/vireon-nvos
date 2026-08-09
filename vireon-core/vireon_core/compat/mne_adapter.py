@@ -28,12 +28,12 @@ def mne_to_vireon(mne_obj: Union["mne.io.BaseRaw", "mne.BaseEpochs"]) -> ISignal
             metadata={"source": "mne.Raw", "subject": mne_obj.info.get("subject_id")},
         )
     elif isinstance(mne_obj, (mne.BaseEpochs, getattr(mne, "Epochs", object))):
-        data = mne_obj.get_data()  # (n_epochs, n_channels, n_samples)
+        data = mne_obj.get_data()  # type: ignore
         return ISignal(
             data=data,
-            sampling_rate=float(mne_obj.info["sfreq"]),
-            channel_names=list(mne_obj.ch_names),
-            metadata={"source": "mne.Epochs", "events": mne_obj.events},
+            sampling_rate=float(mne_obj.info["sfreq"]),  # type: ignore
+            channel_names=list(mne_obj.ch_names),  # type: ignore
+            metadata={"source": "mne.Epochs", "events": mne_obj.events},  # type: ignore
         )
     else:
         raise TypeError(f"Expected mne.io.BaseRaw or mne.Epochs, got {type(mne_obj)}")
