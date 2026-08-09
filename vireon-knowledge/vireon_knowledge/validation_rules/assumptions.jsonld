@@ -1,0 +1,38 @@
+{
+    "@context": {
+        "vk": "https://vireon.org/knowledge/assumptions#"
+    },
+    "@id": "vk:ValidationAssumptions",
+    "assumptions": [
+        {
+            "@id": "vk:Assumption:Stationarity",
+            "target_method": "vk:Method:Welch",
+            "assumption_type": "Mathematical",
+            "description": "Signal is wide-sense stationary over the window duration."
+        },
+        {
+            "@id": "vk:Assumption:FullRankCovariance",
+            "target_method": "vk:Method:CSP",
+            "assumption_type": "Mathematical",
+            "description": "Class covariance matrices are non-singular and full rank."
+        },
+        {
+            "@id": "vk:Assumption:NonGaussianity",
+            "target_method": "vk:Method:ICA",
+            "assumption_type": "Statistical",
+            "description": "Independent components are non-Gaussian."
+        },
+        {
+            "@id": "vk:Assumption:LinearConvolution",
+            "target_method": "vk:Method:FIR",
+            "assumption_type": "Filter",
+            "description": "Input signal length is at least 3x filter order to prevent edge distortion."
+        },
+        {
+            "@id": "vk:Assumption:NyquistSampling",
+            "target_method": "vk:Method:WaveletCoherence",
+            "assumption_type": "SignalProcessing",
+            "description": "Sampling rate strictly satisfies Nyquist criterion (fs >= 2 * max_freq)."
+        }
+    ]
+}

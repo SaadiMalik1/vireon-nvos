@@ -27,6 +27,30 @@
             "violation_severity": "HIGH",
             "recommendation": "vk:Method:Class_Weighting",
             "message": "Common Spatial Patterns is highly sensitive to class imbalance. Ensure balanced classes or use class weighting."
+        },
+        {
+            "@id": "vk:Rule:FilterLengthForFIR",
+            "target_method": "vk:Method:FIR",
+            "condition": "signal.length >= filter_order * 3",
+            "violation_severity": "MEDIUM",
+            "recommendation": "vk:Method:IIR",
+            "message": "FIR filter requires at least 3x the filter order samples for stable convolution."
+        },
+        {
+            "@id": "vk:Rule:EpochCountForCSP",
+            "target_method": "vk:Method:CSP",
+            "condition": "data.n_epochs >= 20 AND data.class_balance >= 0.3",
+            "violation_severity": "HIGH",
+            "recommendation": "vk:Method:RegularizedCSP",
+            "message": "CSP requires >=20 epochs per class with >=30% balance. Use RegularizedCSP for small datasets."
+        },
+        {
+            "@id": "vk:Rule:SamplingRateForHighFreq",
+            "target_method": "vk:Method:WaveletCoherence",
+            "condition": "signal.fs >= 2 * analysis.max_freq",
+            "violation_severity": "HIGH",
+            "recommendation": null,
+            "message": "Sampling rate must be >=2x the maximum analysis frequency (Nyquist theorem)."
         }
     ]
 }

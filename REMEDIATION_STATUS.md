@@ -42,3 +42,4 @@
 | Task ID | Title | Status | Commit | Notes |
 |---------|-------|--------|--------|-------|
 | P4-1 | Add MNE-Python Compatibility Layer | DONE | bd53084 | Added mne_to_vireon and vireon_to_mne converters in vireon_core.compat.mne_adapter |
+| P4-3 | Expand Knowledge Graph Rule Coverage | DONE | 5b98398 | Expanded rules.jsonld with FIR, CSP, and WaveletCoherence rules and added assumptions.jsonld |
