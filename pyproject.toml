@@ -44,7 +44,8 @@ deep-learning = ["torch>=2.0"]
 dev = ["pytest>=7.0", "pytest-cov", "hypothesis>=6.0", "ruff", "mypy"]
 
 [project.scripts]
-vireon = "vireon_lab.cli.main:main"
+vireon = "vireon_simple.cli:main"
+vireon-mcp = "vireon_mcp.server:main"
 
 [project.urls]
 Repository = "https://github.com/SaadiMalik1/vireon-nvos"
@@ -61,7 +62,9 @@ where = [
     "vireon-corpus",
     "vireon-evidence",
     "vireon-api",
-    "vireon-verification"
+    "vireon-verification",
+    "vireon-simple",
+    "vireon-mcp"
 ]
 include = ["vireon_*"]
 
@@ -80,7 +83,9 @@ testpaths = [
     "vireon-knowledge/tests",
     "vireon-corpus/tests",
     "vireon-api/tests",
-    "vireon-verification"
+    "vireon-verification",
+    "vireon-simple/tests",
+    "vireon-mcp/tests"
 ]
 norecursedirs = [
     ".*",
@@ -104,7 +109,9 @@ pythonpath = [
     "vireon-knowledge",
     "vireon-corpus",
     "vireon-api",
-    "vireon-verification"
+    "vireon-verification",
+    "vireon-simple",
+    "vireon-mcp"
 ]
 
 [tool.ruff]

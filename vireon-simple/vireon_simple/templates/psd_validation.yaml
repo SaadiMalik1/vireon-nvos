@@ -1,0 +1,14 @@
+name: PSD Validation
+goal: Spectral analysis using Welch PSD
+mode: quick
+dataset:
+  source: "${INPUT_FILE}"
+method:
+  algorithm: welch
+validation:
+  strategy: single_run
+statistics:
+  metrics: [rmse]
+reporting:
+  format: text
+  verbosity: standard

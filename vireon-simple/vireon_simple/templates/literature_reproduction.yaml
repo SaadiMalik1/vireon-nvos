@@ -1,0 +1,16 @@
+name: Literature Reproduction
+goal: Reproduce Ramoser 2000
+mode: standard
+dataset:
+  source: "physionet_bci"
+method:
+  algorithm: csp
+  decoder: lda
+validation:
+  strategy: k_fold
+  k: 10
+statistics:
+  metrics: [accuracy]
+reporting:
+  format: text
+  verbosity: standard

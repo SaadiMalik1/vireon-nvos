@@ -1,0 +1,685 @@
+unit-tests (ubuntu-latest, 3.11)	Set up job	﻿2026-08-09T16:13:05.0356442Z Current runner version: '2.336.0'
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0383815Z ##[group]Runner Image Provisioner
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0384796Z Hosted Compute Agent
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0385418Z Version: 20260707.563
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0386130Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0386842Z Build Date: 2026-07-07T19:33:50Z
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0387974Z Worker ID: {e3bf7b95-d38d-42eb-a3a3-ef2b144193da}
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0388792Z Azure Region: westus
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0389382Z ##[endgroup]
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0390976Z ##[group]Operating System
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0391652Z Ubuntu
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0392170Z 24.04.4
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0392731Z LTS
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0393279Z ##[endgroup]
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0393810Z ##[group]Runner Image
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0394465Z Image: ubuntu-24.04
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0395032Z Version: 20260720.247.2
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0396113Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0398079Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0399109Z ##[endgroup]
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0400256Z ##[group]GITHUB_TOKEN Permissions
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0402238Z Contents: read
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0402855Z Metadata: read
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0403890Z Packages: read
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0404504Z ##[endgroup]
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0406671Z Secret source: Actions
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0408218Z Prepare workflow directory
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0766158Z Prepare all required actions
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.0819900Z Getting action download info
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.4253793Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:05.8729818Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+unit-tests (ubuntu-latest, 3.11)	Set up job	2026-08-09T16:13:06.2682133Z Complete job name: unit-tests (ubuntu-latest, 3.11)
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	﻿2026-08-09T16:13:06.3378871Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.3388021Z ##[group]Run actions/checkout@v4
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.3388788Z with:
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.3389248Z   repository: SaadiMalik1/vireon-nvos
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.3392850Z   token: ***
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.3393282Z   ssh-strict: true
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.3393725Z   ssh-user: git
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.3394174Z   persist-credentials: true
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.3394672Z   clean: true
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.3395113Z   sparse-checkout-cone-mode: true
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.3395634Z   fetch-depth: 1
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.3396059Z   fetch-tags: false
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.3396494Z   show-progress: true
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.3397129Z   lfs: false
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.3397549Z   submodules: false
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.3398036Z   set-safe-directory: true
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.3398541Z   allow-unsafe-pr-checkout: false
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.3399307Z ##[endgroup]
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4395484Z Syncing repository: SaadiMalik1/vireon-nvos
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4398508Z ##[group]Getting Git version info
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4399705Z Working directory is '/home/runner/work/vireon-nvos/vireon-nvos'
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4401379Z [command]/usr/bin/git version
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4481370Z git version 2.54.0
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4504015Z ##[endgroup]
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4529310Z Temporarily overriding HOME='/home/runner/work/_temp/2fd54025-99a4-4ec8-b063-2e5898368533' before making global git config changes
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4532138Z Adding repository directory to the temporary git global config as a safe directory
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4535009Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/vireon-nvos/vireon-nvos
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4587829Z Deleting the contents of '/home/runner/work/vireon-nvos/vireon-nvos'
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4591961Z ##[group]Initializing the repository
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4596668Z [command]/usr/bin/git init /home/runner/work/vireon-nvos/vireon-nvos
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4747575Z hint: Using 'master' as the name for the initial branch. This default branch name
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4749547Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4751184Z hint: to use in all of your new repositories, which will suppress this warning,
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4752596Z hint: call:
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4753328Z hint:
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4754188Z hint: 	git config --global init.defaultBranch <name>
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4755278Z hint:
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4756227Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4758656Z hint: 'development'. The just-created branch can be renamed via this command:
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4760349Z hint:
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4761213Z hint: 	git branch -m <name>
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4762085Z hint:
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4763240Z hint: Disable this message with "git config set advice.defaultBranchName false"
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4765003Z Initialized empty Git repository in /home/runner/work/vireon-nvos/vireon-nvos/.git/
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4769451Z [command]/usr/bin/git remote add origin https://github.com/SaadiMalik1/vireon-nvos
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4823453Z ##[endgroup]
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4824787Z ##[group]Disabling automatic garbage collection
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4828675Z [command]/usr/bin/git config --local gc.auto 0
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4879524Z ##[endgroup]
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4880756Z ##[group]Setting up auth
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4882026Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.4912809Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.5322844Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.5361026Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.5585985Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.5621991Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.5850268Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.5889667Z ##[endgroup]
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.5890483Z ##[group]Fetching the repository
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:06.5900106Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +97decb2f7d52a0863bfa135f89617761dedc60d3:refs/remotes/origin/main
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:07.1285736Z From https://github.com/SaadiMalik1/vireon-nvos
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:07.1288909Z  * [new ref]         97decb2f7d52a0863bfa135f89617761dedc60d3 -> origin/main
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:07.1329083Z ##[endgroup]
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:07.1331580Z ##[group]Determining the checkout info
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:07.1334573Z ##[endgroup]
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:07.1337969Z [command]/usr/bin/git sparse-checkout disable
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:07.1390446Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:07.1428101Z ##[group]Checking out the ref
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:07.1433018Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:07.1750053Z Switched to a new branch 'main'
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:07.1752602Z branch 'main' set up to track 'origin/main'.
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:07.1760132Z ##[endgroup]
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:07.1804932Z [command]/usr/bin/git log -1 --format=%H
+unit-tests (ubuntu-latest, 3.11)	Run actions/checkout@v4	2026-08-09T16:13:07.1831271Z 97decb2f7d52a0863bfa135f89617761dedc60d3
+unit-tests (ubuntu-latest, 3.11)	Set up Python 3.11	﻿2026-08-09T16:13:07.2211726Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+unit-tests (ubuntu-latest, 3.11)	Set up Python 3.11	2026-08-09T16:13:07.2220051Z ##[group]Run actions/setup-python@v5
+unit-tests (ubuntu-latest, 3.11)	Set up Python 3.11	2026-08-09T16:13:07.2221267Z with:
+unit-tests (ubuntu-latest, 3.11)	Set up Python 3.11	2026-08-09T16:13:07.2222109Z   python-version: 3.11
+unit-tests (ubuntu-latest, 3.11)	Set up Python 3.11	2026-08-09T16:13:07.2223089Z   check-latest: false
+unit-tests (ubuntu-latest, 3.11)	Set up Python 3.11	2026-08-09T16:13:07.2233193Z   token: ***
+unit-tests (ubuntu-latest, 3.11)	Set up Python 3.11	2026-08-09T16:13:07.2234152Z   update-environment: true
+unit-tests (ubuntu-latest, 3.11)	Set up Python 3.11	2026-08-09T16:13:07.2235222Z   allow-prereleases: false
+unit-tests (ubuntu-latest, 3.11)	Set up Python 3.11	2026-08-09T16:13:07.2236257Z   freethreaded: false
+unit-tests (ubuntu-latest, 3.11)	Set up Python 3.11	2026-08-09T16:13:07.2237456Z ##[endgroup]
+unit-tests (ubuntu-latest, 3.11)	Set up Python 3.11	2026-08-09T16:13:07.3550991Z ##[group]Installed versions
+unit-tests (ubuntu-latest, 3.11)	Set up Python 3.11	2026-08-09T16:13:07.4027813Z (node:2307) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+unit-tests (ubuntu-latest, 3.11)	Set up Python 3.11	2026-08-09T16:13:07.4032741Z (Use `node --trace-deprecation ...` to show where the warning was created)
+unit-tests (ubuntu-latest, 3.11)	Set up Python 3.11	2026-08-09T16:13:07.4036121Z Successfully set up CPython (3.11.15)
+unit-tests (ubuntu-latest, 3.11)	Set up Python 3.11	2026-08-09T16:13:07.4039119Z ##[endgroup]
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	﻿2026-08-09T16:13:07.4256770Z ##[group]Run python -m pip install --upgrade pip
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:07.4258748Z ^[[36;1mpython -m pip install --upgrade pip^[[0m
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:07.4260177Z ^[[36;1mpip install -r requirements.txt^[[0m
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:07.4261525Z ^[[36;1mpip install hypothesis pytest pytest-cov^[[0m
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:07.4262853Z ^[[36;1mpip install -e .^[[0m
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:07.4394801Z shell: /usr/bin/bash -e {0}
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:07.4396192Z env:
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:07.4397695Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:07.4399608Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:07.4401467Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:07.4403124Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:07.4404778Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:07.4406488Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:07.4408188Z ##[endgroup]
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:10.3343742Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (26.1.2)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:10.4379135Z Collecting pip
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:10.4866295Z   Downloading pip-26.2.1-py3-none-any.whl.metadata (4.6 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:10.4947305Z Downloading pip-26.2.1-py3-none-any.whl (1.8 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:10.5373466Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 97.1 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:10.6318387Z Installing collected packages: pip
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:10.6319825Z   Attempting uninstall: pip
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:10.6343909Z     Found existing installation: pip 26.1.2
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:10.7042241Z     Uninstalling pip-26.1.2:
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:10.7101977Z       Successfully uninstalled pip-26.1.2
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:11.5017365Z Successfully installed pip-26.2.1
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:12.6038359Z Collecting numpy<3.0.0,>=1.24.0 (from -r requirements.txt (line 1))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:12.6517740Z   Downloading numpy-2.4.6-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:12.7600726Z Collecting scipy<2.0.0,>=1.10.0 (from -r requirements.txt (line 2))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:12.7633970Z   Downloading scipy-1.17.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:12.8617550Z Collecting scikit-learn<2.0.0,>=1.3.0 (from -r requirements.txt (line 3))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:12.8650815Z   Downloading scikit_learn-1.9.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (11 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:12.8873511Z Collecting mne<2.0.0,>=1.5.0 (from -r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:12.8914050Z   Downloading mne-1.12.1-py3-none-any.whl.metadata (16 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:12.9205897Z Collecting mne-bids<1.0.0,>=0.14.0 (from -r requirements.txt (line 5))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:12.9269233Z   Downloading mne_bids-0.19.0-py3-none-any.whl.metadata (8.2 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:12.9461158Z Collecting edfio<1.0.0,>=0.4.0 (from -r requirements.txt (line 6))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:12.9500233Z   Downloading edfio-0.4.16-py3-none-any.whl.metadata (4.0 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.0542041Z Collecting pydantic<3.0.0,>=2.4.0 (from -r requirements.txt (line 7))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.0573400Z   Downloading pydantic-2.13.4-py3-none-any.whl.metadata (109 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.0823864Z Collecting networkx<4.0,>=3.0 (from -r requirements.txt (line 8))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.0852141Z   Downloading networkx-3.6.1-py3-none-any.whl.metadata (6.8 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.1205370Z Collecting pyyaml<7.0,>=6.0 (from -r requirements.txt (line 9))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.1233580Z   Downloading pyyaml-6.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.1619468Z Collecting fastapi<1.0.0,>=0.100.0 (from -r requirements.txt (line 10))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.1648870Z   Downloading fastapi-0.141.1-py3-none-any.whl.metadata (27 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.1844837Z Collecting httpx<1.0.0,>=0.24.0 (from -r requirements.txt (line 11))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.1872458Z   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.1991631Z Collecting threadpoolctl<4.0,>=3.0 (from -r requirements.txt (line 12))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.2020760Z   Downloading threadpoolctl-3.6.0-py3-none-any.whl.metadata (13 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.2233976Z Collecting uvicorn<1.0.0,>=0.24.0 (from uvicorn[standard]<1.0.0,>=0.24.0->-r requirements.txt (line 13))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.2259903Z   Downloading uvicorn-0.52.1-py3-none-any.whl.metadata (6.6 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.2687145Z Collecting statsmodels<1.0.0,>=0.14.0 (from -r requirements.txt (line 14))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.2726778Z   Downloading statsmodels-0.14.6-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (9.5 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.2866250Z Collecting mne-connectivity<1.0.0,>=0.5.0 (from -r requirements.txt (line 15))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.2906678Z   Downloading mne_connectivity-0.8.1-py3-none-any.whl.metadata (10 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.5502861Z Collecting hypothesis<7.0,>=6.0 (from -r requirements.txt (line 16))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.5534359Z   Downloading hypothesis-6.165.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.7 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.5815189Z Collecting joblib>=1.4.0 (from scikit-learn<2.0.0,>=1.3.0->-r requirements.txt (line 3))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.5845384Z   Downloading joblib-1.5.3-py3-none-any.whl.metadata (5.5 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.6130812Z Collecting narwhals>=2.0.1 (from scikit-learn<2.0.0,>=1.3.0->-r requirements.txt (line 3))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.6161356Z   Downloading narwhals-2.24.0-py3-none-any.whl.metadata (15 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.6315701Z Collecting decorator>=5.1 (from mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.6341564Z   Downloading decorator-5.3.1-py3-none-any.whl.metadata (3.9 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.6495853Z Collecting jinja2>=3.1 (from mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.6524117Z   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.6625276Z Collecting lazy-loader>=0.3 (from mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.6656712Z   Downloading lazy_loader-0.5-py3-none-any.whl.metadata (5.9 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.7853421Z Collecting matplotlib>=3.8 (from mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.7889153Z   Downloading matplotlib-3.11.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (80 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.8208239Z Collecting packaging (from mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.8250687Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.8417679Z Collecting pooch>=1.5 (from mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.8445319Z   Downloading pooch-1.9.0-py3-none-any.whl.metadata (10 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.8705199Z Collecting tqdm>=4.66 (from mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.8741821Z   Downloading tqdm-4.70.0-py3-none-any.whl.metadata (57 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.9005138Z Collecting annotated-types>=0.6.0 (from pydantic<3.0.0,>=2.4.0->-r requirements.txt (line 7))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:13.9034269Z   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.5496858Z Collecting pydantic-core==2.46.4 (from pydantic<3.0.0,>=2.4.0->-r requirements.txt (line 7))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.5530628Z   Downloading pydantic_core-2.46.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.5681247Z Collecting typing-extensions>=4.14.1 (from pydantic<3.0.0,>=2.4.0->-r requirements.txt (line 7))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.5713869Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.5827610Z Collecting typing-inspection>=0.4.2 (from pydantic<3.0.0,>=2.4.0->-r requirements.txt (line 7))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.5853786Z   Downloading typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.6082905Z Collecting starlette>=0.46.0 (from fastapi<1.0.0,>=0.100.0->-r requirements.txt (line 10))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.6112653Z   Downloading starlette-1.6.0-py3-none-any.whl.metadata (6.4 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.6263128Z Collecting annotated-doc>=0.0.2 (from fastapi<1.0.0,>=0.100.0->-r requirements.txt (line 10))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.6290698Z   Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.6466686Z Collecting anyio (from httpx<1.0.0,>=0.24.0->-r requirements.txt (line 11))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.6495633Z   Downloading anyio-4.14.2-py3-none-any.whl.metadata (4.6 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.6671086Z Collecting certifi (from httpx<1.0.0,>=0.24.0->-r requirements.txt (line 11))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.6700591Z   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.6840270Z Collecting httpcore==1.* (from httpx<1.0.0,>=0.24.0->-r requirements.txt (line 11))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.6871652Z   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.7016404Z Collecting idna (from httpx<1.0.0,>=0.24.0->-r requirements.txt (line 11))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.7042732Z   Downloading idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.7207122Z Collecting click>=7.0 (from uvicorn<1.0.0,>=0.24.0->uvicorn[standard]<1.0.0,>=0.24.0->-r requirements.txt (line 13))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.7239720Z   Downloading click-8.4.2-py3-none-any.whl.metadata (2.6 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.7345448Z Collecting h11>=0.8 (from uvicorn<1.0.0,>=0.24.0->uvicorn[standard]<1.0.0,>=0.24.0->-r requirements.txt (line 13))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.7371908Z   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.8428376Z Collecting pandas!=2.1.0,>=1.4 (from statsmodels<1.0.0,>=0.14.0->-r requirements.txt (line 14))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.8458592Z   Downloading pandas-3.0.5-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (79 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.8792784Z Collecting patsy>=0.5.6 (from statsmodels<1.0.0,>=0.14.0->-r requirements.txt (line 14))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.8818767Z   Downloading patsy-1.0.2-py2.py3-none-any.whl.metadata (3.6 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.9352598Z Collecting netCDF4>=1.6.5 (from mne-connectivity<1.0.0,>=0.5.0->-r requirements.txt (line 15))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.9381644Z   Downloading netcdf4-1.7.4-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (2.1 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.9654542Z Collecting xarray>=2023.11.0 (from mne-connectivity<1.0.0,>=0.5.0->-r requirements.txt (line 15))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.9681776Z   Downloading xarray-2026.7.0-py3-none-any.whl.metadata (12 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.9873316Z Collecting sortedcontainers<3.0.0,>=2.1.0 (from hypothesis<7.0,>=6.0->-r requirements.txt (line 16))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:14.9899800Z   Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl.metadata (10 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.0213653Z Collecting httptools>=0.8.0 (from uvicorn[standard]<1.0.0,>=0.24.0->-r requirements.txt (line 13))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.0244259Z   Downloading httptools-0.8.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (3.5 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.0398266Z Collecting python-dotenv>=0.13 (from uvicorn[standard]<1.0.0,>=0.24.0->-r requirements.txt (line 13))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.0427158Z   Downloading python_dotenv-1.2.2-py3-none-any.whl.metadata (27 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.0793156Z Collecting uvloop>=0.15.1 (from uvicorn[standard]<1.0.0,>=0.24.0->-r requirements.txt (line 13))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.0822276Z   Downloading uvloop-0.22.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (4.9 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.1875215Z Collecting watchfiles>=0.20 (from uvicorn[standard]<1.0.0,>=0.24.0->-r requirements.txt (line 13))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.1907816Z   Downloading watchfiles-1.2.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.2826375Z Collecting websockets>=13.0 (from uvicorn[standard]<1.0.0,>=0.24.0->-r requirements.txt (line 13))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.2857139Z   Downloading websockets-17.0.1-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.3 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.3346392Z Collecting MarkupSafe>=2.0 (from jinja2>=3.1->mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.3377133Z   Downloading markupsafe-3.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.3948123Z Collecting contourpy>=1.0.1 (from matplotlib>=3.8->mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.3976086Z   Downloading contourpy-1.3.3-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (5.5 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.4089112Z Collecting cycler>=0.10 (from matplotlib>=3.8->mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.4116179Z   Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.5368268Z Collecting fonttools>=4.28.2 (from matplotlib>=3.8->mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.5398991Z   Downloading fonttools-4.63.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (118 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.6044526Z Collecting kiwisolver>=1.3.1 (from matplotlib>=3.8->mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.6073793Z   Downloading kiwisolver-1.5.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (5.1 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.8061478Z Collecting pillow>=9 (from matplotlib>=3.8->mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.8092838Z   Downloading pillow-12.3.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.8323289Z Collecting pyparsing>=3 (from matplotlib>=3.8->mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.8350560Z   Downloading pyparsing-3.3.2-py3-none-any.whl.metadata (5.8 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.8473788Z Collecting python-dateutil>=2.7 (from matplotlib>=3.8->mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.8501056Z   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.9004227Z Collecting cftime (from netCDF4>=1.6.5->mne-connectivity<1.0.0,>=0.5.0->-r requirements.txt (line 15))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.9044697Z   Downloading cftime-1.6.5-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (8.7 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.9307082Z Collecting platformdirs>=2.5.0 (from pooch>=1.5->mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.9335684Z   Downloading platformdirs-4.11.1-py3-none-any.whl.metadata (5.5 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.9528990Z Collecting requests>=2.19.0 (from pooch>=1.5->mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.9555509Z   Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.9697629Z Collecting six>=1.5 (from python-dateutil>=2.7->matplotlib>=3.8->mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:15.9724294Z   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.0654047Z Collecting charset_normalizer<4,>=2 (from requests>=2.19.0->pooch>=1.5->mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.0686282Z   Downloading charset_normalizer-3.4.9-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (41 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.0917982Z Collecting urllib3<3,>=1.26 (from requests>=2.19.0->pooch>=1.5->mne<2.0.0,>=1.5.0->-r requirements.txt (line 4))
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.0948953Z   Downloading urllib3-2.7.0-py3-none-any.whl.metadata (6.9 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.1228939Z Downloading numpy-2.4.6-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.9 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.1821045Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.9/16.9 MB 298.6 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.1854028Z Downloading scipy-1.17.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.3 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.2952451Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.3/35.3 MB 326.7 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.3016250Z Downloading scikit_learn-1.9.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (9.3 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.3595226Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.3/9.3 MB 163.3 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.3635207Z Downloading mne-1.12.1-py3-none-any.whl (7.5 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.4089862Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.5/7.5 MB 168.6 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.4134567Z Downloading mne_bids-0.19.0-py3-none-any.whl (189 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.4200448Z Downloading edfio-0.4.16-py3-none-any.whl (31 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.4262682Z Downloading pydantic-2.13.4-py3-none-any.whl (472 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.4326187Z Downloading pydantic_core-2.46.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.4416925Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 257.5 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.4445618Z Downloading networkx-3.6.1-py3-none-any.whl (2.1 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.4536009Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 268.2 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.4564845Z Downloading pyyaml-6.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (806 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.4618622Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 806.6/806.6 kB 166.5 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.4649420Z Downloading fastapi-0.141.1-py3-none-any.whl (131 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.4717364Z Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.4769368Z Downloading threadpoolctl-3.6.0-py3-none-any.whl (18 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.4817678Z Downloading uvicorn-0.52.1-py3-none-any.whl (79 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.4915856Z Downloading statsmodels-0.14.6-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (10.4 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.5476911Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.4/10.4 MB 188.4 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.5526025Z Downloading mne_connectivity-0.8.1-py3-none-any.whl (167 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.5609060Z Downloading hypothesis-6.165.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.2 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.5672196Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 199.5 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.5701462Z Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.5753216Z Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.5803735Z Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.5849862Z Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.5897566Z Downloading click-8.4.2-py3-none-any.whl (119 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.5949640Z Downloading decorator-5.3.1-py3-none-any.whl (10 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.6000381Z Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.6054006Z Downloading httptools-0.8.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (464 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.6114113Z Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.6169669Z Downloading joblib-1.5.3-py3-none-any.whl (309 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.6227314Z Downloading lazy_loader-0.5-py3-none-any.whl (8.0 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.6276676Z Downloading markupsafe-3.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.6361391Z Downloading matplotlib-3.11.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (10.0 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.6743167Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.0/10.0 MB 273.5 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.6774338Z Downloading contourpy-1.3.3-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (355 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.6831801Z Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.6913967Z Downloading fonttools-4.63.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.1 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.7121695Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.1/5.1 MB 260.7 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.7154881Z Downloading kiwisolver-1.5.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.4 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.7226564Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 231.3 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.7256292Z Downloading narwhals-2.24.0-py3-none-any.whl (461 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.7324004Z Downloading netcdf4-1.7.4-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (10.4 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.7827923Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.4/10.4 MB 211.4 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.7861750Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.7915186Z Downloading pandas-3.0.5-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (11.3 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.8247382Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.3/11.3 MB 357.9 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.8278397Z Downloading patsy-1.0.2-py2.py3-none-any.whl (233 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.8332604Z Downloading pillow-12.3.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.8543517Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 355.6 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.8571035Z Downloading pooch-1.9.0-py3-none-any.whl (67 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.8624466Z Downloading platformdirs-4.11.1-py3-none-any.whl (23 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.8686672Z Downloading pyparsing-3.3.2-py3-none-any.whl (122 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.8737028Z Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.8787295Z Downloading python_dotenv-1.2.2-py3-none-any.whl (22 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.8830737Z Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.8880842Z Downloading charset_normalizer-3.4.9-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (221 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.8930027Z Downloading idna-3.18-py3-none-any.whl (65 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.8979394Z Downloading urllib3-2.7.0-py3-none-any.whl (131 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.9029747Z Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.9079681Z Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.9130531Z Downloading starlette-1.6.0-py3-none-any.whl (75 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.9175366Z Downloading anyio-4.14.2-py3-none-any.whl (125 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.9223602Z Downloading tqdm-4.70.0-py3-none-any.whl (80 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.9274386Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.9322709Z Downloading typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.9370094Z Downloading uvloop-0.22.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (3.8 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.9498073Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.8/3.8 MB 337.5 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.9527441Z Downloading watchfiles-1.2.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (456 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.9583091Z Downloading websockets-17.0.1-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (219 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.9657660Z Downloading xarray-2026.7.0-py3-none-any.whl (1.4 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.9728246Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 243.0 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.9764216Z Downloading cftime-1.6.5-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.7 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:16.9842479Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.7/1.7 MB 261.0 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:17.4685612Z Installing collected packages: sortedcontainers, websockets, uvloop, urllib3, typing-extensions, tqdm, threadpoolctl, six, pyyaml, python-dotenv, pyparsing, platformdirs, pillow, packaging, numpy, networkx, narwhals, MarkupSafe, kiwisolver, joblib, idna, hypothesis, httptools, h11, fonttools, decorator, cycler, click, charset_normalizer, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, scipy, requests, python-dateutil, pydantic-core, patsy, lazy-loader, jinja2, httpcore, edfio, contourpy, cftime, anyio, watchfiles, starlette, scikit-learn, pydantic, pooch, pandas, netCDF4, matplotlib, httpx, xarray, statsmodels, mne, fastapi, mne-connectivity, mne-bids
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:40.6595864Z 
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:40.6626038Z Successfully installed MarkupSafe-3.0.3 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.14.2 certifi-2026.7.22 cftime-1.6.5 charset_normalizer-3.4.9 click-8.4.2 contourpy-1.3.3 cycler-0.12.1 decorator-5.3.1 edfio-0.4.16 fastapi-0.141.1 fonttools-4.63.0 h11-0.16.0 httpcore-1.0.9 httptools-0.8.0 httpx-0.28.1 hypothesis-6.165.2 idna-3.18 jinja2-3.1.6 joblib-1.5.3 kiwisolver-1.5.0 lazy-loader-0.5 matplotlib-3.11.1 mne-1.12.1 mne-bids-0.19.0 mne-connectivity-0.8.1 narwhals-2.24.0 netCDF4-1.7.4 networkx-3.6.1 numpy-2.4.6 packaging-26.3 pandas-3.0.5 patsy-1.0.2 pillow-12.3.0 platformdirs-4.11.1 pooch-1.9.0 pydantic-2.13.4 pydantic-core-2.46.4 pyparsing-3.3.2 python-dateutil-2.9.0.post0 python-dotenv-1.2.2 pyyaml-6.0.3 requests-2.34.2 scikit-learn-1.9.0 scipy-1.17.1 six-1.17.0 sortedcontainers-2.4.0 starlette-1.6.0 statsmodels-0.14.6 threadpoolctl-3.6.0 tqdm-4.70.0 typing-extensions-4.16.0 typing-inspection-0.4.2 urllib3-2.7.0 uvicorn-0.52.1 uvloop-0.22.1 watchfiles-1.2.0 websockets-17.0.1 xarray-2026.7.0
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:41.6604754Z Requirement already satisfied: hypothesis in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (6.165.2)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:41.7459026Z Collecting pytest
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:41.7918324Z   Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:41.8085408Z Collecting pytest-cov
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:41.8115355Z   Downloading pytest_cov-7.1.0-py3-none-any.whl.metadata (32 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:41.8222594Z Requirement already satisfied: sortedcontainers<3.0.0,>=2.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from hypothesis) (2.4.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:41.8323965Z Collecting iniconfig>=1.0.1 (from pytest)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:41.8355340Z   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:41.8388362Z Requirement already satisfied: packaging>=22 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pytest) (26.3)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:41.8463984Z Collecting pluggy<2,>=1.5 (from pytest)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:41.8495173Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:41.8653433Z Collecting pygments>=2.7.2 (from pytest)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:41.8682897Z   Downloading pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:42.2341866Z Collecting coverage>=7.10.6 (from coverage[toml]>=7.10.6->pytest-cov)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:42.2376361Z   Downloading coverage-7.15.4-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (8.6 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:42.2494921Z Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:42.2659911Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:42.2709303Z Downloading pytest_cov-7.1.0-py3-none-any.whl (22 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:42.2764061Z Downloading coverage-7.15.4-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (255 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:42.2826168Z Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:42.2875734Z Downloading pygments-2.20.0-py3-none-any.whl (1.2 MB)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:42.3005703Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 108.4 MB/s  0:00:00
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:42.4274241Z Installing collected packages: pygments, pluggy, iniconfig, coverage, pytest, pytest-cov
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:43.4249745Z 
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:43.4275584Z Successfully installed coverage-7.15.4 iniconfig-2.3.0 pluggy-1.6.0 pygments-2.20.0 pytest-9.1.1 pytest-cov-7.1.0
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:44.1834011Z Obtaining file:///home/runner/work/vireon-nvos/vireon-nvos
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:44.1855455Z   Installing build dependencies: started
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:44.9252562Z   Installing build dependencies: finished with status 'done'
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:44.9258786Z   Checking if build backend supports build_editable: started
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.2798591Z   Checking if build backend supports build_editable: finished with status 'done'
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.2806258Z   Getting requirements to build editable: started
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.6075496Z   Getting requirements to build editable: finished with status 'done'
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.6085521Z   Preparing editable metadata (pyproject.toml): started
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.7975837Z   Preparing editable metadata (pyproject.toml): finished with status 'done'
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8022389Z Requirement already satisfied: numpy<3.0.0,>=1.24.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from vireon-nvos==1.1.0) (2.4.6)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8028449Z Requirement already satisfied: scipy<2.0.0,>=1.10.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from vireon-nvos==1.1.0) (1.17.1)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8033527Z Requirement already satisfied: scikit-learn<2.0.0,>=1.3.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from vireon-nvos==1.1.0) (1.9.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8038868Z Requirement already satisfied: mne<2.0.0,>=1.5.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from vireon-nvos==1.1.0) (1.12.1)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8043865Z Requirement already satisfied: mne-bids<1.0.0,>=0.14.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from vireon-nvos==1.1.0) (0.19.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8049108Z Requirement already satisfied: edfio<1.0.0,>=0.4.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from vireon-nvos==1.1.0) (0.4.16)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8054063Z Requirement already satisfied: pydantic<3.0.0,>=2.4.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from vireon-nvos==1.1.0) (2.13.4)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8059152Z Requirement already satisfied: networkx<4.0,>=3.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from vireon-nvos==1.1.0) (3.6.1)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8063713Z Requirement already satisfied: pyyaml<7.0,>=6.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from vireon-nvos==1.1.0) (6.0.3)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8068671Z Requirement already satisfied: fastapi<1.0.0,>=0.100.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from vireon-nvos==1.1.0) (0.141.1)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8073286Z Requirement already satisfied: httpx<1.0.0,>=0.24.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from vireon-nvos==1.1.0) (0.28.1)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8078134Z Requirement already satisfied: threadpoolctl<4.0,>=3.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from vireon-nvos==1.1.0) (3.6.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8085714Z Requirement already satisfied: uvicorn<1.0.0,>=0.24.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from uvicorn[standard]<1.0.0,>=0.24.0->vireon-nvos==1.1.0) (0.52.1)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8109126Z Requirement already satisfied: starlette>=0.46.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from fastapi<1.0.0,>=0.100.0->vireon-nvos==1.1.0) (1.6.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8115023Z Requirement already satisfied: typing-extensions>=4.8.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from fastapi<1.0.0,>=0.100.0->vireon-nvos==1.1.0) (4.16.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8120204Z Requirement already satisfied: typing-inspection>=0.4.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from fastapi<1.0.0,>=0.100.0->vireon-nvos==1.1.0) (0.4.2)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8124991Z Requirement already satisfied: annotated-doc>=0.0.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from fastapi<1.0.0,>=0.100.0->vireon-nvos==1.1.0) (0.0.5)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8150606Z Requirement already satisfied: anyio in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from httpx<1.0.0,>=0.24.0->vireon-nvos==1.1.0) (4.14.2)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8154883Z Requirement already satisfied: certifi in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from httpx<1.0.0,>=0.24.0->vireon-nvos==1.1.0) (2026.7.22)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8160141Z Requirement already satisfied: httpcore==1.* in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from httpx<1.0.0,>=0.24.0->vireon-nvos==1.1.0) (1.0.9)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8164347Z Requirement already satisfied: idna in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from httpx<1.0.0,>=0.24.0->vireon-nvos==1.1.0) (3.18)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8183383Z Requirement already satisfied: h11>=0.16 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from httpcore==1.*->httpx<1.0.0,>=0.24.0->vireon-nvos==1.1.0) (0.16.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8201187Z Requirement already satisfied: decorator>=5.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (5.3.1)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8206336Z Requirement already satisfied: jinja2>=3.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (3.1.6)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8211425Z Requirement already satisfied: lazy-loader>=0.3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (0.5)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8216077Z Requirement already satisfied: matplotlib>=3.8 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (3.11.1)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8221883Z Requirement already satisfied: packaging in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (26.3)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8226556Z Requirement already satisfied: pooch>=1.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (1.9.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8232543Z Requirement already satisfied: tqdm>=4.66 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (4.70.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8431180Z Requirement already satisfied: annotated-types>=0.6.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pydantic<3.0.0,>=2.4.0->vireon-nvos==1.1.0) (0.8.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8436101Z Requirement already satisfied: pydantic-core==2.46.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pydantic<3.0.0,>=2.4.0->vireon-nvos==1.1.0) (2.46.4)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8466466Z Requirement already satisfied: joblib>=1.4.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from scikit-learn<2.0.0,>=1.3.0->vireon-nvos==1.1.0) (1.5.3)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8470812Z Requirement already satisfied: narwhals>=2.0.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from scikit-learn<2.0.0,>=1.3.0->vireon-nvos==1.1.0) (2.24.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8566447Z Requirement already satisfied: click>=7.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from uvicorn<1.0.0,>=0.24.0->uvicorn[standard]<1.0.0,>=0.24.0->vireon-nvos==1.1.0) (8.4.2)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8584551Z Requirement already satisfied: httptools>=0.8.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from uvicorn[standard]<1.0.0,>=0.24.0->vireon-nvos==1.1.0) (0.8.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8590314Z Requirement already satisfied: python-dotenv>=0.13 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from uvicorn[standard]<1.0.0,>=0.24.0->vireon-nvos==1.1.0) (1.2.2)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8598878Z Requirement already satisfied: uvloop>=0.15.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from uvicorn[standard]<1.0.0,>=0.24.0->vireon-nvos==1.1.0) (0.22.1)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8604238Z Requirement already satisfied: watchfiles>=0.20 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from uvicorn[standard]<1.0.0,>=0.24.0->vireon-nvos==1.1.0) (1.2.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8609751Z Requirement already satisfied: websockets>=13.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from uvicorn[standard]<1.0.0,>=0.24.0->vireon-nvos==1.1.0) (17.0.1)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8667262Z Requirement already satisfied: MarkupSafe>=2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jinja2>=3.1->mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (3.0.3)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8843412Z Requirement already satisfied: contourpy>=1.0.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib>=3.8->mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (1.3.3)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8847596Z Requirement already satisfied: cycler>=0.10 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib>=3.8->mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (0.12.1)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8852165Z Requirement already satisfied: fonttools>=4.28.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib>=3.8->mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (4.63.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8856294Z Requirement already satisfied: kiwisolver>=1.3.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib>=3.8->mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (1.5.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8862613Z Requirement already satisfied: pillow>=9 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib>=3.8->mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (12.3.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8866621Z Requirement already satisfied: pyparsing>=3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib>=3.8->mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (3.3.2)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.8871171Z Requirement already satisfied: python-dateutil>=2.7 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib>=3.8->mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (2.9.0.post0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.9008236Z Requirement already satisfied: platformdirs>=2.5.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pooch>=1.5->mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (4.11.1)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.9013288Z Requirement already satisfied: requests>=2.19.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pooch>=1.5->mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (2.34.2)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.9048863Z Requirement already satisfied: six>=1.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from python-dateutil>=2.7->matplotlib>=3.8->mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (1.17.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.9073928Z Requirement already satisfied: charset_normalizer<4,>=2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from requests>=2.19.0->pooch>=1.5->mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (3.4.9)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.9079900Z Requirement already satisfied: urllib3<3,>=1.26 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from requests>=2.19.0->pooch>=1.5->mne<2.0.0,>=1.5.0->vireon-nvos==1.1.0) (2.7.0)
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.9259587Z Building wheels for collected packages: vireon-nvos
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:45.9267559Z   Building editable for vireon-nvos (pyproject.toml): started
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:46.2150568Z   Building editable for vireon-nvos (pyproject.toml): finished with status 'done'
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:46.2157154Z   Created wheel for vireon-nvos: filename=vireon_nvos-1.1.0-0.editable-py3-none-any.whl size=6575 sha256=d83cdc2d4205fc2e7b00c707824d0ee13c2d443d491b46c6e54a1cef57109aca
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:46.2158860Z   Stored in directory: /tmp/pip-ephem-wheel-cache-6pgymxzk/wheels/8e/a4/48/0e2a749d7b5ca0834ee267e27fb130e57511552c49728ad71b
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:46.2182248Z Successfully built vireon-nvos
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:46.2822481Z Installing collected packages: vireon-nvos
+unit-tests (ubuntu-latest, 3.11)	Install dependencies	2026-08-09T16:13:46.2919384Z Successfully installed vireon-nvos-1.1.0
+unit-tests (ubuntu-latest, 3.11)	Regenerate seed registry	﻿2026-08-09T16:13:46.3568654Z ##[group]Run python scripts/regenerate_seed_registry.py
+unit-tests (ubuntu-latest, 3.11)	Regenerate seed registry	2026-08-09T16:13:46.3569109Z ^[[36;1mpython scripts/regenerate_seed_registry.py^[[0m
+unit-tests (ubuntu-latest, 3.11)	Regenerate seed registry	2026-08-09T16:13:46.3616461Z shell: /usr/bin/bash -e {0}
+unit-tests (ubuntu-latest, 3.11)	Regenerate seed registry	2026-08-09T16:13:46.3616719Z env:
+unit-tests (ubuntu-latest, 3.11)	Regenerate seed registry	2026-08-09T16:13:46.3617332Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+unit-tests (ubuntu-latest, 3.11)	Regenerate seed registry	2026-08-09T16:13:46.3617918Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+unit-tests (ubuntu-latest, 3.11)	Regenerate seed registry	2026-08-09T16:13:46.3618356Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+unit-tests (ubuntu-latest, 3.11)	Regenerate seed registry	2026-08-09T16:13:46.3618739Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+unit-tests (ubuntu-latest, 3.11)	Regenerate seed registry	2026-08-09T16:13:46.3619114Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+unit-tests (ubuntu-latest, 3.11)	Regenerate seed registry	2026-08-09T16:13:46.3619494Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+unit-tests (ubuntu-latest, 3.11)	Regenerate seed registry	2026-08-09T16:13:46.3619815Z ##[endgroup]
+unit-tests (ubuntu-latest, 3.11)	Regenerate seed registry	2026-08-09T16:13:47.0450329Z [EvidenceRegistry] Successfully registered 80 evidence bundles in evidence_registry.db.
+unit-tests (ubuntu-latest, 3.11)	Regenerate seed registry	2026-08-09T16:13:47.0451521Z Seed registry regenerated: evidence_registry.db
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	﻿2026-08-09T16:13:47.0957393Z ##[group]Run pytest --tb=short -q
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:13:47.0957757Z ^[[36;1mpytest --tb=short -q^[[0m
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:13:47.1003126Z shell: /usr/bin/bash -e {0}
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:13:47.1003379Z env:
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:13:47.1003643Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:13:47.1004105Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:13:47.1004547Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:13:47.1004937Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:13:47.1005322Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:13:47.1005708Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:13:47.1006086Z   VIREON_HOME: /home/runner/work/vireon-nvos/vireon-nvos
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:13:47.1006394Z   MPLBACKEND: Agg
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:13:47.1006593Z ##[endgroup]
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:13:56.1987813Z ........................................................................ [ 15%]
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:18:53.6001033Z .......................................F................................ [ 31%]
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:19:03.9417727Z .............................................................s....s.s... [ 46%]
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:19:07.5334204Z ........................................................................ [ 62%]
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:19:23.7512953Z ........................................................................ [ 77%]
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:20:58.5910880Z ...................................................s.................... [ 93%]
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7266891Z ss....ss.ss.....................                                         [100%]
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7268005Z =================================== FAILURES ===================================
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7268712Z _________________________ test_real_data_physionet_csp _________________________
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7270069Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3/connection.py:204: in _new_conn
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7271240Z     sock = connection.create_connection(
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7272437Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3/util/connection.py:85: in create_connection
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7273651Z     raise err
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7274669Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3/util/connection.py:73: in create_connection
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7275746Z     sock.connect(sa)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7276136Z E   TimeoutError: timed out
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7276414Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7276749Z The above exception was the direct cause of the following exception:
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7278100Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3/connectionpool.py:788: in urlopen
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7279064Z     response = self._make_request(
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7280001Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3/connectionpool.py:488: in _make_request
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7280690Z     raise new_e
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7281239Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3/connectionpool.py:464: in _make_request
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7281875Z     self._validate_conn(conn)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7282471Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3/connectionpool.py:1106: in _validate_conn
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7283111Z     conn.connect()
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7283613Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3/connection.py:759: in connect
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7284218Z     self.sock = sock = self._new_conn()
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7284532Z                        ^^^^^^^^^^^^^^^^
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7285077Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3/connection.py:213: in _new_conn
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7285574Z     raise ConnectTimeoutError(
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7286281Z E   urllib3.exceptions.ConnectTimeoutError: (<HTTPSConnection(host='physionet.org', port=443) at 0x7f5a9788be10>, 'Connection to physionet.org timed out. (connect timeout=30)')
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7287512Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7287698Z The above exception was the direct cause of the following exception:
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7288253Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/requests/adapters.py:696: in send
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7288739Z     resp = conn.urlopen(
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7289201Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3/connectionpool.py:842: in urlopen
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7289719Z     retries = retries.increment(
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7290179Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3/util/retry.py:543: in increment
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7290805Z     raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7291208Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7292445Z E   urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='physionet.org', port=443): Max retries exceeded with url: /files/eegmmidb/1.0.0/S001/S001R04.edf (Caused by ConnectTimeoutError(<HTTPSConnection(host='physionet.org', port=443) at 0x7f5a9788be10>, 'Connection to physionet.org timed out. (connect timeout=30)'))
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7293858Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7294039Z During handling of the above exception, another exception occurred:
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7294485Z vireon-corpus/vireon_corpus/dataset_manager.py:76: in load_dataset
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7294886Z     return self._load_physionet_bci(subject, default_runs)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7295209Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7295588Z vireon-corpus/vireon_corpus/dataset_manager.py:94: in _load_physionet_bci
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7296121Z     raw_files = mne.datasets.eegbci.load_data(subject, runs, update_path=True, verbose=False)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7296594Z                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7297543Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/mne/datasets/eegbci/eegbci.py:221: in load_data
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7298506Z     fetcher.fetch(file_part)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7299230Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pooch/core.py:598: in fetch
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7300009Z     stream_download(
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7300740Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pooch/core.py:823: in stream_download
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7301547Z     downloader(url, tmp, pooch)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7302015Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pooch/downloaders.py:230: in __call__
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7302562Z     response = requests.get(url, timeout=timeout, **kwargs)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7302887Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7303339Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/requests/api.py:87: in get
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7303830Z     return request("get", url, params=params, **kwargs)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7304143Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7304607Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/requests/api.py:71: in request
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7305130Z     return session.request(method=method, url=url, **kwargs)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7305467Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7305952Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/requests/sessions.py:651: in request
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7306450Z     resp = self.send(prep, **send_kwargs)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7306710Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7307435Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/requests/sessions.py:784: in send
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7307913Z     r = adapter.send(request, **kwargs)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7308163Z         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7308596Z /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/requests/adapters.py:717: in send
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7309263Z     raise ConnectTimeout(e, request=request)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7310517Z E   requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='physionet.org', port=443): Max retries exceeded with url: /files/eegmmidb/1.0.0/S001/S001R04.edf (Caused by ConnectTimeoutError(<HTTPSConnection(host='physionet.org', port=443) at 0x7f5a9788be10>, 'Connection to physionet.org timed out. (connect timeout=30)'))
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7311692Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7311873Z The above exception was the direct cause of the following exception:
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7312410Z tests/test_real_data_validation.py:14: in test_real_data_physionet_csp
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7312796Z     ds = dataset_mgr.load_dataset("physionet_bci")
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7313088Z          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7313438Z vireon-corpus/vireon_corpus/dataset_manager.py:88: in load_dataset
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7313804Z     raise DatasetDownloadError(
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7315595Z E   vireon_corpus.exceptions.DatasetDownloadError: Failed to load dataset 'physionet_bci' (subject=1): ConnectTimeout: HTTPSConnectionPool(host='physionet.org', port=443): Max retries exceeded with url: /files/eegmmidb/1.0.0/S001/S001R04.edf (Caused by ConnectTimeoutError(<HTTPSConnection(host='physionet.org', port=443) at 0x7f5a9788be10>, 'Connection to physionet.org timed out. (connect timeout=30)')). No synthetic fallback will be provided. Call load_synthetic_fixture() explicitly for testing.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7317887Z ----------------------------- Captured stderr call -----------------------------
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7318703Z Downloading file 'S001/S001R04.edf' from 'https://physionet.org/files/eegmmidb/1.0.0/S001/S001R04.edf' to '/home/runner/mne_data/MNE-eegbci-data/files/eegmmidb/1.0.0'.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7319492Z Failed to download 'S001R04.edf'. Will attempt the download again 2 more times.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7319991Z Failed to download 'S001R04.edf'. Will attempt the download again 1 more time.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7320420Z =============================== warnings summary ===============================
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7320938Z ../../../../../opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/fastapi/testclient.py:1
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7321978Z   /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7322909Z     from starlette.testclient import TestClient as TestClient  # noqa
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7323274Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7323644Z tests/test_algorithm_validation_suite/test_ica_csp_validation.py::test_csp_features_match_mne
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7324835Z   /home/runner/work/vireon-nvos/vireon-nvos/tests/test_algorithm_validation_suite/test_ica_csp_validation.py:132: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7325872Z     csp_v = CSPPlugin(n_components=2)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7326043Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7326326Z tests/test_algorithm_validation_suite/test_ica_csp_validation.py::test_csp_log_variance_features
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7327802Z   /home/runner/work/vireon-nvos/vireon-nvos/tests/test_algorithm_validation_suite/test_ica_csp_validation.py:149: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7328816Z     csp = CSPPlugin(n_components=2)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7328983Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7329267Z tests/test_algorithm_validation_suite/test_ica_csp_validation.py::test_csp_n_components_respected
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7329899Z tests/test_algorithm_validation_suite/test_ica_csp_validation.py::test_csp_n_components_respected
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7330526Z tests/test_algorithm_validation_suite/test_ica_csp_validation.py::test_csp_n_components_respected
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7331865Z   /home/runner/work/vireon-nvos/vireon-nvos/tests/test_algorithm_validation_suite/test_ica_csp_validation.py:159: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7332867Z     csp = CSPPlugin(n_components=n)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7333034Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7333242Z vireon-methods/tests/test_csp.py::test_csp_returns_correct_shape
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7334207Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-methods/tests/test_csp.py:8: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7335092Z     csp = CSPPlugin(n_components=4)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7335250Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7335436Z vireon-methods/tests/test_csp.py::test_csp_features_are_log_variance
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7336416Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-methods/tests/test_csp.py:15: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7337448Z     csp = CSPPlugin(n_components=2)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7337750Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7337926Z vireon-methods/tests/test_csp.py::test_csp_compatible_with_lda
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7338879Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-methods/tests/test_csp.py:30: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7339758Z     csp = CSPPlugin(n_components=4)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7339922Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7340061Z vireon-methods/tests/test_csp.py::test_csp_srl_is_srl2
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7340980Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-methods/tests/test_csp.py:39: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7341864Z     csp = CSPPlugin()
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7341997Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7342226Z vireon-validation/tests/test_csp_lda_real_ccc.py::test_method_accuracy_on_erd_data
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7343311Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-validation/tests/test_csp_lda_real_ccc.py:27: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7344382Z     method_acc = matrix._compute_method_accuracy(CSPPlugin(n_components=4), X, y)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7344689Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7344850Z vireon-validation/tests/test_csp_lda_real_ccc.py: 15 warnings
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7345276Z vireon-validation/tests/test_matrix_bundle_population.py: 40 warnings
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7345717Z vireon-validation/tests/test_matrix_data_passing.py: 5 warnings
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7346071Z vireon-api/tests/test_api.py: 5 warnings
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7347202Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-validation/vireon_validation/benchmarks/matrix.py:137: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7348202Z     fold_method = method.__class__(
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7348376Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7348614Z vireon-validation/tests/test_csp_lda_real_ccc.py::test_ccc_above_threshold_on_baseline
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7349714Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-validation/tests/test_csp_lda_real_ccc.py:40: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7350683Z     matrix.add_method(CSPPlugin(n_components=4))
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7350892Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7351121Z vireon-validation/tests/test_csp_lda_real_ccc.py::test_ccc_uses_identical_cv_splits
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7352201Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-validation/tests/test_csp_lda_real_ccc.py:58: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7353396Z     method_scores = matrix._compute_method_cv_scores(CSPPlugin(n_components=4), X, y)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7353728Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7354005Z vireon-validation/tests/test_matrix_bundle_population.py::test_matrix_populates_evidence_hash
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7355166Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-validation/tests/test_matrix_bundle_population.py:33: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7356167Z     matrix.add_method(CSPPlugin(n_components=2))
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7356370Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7356718Z vireon-validation/tests/test_matrix_bundle_population.py::test_matrix_populates_algorithm_field
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7358002Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-validation/tests/test_matrix_bundle_population.py:45: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7358984Z     csp = CSPPlugin(n_components=2)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7359155Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7359532Z vireon-validation/tests/test_matrix_bundle_population.py::test_matrix_measures_runtime
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7360951Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-validation/tests/test_matrix_bundle_population.py:55: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7361981Z     matrix.add_method(CSPPlugin(n_components=2))
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7362183Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7362481Z vireon-validation/tests/test_matrix_bundle_population.py::test_conclusion_verdict_equals_pass_fail
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7363649Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-validation/tests/test_matrix_bundle_population.py:64: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7364645Z     matrix.add_method(CSPPlugin(n_components=2))
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7364841Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7365165Z vireon-validation/tests/test_matrix_bundle_population.py::test_evidence_hash_deterministic_for_same_input
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7366351Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-validation/tests/test_matrix_bundle_population.py:73: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7367527Z     matrix1.add_method(CSPPlugin(n_components=2))
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7367738Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7368051Z vireon-validation/tests/test_matrix_bundle_population.py::test_evidence_hash_deterministic_for_same_input
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7369250Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-validation/tests/test_matrix_bundle_population.py:78: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7370255Z     matrix2.add_method(CSPPlugin(n_components=2))
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7370462Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7370777Z vireon-validation/tests/test_matrix_bundle_population.py::test_evidence_hash_differs_for_different_input
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7371959Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-validation/tests/test_matrix_bundle_population.py:89: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7372956Z     matrix1.add_method(CSPPlugin(n_components=2))
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7373156Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7373466Z vireon-validation/tests/test_matrix_bundle_population.py::test_evidence_hash_differs_for_different_input
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7374653Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-validation/tests/test_matrix_bundle_population.py:94: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7375795Z     matrix2.add_method(CSPPlugin(n_components=2))
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7376000Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7376238Z vireon-validation/tests/test_matrix_data_passing.py::test_matrix_receives_real_data
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7377578Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-validation/tests/test_matrix_data_passing.py:54: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7378558Z     matrix.add_method(CSPPlugin(n_components=2))
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7378762Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7378968Z vireon-corpus/tests/test_bids_conversion.py::test_convert_to_bids_structure
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7379439Z vireon-corpus/tests/test_bids_no_fake.py::test_no_fake_edf_files
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7380500Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-corpus/vireon_corpus/plugins/eegbci_plugin.py:115: RuntimeWarning: EDF format requires equal-length data blocks, so 0.375 seconds of edge values were appended to all channels when writing the final block.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7381726Z     write_raw_bids(raw, bids_path, events=events, event_id=event_id, overwrite=True, format='EDF', allow_preload=True)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7382272Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7382457Z vireon-api/tests/test_api.py::test_benchmark_and_retrieve_evidence
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7383425Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-api/vireon_api/main.py:111: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7384331Z     matrix.add_method(CSPPlugin(n_components=2))
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7384530Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7384794Z vireon-verification/interoperability/test_format_roundtrip.py::test_interoperability
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7386217Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-verification/interoperability/test_format_roundtrip.py:50: RuntimeWarning: No events found or provided. Please add annotations to the raw data, or provide the events and event_id parameters. For resting state data, BIDS recommends naming the task using labels beginning with "rest".
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7388024Z     write_raw_bids(raw, bids_path, overwrite=True, allow_preload=True, format='EDF', verbose=False)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7388389Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7388607Z vireon-verification/statistical/test_csp_crossval.py::test_csp_crossval
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7389683Z   /home/runner/work/vireon-nvos/vireon-nvos/vireon-verification/statistical/test_csp_crossval.py:44: DeprecationWarning: vireon_methods.machine_learning.csp.CSPPlugin is deprecated. Use vireon_methods.spatial.vireon_csp.VireonCSP instead.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7390700Z     csp_vir = CSPPlugin(n_components=2, norm_trace=False)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.7390924Z 
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.9483431Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.9484243Z =========================== short test summary info ============================
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.9487963Z FAILED tests/test_real_data_validation.py::test_real_data_physionet_csp - vireon_corpus.exceptions.DatasetDownloadError: Failed to load dataset 'physionet_bci' (subject=1): ConnectTimeout: HTTPSConnectionPool(host='physionet.org', port=443): Max retries exceeded with url: /files/eegmmidb/1.0.0/S001/S001R04.edf (Caused by ConnectTimeoutError(<HTTPSConnection(host='physionet.org', port=443) at 0x7f5a9788be10>, 'Connection to physionet.org timed out. (connect timeout=30)')). No synthetic fallback will be provided. Call load_synthetic_fixture() explicitly for testing.
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:05.9490616Z 1 failed, 453 passed, 10 skipped, 92 warnings in 617.80s (0:10:17)
+unit-tests (ubuntu-latest, 3.11)	Run unit tests	2026-08-09T16:24:06.3757436Z ##[error]Process completed with exit code 1.
+unit-tests (ubuntu-latest, 3.11)	Post Run actions/checkout@v4	﻿2026-08-09T16:24:06.3900835Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+unit-tests (ubuntu-latest, 3.11)	Post Run actions/checkout@v4	2026-08-09T16:24:06.3902092Z Post job cleanup.
+unit-tests (ubuntu-latest, 3.11)	Post Run actions/checkout@v4	2026-08-09T16:24:06.4752588Z [command]/usr/bin/git version
+unit-tests (ubuntu-latest, 3.11)	Post Run actions/checkout@v4	2026-08-09T16:24:06.4833940Z git version 2.54.0
+unit-tests (ubuntu-latest, 3.11)	Post Run actions/checkout@v4	2026-08-09T16:24:06.4880011Z Temporarily overriding HOME='/home/runner/work/_temp/267181fc-0ff4-43ea-9243-b97c0a4e722d' before making global git config changes
+unit-tests (ubuntu-latest, 3.11)	Post Run actions/checkout@v4	2026-08-09T16:24:06.4881501Z Adding repository directory to the temporary git global config as a safe directory
+unit-tests (ubuntu-latest, 3.11)	Post Run actions/checkout@v4	2026-08-09T16:24:06.4888262Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/vireon-nvos/vireon-nvos
+unit-tests (ubuntu-latest, 3.11)	Post Run actions/checkout@v4	2026-08-09T16:24:06.4928302Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+unit-tests (ubuntu-latest, 3.11)	Post Run actions/checkout@v4	2026-08-09T16:24:06.4964122Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+unit-tests (ubuntu-latest, 3.11)	Post Run actions/checkout@v4	2026-08-09T16:24:06.5214972Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+unit-tests (ubuntu-latest, 3.11)	Post Run actions/checkout@v4	2026-08-09T16:24:06.5246334Z http.https://github.com/.extraheader
+unit-tests (ubuntu-latest, 3.11)	Post Run actions/checkout@v4	2026-08-09T16:24:06.5258233Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+unit-tests (ubuntu-latest, 3.11)	Post Run actions/checkout@v4	2026-08-09T16:24:06.5301053Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+unit-tests (ubuntu-latest, 3.11)	Post Run actions/checkout@v4	2026-08-09T16:24:06.5552532Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+unit-tests (ubuntu-latest, 3.11)	Post Run actions/checkout@v4	2026-08-09T16:24:06.5598039Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+unit-tests (ubuntu-latest, 3.11)	Complete job	﻿2026-08-09T16:24:06.6039100Z Cleaning up orphan processes
+unit-tests (ubuntu-latest, 3.11)	Complete job	2026-08-09T16:24:06.6345545Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

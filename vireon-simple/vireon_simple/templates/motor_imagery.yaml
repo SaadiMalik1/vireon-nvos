@@ -1,0 +1,27 @@
+name: Motor Imagery Validation
+goal: Validate a motor imagery BCI decoder with subject-wise cross-validation
+mode: standard
+dataset:
+  source: "${INPUT_FILE}"
+  epoch_length: 2.0
+preprocessing:
+  - type: filter
+    parameters: {kind: bandpass, low: 8, high: 30, order: 5}
+  - type: epoch
+    parameters: {length: 2.0, overlap: 0.0}
+method:
+  algorithm: csp
+  decoder: lda
+validation:
+  strategy: subject_wise
+  k: 5
+  leakage_check: true
+statistics:
+  metrics: [accuracy, balanced_accuracy]
+  significance_test: permutation
+  n_permutations: 1000
+  confidence_interval: bootstrap
+  ci_level: 0.95
+reporting:
+  format: text
+  verbosity: standard
