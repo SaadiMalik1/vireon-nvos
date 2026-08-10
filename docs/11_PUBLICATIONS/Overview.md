@@ -13,10 +13,9 @@ vireon reproduce vk:Publication:Author2026
 The Core Engine will parse the bundle, dynamically fetch the exact versions of the plugins, download the fingerprinted dataset from `vireon-corpus`, execute the DAG, and output a boolean confirming whether the generated metrics match the published metrics.
 
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Complete (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
-> This section was previously a stub. It has been filled as part of the v1.1.0
-> remediation effort (audit finding S9).
+> This section was previously a stub. It has been filled as part of the v1.2.0 remediation.

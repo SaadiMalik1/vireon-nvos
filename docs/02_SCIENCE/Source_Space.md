@@ -14,10 +14,11 @@ VIREON mandates that all biological activity is generated in a 3D coordinate spa
 
 This ensures that spatial filters (like CSP or Beamformers) trained on VIREON data learn physiologically plausible covariance matrices.
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Partial (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
 > Scientific principles are implemented in vireon-core/contracts/ and vireon-knowledge/.
-> Runtime contract enforcement is production-ready.
+> Runtime contract enforcement (ADF stationarity test) is production-ready.
+> Knowledge graph has 20+ rules covering all major algorithms.

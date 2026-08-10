@@ -25,10 +25,9 @@ Data is never passed as raw arrays. It is always wrapped in an `IScientificObjec
 Failure to propagate these metadata fields correctly during `execute` will cause the Evidence Engine to reject the plugin's output.
 
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Complete (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
-> This section was previously a stub. It has been filled as part of the v1.1.0
-> remediation effort (audit finding S9).
+> This section was previously a stub. It has been filled as part of the v1.2.0 remediation.

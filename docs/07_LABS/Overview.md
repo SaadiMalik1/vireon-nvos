@@ -9,10 +9,9 @@ The `vireon-lab` repository contains interactive environments (Jupyter Notebooks
 3. **The Contract Validator:** An interactive graph explorer for `vireon-knowledge`. Input a set of methods and datasets, and the app will visually highlight any conflicting scientific assumptions.
 
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Complete (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
-> This section was previously a stub. It has been filled as part of the v1.1.0
-> remediation effort (audit finding S9).
+> This section was previously a stub. It has been filled as part of the v1.2.0 remediation.

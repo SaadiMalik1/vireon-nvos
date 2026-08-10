@@ -12,10 +12,11 @@ Learn how to use the declarative YAML interface to pass the `SyntheticAlpha10Hz`
 Learn how to wrap a simple scikit-learn Linear Discriminant Analysis (LDA) classifier in an `IPlugin` wrapper, and use `vireon-validation` to test its robustness against increasing levels of telemetry packet loss.
 
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Complete (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
-> Tutorials are runnable and tested in CI via integration tests.
+> Tutorials are runnable and tested in CI.
 > examples/first_validation/demo.py is the canonical entry point.
+> See docs/06_TUTORIALS/quickstart.md for the 5-minute guide.

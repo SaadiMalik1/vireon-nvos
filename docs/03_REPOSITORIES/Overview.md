@@ -9,13 +9,12 @@ VIREON is divided into several highly decoupled repositories.
 - **`vireon-validation`**: Automated benchmarking scenarios and execution harnesses.
 - **`vireon-verification`**: Continuous Integration checks ensuring standard mathematical and numerical agreements.
 - **`vireon-corpus`**: High-quality, curated, and fingerprinted physiological datasets.
-- **`vireon-publications`**: Executable evidence graphs reproducing the results of canonical papers.
 
 
-## Phase E Implementation Status
+
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Complete (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
-> This section was previously a stub. It has been filled as part of the v1.1.0
-> remediation effort (audit finding S9).
+> This section was previously a stub. It has been filled as part of the v1.2.0 remediation.

@@ -23,10 +23,11 @@ The base module defines the fundamental `IScientificObject` payloads (like `ISig
       heading_level: 3
 
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Complete (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
 > REST API is implemented in vireon-api/ with 6 endpoints.
-> CLI is implemented in vireon-lab/cli/ with 4 subcommands.
+> CLI is implemented in vireon-lab/cli/ with 5 subcommands (dataset, experiment, verify, reproduce, inspect).
+> OpenAPI/Swagger auto-generated at /docs.

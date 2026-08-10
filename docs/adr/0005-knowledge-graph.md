@@ -17,9 +17,9 @@ For example: `[vk:Artifact:ElectrodePop] -> (VIOLATES) -> [vk:Assumption:Station
 - **Requirement:** The graph must be queryable by the `EvidenceEngine` at runtime to resolve complex dependency trees.
 
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Accepted & Implemented (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
-> Architectural Decision Record validated against core codebase.
+> This section was previously a stub. It has been filled as part of the v1.2.0 remediation.

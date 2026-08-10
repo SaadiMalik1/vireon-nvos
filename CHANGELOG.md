@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] - 2026-08-10
+
+### Added
+- Completed Phase 1-4 remediation tasks from the multi-agent playbook.
+- Fixed algorithm defects (FBCSP, EEGNet, DeepConvNet, Mutual Information, Wavelet Coherence, etc.).
+- Fixed test suites and CI pipeline (added pytest-asyncio, macOS, Windows).
+- Fixed Evidence engine integrity.
+- Added `/api/datasets` endpoint and improved `/api/algorithms`.
+- Improved documentation and filled Phase E stubs.
+- Cleaned up tracking of `.db` files and hardcoded secrets.
+
+---
+
 ## [1.0.0] - 2026-08-05
 
 ### Added

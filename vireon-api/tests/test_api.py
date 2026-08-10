@@ -17,7 +17,7 @@ def test_health():
 
 
 def test_api_key_auth(monkeypatch):
-    monkeypatch.setenv("VIREON_API_KEY", "secret_key_123")
+    monkeypatch.setenv("VIREON_API_KEY", "test_key_123")
     # Request without key -> 401
     resp = client.get("/api/algorithms")
     assert resp.status_code == 401
@@ -27,7 +27,7 @@ def test_api_key_auth(monkeypatch):
     assert resp.status_code == 401
 
     # Request with valid key -> 200
-    resp = client.get("/api/algorithms", headers={"X-API-Key": "secret_key_123"})
+    resp = client.get("/api/algorithms", headers={"X-API-Key": "test_key_123"})
     assert resp.status_code == 200
 
 

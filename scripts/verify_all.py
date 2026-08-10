@@ -10,7 +10,7 @@ ROOT = Path(__file__).parent.parent
 os.chdir(ROOT)
 
 PYTHONPATH = "PYTHONPATH=.:vireon-core:vireon-models:vireon-lab:vireon-methods:vireon-validation:vireon-evidence:vireon-knowledge:vireon-corpus:vireon-api:vireon-verification"
-ENV = {"PYTHONPATH": ".".join(["", "vireon-core", "vireon-models", "vireon-lab", "vireon-methods",
+ENV = {"PYTHONPATH": ":".join(["", "vireon-core", "vireon-models", "vireon-lab", "vireon-methods",
                                  "vireon-validation", "vireon-evidence", "vireon-knowledge",
                                  "vireon-corpus", "vireon-api", "vireon-verification"]),
         "MPLBACKEND": "Agg", "PATH": os.environ["PATH"]}
@@ -108,7 +108,7 @@ print(f'Status: {r.status_code}')
     results["no_vireon_publications"] = check("no vireon-publications refs",
         "grep -rl 'vireon-publications' docs/ README.md 2>/dev/null | wc -l", "0")
     results["changelog_current"] = check("CHANGELOG has v1.2.0",
-        "grep '## \\\\[1.2.0\\\\]' CHANGELOG.md", "[1.2.0]")
+        "grep -E '## \\[1\\.2\\.0\\]' CHANGELOG.md", "[1.2.0]")
     results["version_sync"] = check("versions synced", '''python3 -c "
 import tomllib
 with open('pyproject.toml', 'rb') as f:

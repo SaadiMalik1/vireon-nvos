@@ -13,10 +13,9 @@ Contributions are accepted strictly via Pull Requests. Every PR must:
 3. Be accompanied by empirical evidence generated from a validation dataset.
 
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Complete (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
-> This section was previously a stub. It has been filled as part of the v1.1.0
-> remediation effort (audit finding S9).
+> This section was previously a stub. It has been filled as part of the v1.2.0 remediation.

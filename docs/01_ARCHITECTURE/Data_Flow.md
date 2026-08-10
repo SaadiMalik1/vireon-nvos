@@ -25,10 +25,10 @@ graph TD;
     E -->|ISignal| B;
 ```
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Complete (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
 > Architecture as documented is implemented across the 10 vireon-* packages.
 > ADRs (docs/adr/) are up-to-date with the codebase.

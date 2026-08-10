@@ -19,14 +19,14 @@ The VIREON ecosystem is intentionally fragmented into domain-specific repositori
 
 ## Data & Evidence
 - **`vireon-corpus`**: High-quality, curated, and fingerprinted physiological datasets.
-- **`vireon-publications`**: Executable evidence graphs reproducing the results of canonical papers.
+
 - **`vireon-reference`**: Ground-truth implementations (often slow, unoptimized Python) used to verify faster rust/C++ extensions.
 - **`vireon-lab`**: Interactive Jupyter notebooks and the `vireon reproduce [DOI]` CLI for one-command paper replication.
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Complete (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
 > Architecture as documented is implemented across the 10 vireon-* packages.
 > ADRs (docs/adr/) are up-to-date with the codebase.

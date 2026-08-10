@@ -16,9 +16,9 @@ The VIREON kernel (`vireon-core`) will contain zero scientific logic. Instead, i
 - **Requirement:** A robust reflection and plugin discovery mechanism must be maintained in `vireon-core`.
 
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Accepted & Implemented (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
-> Architectural Decision Record validated against core codebase.
+> This section was previously a stub. It has been filled as part of the v1.2.0 remediation.

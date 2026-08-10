@@ -16,10 +16,11 @@ Where:
 A critical challenge in signal modeling is non-stationarity. Brain states shift (e.g., from awake to drowsy), causing the underlying probability distribution of $S(t)$ to change over time. 
 VIREON's generative models (`vireon-models`) allow researchers to explicitly schedule state transitions to test how adaptive decoders handle concept drift.
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Partial (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
 > Scientific principles are implemented in vireon-core/contracts/ and vireon-knowledge/.
-> Runtime contract enforcement is production-ready.
+> Runtime contract enforcement (ADF stationarity test) is production-ready.
+> Knowledge graph has 20+ rules covering all major algorithms.

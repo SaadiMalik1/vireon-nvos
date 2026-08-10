@@ -22,10 +22,10 @@ Plugins declare:
 As data flows, the **Evidence Engine** constructs a shadow graph. It records the state of the digital twin, the specific versions of the plugins used, the explicit assumptions made, and the numerical tolerances observed. This results in an `IEvidence` bundle—an immutable record of exactly *why* a particular scientific outcome was reached.
 
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Complete (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
 > Architecture as documented is implemented across the 10 vireon-* packages.
 > ADRs (docs/adr/) are up-to-date with the codebase.

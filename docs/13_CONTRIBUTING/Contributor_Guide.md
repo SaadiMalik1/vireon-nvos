@@ -34,10 +34,9 @@ Datasets are treated as scientific assets.
 - Scientific constants (e.g., the speed of light, tissue conductivities) must never be hardcoded "magic numbers". They must be imported from the `vireon-knowledge` ontology.
 
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Complete (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
-> This section was previously a stub. It has been filled as part of the v1.1.0
-> remediation effort (audit finding S9).
+> This section was previously a stub. It has been filled as part of the v1.2.0 remediation.

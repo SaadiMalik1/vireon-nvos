@@ -16,9 +16,9 @@ VIREON mandates a **Source Space First** architecture for biological signals. Bi
 - **Requirement:** Maintain multiple tiers of head models (e.g., analytical SphereModel for speed, BEM for accuracy) allowing users to balance speed vs. realism.
 
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Accepted & Implemented (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
-> Architectural Decision Record validated against core codebase.
+> This section was previously a stub. It has been filled as part of the v1.2.0 remediation.

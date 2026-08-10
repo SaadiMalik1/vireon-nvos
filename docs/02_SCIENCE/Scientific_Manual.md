@@ -42,10 +42,11 @@ When generating evidence, numerical results (e.g., "Accuracy: 95%") are insuffic
 - **Cohen's d**: To measure the true effect size of degradation caused by hardware or artifact injection.
 
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Partial (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
 > Scientific principles are implemented in vireon-core/contracts/ and vireon-knowledge/.
-> Runtime contract enforcement is production-ready.
+> Runtime contract enforcement (ADF stationarity test) is production-ready.
+> Knowledge graph has 20+ rules covering all major algorithms.

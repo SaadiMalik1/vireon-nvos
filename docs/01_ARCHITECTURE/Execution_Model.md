@@ -28,10 +28,10 @@ constraints:
 The Kernel reads this YAML, queries the plugin registry for any plugin that `produces` Spectral Power and satisfies the constraints (e.g., the `WelchPSD` plugin), and executes it. 
 This Execution Model allows rapid adversarial testing: you can inject an `ElectrodePop` artifact plugin into the DAG purely by altering the YAML manifest, without touching a single line of Python.
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Complete (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
 > Architecture as documented is implemented across the 10 vireon-* packages.
 > ADRs (docs/adr/) are up-to-date with the codebase.

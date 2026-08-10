@@ -12,10 +12,9 @@ We do not test for boolean equality (`True`/`False`), as floating-point arithmet
 Inputs are fuzzed with `NaN`s, `Inf`s, and extreme scaling factors to ensure that `IPlugins` fail gracefully and throw appropriately typed `ScientificContractViolations` rather than crashing the execution DAG.
 
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Complete (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
-> This section was previously a stub. It has been filled as part of the v1.1.0
-> remediation effort (audit finding S9).
+> This section was previously a stub. It has been filled as part of the v1.2.0 remediation.

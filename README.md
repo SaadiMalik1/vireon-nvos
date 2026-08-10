@@ -50,7 +50,7 @@ mkdocs serve
 - **`vireon-validation`**: Automated benchmarking scenarios and execution harnesses.
 - **`vireon-verification`**: Continuous Integration checks ensuring standard mathematical and numerical agreements.
 - **`vireon-corpus`**: High-quality, curated, and fingerprinted physiological datasets.
-- **`vireon-publications`** *(integrated into `vireon-lab/data`)*: Executable evidence graphs reproducing the findings of canonical papers.
+
 
 ## 🤝 Contributing
 VIREON adheres to strict Scientific Readiness Levels (SRL) ranging from 0 to 9. We prioritize scientific rigor over velocity. All new plugins must supply an explicit `ScientificContract` mapping their assumptions to the Knowledge Graph. 

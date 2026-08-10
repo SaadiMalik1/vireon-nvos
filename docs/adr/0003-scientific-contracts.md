@@ -16,9 +16,9 @@ Every `IPlugin` must define a `ScientificContract`. This contract explicitly lis
 - **Requirement:** The `EvidenceEngine` must dynamically verify that the metadata of the `IScientificObject` payload satisfies the downstream plugin's contract before execution is permitted.
 
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Accepted & Implemented (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
-> Architectural Decision Record validated against core codebase.
+> This section was previously a stub. It has been filled as part of the v1.2.0 remediation.

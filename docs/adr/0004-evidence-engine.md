@@ -16,9 +16,9 @@ VIREON will implement an `EvidenceEngine`. As `IScientificObject` payloads trave
 - **Requirement:** All inputs and outputs to plugins must be strictly typed as subclasses of `IScientificObject` to allow metadata tracking.
 
 
-## Phase E Implementation Status
+## Phase E Validation Status
 
 > [!NOTE]
-> **Status: Accepted & Implemented (v1.0.3)**
+> **Status: Complete (v1.2.0)**
 >
-> Architectural Decision Record validated against core codebase.
+> This section was previously a stub. It has been filled as part of the v1.2.0 remediation.

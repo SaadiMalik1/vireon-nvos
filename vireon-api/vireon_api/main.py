@@ -1,7 +1,7 @@
 """FastAPI backend for VIREON evidence platform."""
 import os
 import sys
-import secrets
+import hmac
 from typing import Optional, Dict, Any, List
 from fastapi import FastAPI, HTTPException, Depends, Security
 from fastapi.security import APIKeyHeader
@@ -30,7 +30,7 @@ async def verify_api_key(api_key: Optional[str] = Security(API_KEY_HEADER)):
     expected_key = os.environ.get("VIREON_API_KEY")
     if not expected_key:
         return True
-    if not api_key or not secrets.compare_digest(api_key, expected_key):
+    if not api_key or not hmac.compare_digest(api_key, expected_key):
         raise HTTPException(status_code=401, detail="Invalid or missing API key")
     return True
 
