@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.0.0] - 2026-08-11
+
+### Added
+- **MOABB Integration**: Transitioned VIREON to a validation and evidence layer for MOABB (ADR 0008).
+- Implemented `vireon-moabb` package handling datasets, models, pipelines, and evaluation.
+- Added `ExperimentSpec` and rigorous schema validation for reproducibility.
+- Replaced custom native implementations with MOABB's robust pipeline paradigms (e.g. `CSP + SVM`, `EEGNet`, `MDM`).
+- Created `vireon_lab` CLI with `validate` and `inspect` commands for easier orchestration.
+- Added `Scorecard` within Reporter for human-readable evaluation summaries.
+- Fixed `ModuleNotFoundError` and Documentation Drift in CI pipeline.
+- Implemented global `pytest` memory leak prevention for matplotlib in `conftest.py`.
+
+---
+
 ## [1.2.0] - 2026-08-10
 
 ### Added

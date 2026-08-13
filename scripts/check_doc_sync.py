@@ -69,28 +69,28 @@ CLAIMS: List[Dict[str, Any]] = [
     },
     {
         "doc": "docs/03_REPOSITORIES/vireon-methods.md",
-        "claim": "Welch PSD method uses real native implementation",
-        "verify": lambda: _grep("class VireonWelch", "vireon-methods/vireon_methods/spectral/vireon_welch.py"),
+        "claim": "Welch PSD method uses real native implementation (deprecated reference)",
+        "verify": lambda: _grep("class VireonWelch", "vireon-methods/reference/deprecated/vireon_welch.py"),
     },
     {
         "doc": "docs/03_REPOSITORIES/vireon-methods.md",
-        "claim": "FFT method uses real native FFT",
-        "verify": lambda: _grep("class VireonFFT", "vireon-methods/vireon_methods/spectral/vireon_fft.py"),
+        "claim": "FFT method uses real native FFT (deprecated reference)",
+        "verify": lambda: _grep("class VireonFFT", "vireon-methods/reference/deprecated/vireon_fft.py"),
     },
     {
         "doc": "docs/03_REPOSITORIES/vireon-methods.md",
-        "claim": "STFT method uses real native STFT",
-        "verify": lambda: _grep("class VireonSTFT", "vireon-methods/vireon_methods/spectral/vireon_stft.py"),
+        "claim": "STFT method uses real native STFT (deprecated reference)",
+        "verify": lambda: _grep("class VireonSTFT", "vireon-methods/reference/deprecated/vireon_stft.py"),
     },
     {
         "doc": "docs/03_REPOSITORIES/vireon-methods.md",
-        "claim": "CSP method uses real covariance generalized eigenvalue decomposition",
-        "verify": lambda: _grep("linalg.eigh", "vireon-methods/vireon_methods/spatial/vireon_csp.py"),
+        "claim": "CSP method uses real covariance generalized eigenvalue decomposition (deprecated reference)",
+        "verify": lambda: _grep("linalg.eigh", "vireon-methods/reference/deprecated/vireon_csp.py"),
     },
     {
         "doc": "docs/03_REPOSITORIES/vireon-methods.md",
-        "claim": "wPLI connectivity is implemented",
-        "verify": lambda: _grep("class VireonWPLI", "vireon-methods/vireon_methods/connectivity/vireon_connectivity.py"),
+        "claim": "wPLI connectivity is implemented (deprecated reference)",
+        "verify": lambda: _grep("class VireonWPLI", "vireon-methods/reference/deprecated/vireon_connectivity.py"),
     },
     {
         "doc": "docs/03_REPOSITORIES/vireon-models.md",
