@@ -1,0 +1,15 @@
+diff a/vireon-corpus/vireon_corpus/__init__.py b/vireon-corpus/vireon_corpus/__init__.py	(rejected hunks)
+@@ -1,5 +1,11 @@
+ """vireon_corpus main package."""
+ from vireon_corpus.dataset_manager import DatasetManager
++from vireon_corpus.exceptions import (
++    VireonCorpusError, UnknownDatasetError, DatasetDownloadError, DatasetValidationError
++)
+ 
+-__version__ = "1.0.2"
+-__all__ = ["DatasetManager"]
++__version__ = "1.2.0"
++__all__ = [
++    "DatasetManager",
++    "VireonCorpusError", "UnknownDatasetError", "DatasetDownloadError", "DatasetValidationError",
++]

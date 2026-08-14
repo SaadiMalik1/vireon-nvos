@@ -1,0 +1,129 @@
+diff a/vireon-methods/vireon_methods/connectivity/vireon_mutual_information.py b/vireon-methods/vireon_methods/connectivity/vireon_mutual_information.py	(rejected hunks)
+@@ -1,31 +1,104 @@
+-"""Mutual Information Information-Theoretic Functional Connectivity Estimator.
++"""Mutual Information estimator using Kraskov k-NN method (KSG estimator).
+ 
+-Reference: Kraskov, A., Stogbauer, H., & Grassberger, P. (2004). Estimating mutual information.
+-Physical Review E, 69(6), 066138. DOI: 10.1103/PhysRevE.69.066138
++FIXED in playbook dx — was histogram-based, mislabeled as Kraskov.
++Now implements actual Kraskov 2004 Estimator 1 using scipy.spatial.cKDTree.
+ """
+ import numpy as np
++from typing import Optional
+ 
+ 
+ class VireonMutualInformation:
+-    """Non-linear Mutual Information estimator using 2D Histogram Binning and Kraskov entropy formulations."""
+-    
+-    def __init__(self, n_bins: int = 10):
+-        self.n_bins = n_bins
++    """Mutual Information estimator using Kraskov k-NN method (KSG estimator).
++
++    Reference: Kraskov, Stögbauer, Grassberger (2004).
++    "Estimating mutual information." Phys Rev E. 69:066138.
++    DOI: 10.1103/PhysRevE.69.066138
++
++    Implements Estimator 1 (epsilon-ball approach).
++    """
++
++    def __init__(self, k: int = 4, n_neighbors: Optional[int] = None):
++        if n_neighbors is not None:
++            k = n_neighbors
++        if k < 1:
++            raise ValueError(f"k must be >= 1, got {k}")
++        self.k = k
++
++    @property
++    def plugin_id(self) -> str:
++        return "vk:Method:MutualInformation"
++
++    @property
++    def plugin_capabilities(self):
++        return {"information_theory", "connectivity"}
++
++    def _validate(self, x: np.ndarray, y: np.ndarray) -> None:
++        if x.ndim != 1 or y.ndim != 1:
++            raise ValueError(f"x and y must be 1D; got shapes {x.shape}, {y.shape}")
++        if x.shape != y.shape:
++            raise ValueError(f"x and y must have same length; got {x.shape} vs {y.shape}")
++        if len(x) < self.k + 1:
++            raise ValueError(f"Need at least k+1={self.k+1} samples; got {len(x)}")
++        if np.any(np.isnan(x)) or np.any(np.isnan(y)) or \
++           np.any(np.isinf(x)) or np.any(np.isinf(y)):
++            raise ValueError("x or y contains NaN or Inf values")
+ 
+     def compute(self, x: np.ndarray, y: np.ndarray) -> float:
+-        """Compute Mutual Information I(X; Y) using 2D joint histogram binning estimator."""
+-        # Compute 2D joint histogram and marginal 1D probability distributions
+-        hist_2d, _, _ = np.histogram2d(x, y, bins=self.n_bins)
+-        p_xy = hist_2d / float(np.sum(hist_2d))
+-        
+-        p_x = np.sum(p_xy, axis=1)
+-        p_y = np.sum(p_xy, axis=0)
+-        
+-        # Outer product of marginals p_x * p_y
+-        p_x_p_y = np.outer(p_x, p_y)
+-        
+-        # Compute I(X;Y) = sum p(x,y) * log( p(x,y) / (p(x)p(y)) )
+-        nonzero_mask = p_xy > 0
+-        mi = np.sum(p_xy[nonzero_mask] * np.log(p_xy[nonzero_mask] / p_x_p_y[nonzero_mask]))
+-        
+-        return float(max(0.0, mi))
++        """Compute mutual information I(X;Y) using Kraskov k-NN estimator.
++
++        Args:
++            x: 1D array of samples from random variable X.
++            y: 1D array of samples from random variable Y (same length as x).
++
++        Returns:
++            Mutual information in nats (natural log).
++        """
++        self._validate(x, y)
++        x = np.asarray(x, dtype=np.float64)
++        y = np.asarray(y, dtype=np.float64)
++        n = len(x)
++
++        from scipy.spatial import cKDTree
++        from scipy.special import digamma
++
++        # Build joint space tree
++        joint = np.column_stack([x, y])
++        tree_joint = cKDTree(joint)
++        distances, _ = tree_joint.query(joint, k=self.k + 1, p=np.inf)
++        eps = distances[:, self.k]
++
++        # Count neighbors in marginal spaces within epsilon_i
++        tree_x = cKDTree(x.reshape(-1, 1))
++        tree_y = cKDTree(y.reshape(-1, 1))
++
++        n_x = np.array([len(tree_x.query_ball_point([x[i]], eps[i], p=np.inf)) - 1
++                        for i in range(n)])
++        n_y = np.array([len(tree_y.query_ball_point([y[i]], eps[i], p=np.inf)) - 1
++                        for i in range(n)])
++
++        # Kraskov estimator 1
++        mi = (digamma(self.k)
++              - np.mean(digamma(n_x + 1) + digamma(n_y + 1))
++              + digamma(n))
++
++        return max(0.0, float(mi))
++
++    def compute_matrix(self, data: np.ndarray) -> np.ndarray:
++        """Compute pairwise MI matrix for multivariate data.
++
++        Args:
++            data: 2D array (n_channels, n_samples).
++
++        Returns:
++            Symmetric (n_channels, n_channels) MI matrix.
++        """
++        if data.ndim != 2:
++            raise ValueError(f"data must be 2D (channels, samples); got {data.shape}")
++        n_ch = data.shape[0]
++        mi_matrix = np.zeros((n_ch, n_ch))
++        for i in range(n_ch):
++            for j in range(i + 1, n_ch):
++                mi = self.compute(data[i], data[j])
++                mi_matrix[i, j] = mi
++                mi_matrix[j, i] = mi
++        return mi_matrix

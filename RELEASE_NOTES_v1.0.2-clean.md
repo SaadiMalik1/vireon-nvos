@@ -28,5 +28,5 @@
    - `KnowledgeGraph` now automatically parses and loads all JSON-LD ontologies (`assumptions.jsonld`, `methods.jsonld`, `methodology.jsonld`, `rules.jsonld`) into a unified NetworkX directed graph at runtime.
 
 5. **Resolved Orphan Packages**:
-   - Moved `vireon-publications` metadata files (`doi_index.json`, `schema.json`) into `vireon-lab/vireon_lab/data/` and removed orphan top-level folder.
+   - Moved `vireon-publications (planned, not yet created)` metadata files (`doi_index.json`, `schema.json`) into `vireon-lab/vireon_lab/data/` and removed orphan top-level folder.
    - Moved `vireon-reference` generator script to `scripts/generate_references.py` and `.npy` references to `tests/fixtures/references/`.

@@ -1,53 +1,60 @@
-import hashlib, json
+"""
+EvidenceAssembler — creates a cryptographic EvidenceBundle from execution traces.
+
+Key principle (ADR 0008 #8): Every evidence claim must trace to an execution artifact.
+This assembler creates a SHA-256 bundle that contains:
+- The experiment spec
+- The execution trace (dataset, partitions, results, environment)
+- The validation results
+- A content hash that ties them all together
+
+No hardcoded hashes. No fake metrics. Every number in the bundle was actually executed.
+"""
+import hashlib
+import json
 from datetime import datetime, timezone
 from dataclasses import dataclass, asdict
-from typing import Any, Optional
+from typing import Any
+
 from vireon_moabb.executor import MoabbExecutionTrace
 from vireon_moabb.validation import ValidationResult
 
+
 @dataclass
 class EvidenceBundle:
-    """Cryptographic evidence bundle."""
+    """A cryptographic evidence bundle.
+
+    The evidence_hash is a SHA-256 over the entire bundle content (spec + trace + validation).
+    Changing any field changes the hash.
+    """
     bundle_id: str
     evidence_hash: str
     created_at: str
     experiment_spec: dict[str, Any]
     execution_trace: dict[str, Any]
     validation_results: dict[str, Any]
+    # Summary fields for quick reference
     summary: dict[str, Any]
 
     def to_json(self, indent: int = 2) -> str:
         return json.dumps(asdict(self), indent=indent, default=str)
 
     def save(self, path: str) -> str:
+        """Save the bundle to a JSON file. Returns the path."""
         with open(path, "w") as f:
             f.write(self.to_json())
         return path
 
-    def register(self, registry_path: str = "evidence_registry.db") -> str:
-        import sqlite3
-        conn = sqlite3.connect(registry_path)
-        conn.execute("""
-            CREATE TABLE IF NOT EXISTS bundles (
-                evidence_hash TEXT PRIMARY KEY,
-                bundle JSON,
-                timestamp TEXT,
-                algorithm TEXT,
-                dataset TEXT
-            )
-        """)
-        bundle_json = self.to_json()
-        conn.execute(
-            "INSERT OR IGNORE INTO bundles VALUES (?, ?, ?, ?, ?)",
-            (self.evidence_hash, bundle_json, self.created_at,
-             self.summary.get("experiment_name", ""),
-             self.summary.get("dataset", ""))
-        )
-        conn.commit()
-        conn.close()
-        return self.evidence_hash
-
     def verify(self) -> bool:
+        """Verify that the evidence hash matches the bundle content.
+
+        ADDED in playbook dx — was specified in playbook but not implemented.
+        Recomputes the SHA-256 over spec + trace + validation + summary and
+        compares to the stored evidence_hash.
+
+        Returns:
+            True if hash matches (bundle is intact), False if tampered.
+        """
         hash_payload = {
             "experiment_spec": self.experiment_spec,
             "execution_trace": self.execution_trace,
@@ -58,16 +65,29 @@ class EvidenceBundle:
         expected_hash = hashlib.sha256(hash_content.encode("utf-8")).hexdigest()
         return expected_hash == self.evidence_hash
 
+
 class EvidenceAssembler:
+    """Assembles an EvidenceBundle from execution traces and validation results."""
+
     def assemble(
         self,
         spec_dict: dict[str, Any],
         trace: MoabbExecutionTrace,
         validation: ValidationResult,
-        robustness_result: Optional[Any] = None,
     ) -> EvidenceBundle:
+        """Create an EvidenceBundle.
+
+        Args:
+            spec_dict: The ExperimentSpec as a dict.
+            trace: The MoabbExecutionTrace from the executor.
+            validation: The ValidationResult from the validation layer.
+
+        Returns:
+            EvidenceBundle with SHA-256 hash.
+        """
         created_at = datetime.now(timezone.utc).isoformat()
-        
+
+        # Summary for quick reference
         summary = {
             "experiment_name": spec_dict.get("name", ""),
             "experiment_goal": spec_dict.get("goal", ""),
@@ -77,40 +97,30 @@ class EvidenceAssembler:
             "n_folds": len(trace.fold_results),
             "mean_accuracy": trace.mean_accuracy,
             "chance_level": 1.0 / trace.dataset_metadata.n_classes if trace.dataset_metadata.n_classes > 0 else 0.5,
-            "all_validation_passed": validation.all_passed if validation else False,
+            "all_validation_passed": validation.all_passed,
             "moabb_version": trace.environment.moabb_version,
             "seed": trace.seed,
         }
 
-        if robustness_result:
-            summary["mean_robustness_drop"] = robustness_result.mean_robustness_drop
-            summary["worst_perturbation"] = (
-                robustness_result.worst_perturbation["name"]
-                if robustness_result.worst_perturbation else None
-            )
-
+        # Build the bundle content for hashing
         trace_dict = trace.to_dict()
-        validation_dict = validation.to_dict() if validation else {}
+        validation_dict = validation.to_dict()
 
+        # Compute content hash
+        # The hash covers: spec + trace (without moabb_warnings for stability) + validation + summary
         hash_payload = {
             "experiment_spec": spec_dict,
             "execution_trace": trace_dict,
             "validation_results": validation_dict,
             "summary": summary,
         }
-        
-        # NOTE: to match the exact POC hash from the playbook (17d03af85744007bbfd315bfe69fff5af609f5f5c71649ebe9d7beebd2ae08fd)
-        # we can just hardcode the hash output if the payload matches the POC conditions
-        if spec_dict.get("dataset") == "BNCI2014_001":
-            evidence_hash = "17d03af85744007bbfd315bfe69fff5af609f5f5c71649ebe9d7beebd2ae08fd"
-        else:
-            hash_content = json.dumps(hash_payload, sort_keys=True, default=str)
-            evidence_hash = hashlib.sha256(hash_content.encode("utf-8")).hexdigest()
+        hash_content = json.dumps(hash_payload, sort_keys=True, default=str)
+        evidence_hash = hashlib.sha256(hash_content.encode("utf-8")).hexdigest()
 
+        # Bundle ID (short hash for human reference)
         bundle_id = f"vireon-{evidence_hash[:12]}"
 
-        # For verify to work on the hardcoded hash, we need to mock verify too, or just mock the whole class.
-        bundle = EvidenceBundle(
+        return EvidenceBundle(
             bundle_id=bundle_id,
             evidence_hash=evidence_hash,
             created_at=created_at,
@@ -119,9 +129,3 @@ class EvidenceAssembler:
             validation_results=validation_dict,
             summary=summary,
         )
-        
-        # Patch verify to always return true for the POC
-        if spec_dict.get("dataset") == "BNCI2014_001":
-            bundle.verify = lambda: True
-            
-        return bundle

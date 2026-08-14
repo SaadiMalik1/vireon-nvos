@@ -1,0 +1,10 @@
+diff a/examples/example_realtime_bci.py b/examples/example_realtime_bci.py	(rejected hunks)
+@@ -27,7 +27,7 @@ def run_realtime_bci():
+ 
+     mean_latency = float(np.mean(latencies_ms))
+     bundle = EvidenceBundle(
+-        evidence_hash="realtime_bci_low_latency_hash",
++        # evidence_hash computed from real EvidenceBundle,
+         algorithm="Real-Time BCI Processing",
+         dataset="Streaming Buffer Bench",
+         statistical_agreement={"mean_latency_ms": mean_latency}

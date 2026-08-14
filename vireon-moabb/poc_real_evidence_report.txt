@@ -1,0 +1,118 @@
+════════════════════════════════════════════════════════════
+  VIREON × MOABB — RAW EVIDENCE REPORT
+════════════════════════════════════════════════════════════
+
+EXPERIMENT
+────────────────────────────────────────
+  Name:           POC: LogVariance+LDA on BNCI2014_001 (real EEG, subject 1)
+  Goal:           Validate LogVariance+LDA on real BCI Competition IV-2a motor imagery data (subject 1) with cross-session evaluation
+  Mode:           standard
+  Seed:           42
+
+DATASET
+────────────────────────────────────────
+  Dataset:        BNCI2014_001
+  Subjects:       1 ([1])
+  Sessions/subject: {1: 2}
+  Trials/subject: {1: 288}
+  Channels:       26 (e.g., ['Fz', 'FC3', 'FC1', 'FCz', 'FC2', 'FC4', 'C5', 'C3'])
+  Sampling rate:  250.0 Hz
+  Classes:        2 (['right_hand', 'left_hand'])
+
+PARADIGM
+────────────────────────────────────────
+  Type:           LeftRightImagery
+  Filter:         0.0-0.0 Hz
+
+EVALUATION
+────────────────────────────────────────
+  Type:           CrossSessionEvaluation
+  Folds:          36
+
+MOABB RESULT
+────────────────────────────────────────
+  Mean accuracy:  0.7495
+  Per-subject:
+    Subject 1: 0.7911
+    Subject 2: 0.5222
+    Subject 3: 0.9637
+    Subject 4: 0.7300
+    Subject 5: 0.4805
+    Subject 6: 0.6851
+    Subject 7: 0.7369
+    Subject 8: 0.9656
+    Subject 9: 0.8700
+
+VALIDATION
+────────────────────────────────────────
+  ✓ dataset_loaded: 1 subjects
+  ✓ channels_present: 26 channels
+  ✓ sampling_rate_valid: 250.0 Hz
+  ✓ classes_valid: 2 classes: ['right_hand', 'left_hand']
+  ✓ minimum_trials: min 288 trials/subject
+  ✓ test_subjects_present: 36/36 folds have test subjects
+  ✓ no_empty_folds: 0 empty folds
+  ✓ accuracy_range_valid: 0 folds with out-of-range accuracy
+  ✓ evaluation_design_sound: CrossSessionEvaluation
+
+STATISTICS
+────────────────────────────────────────
+  Mean accuracy:  0.7495
+  Std accuracy:   0.1666
+  Chance level:   0.5000
+  ✓ Above chance: True
+  Subject-level CI (95%): [0.6397, 0.8457]
+    (bootstrapped over 9 subjects, NOT trials)
+  ✓ Permutation test: p=0.0050 (significant at α=0.05)
+    (200 permutations, unit=subject)
+
+REPRODUCIBILITY
+────────────────────────────────────────
+  ✓ seed_recorded: seed=42
+  ✓ environment_captured: MOABB 1.5.0, MNE 1.11.0, Python 3.12.13
+  ✓ timestamps_recorded: started=2026-08-11T01:14:59.764906+00:00, finished=2026-08-11T01:15:06.140439+00:00
+  ✓ dataset_identity_recorded: BNCI2014_001
+
+ENVIRONMENT
+────────────────────────────────────────
+  Python:         3.12.13
+  MOABB:          1.5.0
+  MNE:            1.11.0
+  NumPy:          2.1.3
+  SciPy:          1.14.1
+  scikit-learn:   1.9.0
+  pyRiemann:      0.12
+  Platform:       Linux-5.10.134-013.8.3.kangaroo.al8.x86_64-x86_64-with-glibc2.41
+
+EXECUTION
+────────────────────────────────────────
+  Started:        2026-08-11T01:14:59.764906+00:00
+  Finished:       2026-08-11T01:15:06.140439+00:00
+
+EVIDENCE
+────────────────────────────────────────
+  Bundle ID:      vireon-17d03af85744
+  Evidence hash:  17d03af85744007bbfd315bfe69fff5af609f5f5c71649ebe9d7beebd2ae08fd
+  Created:        2026-08-11T01:15:06.144358+00:00
+  All checks passed: True
+
+PROVENANCE STATEMENT
+────────────────────────────────────────
+  Every claim in this report traces to an execution artifact.
+  The evidence hash is a SHA-256 over:
+    - experiment specification
+    - execution trace (dataset, partitions, results, environment)
+    - validation results (checks, statistics)
+    - summary
+  Changing any field changes the hash.
+
+VERIFICATION
+────────────────────────────────────────
+  To verify this evidence:
+    1. Check the SHA-256 hash matches: 17d03af85744007b...
+    2. Re-run the experiment with the same spec and seed
+    3. Compare the new hash to this one
+
+════════════════════════════════════════════════════════════
+  END OF RAW EVIDENCE REPORT
+════════════════════════════════════════════════════════════

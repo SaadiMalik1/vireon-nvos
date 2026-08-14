@@ -1,4 +1,7 @@
-"""Exceptions for vireon-corpus dataset ingestion and management."""
+"""VIREON Corpus exceptions.
+
+Added in playbook dx — used by fixed DatasetManager.load_dataset().
+"""
 
 
 class VireonCorpusError(Exception):

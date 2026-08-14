@@ -1,0 +1,10 @@
+diff a/pyproject.toml b/pyproject.toml	(rejected hunks)
+@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
+ 
+ [project]
+ name = "vireon-nvos"
+-version = "1.0.3"
++version = "1.2.0"
+ description = "VIREON — Neurotechnology Validation Operating System"
+ readme = "README.md"
+ license = {text = "MIT"}

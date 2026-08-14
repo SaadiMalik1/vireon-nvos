@@ -1,0 +1,10 @@
+diff a/vireon-api/vireon_api/main.py b/vireon-api/vireon_api/main.py	(rejected hunks)
+@@ -20,7 +20,7 @@ from vireon_validation.benchmarks.matrix import BenchmarkMatrix
+ from vireon_evidence.registry.core import EvidenceRegistry
+ from vireon_core.contracts.evidence import EvidenceBundle
+ 
+-app = FastAPI(title="VIREON Evidence API", version="0.4.0")
++app = FastAPI(title="VIREON Evidence API", version="1.2.0")
+ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+ 
+ def get_registry() -> EvidenceRegistry:

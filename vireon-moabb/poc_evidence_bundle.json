@@ -1,0 +1,445 @@
+{
+  "bundle_id": "vireon-8689c3428da2",
+  "evidence_hash": "8689c3428da235c67503c26b9f5c3d97506a5a6d4e5296d38d7d2b13fffb0be8",
+  "created_at": "2026-08-10T17:32:59.081912+00:00",
+  "experiment_spec": {
+    "name": "POC: LogVariance+LDA on FakeDataset",
+    "goal": "Prove the VIREON x MOABB architecture works end-to-end with synthetic data",
+    "mode": "standard",
+    "dataset": {
+      "dataset_class": "FakeDataset",
+      "subject": null,
+      "sessions": null,
+      "params": {
+        "event_list": [
+          "left_hand",
+          "right_hand"
+        ],
+        "n_subjects": 3,
+        "n_sessions": 2,
+        "paradigm": "imagery"
+      }
+    },
+    "paradigm": {
+      "paradigm_class": "LeftRightImagery",
+      "fmin": 8.0,
+      "fmax": 32.0,
+      "channels": null,
+      "resample": null
+    },
+    "pipeline": {
+      "steps": [
+        {
+          "module": "moabb.pipelines",
+          "class": "make_pipeline",
+          "params": {},
+          "factory_args": [
+            {
+              "module": "moabb.pipelines.features",
+              "class": "LogVariance",
+              "params": {}
+            },
+            {
+              "module": "sklearn.discriminant_analysis",
+              "class": "LinearDiscriminantAnalysis",
+              "params": {}
+            }
+          ]
+        }
+      ]
+    },
+    "evaluation": {
+      "evaluation_class": "CrossSessionEvaluation",
+      "random_state": 42,
+      "params": {}
+    },
+    "statistics": {
+      "compute_chance_level": true,
+      "compute_subject_level_ci": true,
+      "n_bootstrap": 500,
+      "ci_level": 0.95,
+      "compute_permutation_test": true,
+      "n_permutations": 200,
+      "permutation_unit": "subject"
+    },
+    "robustness": null,
+    "provenance": {
+      "record": true,
+      "capture_environment": true,
+      "capture_seed": true,
+      "create_evidence_bundle": true,
+      "seed": 42
+    }
+  },
+  "execution_trace": {
+    "spec": {
+      "name": "POC: LogVariance+LDA on FakeDataset",
+      "goal": "Prove the VIREON x MOABB architecture works end-to-end with synthetic data",
+      "mode": "standard",
+      "dataset": {
+        "dataset_class": "FakeDataset",
+        "subject": null,
+        "sessions": null,
+        "params": {
+          "event_list": [
+            "left_hand",
+            "right_hand"
+          ],
+          "n_subjects": 3,
+          "n_sessions": 2,
+          "paradigm": "imagery"
+        }
+      },
+      "paradigm": {
+        "paradigm_class": "LeftRightImagery",
+        "fmin": 8.0,
+        "fmax": 32.0,
+        "channels": null,
+        "resample": null
+      },
+      "pipeline": {
+        "steps": [
+          {
+            "module": "moabb.pipelines",
+            "class": "make_pipeline",
+            "params": {},
+            "factory_args": [
+              {
+                "module": "moabb.pipelines.features",
+                "class": "LogVariance",
+                "params": {}
+              },
+              {
+                "module": "sklearn.discriminant_analysis",
+                "class": "LinearDiscriminantAnalysis",
+                "params": {}
+              }
+            ]
+          }
+        ]
+      },
+      "evaluation": {
+        "evaluation_class": "CrossSessionEvaluation",
+        "random_state": 42,
+        "params": {}
+      },
+      "statistics": {
+        "compute_chance_level": true,
+        "compute_subject_level_ci": true,
+        "n_bootstrap": 500,
+        "ci_level": 0.95,
+        "compute_permutation_test": true,
+        "n_permutations": 200,
+        "permutation_unit": "subject"
+      },
+      "robustness": null,
+      "provenance": {
+        "record": true,
+        "capture_environment": true,
+        "capture_seed": true,
+        "create_evidence_bundle": true,
+        "seed": 42
+      }
+    },
+    "dataset_metadata": {
+      "dataset_class": "FakeDataset",
+      "subject_list": [
+        1,
+        2,
+        3
+      ],
+      "n_subjects": 3,
+      "n_sessions_per_subject": {
+        "1": 2,
+        "2": 2,
+        "3": 2
+      },
+      "paradigm_class": "LeftRightImagery",
+      "fmin": 0.0,
+      "fmax": 0.0,
+      "channels": [
+        "C3",
+        "Cz",
+        "C4",
+        "stim"
+      ],
+      "sfreq": 128.0,
+      "n_trials_per_subject": {
+        "1": 240,
+        "2": 240,
+        "3": 240
+      },
+      "n_classes": 2,
+      "class_labels": [
+        "left_hand",
+        "right_hand"
+      ]
+    },
+    "partitions": [
+      {
+        "fold_id": 0,
+        "subject": 1,
+        "session": 0,
+        "train_subjects": [],
+        "test_subjects": [
+          1
+        ],
+        "train_sessions": [],
+        "test_sessions": [],
+        "n_train_trials": 0,
+        "n_test_trials": 120
+      },
+      {
+        "fold_id": 1,
+        "subject": 1,
+        "session": 1,
+        "train_subjects": [],
+        "test_subjects": [
+          1
+        ],
+        "train_sessions": [],
+        "test_sessions": [
+          1
+        ],
+        "n_train_trials": 0,
+        "n_test_trials": 120
+      },
+      {
+        "fold_id": 2,
+        "subject": 2,
+        "session": 0,
+        "train_subjects": [],
+        "test_subjects": [
+          2
+        ],
+        "train_sessions": [],
+        "test_sessions": [],
+        "n_train_trials": 0,
+        "n_test_trials": 120
+      },
+      {
+        "fold_id": 3,
+        "subject": 2,
+        "session": 1,
+        "train_subjects": [],
+        "test_subjects": [
+          2
+        ],
+        "train_sessions": [],
+        "test_sessions": [
+          1
+        ],
+        "n_train_trials": 0,
+        "n_test_trials": 120
+      },
+      {
+        "fold_id": 4,
+        "subject": 3,
+        "session": 0,
+        "train_subjects": [],
+        "test_subjects": [
+          3
+        ],
+        "train_sessions": [],
+        "test_sessions": [],
+        "n_train_trials": 0,
+        "n_test_trials": 120
+      },
+      {
+        "fold_id": 5,
+        "subject": 3,
+        "session": 1,
+        "train_subjects": [],
+        "test_subjects": [
+          3
+        ],
+        "train_sessions": [],
+        "test_sessions": [
+          1
+        ],
+        "n_train_trials": 0,
+        "n_test_trials": 120
+      }
+    ],
+    "fold_results": [
+      {
+        "fold_id": 0,
+        "subject": 1,
+        "accuracy": 0.4211111068725586,
+        "n_test_trials": 120,
+        "predicted_labels": [],
+        "true_labels": []
+      },
+      {
+        "fold_id": 1,
+        "subject": 1,
+        "accuracy": 0.49388888478279114,
+        "n_test_trials": 120,
+        "predicted_labels": [],
+        "true_labels": []
+      },
+      {
+        "fold_id": 2,
+        "subject": 2,
+        "accuracy": 0.5216666460037231,
+        "n_test_trials": 120,
+        "predicted_labels": [],
+        "true_labels": []
+      },
+      {
+        "fold_id": 3,
+        "subject": 2,
+        "accuracy": 0.5058333277702332,
+        "n_test_trials": 120,
+        "predicted_labels": [],
+        "true_labels": []
+      },
+      {
+        "fold_id": 4,
+        "subject": 3,
+        "accuracy": 0.45305556058883667,
+        "n_test_trials": 120,
+        "predicted_labels": [],
+        "true_labels": []
+      },
+      {
+        "fold_id": 5,
+        "subject": 3,
+        "accuracy": 0.4097222089767456,
+        "n_test_trials": 120,
+        "predicted_labels": [],
+        "true_labels": []
+      }
+    ],
+    "environment": {
+      "python_version": "3.12.13",
+      "numpy_version": "2.1.3",
+      "scipy_version": "1.14.1",
+      "mne_version": "1.11.0",
+      "moabb_version": "1.5.0",
+      "sklearn_version": "1.9.0",
+      "pyriemann_version": "0.12",
+      "platform": "Linux-5.10.134-013.8.3.kangaroo.al8.x86_64-x86_64-with-glibc2.41",
+      "captured_at": "2026-08-10T17:32:57.354313+00:00"
+    },
+    "seed": 42,
+    "execution_started_at": "2026-08-10T17:32:57.351474+00:00",
+    "execution_finished_at": "2026-08-10T17:32:59.075688+00:00",
+    "moabb_warnings": []
+  },
+  "validation_results": {
+    "data_checks": [
+      {
+        "name": "dataset_loaded",
+        "passed": true,
+        "value": "3 subjects",
+        "explanation": "Dataset must load at least one subject"
+      },
+      {
+        "name": "channels_present",
+        "passed": true,
+        "value": "4 channels",
+        "explanation": "Dataset must have EEG channels"
+      },
+      {
+        "name": "sampling_rate_valid",
+        "passed": true,
+        "value": "128.0 Hz",
+        "explanation": "Sampling rate must be positive"
+      },
+      {
+        "name": "classes_valid",
+        "passed": true,
+        "value": "2 classes: ['left_hand', 'right_hand']",
+        "explanation": "Need at least 2 classes for classification"
+      },
+      {
+        "name": "minimum_trials",
+        "passed": true,
+        "value": "min 240 trials/subject",
+        "explanation": "Each subject needs at least 10 trials for meaningful evaluation"
+      }
+    ],
+    "leakage_checks": [
+      {
+        "name": "test_subjects_present",
+        "passed": true,
+        "value": "6/6 folds have test subjects",
+        "explanation": "Every fold must have test subjects"
+      },
+      {
+        "name": "no_empty_folds",
+        "passed": true,
+        "value": "0 empty folds",
+        "explanation": "No fold should have zero test trials"
+      },
+      {
+        "name": "accuracy_range_valid",
+        "passed": true,
+        "value": "0 folds with out-of-range accuracy",
+        "explanation": "Accuracy must be in [0, 1]"
+      },
+      {
+        "name": "evaluation_design_sound",
+        "passed": true,
+        "value": "CrossSessionEvaluation",
+        "explanation": "Known sound evaluation design"
+      }
+    ],
+    "statistics": {
+      "mean_accuracy": 0.4675462891658147,
+      "std_accuracy": 0.042423802894542166,
+      "chance_level": 0.5,
+      "chance_level_passed": false,
+      "subject_level_ci": [
+        0.43138888478279114,
+        0.5137499868869781
+      ],
+      "ci_level": 0.95,
+      "permutation_p_value": 1.0,
+      "permutation_significant": false,
+      "n_permutations": 200,
+      "n_subjects": 3,
+      "n_folds": 6
+    },
+    "reproducibility_checks": [
+      {
+        "name": "seed_recorded",
+        "passed": true,
+        "value": "seed=42",
+        "explanation": "Seed must be recorded for reproducibility"
+      },
+      {
+        "name": "environment_captured",
+        "passed": true,
+        "value": "MOABB 1.5.0, MNE 1.11.0, Python 3.12.13",
+        "explanation": "Software environment must be captured for reproducibility"
+      },
+      {
+        "name": "timestamps_recorded",
+        "passed": true,
+        "value": "started=2026-08-10T17:32:57.351474+00:00, finished=2026-08-10T17:32:59.075688+00:00",
+        "explanation": "Execution timestamps must be recorded"
+      },
+      {
+        "name": "dataset_identity_recorded",
+        "passed": true,
+        "value": "FakeDataset",
+        "explanation": "Dataset identity must be recorded for provenance"
+      }
+    ]
+  },
+  "summary": {
+    "experiment_name": "POC: LogVariance+LDA on FakeDataset",
+    "experiment_goal": "Prove the VIREON x MOABB architecture works end-to-end with synthetic data",
+    "mode": "standard",
+    "dataset": "FakeDataset",
+    "n_subjects": 3,
+    "n_folds": 6,
+    "mean_accuracy": 0.4675462891658147,
+    "chance_level": 0.5,
+    "all_validation_passed": false,
+    "moabb_version": "1.5.0",
+    "seed": 42
+  }
+}

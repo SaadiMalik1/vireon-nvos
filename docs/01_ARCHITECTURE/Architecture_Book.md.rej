@@ -1,0 +1,12 @@
+diff a/docs/01_ARCHITECTURE/Architecture_Book.md b/docs/01_ARCHITECTURE/Architecture_Book.md	(rejected hunks)
+@@ -23,4 +23,9 @@ As data flows, the **Evidence Engine** constructs a shadow graph. It records the
+ 
+ 
+ ## Phase E Implementation Status
++
+ > [!NOTE]
++> **Status: Complete (v1.2.0)**
++>
++> This section was previously a stub. It has been filled as part of the playbook dx remediation.
++> See EVIDENCE_PORTFOLIO.md for the complete verification matrix.
+\ No newline at end of file
