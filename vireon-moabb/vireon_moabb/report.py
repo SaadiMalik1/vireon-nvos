@@ -83,7 +83,7 @@ class Reporter:
         lines.append(f"  Mean accuracy:  {trace.mean_accuracy:.4f}")
         per_subj = trace.per_subject_accuracy
         if per_subj:
-            lines.append(f"  Per-subject:")
+            lines.append("  Per-subject:")
             for s, acc in sorted(per_subj.items()):
                 lines.append(f"    Subject {s}: {acc:.4f}")
         lines.append("")
@@ -160,22 +160,22 @@ class Reporter:
         # Provenance statement
         lines.append("PROVENANCE STATEMENT")
         lines.append("─" * 40)
-        lines.append(f"  Every claim in this report traces to an execution artifact.")
-        lines.append(f"  The evidence hash is a SHA-256 over:")
-        lines.append(f"    - experiment specification")
-        lines.append(f"    - execution trace (dataset, partitions, results, environment)")
-        lines.append(f"    - validation results (checks, statistics)")
-        lines.append(f"    - summary")
-        lines.append(f"  Changing any field changes the hash.")
+        lines.append("  Every claim in this report traces to an execution artifact.")
+        lines.append("  The evidence hash is a SHA-256 over:")
+        lines.append("    - experiment specification")
+        lines.append("    - execution trace (dataset, partitions, results, environment)")
+        lines.append("    - validation results (checks, statistics)")
+        lines.append("    - summary")
+        lines.append("  Changing any field changes the hash.")
         lines.append("")
 
         # Verification
         lines.append("VERIFICATION")
         lines.append("─" * 40)
-        lines.append(f"  To verify this evidence:")
+        lines.append("  To verify this evidence:")
         lines.append(f"    1. Check the SHA-256 hash matches: {bundle.evidence_hash[:16]}...")
-        lines.append(f"    2. Re-run the experiment with the same spec and seed")
-        lines.append(f"    3. Compare the new hash to this one")
+        lines.append("    2. Re-run the experiment with the same spec and seed")
+        lines.append("    3. Compare the new hash to this one")
         lines.append("")
 
         lines.append("═" * 60)

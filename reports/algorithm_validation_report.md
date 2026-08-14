@@ -1,11 +1,11 @@
 # VIREON Scientific Algorithm Validation Report
 
-**Generated:** 2026-08-04T13:28:27.889039  
+**Generated:** 2026-08-14T21:14:43.185542  
 **VIREON Version:** `v0.4.0-svp`  
 **Platform:** VIREON Scientific Validation Platform (SVP)  
 **Total Native Algorithms Validated:** 14  
 **Overall Validation Status:** ✅ PASSED ALL TESTS  
-**Total Tests Executed:** 80 (80 passed, 0 failed)  
+**Total Tests Executed:** 100 (100 passed, 0 failed)  
 
 ---
 
@@ -52,7 +52,7 @@ Every test enforces strict declared numerical tolerances (`rtol`/`atol`), determ
 - **Validation Test Suite:** `tests/test_algorithm_validation_suite/test_fft_validation.py`
 - **Reference Standard:** scipy.fft / scipy.signal.periodogram
 - **Numerical Tolerance:** `rtol=1e-7`
-- **Execution Result:** **PASSED** (18 passed, 0 failed)
+- **Execution Result:** **PASSED** (19 passed, 0 failed)
 
 #### Implementation & Verification Details
 1. **Mathematical Formulation:** Cross-checked against standard DSP and neuroimaging literature formulations.
@@ -66,7 +66,7 @@ Every test enforces strict declared numerical tolerances (`rtol`/`atol`), determ
 - **Validation Test Suite:** `tests/test_algorithm_validation_suite/test_fft_validation.py`
 - **Reference Standard:** scipy.signal.welch
 - **Numerical Tolerance:** `rtol=1e-7`
-- **Execution Result:** **PASSED** (18 passed, 0 failed)
+- **Execution Result:** **PASSED** (19 passed, 0 failed)
 
 #### Implementation & Verification Details
 1. **Mathematical Formulation:** Cross-checked against standard DSP and neuroimaging literature formulations.
@@ -108,7 +108,7 @@ Every test enforces strict declared numerical tolerances (`rtol`/`atol`), determ
 - **Validation Test Suite:** `tests/test_algorithm_validation_suite/test_filter_validation.py`
 - **Reference Standard:** scipy.signal.firwin
 - **Numerical Tolerance:** `rtol=1e-10`
-- **Execution Result:** **PASSED** (14 passed, 0 failed)
+- **Execution Result:** **PASSED** (15 passed, 0 failed)
 
 #### Implementation & Verification Details
 1. **Mathematical Formulation:** Cross-checked against standard DSP and neuroimaging literature formulations.
@@ -122,7 +122,7 @@ Every test enforces strict declared numerical tolerances (`rtol`/`atol`), determ
 - **Validation Test Suite:** `tests/test_algorithm_validation_suite/test_filter_validation.py`
 - **Reference Standard:** scipy.signal.butter
 - **Numerical Tolerance:** `rtol=1e-10`
-- **Execution Result:** **PASSED** (14 passed, 0 failed)
+- **Execution Result:** **PASSED** (15 passed, 0 failed)
 
 #### Implementation & Verification Details
 1. **Mathematical Formulation:** Cross-checked against standard DSP and neuroimaging literature formulations.
@@ -164,7 +164,7 @@ Every test enforces strict declared numerical tolerances (`rtol`/`atol`), determ
 - **Validation Test Suite:** `tests/test_algorithm_validation_suite/test_beamforming_source_validation.py`
 - **Reference Standard:** analytical (known source localization)
 - **Numerical Tolerance:** `correct index`
-- **Execution Result:** **PASSED** (10 passed, 0 failed)
+- **Execution Result:** **PASSED** (11 passed, 0 failed)
 
 #### Implementation & Verification Details
 1. **Mathematical Formulation:** Cross-checked against standard DSP and neuroimaging literature formulations.
@@ -178,7 +178,7 @@ Every test enforces strict declared numerical tolerances (`rtol`/`atol`), determ
 - **Validation Test Suite:** `tests/test_algorithm_validation_suite/test_beamforming_source_validation.py`
 - **Reference Standard:** analytical (known source localization)
 - **Numerical Tolerance:** `correct index`
-- **Execution Result:** **PASSED** (10 passed, 0 failed)
+- **Execution Result:** **PASSED** (11 passed, 0 failed)
 
 #### Implementation & Verification Details
 1. **Mathematical Formulation:** Cross-checked against standard DSP and neuroimaging literature formulations.
@@ -192,7 +192,7 @@ Every test enforces strict declared numerical tolerances (`rtol`/`atol`), determ
 - **Validation Test Suite:** `tests/test_algorithm_validation_suite/test_connectivity_validation.py`
 - **Reference Standard:** scipy.signal.coherence / Hilbert
 - **Numerical Tolerance:** `phase-locked > 0.9, noise < 0.2`
-- **Execution Result:** **PASSED** (15 passed, 0 failed)
+- **Execution Result:** **PASSED** (16 passed, 0 failed)
 
 #### Implementation & Verification Details
 1. **Mathematical Formulation:** Cross-checked against standard DSP and neuroimaging literature formulations.
@@ -206,7 +206,7 @@ Every test enforces strict declared numerical tolerances (`rtol`/`atol`), determ
 - **Validation Test Suite:** `tests/test_algorithm_validation_suite/test_new_algorithms_validation.py`
 - **Reference Standard:** scipy.signal.windows.dpss
 - **Numerical Tolerance:** `peak freq < 1.0 Hz diff`
-- **Execution Result:** **PASSED** (3 passed, 0 failed)
+- **Execution Result:** **PASSED** (19 passed, 0 failed)
 
 #### Implementation & Verification Details
 1. **Mathematical Formulation:** Cross-checked against standard DSP and neuroimaging literature formulations.
@@ -220,7 +220,7 @@ Every test enforces strict declared numerical tolerances (`rtol`/`atol`), determ
 - **Validation Test Suite:** `tests/test_algorithm_validation_suite/test_new_algorithms_validation.py`
 - **Reference Standard:** Huang et al. (1998) sifting
 - **Numerical Tolerance:** `reconstruction error < 1e-10`
-- **Execution Result:** **PASSED** (3 passed, 0 failed)
+- **Execution Result:** **PASSED** (19 passed, 0 failed)
 
 #### Implementation & Verification Details
 1. **Mathematical Formulation:** Cross-checked against standard DSP and neuroimaging literature formulations.
@@ -234,7 +234,7 @@ Every test enforces strict declared numerical tolerances (`rtol`/`atol`), determ
 - **Validation Test Suite:** `tests/test_algorithm_validation_suite/test_new_algorithms_validation.py`
 - **Reference Standard:** np.convolve / np.correlate
 - **Numerical Tolerance:** `Lin's CCC > 0.9999`
-- **Execution Result:** **PASSED** (3 passed, 0 failed)
+- **Execution Result:** **PASSED** (19 passed, 0 failed)
 
 #### Implementation & Verification Details
 1. **Mathematical Formulation:** Cross-checked against standard DSP and neuroimaging literature formulations.
@@ -250,19 +250,19 @@ The validation suite was executed using `pytest` against all 6 algorithm test su
 
 ```text
 $ pytest tests/test_algorithm_validation_suite/test_fft_validation.py -v
-  Status: PASSED | Passed: 18 | Failed: 0
+  Status: PASSED | Passed: 19 | Failed: 0
 $ pytest tests/test_algorithm_validation_suite/test_stft_wavelet_validation.py -v
   Status: PASSED | Passed: 12 | Failed: 0
 $ pytest tests/test_algorithm_validation_suite/test_filter_validation.py -v
-  Status: PASSED | Passed: 14 | Failed: 0
+  Status: PASSED | Passed: 15 | Failed: 0
 $ pytest tests/test_algorithm_validation_suite/test_ica_csp_validation.py -v
   Status: PASSED | Passed: 8 | Failed: 0
 $ pytest tests/test_algorithm_validation_suite/test_beamforming_source_validation.py -v
-  Status: PASSED | Passed: 10 | Failed: 0
+  Status: PASSED | Passed: 11 | Failed: 0
 $ pytest tests/test_algorithm_validation_suite/test_connectivity_validation.py -v
-  Status: PASSED | Passed: 15 | Failed: 0
+  Status: PASSED | Passed: 16 | Failed: 0
 $ pytest tests/test_algorithm_validation_suite/test_new_algorithms_validation.py -v
-  Status: PASSED | Passed: 3 | Failed: 0
+  Status: PASSED | Passed: 19 | Failed: 0
 ```
 
 ---
