@@ -5,7 +5,11 @@ from vireon_moabb.evidence import EvidenceAssembler
 from vireon_moabb.report import Reporter
 
 
+import pytest
+
+
 def test_integration_flow():
+    pytest.importorskip("moabb")
     spec = standard_spec(dataset='BNCI2014_001', subject=1, pipeline_name='logvar_lda')
     trace = MoabbExecutor(seed=42).run(spec)
     validation = ValidationLayer().validate(trace, spec)

@@ -35,7 +35,7 @@ async def verify_api_key(api_key: Optional[str] = Security(API_KEY_HEADER)):
     return True
 
 
-app = FastAPI(title="VIREON Evidence API", version="1.1.0")
+app = FastAPI(title="VIREON Evidence API", version="1.2.0")
 
 allowed_origins = os.environ.get("VIREON_CORS_ORIGINS", "http://localhost:3000,http://localhost:8000").split(",")
 app.add_middleware(
@@ -69,7 +69,7 @@ def dashboard():
 
 @app.get("/api/health")
 def health():
-    return {"status": "ok", "version": "1.1.0"}
+    return {"status": "ok", "version": "1.2.0"}
 
 
 @app.get("/api/evidence")
