@@ -1,0 +1,10 @@
+diff a/README.md b/README.md	(rejected hunks)
+@@ -50,7 +50,7 @@ mkdocs serve
+ - **`vireon-validation`**: Automated benchmarking scenarios and execution harnesses.
+ - **`vireon-verification`**: Continuous Integration checks ensuring standard mathematical and numerical agreements.
+ - **`vireon-corpus`**: High-quality, curated, and fingerprinted physiological datasets.
+-- **`vireon-publications`**: Executable evidence graphs reproducing the findings of canonical papers.
++- **`vireon-publications (planned, not yet created)`**: Executable evidence graphs reproducing the findings of canonical papers.
+ 
+ ## 🤝 Contributing
+ VIREON adheres to strict Scientific Readiness Levels (SRL) ranging from 0 to 9. We prioritize scientific rigor over velocity. All new plugins must supply an explicit `ScientificContract` mapping their assumptions to the Knowledge Graph. 

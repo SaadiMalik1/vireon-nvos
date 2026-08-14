@@ -121,8 +121,10 @@ def test_fbcsp_validation():
     rng = DeterministicRNG(seed=2012)
     X = rng.normal(0, 1.0, (20, 4, 100))
     y = np.array([0, 1] * 10)
-    fbcsp = VireonFBCSP(n_components=2)
-    feats = fbcsp.fit_transform(X, y)
+    # 5 bands × 2 components = 10 features; fs required by playbook-dx FBCSP.
+    bands = [(4, 8), (8, 12), (12, 16), (16, 24), (24, 32)]
+    fbcsp = VireonFBCSP(bands=bands, n_components=2)
+    feats = fbcsp.fit_transform(X, y, fs=250.0)
     assert feats.shape == (20, 10)
 
 
@@ -132,8 +134,9 @@ def test_fbcsp_vs_single_band_csp():
     rng = DeterministicRNG(seed=2012)
     X = rng.normal(0, 1.0, (20, 4, 100))
     y = np.array([0, 1] * 10)
-    fbcsp = VireonFBCSP(n_components=2)
-    feats = fbcsp.fit_transform(X, y)
+    bands = [(4, 8), (8, 12), (12, 16), (16, 24), (24, 32)]
+    fbcsp = VireonFBCSP(bands=bands, n_components=2)
+    feats = fbcsp.fit_transform(X, y, fs=250.0)
     assert feats.shape[1] == 10
 
 
@@ -217,7 +220,8 @@ def test_mi_vs_sklearn():
     rng = np.random.default_rng(42)
     x = rng.normal(0, 1, 500)
     y = x + rng.normal(0, 0.5, 500)
-    mi_vireon = VireonMutualInformation(n_bins=10).compute(x, y)
+    # k=4 (KSG estimator parameter) — replaces legacy n_bins arg.
+    mi_vireon = VireonMutualInformation(k=4).compute(x, y)
     mi_sk = float(mutual_info_regression(x.reshape(-1, 1), y, random_state=42)[0])
     assert abs(mi_vireon - mi_sk) < 0.5
 

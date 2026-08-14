@@ -14,8 +14,13 @@ def test_ang_2012():
     X = rng.normal(0, 1.0, (n_epochs, n_channels, n_samples))
     y = np.array([0, 1] * (n_epochs // 2))
 
-    fbcsp = VireonFBCSP(n_components=2)
-    feats = fbcsp.fit_transform(X, y)
+    # fs is required by the playbook-dx FBCSP signature (band-pass filtering
+    # per sub-band needs a sample rate to design the Butterworth filters).
+    # Use the 5-band configuration from the original Ang 2012 paper
+    # (motor-imagery band 4-32 Hz split into 5 sub-bands).
+    bands = [(4, 8), (8, 12), (12, 16), (16, 24), (24, 32)]
+    fbcsp = VireonFBCSP(bands=bands, n_components=2)
+    feats = fbcsp.fit_transform(X, y, fs=250.0)
     assert feats.shape == (30, 10)
 
 

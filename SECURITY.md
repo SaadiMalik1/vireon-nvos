@@ -1,29 +1,30 @@
 # Security Policy
 
-## Supported Versions
-
-The following versions of VIREON are currently supported with security updates:
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.1.x   | :white_check_mark: |
-| 1.0.x   | :x:                |
-| < 1.0   | :x:                |
-
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in VIREON, please report it responsibly.
+If you discover a security vulnerability in VIREON, please report it responsibly:
 
-**Do NOT report security vulnerabilities through public GitHub issues.**
+1. **Do NOT open a public GitHub issue.**
+2. Email: security@vireon.org (or open a private security advisory on GitHub)
+3. Include:
+   - Description of the vulnerability
+   - Steps to reproduce
+   - Potential impact
+   - Suggested fix (if any)
 
-Instead, please report security issues via email to security@users.noreply.github.com or directly to project maintainers.
+## Response Timeline
 
-### Please Include:
-- A description of the vulnerability and its potential impact.
-- Step-by-step instructions or proof-of-concept code to reproduce the issue.
-- Any suggested mitigations or fixes.
+- **Acknowledgment:** within 48 hours
+- **Initial assessment:** within 1 week
+- **Fix or mitigation:** within 30 days (severity-dependent)
 
-### Response Timeline
-- **Acknowledgement**: Within 48 hours.
-- **Assessment & Fix Plan**: Within 7 business days.
-- **Public Disclosure**: Coordinated after a patch is released.
+## Supported Versions
+
+Only the latest release (v1.2.x) receives security updates.
+
+## Known Security Considerations
+
+- VIREON uses SQLite for evidence storage. SQLite is not designed for concurrent write access — do not deploy multiple API instances against the same `.db` file without external locking.
+- The MCP server (stdio transport) does not encrypt data in transit — it is intended for local use only. For remote deployments, use the HTTP transport (v1.3+) with TLS.
+- Evidence bundles are hashed (SHA-256) but not encrypted. Do not store PII in evidence bundles.
+- The API uses API key authentication (set `VIREON_API_KEY` env var). Without this, the API runs in unauthenticated development mode.

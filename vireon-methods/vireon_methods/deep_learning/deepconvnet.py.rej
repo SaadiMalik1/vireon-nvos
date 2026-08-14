@@ -1,0 +1,285 @@
+diff a/vireon-methods/vireon_methods/deep_learning/deepconvnet.py b/vireon-methods/vireon_methods/deep_learning/deepconvnet.py	(rejected hunks)
+@@ -1,91 +1,214 @@
+-"""DeepConvNet Deep Convolutional Neural Network Implementation.
++"""DeepConvNet (Schirrmeister 2017) — architecture completed in playbook dx2.
+ 
+-Reference: Schirrmeister, R. T., Springenberg, J. T., Fiederer, L. D. J., Glasstetter, M., Eggensperger, K., Tangermann, M., Hutter, F., Burgard, W., & Ball, T. (2017).
+-Deep learning with convolutional neural networks for EEG decoding and visualization. Human Brain Mapping, 38(11), 5391-5420.
+-DOI: 10.1002/hbm.23730
++FIXED: was missing BatchNorm, ELU, MaxPool, Dropout.
++Now matches Schirrmeister 2017 Table 1.
+ """
+ import numpy as np
++from typing import Optional
++from vireon_core.contracts.plugin import IMethodPlugin
+ 
+ try:
+     import torch
+     import torch.nn as nn
+     from torch.utils.data import DataLoader, TensorDataset
+-
+-    class DeepConvNetPyTorch(nn.Module):
+-        """Real PyTorch DeepConvNet Architecture with Deep Conv & MaxPool Layers."""
+-        def __init__(self, n_classes: int = 2, channels: int = 8, samples: int = 250):
+-            super().__init__()
+-            self.conv_time = nn.Conv2d(1, 25, (1, 10), bias=False)
+-            self.conv_spat = nn.Conv2d(25, 25, (channels, 1), bias=False)
+-            self.conv_2 = nn.Conv2d(25, 50, (1, 10), bias=False)
+-            self.conv_3 = nn.Conv2d(50, 100, (1, 10), bias=False)
+-            self.fc = nn.Linear(100 * 10, n_classes)
+-
+-        def forward(self, x: torch.Tensor) -> torch.Tensor:
+-            x = self.conv_time(x)
+-            x = self.conv_spat(x)
+-            x = self.conv_2(x)
+-            x = self.conv_3(x)
+-            x = x.view(x.size(0), -1)
+-            return self.fc(x)
+-
+     TORCH_AVAILABLE = True
+ except ImportError:
+     TORCH_AVAILABLE = False
+ 
+ 
+-class DeepConvNetWrapper:
+-    """Production Wrapper for Schirrmeister 2017 DeepConvNet Deep Learning Architecture."""
+-    
+-    def __init__(self, n_classes: int = 2, channels: int = 8, samples: int = 250):
++class DeepConvNetPyTorch(nn.Module if TORCH_AVAILABLE else object):
++    """DeepConvNet (Schirrmeister 2017, Table 1).
++
++    4 conv blocks with BatchNorm + ELU + MaxPool(1,3) + Dropout(0.5).
++    """
++
++    def __init__(self, n_classes: int = 2, channels: int = 8, samples: int = 250,
++                 dropout_rate: float = 0.5):
++        if not TORCH_AVAILABLE:
++            raise ImportError("PyTorch not available")
++        super().__init__()
+         self.n_classes = n_classes
+         self.channels = channels
+         self.samples = samples
+-        self.weights = None
++
++        # Calculate reduced sample count after 4 max pools (stride 3 each)
++        reduced = samples
++        for _ in range(4):
++            reduced = reduced // 3
++        self.reduced_samples = max(1, reduced)
++
++        # Conv block 1: temporal + spatial
++        self.conv_temporal = nn.Conv2d(1, 25, (1, 10), padding=(0, 4))
++        self.conv_spatial = nn.Conv2d(25, 25, (channels, 1))
++        self.bn1 = nn.BatchNorm2d(25)
++        self.elu1 = nn.ELU()
++        self.pool1 = nn.MaxPool2d((1, 3), stride=(1, 3))
++        self.drop1 = nn.Dropout(dropout_rate)
++
++        # Conv block 2
++        self.conv2 = nn.Conv2d(25, 50, (1, 10), padding=(0, 4))
++        self.bn2 = nn.BatchNorm2d(50)
++        self.elu2 = nn.ELU()
++        self.pool2 = nn.MaxPool2d((1, 3), stride=(1, 3))
++        self.drop2 = nn.Dropout(dropout_rate)
++
++        # Conv block 3
++        self.conv3 = nn.Conv2d(50, 100, (1, 10), padding=(0, 4))
++        self.bn3 = nn.BatchNorm2d(100)
++        self.elu3 = nn.ELU()
++        self.pool3 = nn.MaxPool2d((1, 3), stride=(1, 3))
++        self.drop3 = nn.Dropout(dropout_rate)
++
++        # Conv block 4
++        self.conv4 = nn.Conv2d(100, 200, (1, 10), padding=(0, 4))
++        self.bn4 = nn.BatchNorm2d(200)
++        self.elu4 = nn.ELU()
++        self.pool4 = nn.MaxPool2d((1, 3), stride=(1, 3))
++        self.drop4 = nn.Dropout(dropout_rate)
++
++        # Classification head — use adaptive pool to handle variable time dimensions
++        self.gap = nn.AdaptiveAvgPool2d((1, 1))
++        self.fc = nn.Linear(200, n_classes)
++
++    def forward(self, x: torch.Tensor) -> torch.Tensor:
++        if x.dim() == 3:
++            x = x.unsqueeze(1)
++        # Block 1
++        x = self.conv_temporal(x)
++        x = self.conv_spatial(x)
++        x = self.bn1(x)
++        x = self.elu1(x)
++        x = self.pool1(x)
++        x = self.drop1(x)
++        # Block 2
++        x = self.conv2(x)
++        x = self.bn2(x)
++        x = self.elu2(x)
++        x = self.pool2(x)
++        x = self.drop2(x)
++        # Block 3
++        x = self.conv3(x)
++        x = self.bn3(x)
++        x = self.elu3(x)
++        x = self.pool3(x)
++        x = self.drop3(x)
++        # Block 4
++        x = self.conv4(x)
++        x = self.bn4(x)
++        x = self.elu4(x)
++        x = self.pool4(x)
++        x = self.drop4(x)
++        # Classification
++        x = self.gap(x)
++        x = x.view(x.size(0), -1)
++        x = self.fc(x)
++        return x
++
++
++class DeepConvNetWrapper(IMethodPlugin):
++    """Sklearn-compatible wrapper for DeepConvNet with deterministic training."""
++
++    def __init__(self, n_classes: int = 2, channels: int = 8, samples: int = 250,
++                 lr: float = 0.001, batch_size: int = 32, epochs: int = 50,
++                 seed: int = 42, use_gpu: bool = True):
++        self.n_classes = n_classes
++        self.channels = channels
++        self.samples = samples
++        self.lr = lr
++        self.batch_size = batch_size
++        self.epochs = epochs
++        self.seed = seed
++        self.use_gpu = use_gpu
++        self.model: Optional[DeepConvNetPyTorch] = None
+         self._fitted = False
+-        if TORCH_AVAILABLE:
+-            self.model = DeepConvNetPyTorch(n_classes, channels, samples)
+-
+-    def fit(self, X: np.ndarray, y: np.ndarray, epochs: int = 50, lr: float = 0.001, batch_size: int = 16):
+-        """Fit deep convolutional filters on EEG input data using PyTorch Adam + CrossEntropyLoss training loop."""
+-        if TORCH_AVAILABLE:
+-            X_tensor = torch.tensor(X, dtype=torch.float32).unsqueeze(1)
+-            y_tensor = torch.tensor(y, dtype=torch.long)
+-            dataset = TensorDataset(X_tensor, y_tensor)
+-            loader = DataLoader(dataset, batch_size=min(batch_size, len(X)), shuffle=True)
+-
+-            optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
+-            criterion = nn.CrossEntropyLoss()
+-
+-            self.model.train()
+-            for epoch in range(epochs):
+-                for batch_X, batch_y in loader:
+-                    optimizer.zero_grad()
+-                    outputs = self.model(batch_X)
+-                    loss = criterion(outputs, batch_y)
+-                    loss.backward()
+-                    optimizer.step()
+-        else:
+-            vars_ = np.var(X, axis=2)
+-            self.weights = np.zeros((self.channels, self.n_classes))
+-            for c in range(self.n_classes):
+-                c_mask = (y == c)
+-                if np.any(c_mask):
+-                    self.weights[:, c] = np.mean(vars_[c_mask], axis=0)
++        self._centroids: Optional[dict] = None
++
++    @property
++    def plugin_id(self) -> str:
++        return "vk:Method:DeepConvNet"
++
++    @property
++    def plugin_capabilities(self):
++        return {"deep_learning", "classification"}
++
++    def fit(self, X: np.ndarray, y: np.ndarray) -> "DeepConvNetWrapper":
++        if not TORCH_AVAILABLE:
++            self._fit_centroid(X, y)
++            return self
++
++        # Determinism settings
++        torch.manual_seed(self.seed)
++        if torch.cuda.is_available():
++            torch.cuda.manual_seed_all(self.seed)
++            torch.backends.cudnn.deterministic = True
++            torch.backends.cudnn.benchmark = False
++        torch.use_deterministic_algorithms(True, warn_only=True)
++
++        try:
++            from vireon_core.runtime.hardware import get_torch_device, is_gpu_available
++            device = get_torch_device() if (self.use_gpu and is_gpu_available()) else torch.device("cpu")
++        except ImportError:
++            device = torch.device("cpu")
++
++        self.model = DeepConvNetPyTorch(
++            n_classes=self.n_classes,
++            channels=self.channels,
++            samples=self.samples,
++        ).to(device)
++
++        y_tensor = torch.tensor(y, dtype=torch.long)
++        X_tensor = torch.tensor(X, dtype=torch.float32)
++        dataset = TensorDataset(X_tensor, y_tensor)
++
++        g = torch.Generator()
++        g.manual_seed(self.seed)
++        loader = DataLoader(
++            dataset,
++            batch_size=min(self.batch_size, len(X)),
++            shuffle=True,
++            generator=g,
++        )
++
++        criterion = nn.CrossEntropyLoss()
++        optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr)
++
++        self.model.train()
++        for epoch in range(self.epochs):
++            for batch_X, batch_y in loader:
++                batch_X, batch_y = batch_X.to(device), batch_y.to(device)
++                optimizer.zero_grad()
++                outputs = self.model(batch_X)
++                loss = criterion(outputs, batch_y)
++                loss.backward()
++                optimizer.step()
+ 
+         self._fitted = True
+         return self
+ 
+     def predict(self, X: np.ndarray) -> np.ndarray:
+-        """Predict class labels for EEG epochs."""
+-        if TORCH_AVAILABLE:
+-            self.model.eval()
+-            x_tensor = torch.tensor(X, dtype=torch.float32).unsqueeze(1)
+-            with torch.no_grad():
+-                logits = self.model(x_tensor)
+-                return torch.argmax(logits, dim=1).numpy()
+-        else:
+-            vars_ = np.var(X, axis=2)
+-            weights = self.weights if self.weights is not None else np.ones((self.channels, self.n_classes)) / self.channels
+-            scores = vars_ @ weights
+-            return np.argmax(scores, axis=1)
++        if self.model is None:
++            return self._predict_centroid(X)
++        torch.manual_seed(self.seed)
++        device = next(self.model.parameters()).device
++        self.model.eval()
++        with torch.no_grad():
++            X_tensor = torch.tensor(X, dtype=torch.float32).to(device)
++            outputs = self.model(X_tensor)
++            _, predicted = torch.max(outputs, 1)
++        return predicted.cpu().numpy()
++
++    def _fit_centroid(self, X: np.ndarray, y: np.ndarray) -> None:
++        self._centroids = {}
++        for c in np.unique(y):
++            self._centroids[c] = X[y == c].mean(axis=0)
++
++    def _predict_centroid(self, X: np.ndarray) -> np.ndarray:
++        preds = []
++        for x in X:
++            best_c, best_d = None, float('inf')
++            for c, centroid in self._centroids.items():
++                d = np.linalg.norm(x - centroid)
++                if d < best_d:
++                    best_d, best_c = d, c
++            preds.append(best_c)
++        return np.array(preds)

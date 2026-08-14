@@ -1,0 +1,20 @@
+diff a/.gitignore b/.gitignore	(rejected hunks)
+@@ -97,3 +97,18 @@ inp4/
+ # Trackers
+ *TRACKER*.md
+ *tracker*.md
++
++# Generated artifacts — never commit
++site/
++evidence/suite_run/*.parquet
++evidence/suite_run/*.npz
++evidence_output/*.npy
++*.db
++*.db-journal
++__pycache__/
++*.pyc
++.pytest_cache/
++.coverage
++htmlcov/
++.ruff_cache/
++.mypy_cache/

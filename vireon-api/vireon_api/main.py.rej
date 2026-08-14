@@ -1,0 +1,38 @@
+diff a/vireon-api/vireon_api/main.py b/vireon-api/vireon_api/main.py	(rejected hunks)
+@@ -20,8 +20,34 @@ from vireon_validation.benchmarks.matrix import BenchmarkMatrix
+ from vireon_evidence.registry.core import EvidenceRegistry
+ from vireon_core.contracts.evidence import EvidenceBundle
+ 
+-app = FastAPI(title="VIREON Evidence API", version="0.4.0")
+-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
++app = FastAPI(title="VIREON Evidence API", version="1.2.0")
++
++# Tightened CORS — read allowed origins from env (no more wildcard)
++_allowed = os.environ.get("VIREON_CORS_ORIGINS", "http://localhost:3000,http://localhost:8000").split(",")
++app.add_middleware(
++    CORSMiddleware,
++    allow_origins=_allowed,
++    allow_credentials=True,
++    allow_methods=["GET", "POST"],
++    allow_headers=["*"],
++)
++
++# API key authentication
++import secrets
++from fastapi import Depends, Security
++from fastapi.security import APIKeyHeader
++
++_API_KEY_HEADER = APIKeyHeader(name="X-API-Key", auto_error=False)
++
++async def verify_api_key(api_key: str = Security(_API_KEY_HEADER)):
++    """Verify API key. Skips if VIREON_API_KEY env var is not set (dev mode)."""
++    expected = os.environ.get("VIREON_API_KEY")
++    if expected is None:
++        return True  # Dev mode — no auth
++    if api_key is None or not secrets.compare_digest(api_key, expected):
++        from fastapi import HTTPException
++        raise HTTPException(status_code=401, detail="Invalid or missing API key")
++    return True
+ 
+ def get_registry() -> EvidenceRegistry:
+     db_path = os.environ.get("VIREON_DB_PATH", "evidence_registry.db")

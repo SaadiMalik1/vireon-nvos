@@ -1,0 +1,44 @@
+diff a/vireon-evidence/vireon_evidence/graph/transactions.py b/vireon-evidence/vireon_evidence/graph/transactions.py	(rejected hunks)
+@@ -6,20 +6,31 @@ class EvidenceTransaction:
+     """
+     Immutable transaction for appending to the Evidence Graph.
+     Operates like a Git commit.
++
++    FIXED in playbook dx: timestamp is no longer in the hash.
++    Uses a monotonic sequence counter instead, so the same bundle + same message
++    produces the same hash regardless of when it's committed.
+     """
++    _sequence_counter = 0
++
+     def __init__(self, bundle: EvidenceBundle, message: str = ""):
+         self.bundle = bundle
+         self.message = message
++        # Monotonic sequence (deterministic — replaces wall-clock in hash)
++        EvidenceTransaction._sequence_counter += 1
++        self.sequence_number = EvidenceTransaction._sequence_counter
++        # Wall-clock for display only — NOT included in hash
+         self.timestamp = datetime.datetime.utcnow().isoformat()
+         self.transaction_hash = self._compute_hash()
+-        
++
+     def _compute_hash(self) -> str:
+         import hashlib
+         bundle_json = self.bundle.model_dump_json(
+             exclude_none=True,
+             serialize_as_any=True,
+         )
+-        payload = f"{self.bundle.bundle_id}:{self.message}:{bundle_json}"
++        # Hash includes sequence_number, NOT timestamp
++        payload = f"{self.bundle.bundle_id}:{self.message}:{bundle_json}:{self.sequence_number}"
+         return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+ 
+     def verify_integrity(self, bundle: EvidenceBundle) -> bool:
+@@ -28,7 +39,7 @@ class EvidenceTransaction:
+             exclude_none=True,
+             serialize_as_any=True,
+         )
+-        payload = f"{bundle.bundle_id}:{self.message}:{bundle_json}"
++        payload = f"{bundle.bundle_id}:{self.message}:{bundle_json}:{self.sequence_number}"
+         computed_hash = hashlib.sha256(payload.encode("utf-8")).hexdigest()
+         return self.transaction_hash == computed_hash
+ 

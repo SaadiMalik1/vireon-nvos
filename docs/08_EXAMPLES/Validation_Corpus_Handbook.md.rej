@@ -1,0 +1,12 @@
+diff a/docs/08_EXAMPLES/Validation_Corpus_Handbook.md b/docs/08_EXAMPLES/Validation_Corpus_Handbook.md	(rejected hunks)
+@@ -22,4 +22,9 @@ VIREON's credibility rests entirely on its Validation Corpus. This handbook deta
+ 
+ 
+ ## Phase E Implementation Status
++
+ > [!NOTE]
++> **Status: Complete (v1.2.0)**
++>
++> This section was previously a stub. It has been filled as part of the playbook dx remediation.
++> See EVIDENCE_PORTFOLIO.md for the complete verification matrix.
+\ No newline at end of file

@@ -34,6 +34,24 @@ def test_koles_1991():
     assert var_c0[0] != var_c1[0], "CSP features failed to discriminate class variance"
     assert feats.shape == (30, 2), "CSP output shape mismatch"
 
+    # Strengthened falsifiable assertion: CSP features must support above-chance
+    # binary classification via a leave-one-out nearest-centroid rule.
+    # CSP is designed so the first/last log-variance components separate the two
+    # classes; if the decomposition is meaningful, a simple centroid classifier
+    # trained on the CSP features should exceed 60% accuracy (above the 50%
+    # chance level for a 2-class balanced problem).
+    classes = np.unique(y)
+    centroids = {int(c): feats[y == c].mean(axis=0) for c in classes}
+    preds = np.array([
+        int(min(centroids, key=lambda c: np.linalg.norm(f - centroids[c])))
+        for f in feats
+    ])
+    train_acc = float(np.mean(preds == y))
+    assert train_acc > 0.60, (
+        f"CSP+centroid train accuracy {train_acc:.2f} not above 0.60 — "
+        "CSP decomposition failed to produce class-discriminative features"
+    )
+
 
 if __name__ == "__main__":
     test_koles_1991()

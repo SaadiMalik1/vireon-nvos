@@ -1,0 +1,10 @@
+diff a/vireon-lab/vireon_lab/cli/runner.py b/vireon-lab/vireon_lab/cli/runner.py	(rejected hunks)
+@@ -106,7 +106,7 @@ class ExperimentRunner:
+                 from vireon_core.contracts.base import IEvidence, IExecutionContext
+                 dummy_evidence = IEvidence(
+                     experiment_id=experiment_id,
+-                    execution_hash="dummy",
++                    execution_hash = self._compute_execution_hash(),
+                     execution_context=execution_context or IExecutionContext(environment_fingerprint="dummy", dependencies={}, hardware_info={}, execution_timestamp=0.0),
+                     telemetry_path="",
+                     events=[],

@@ -1,0 +1,39 @@
+diff a/vireon-verification/literature/test_lawhern_2018.py b/vireon-verification/literature/test_lawhern_2018.py	(rejected hunks)
+@@ -15,11 +15,36 @@ def test_lawhern_2018():
+     X = rng.normal(0, 1.0, (n_epochs, n_channels, n_samples))
+     y = np.array([0, 1] * (n_epochs // 2))
+ 
+-    net = EEGNetWrapper(n_classes=2, channels=8, samples=250)
++    # Inject a class-discriminative spectral-spatial pattern so that EEGNet
++    # has a learnable signal: class 0 has elevated 10 Hz power over channels
++    # 0-1, class 1 has elevated 20 Hz power over channels 2-3.
++    t = np.arange(n_samples) / 250.0
++    alpha = np.sin(2 * np.pi * 10.0 * t)
++    beta = np.sin(2 * np.pi * 20.0 * t)
++    for i in range(n_epochs):
++        if y[i] == 0:
++            X[i, 0:2] += 3.0 * alpha
++            X[i, 2:4] += 0.2 * beta
++        else:
++            X[i, 0:2] += 0.2 * alpha
++            X[i, 2:4] += 3.0 * beta
++
++    net = EEGNetWrapper(n_classes=2, channels=8, samples=250, epochs=20)
+     net.fit(X, y)
+     preds = net.predict(X)
+     assert len(preds) == n_epochs
+ 
++    # Strengthened falsifiable assertion: EEGNet must exceed 60% train accuracy
++    # on class-discriminative synthetic EEG (above the 50% chance level for a
++    # balanced 2-class problem). If the architecture (depthwise spatial conv +
++    # separable temporal conv + BatchNorm + ELU + AvgPool) is correctly wired,
++    # it should overfit the small training set within 20 epochs.
++    train_acc = float(np.mean(preds == y))
++    assert train_acc > 0.60, (
++        f"EEGNet train accuracy {train_acc:.2f} not above 0.60 — "
++        "architecture may be missing key components (BN/ELU/AvgPool/Dropout)"
++    )
++
+ 
+ if __name__ == "__main__":
+     test_lawhern_2018()

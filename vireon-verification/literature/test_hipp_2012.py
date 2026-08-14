@@ -28,6 +28,24 @@ def test_hipp_2012():
     assert aec.shape == (2, 2), f"AEC shape mismatch {aec.shape}"
     assert not np.isnan(aec[0, 1]), "AEC produced NaN"
 
+    # Strengthened falsifiable assertion: AEC must detect the shared amplitude
+    # envelope between the two channels. Since both channels share the same
+    # slow (0.5 Hz) amplitude envelope modulating the 10 Hz carrier, the
+    # off-diagonal AEC entry (envelope correlation) must exceed 0.3.
+    aec_off = float(aec[0, 1])
+    assert aec_off > 0.3, (
+        f"AEC[0,1] = {aec_off:.3f} not > 0.3 — "
+        "AEC failed to detect the shared amplitude envelope"
+    )
+
+    # AEC matrix must be symmetric and have unit diagonal (self-correlation = 1)
+    assert abs(float(aec[0, 0]) - 1.0) < 1e-6, (
+        f"AEC[0,0] = {aec[0,0]:.3f} != 1.0 — self-envelope correlation must be 1.0"
+    )
+    assert abs(float(aec[0, 1]) - float(aec[1, 0])) < 1e-9, (
+        "AEC matrix not symmetric — correlation matrix must be symmetric"
+    )
+
 
 if __name__ == "__main__":
     test_hipp_2012()

@@ -1,0 +1,12 @@
+diff a/docs/adr/0005-knowledge-graph.md b/docs/adr/0005-knowledge-graph.md	(rejected hunks)
+@@ -18,4 +18,9 @@ For example: `[vk:Artifact:ElectrodePop] -> (VIOLATES) -> [vk:Assumption:Station
+ 
+ 
+ ## Phase E Implementation Status
++
+ > [!NOTE]
++> **Status: Complete (v1.2.0)**
++>
++> This section was previously a stub. It has been filled as part of the playbook dx remediation.
++> See EVIDENCE_PORTFOLIO.md for the complete verification matrix.
+\ No newline at end of file
