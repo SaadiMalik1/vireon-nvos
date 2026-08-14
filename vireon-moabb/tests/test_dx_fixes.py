@@ -205,7 +205,7 @@ def test_no_fake_hashes():
                         continue
                     if fake_hash_pattern.search(line):
                         real_matches.append(f"{p}:{line_no}: {sline}")
-    assert len(real_matches) == 0, f"Fake hashes found:\n" + "\n".join(real_matches)
+    assert len(real_matches) == 0, "Fake hashes found:\n" + "\n".join(real_matches)
 
 
 def test_no_scratch_files():
