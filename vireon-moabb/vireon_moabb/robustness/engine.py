@@ -55,6 +55,7 @@ class RobustnessResult:
     """Result of running all perturbations against a baseline trace."""
     baseline_accuracy: float
     perturbation_results: list[dict[str, Any]] = field(default_factory=list)
+    execution_mode: str = "real"  # "real", "simulated", or "failed"
 
     @property
     def all_passed(self) -> bool:
@@ -69,12 +70,27 @@ class RobustnessResult:
             return 0.0
         return float(np.mean([p["accuracy_drop"] for p in self.perturbation_results]))
 
+    @property
+    def worst_perturbation(self) -> dict[str, Any] | None:
+        """The perturbation with the largest accuracy drop, or None if no results."""
+        if not self.perturbation_results:
+            return None
+        return max(self.perturbation_results, key=lambda r: r["accuracy_drop"])
+
+    @property
+    def is_valid(self) -> bool:
+        """True iff results were produced by real execution (not simulation/fallback)."""
+        return self.execution_mode == "real" and len(self.perturbation_results) > 0
+
     def to_dict(self) -> dict[str, Any]:
         return {
             "baseline_accuracy": self.baseline_accuracy,
             "perturbation_results": list(self.perturbation_results),
             "all_passed": self.all_passed,
             "mean_drop": self.mean_drop,
+            "worst_perturbation": self.worst_perturbation,
+            "execution_mode": self.execution_mode,
+            "is_valid": self.is_valid,
         }
 
 

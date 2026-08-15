@@ -183,3 +183,55 @@ class Reporter:
         lines.append("═" * 60)
 
         return "\n".join(lines)
+
+    def generate_scorecard(self, bundle: EvidenceBundle) -> str:
+        """Generate formatted Algorithm Compliance Scorecard from an EvidenceBundle."""
+        from vireon_moabb.scorecard import build_scorecard
+
+        summary = bundle.summary
+        stats = bundle.validation_results.get("statistics") or {}
+        data_checks = bundle.validation_results.get("data_checks", [])
+        repro_checks = bundle.validation_results.get("reproducibility_checks", [])
+
+        mean_accuracy = summary.get("mean_accuracy", 0.0)
+        chance_level = stats.get("chance_level", 0.5)
+        chance_passed = stats.get("chance_level_passed", True)
+        has_ci = bool(stats.get("subject_level_ci"))
+        has_permutation = stats.get("permutation_p_value") is not None
+        permutation_significant = bool(stats.get("permutation_significant", False))
+
+        n_repro_passed = sum(1 for c in repro_checks if c.get("passed", False))
+        n_repro_total = len(repro_checks) if repro_checks else 1
+
+        n_data_passed = sum(1 for c in data_checks if c.get("passed", False))
+        n_data_total = len(data_checks) if data_checks else 1
+
+        verified = bundle.verify()
+
+        card = build_scorecard(
+            mean_accuracy=mean_accuracy,
+            chance_level=chance_level,
+            chance_passed=chance_passed,
+            has_ci=has_ci,
+            has_permutation=has_permutation,
+            permutation_significant=permutation_significant,
+            n_repro_checks_passed=n_repro_passed,
+            n_repro_checks_total=n_repro_total,
+            n_robustness_passed=0,
+            n_robustness_total=0,
+            n_data_checks_passed=n_data_passed,
+            n_data_checks_total=n_data_total,
+            evidence_verified=verified,
+        )
+
+        lines = [
+            "═" * 60,
+            "  Algorithm Compliance Scorecard",
+            "═" * 60,
+            f"  Total Score: {card.total}/100 ({card.confidence} Confidence)",
+            "─" * 60,
+        ]
+        for d in card.dimensions:
+            lines.append(f"  • {d.name:20s}: {d.score}/{d.max} ({d.explanation})")
+        lines.append("═" * 60)
+        return "\n".join(lines)
