@@ -210,20 +210,23 @@ def test_no_fake_hashes():
 
 def test_no_scratch_files():
     """Test that scratch files with /home/ronin paths are removed."""
-    assert not os.path.exists("scratch_bids.py")
-    assert not os.path.exists("parse_phase_c.py")
-    assert not os.path.exists("parse_transcript.py")
-    assert not os.path.exists("test_bem.py")
+    from pathlib import Path
+    repo_root = Path(__file__).resolve().parent.parent.parent
+    assert not (repo_root / "scratch_bids.py").exists()
+    assert not (repo_root / "parse_phase_c.py").exists()
+    assert not (repo_root / "parse_transcript.py").exists()
+    assert not (repo_root / "test_bem.py").exists()
 
 
 def test_version_synced():
     """Test that version strings are synced to 1.2.0."""
-    import subprocess
+    from pathlib import Path
+    repo_root = Path(__file__).resolve().parent.parent.parent
     # pyproject.toml
-    with open("pyproject.toml") as f:
+    with open(repo_root / "pyproject.toml") as f:
         assert 'version = "1.2.0"' in f.read()
     # FastAPI app
-    with open("vireon-api/vireon_api/main.py") as f:
+    with open(repo_root / "vireon-api" / "vireon_api" / "main.py") as f:
         assert 'version="1.2.0"' in f.read()
 
 
