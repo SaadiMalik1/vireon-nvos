@@ -1,10 +1,10 @@
 {
-  "bundle_id": "vireon-6159278e32ff",
-  "evidence_hash": "6159278e32ffc866e7e1cdc097ba9b04173f20a2963acfa680e02ee2ee129ec0",
-  "created_at": "2026-08-16T04:55:49.793446+00:00",
+  "bundle_id": "vireon-16f8b0ac6e10",
+  "evidence_hash": "16f8b0ac6e101ce746bae96293be07ec77fbcf30eb116a594cbf34f1f5501688",
+  "created_at": "2026-08-16T04:56:52.444412+00:00",
   "experiment_spec": {
-    "name": "C-1: CSP+LDA on BNCI2014_001",
-    "goal": "Study C Experiment 1: Classical CSP+LDA baseline on motor imagery.",
+    "name": "C-3: Riemannian MDM on BNCI2014_001",
+    "goal": "Study C Experiment 3: Riemannian geometry pipeline (MDM).",
     "mode": "research",
     "dataset": {
       "dataset_class": "BNCI2014_001",
@@ -27,15 +27,15 @@
           "params": {},
           "factory_args": [
             {
-              "module": "mne.decoding",
-              "class": "CSP",
+              "module": "pyriemann.estimation",
+              "class": "Covariances",
               "params": {
-                "n_components": 8
+                "estimator": "oas"
               }
             },
             {
-              "module": "sklearn.discriminant_analysis",
-              "class": "LinearDiscriminantAnalysis",
+              "module": "pyriemann.classification",
+              "class": "MDM",
               "params": {}
             }
           ]
@@ -88,8 +88,8 @@
   },
   "execution_trace": {
     "spec": {
-      "name": "C-1: CSP+LDA on BNCI2014_001",
-      "goal": "Study C Experiment 1: Classical CSP+LDA baseline on motor imagery.",
+      "name": "C-3: Riemannian MDM on BNCI2014_001",
+      "goal": "Study C Experiment 3: Riemannian geometry pipeline (MDM).",
       "mode": "research",
       "dataset": {
         "dataset_class": "BNCI2014_001",
@@ -112,15 +112,15 @@
             "params": {},
             "factory_args": [
               {
-                "module": "mne.decoding",
-                "class": "CSP",
+                "module": "pyriemann.estimation",
+                "class": "Covariances",
                 "params": {
-                  "n_components": 8
+                  "estimator": "oas"
                 }
               },
               {
-                "module": "sklearn.discriminant_analysis",
-                "class": "LinearDiscriminantAnalysis",
+                "module": "pyriemann.classification",
+                "class": "MDM",
                 "params": {}
               }
             ]
@@ -521,7 +521,7 @@
       {
         "fold_id": 0,
         "subject": 1,
-        "accuracy": 0.9317129850387573,
+        "accuracy": 0.9502314925193787,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -529,7 +529,7 @@
       {
         "fold_id": 1,
         "subject": 1,
-        "accuracy": 0.9554398059844971,
+        "accuracy": 0.9484953880310059,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -537,7 +537,7 @@
       {
         "fold_id": 2,
         "subject": 2,
-        "accuracy": 0.5271990895271301,
+        "accuracy": 0.5102237462997437,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -545,7 +545,7 @@
       {
         "fold_id": 3,
         "subject": 2,
-        "accuracy": 0.6462191343307495,
+        "accuracy": 0.5509259104728699,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -553,7 +553,7 @@
       {
         "fold_id": 4,
         "subject": 3,
-        "accuracy": 0.9938271641731262,
+        "accuracy": 0.9942129850387573,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -561,7 +561,7 @@
       {
         "fold_id": 5,
         "subject": 3,
-        "accuracy": 0.9963348507881165,
+        "accuracy": 0.9922839403152466,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -569,7 +569,7 @@
       {
         "fold_id": 6,
         "subject": 4,
-        "accuracy": 0.8288965821266174,
+        "accuracy": 0.8043981194496155,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -577,7 +577,7 @@
       {
         "fold_id": 7,
         "subject": 4,
-        "accuracy": 0.8287037014961243,
+        "accuracy": 0.7652391791343689,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -585,7 +585,7 @@
       {
         "fold_id": 8,
         "subject": 5,
-        "accuracy": 0.6209490895271301,
+        "accuracy": 0.6099537014961243,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -593,7 +593,7 @@
       {
         "fold_id": 9,
         "subject": 5,
-        "accuracy": 0.5719521641731262,
+        "accuracy": 0.5343364477157593,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -601,7 +601,7 @@
       {
         "fold_id": 10,
         "subject": 6,
-        "accuracy": 0.8177083134651184,
+        "accuracy": 0.7559799551963806,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -609,7 +609,7 @@
       {
         "fold_id": 11,
         "subject": 6,
-        "accuracy": 0.776813268661499,
+        "accuracy": 0.7293595671653748,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -617,7 +617,7 @@
       {
         "fold_id": 12,
         "subject": 7,
-        "accuracy": 0.8871527910232544,
+        "accuracy": 0.9083719253540039,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -625,7 +625,7 @@
       {
         "fold_id": 13,
         "subject": 7,
-        "accuracy": 0.9008487462997437,
+        "accuracy": 0.7310956716537476,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -633,7 +633,7 @@
       {
         "fold_id": 14,
         "subject": 8,
-        "accuracy": 0.9953703880310059,
+        "accuracy": 0.9608410596847534,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -641,7 +641,7 @@
       {
         "fold_id": 15,
         "subject": 8,
-        "accuracy": 0.9870756268501282,
+        "accuracy": 0.9974923133850098,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -649,7 +649,7 @@
       {
         "fold_id": 16,
         "subject": 9,
-        "accuracy": 0.8404706716537476,
+        "accuracy": 0.6770833134651184,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -657,7 +657,7 @@
       {
         "fold_id": 17,
         "subject": 9,
-        "accuracy": 0.9548611044883728,
+        "accuracy": 0.9646990895271301,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -672,11 +672,11 @@
       "sklearn_version": "1.9.0",
       "pyriemann_version": "0.12",
       "platform": "Linux-7.1.6-1-cachyos-x86_64-with-glibc2.44",
-      "captured_at": "2026-08-16T04:55:33.674412+00:00"
+      "captured_at": "2026-08-16T04:56:19.313230+00:00"
     },
     "seed": 42,
-    "execution_started_at": "2026-08-16T04:55:33.665286+00:00",
-    "execution_finished_at": "2026-08-16T04:55:49.783198+00:00",
+    "execution_started_at": "2026-08-16T04:56:19.311889+00:00",
+    "execution_finished_at": "2026-08-16T04:56:52.437111+00:00",
     "moabb_warnings": []
   },
   "validation_results": {
@@ -751,13 +751,13 @@
       }
     ],
     "statistics": {
-      "mean_accuracy": 0.8367519709799025,
-      "std_accuracy": 0.14804472065794055,
+      "mean_accuracy": 0.7991791003280215,
+      "std_accuracy": 0.16729184132035807,
       "chance_level": 0.5,
       "chance_level_passed": true,
       "subject_level_ci": [
-        0.7287921174532838,
-        0.9216812930173344
+        0.684721682055129,
+        0.8943528202672799
       ],
       "ci_level": 0.95,
       "permutation_p_value": 0.001996007984031936,
@@ -782,7 +782,7 @@
       {
         "name": "timestamps_recorded",
         "passed": true,
-        "value": "started=2026-08-16T04:55:33.665286+00:00, finished=2026-08-16T04:55:49.783198+00:00",
+        "value": "started=2026-08-16T04:56:19.311889+00:00, finished=2026-08-16T04:56:52.437111+00:00",
         "explanation": "Execution timestamps must be recorded"
       },
       {
@@ -794,13 +794,13 @@
     ]
   },
   "summary": {
-    "experiment_name": "C-1: CSP+LDA on BNCI2014_001",
-    "experiment_goal": "Study C Experiment 1: Classical CSP+LDA baseline on motor imagery.",
+    "experiment_name": "C-3: Riemannian MDM on BNCI2014_001",
+    "experiment_goal": "Study C Experiment 3: Riemannian geometry pipeline (MDM).",
     "mode": "research",
     "dataset": "BNCI2014_001",
     "n_subjects": 9,
     "n_folds": 18,
-    "mean_accuracy": 0.8367519709799025,
+    "mean_accuracy": 0.7991791003280215,
     "chance_level": 0.5,
     "all_validation_passed": true,
     "moabb_version": "1.5.0",

@@ -30,6 +30,7 @@ class ParadigmSpec(BaseModel):
     fmax: float = Field(default=32.0, description="Low-pass filter cutoff (Hz)")
     channels: Optional[list[str]] = Field(default=None, description="Channel list; None = all")
     resample: Optional[float] = Field(default=None, description="Resample rate (Hz); None = no resample")
+    n_classes: Optional[int] = Field(default=None, description="Number of classes (for SSVEP, etc.)")
 
 
 class PipelineSpec(BaseModel):

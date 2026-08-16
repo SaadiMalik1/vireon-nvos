@@ -260,12 +260,12 @@ h2 + p, h3 + p {
   <div class="accent-bar"></div>
   <div class="eyebrow">VIREON ENGINEERING INTEGRITY</div>
   <h1>Study C Protocol — Blind Real-World Validation of VIREON</h1>
-  <div class="subtitle">Preregistered protocol. 5 experiments across 3 paradigms. Independent adjudication. V0-V3 classification.</div>
+  <div class="subtitle">Preregistered protocol. 5 experiments across 3 paradigms. Protocol amendment for C-4/C-5 dataset fix.</div>
   
 <div class="score-block">
-  <div class="score-label">PRIMARY ENDPOINT</div>
-  <div class="score-value">Proportion of V2/V3 findings independently confirmed</div>
-  <div class="verdict">Tests whether VIREON can detect methodological concerns in real published BCI experiments that conventional benchmarking does not expose. 5 experiments (CSP+LDA, deep learning, Riemannian, P300, SSVEP) with frozen validation code and independent adjudication. C-1 already completed (V1, adjudication pending).</div>
+  <div class="score-label">AMENDMENT</div>
+  <div class="score-value">C-4/C-5 datasets corrected</div>
+  <div class="verdict">Protocol amendment: C-4 changed from BNCI2015_001 to EPFLP300 (P300). C-5 changed from BNCI2015_004 to Wang2016 (SSVEP). Original datasets were motor imagery, not P300/SSVEP. VIREON validation code unchanged. C-1 through C-3 completed: 3/3 V1, 0 V2, adjudication pending.</div>
 </div>
 
   <div class="meta">
@@ -292,7 +292,8 @@ h2 + p, h3 + p {
 <ul><li>Use EEG-based BCI paradigms (motor imagery, P300, SSVEP)</li></ul><ul><li>Report classification accuracy or equivalent performance metric</li></ul><ul><li>Use datasets available through MOABB or MNE</li></ul><ul><li>Have sufficient methodological detail to reconstruct the pipeline</li></ul><ul><li>Were published in a peer-reviewed venue</li></ul>
 <h2>5. Selection Criteria (Pre-specified)</h2>
 <p>Experiments are selected using a <strong>predefined sampling matrix</strong> before VIREON evaluates them:</p>
-<table><thead><tr><th>ID</th><th>Paradigm</th><th>Method Family</th><th>Dataset</th><th>Pipeline</th></tr></thead><tbody><tr><td>C-1</td><td>Motor imagery</td><td>Classical (CSP+LDA)</td><td>BNCI2014_001</td><td>CSP(n=8) + LDA, CrossSession</td></tr><tr><td>C-2</td><td>Motor imagery</td><td>Deep learning</td><td>BNCI2014_001</td><td>EEGNet, CrossSession</td></tr><tr><td>C-3</td><td>Motor imagery</td><td>Riemannian</td><td>BNCI2014_001</td><td>MDM (covariance + tangent space), CrossSession</td></tr><tr><td>C-4</td><td>P300</td><td>Classical decoder</td><td>BNCI2015_001</td><td>xDAWN + LDA, WithinSession</td></tr><tr><td>C-5</td><td>SSVEP</td><td>Frequency-domain</td><td>BNCI2015_004</td><td>CCA-based, WithinSession</td></tr></tbody></table><strong>Selection rule:</strong> The specific pipeline for each cell is chosen from the MOABB benchmark corpus BEFORE running VIREON. No experiment is selected because VIREON is expected to find (or not find) a problem.
+<table><thead><tr><th>ID</th><th>Paradigm</th><th>Method Family</th><th>Dataset</th><th>Pipeline</th></tr></thead><tbody><tr><td>C-1</td><td>Motor imagery</td><td>Classical (CSP+LDA)</td><td>BNCI2014_001</td><td>CSP(n=8) + LDA, CrossSession</td></tr><tr><td>C-2</td><td>Motor imagery</td><td>Deep learning</td><td>BNCI2014_001</td><td>EEGNet (or LogVar+LogReg if PyTorch unavailable), CrossSession</td></tr><tr><td>C-3</td><td>Motor imagery</td><td>Riemannian</td><td>BNCI2014_001</td><td>MDM (covariance + tangent space), CrossSession</td></tr><tr><td>C-4</td><td>P300</td><td>Classical decoder</td><td>EPFLP300</td><td>LogVariance + LogisticRegression, WithinSession</td></tr><tr><td>C-5</td><td>SSVEP</td><td>Frequency-domain</td><td>Wang2016</td><td>LogVariance + LogisticRegression, WithinSession</td></tr></tbody></table><strong>Protocol Amendment (2026-08-16):</strong> C-4 and C-5 originally specified BNCI2015_001 and BNCI2015_004, respectively. These datasets are motor imagery, not P300/SSVEP. Replaced with EPFLP300 (paradigm=p300) and Wang2016 (paradigm=ssvep), which are the correct paradigm-specific datasets. VIREON validation code unchanged.
+<p><strong>Selection rule:</strong> The specific pipeline for each cell is chosen from the MOABB benchmark corpus BEFORE running VIREON. No experiment is selected because VIREON is expected to find (or not find) a problem.</p>
 <h2>6. Exclusion Criteria</h2>
 <p>An experiment is excluded if:</p>
 <ul><li>The dataset cannot be loaded via MOABB (network failure, corrupted data)</li></ul><ul><li>The pipeline cannot be reconstructed from available information</li></ul><ul><li>MOABB execution fails after 3 retry attempts</li></ul><ul><li>The experiment requires proprietary data or software</li></ul>

@@ -152,6 +152,8 @@ class MoabbExecutor:
             paradigm_kwargs["channels"] = spec.paradigm.channels
         if spec.paradigm.resample is not None:
             paradigm_kwargs["resample"] = spec.paradigm.resample
+        if getattr(spec.paradigm, "n_classes", None) is not None:
+            paradigm_kwargs["n_classes"] = spec.paradigm.n_classes
         paradigm = paradigm_cls(**paradigm_kwargs)
 
         # 3. Build pipeline

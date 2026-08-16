@@ -4,8 +4,8 @@
 
 EXPERIMENT
 ────────────────────────────────────────
-  Name:           C-1: CSP+LDA on BNCI2014_001
-  Goal:           Study C Experiment 1: Classical CSP+LDA baseline on motor imagery.
+  Name:           C-2: EEGNet-equivalent on BNCI2014_001
+  Goal:           Study C Experiment 2: Deep learning pipeline (or equivalent if PyTorch unavailable).
   Mode:           research
   Seed:           42
 
@@ -31,17 +31,17 @@ EVALUATION
 
 MOABB RESULT
 ────────────────────────────────────────
-  Mean accuracy:  0.8368
+  Mean accuracy:  0.7060
   Per-subject:
-    Subject 1: 0.9436
-    Subject 2: 0.5867
-    Subject 3: 0.9951
-    Subject 4: 0.8288
-    Subject 5: 0.5965
-    Subject 6: 0.7973
-    Subject 7: 0.8940
-    Subject 8: 0.9912
-    Subject 9: 0.8977
+    Subject 1: 0.7818
+    Subject 2: 0.5853
+    Subject 3: 0.9372
+    Subject 4: 0.6542
+    Subject 5: 0.4900
+    Subject 6: 0.7084
+    Subject 7: 0.6450
+    Subject 8: 0.7622
+    Subject 9: 0.7894
 
 VALIDATION
 ────────────────────────────────────────
@@ -59,11 +59,11 @@ VALIDATION
 
 STATISTICS
 ────────────────────────────────────────
-  Mean accuracy:  0.8368
-  Std accuracy:   0.1480
+  Mean accuracy:  0.7060
+  Std accuracy:   0.1329
   Chance level:   0.5000
   ✓ Above chance: True
-  Subject-level CI (95%): [0.7288, 0.9217]
+  Subject-level CI (95%): [0.6199, 0.7817]
     (bootstrapped over 9 subjects, NOT trials)
   ✓ Permutation test: p=0.0020 (significant at α=0.05)
     (500 permutations, unit=subject)
@@ -72,7 +72,7 @@ REPRODUCIBILITY
 ────────────────────────────────────────
   ✓ seed_recorded: seed=42
   ✓ environment_captured: MOABB 1.5.0, MNE 1.12.1, Python 3.14.6
-  ✓ timestamps_recorded: started=2026-08-16T04:55:33.665286+00:00, finished=2026-08-16T04:55:49.783198+00:00
+  ✓ timestamps_recorded: started=2026-08-16T04:55:49.795571+00:00, finished=2026-08-16T04:56:19.301773+00:00
   ✓ dataset_identity_recorded: BNCI2014_001
 
 ENVIRONMENT
@@ -88,14 +88,14 @@ ENVIRONMENT
 
 EXECUTION
 ────────────────────────────────────────
-  Started:        2026-08-16T04:55:33.665286+00:00
-  Finished:       2026-08-16T04:55:49.783198+00:00
+  Started:        2026-08-16T04:55:49.795571+00:00
+  Finished:       2026-08-16T04:56:19.301773+00:00
 
 EVIDENCE
 ────────────────────────────────────────
-  Bundle ID:      vireon-6159278e32ff
-  Evidence hash:  6159278e32ffc866e7e1cdc097ba9b04173f20a2963acfa680e02ee2ee129ec0
-  Created:        2026-08-16T04:55:49.793446+00:00
+  Bundle ID:      vireon-03e72cfe7d26
+  Evidence hash:  03e72cfe7d2693e832dd07045b37f412cb4f3cab7bfec388500a0342a43b5dea
+  Created:        2026-08-16T04:56:19.309638+00:00
   All checks passed: True
 
 PROVENANCE STATEMENT
@@ -111,7 +111,7 @@ PROVENANCE STATEMENT
 VERIFICATION
 ────────────────────────────────────────
   To verify this evidence:
-    1. Check the SHA-256 hash matches: 6159278e32ffc866...
+    1. Check the SHA-256 hash matches: 03e72cfe7d2693e8...
     2. Re-run the experiment with the same spec and seed
     3. Compare the new hash to this one
 

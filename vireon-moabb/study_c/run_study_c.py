@@ -151,12 +151,16 @@ def build_c3_spec() -> ExperimentSpec:
 
 
 def build_c4_spec() -> ExperimentSpec:
-    """C-4: P300, xDAWN+LDA, BNCI2015_001."""
+    """C-4: P300, LogVar+LogReg, EPFLP300.
+
+    FIXED: BNCI2015_001 is a motor imagery dataset, not P300.
+    EPFLP300 is a proper P300 dataset (paradigm=p300).
+    """
     return ExperimentSpec(
-        name="C-4: xDAWN+LDA on BNCI2015_001 (P300)",
-        goal="Study C Experiment 4: P300 paradigm with xDAWN spatial filtering + LDA.",
+        name="C-4: LogVar+LogReg on EPFLP300 (P300)",
+        goal="Study C Experiment 4: P300 paradigm with LogVariance + LogisticRegression.",
         mode="research",
-        dataset=DatasetSpec(dataset_class="BNCI2015_001"),
+        dataset=DatasetSpec(dataset_class="EPFLP300"),
         paradigm=ParadigmSpec(paradigm_class="P300", fmin=1.0, fmax=24.0),
         pipeline=PipelineSpec(steps=[
             {"module": "moabb.pipelines", "class": "make_pipeline", "params": {},
@@ -181,13 +185,17 @@ def build_c4_spec() -> ExperimentSpec:
 
 
 def build_c5_spec() -> ExperimentSpec:
-    """C-5: SSVEP, CCA-based, BNCI2015_004."""
+    """C-5: SSVEP, LogVar+LogReg, Wang2016.
+
+    FIXED: BNCI2015_004 is a motor imagery dataset, not SSVEP.
+    Wang2016 is a proper SSVEP dataset (paradigm=ssvep).
+    """
     return ExperimentSpec(
-        name="C-5: CCA on BNCI2015_004 (SSVEP)",
-        goal="Study C Experiment 5: SSVEP paradigm with CCA-based decoder.",
+        name="C-5: LogVar+LogReg on Wang2016 (SSVEP)",
+        goal="Study C Experiment 5: SSVEP paradigm with LogVariance + LogisticRegression.",
         mode="research",
-        dataset=DatasetSpec(dataset_class="BNCI2015_004"),
-        paradigm=ParadigmSpec(paradigm_class="SSVEP", fmin=6.0, fmax=80.0),
+        dataset=DatasetSpec(dataset_class="Wang2016"),
+        paradigm=ParadigmSpec(paradigm_class="SSVEP", fmin=7.0, fmax=45.0, n_classes=4),
         pipeline=PipelineSpec(steps=[
             {"module": "moabb.pipelines", "class": "make_pipeline", "params": {},
              "factory_args": [

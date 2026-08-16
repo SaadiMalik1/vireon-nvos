@@ -1,0 +1,214 @@
+{
+  "study": "C",
+  "date": "2026-08-16",
+  "vireon_version": "frozen",
+  "experiments": [
+    {
+      "experiment_id": "C-1",
+      "name": "C-1: CSP+LDA on BNCI2014_001",
+      "dataset": "BNCI2014_001",
+      "pipeline": "CSP",
+      "evaluation": "CrossSessionEvaluation",
+      "mean_accuracy": 0.8367519709799025,
+      "std_accuracy": 0.14804472065794055,
+      "n_subjects": 9,
+      "n_folds": 18,
+      "execution_time_sec": 18.080753803253174,
+      "chance_level": 0.5,
+      "above_chance": true,
+      "subject_level_ci": [
+        0.7287921174532838,
+        0.9216812930173344
+      ],
+      "permutation_p": 0.001996007984031936,
+      "all_data_checks_passed": true,
+      "all_leakage_checks_passed": true,
+      "all_repro_checks_passed": true,
+      "robustness_results": [
+        {
+          "name": "channel_dropout_20",
+          "type": "channel_dropout",
+          "severity": 0.2,
+          "baseline_accuracy": 0.8367519709799025,
+          "perturbed_accuracy": 0.8032818921407063,
+          "accuracy_drop": 0.03347007883919617,
+          "passed": true
+        },
+        {
+          "name": "white_noise_0.1",
+          "type": "white_noise",
+          "severity": 0.1,
+          "baseline_accuracy": 0.8367519709799025,
+          "perturbed_accuracy": 0.8200169315603044,
+          "accuracy_drop": 0.016735039419598086,
+          "passed": true
+        },
+        {
+          "name": "line_noise_50hz",
+          "type": "line_noise",
+          "severity": 0.5,
+          "baseline_accuracy": 0.8367519709799025,
+          "perturbed_accuracy": 0.7530767738819123,
+          "accuracy_drop": 0.0836751970979902,
+          "passed": true
+        }
+      ],
+      "robustness_mode": "real",
+      "evidence_hash": "6159278e32ffc866e7e1cdc097ba9b04173f20a2963acfa680e02ee2ee129ec0",
+      "evidence_verified": true,
+      "vireon_classification": "V1",
+      "findings": [
+        {
+          "finding": "Additional characterization: Subject-level uncertainty quantification, Statistical significance testing, Robustness analysis, Cryptographic evidence bundle",
+          "evidence": "See validation profile",
+          "severity": "Info"
+        }
+      ],
+      "adjudication_status": "pending"
+    },
+    {
+      "experiment_id": "C-2",
+      "name": "C-2: EEGNet-equivalent on BNCI2014_001",
+      "dataset": "BNCI2014_001",
+      "pipeline": "LogVariance",
+      "evaluation": "CrossSessionEvaluation",
+      "mean_accuracy": 0.7059542172484927,
+      "std_accuracy": 0.13288119916006372,
+      "n_subjects": 9,
+      "n_folds": 18,
+      "execution_time_sec": 29.506529331207275,
+      "chance_level": 0.5,
+      "above_chance": true,
+      "subject_level_ci": [
+        0.6199360775450866,
+        0.7816505353483889
+      ],
+      "permutation_p": 0.001996007984031936,
+      "all_data_checks_passed": true,
+      "all_leakage_checks_passed": true,
+      "all_repro_checks_passed": true,
+      "robustness_results": [
+        {
+          "name": "channel_dropout_20",
+          "type": "channel_dropout",
+          "severity": 0.2,
+          "baseline_accuracy": 0.7059542172484927,
+          "perturbed_accuracy": 0.6777160485585529,
+          "accuracy_drop": 0.02823816868993978,
+          "passed": true
+        },
+        {
+          "name": "white_noise_0.1",
+          "type": "white_noise",
+          "severity": 0.1,
+          "baseline_accuracy": 0.7059542172484927,
+          "perturbed_accuracy": 0.6918351329035228,
+          "accuracy_drop": 0.01411908434496989,
+          "passed": true
+        },
+        {
+          "name": "line_noise_50hz",
+          "type": "line_noise",
+          "severity": 0.5,
+          "baseline_accuracy": 0.7059542172484927,
+          "perturbed_accuracy": 0.6353587955236435,
+          "accuracy_drop": 0.07059542172484923,
+          "passed": true
+        }
+      ],
+      "robustness_mode": "real",
+      "evidence_hash": "03e72cfe7d2693e832dd07045b37f412cb4f3cab7bfec388500a0342a43b5dea",
+      "evidence_verified": true,
+      "vireon_classification": "V1",
+      "findings": [
+        {
+          "finding": "Additional characterization: Subject-level uncertainty quantification, Statistical significance testing, Robustness analysis, Cryptographic evidence bundle",
+          "evidence": "See validation profile",
+          "severity": "Info"
+        }
+      ],
+      "adjudication_status": "pending"
+    },
+    {
+      "experiment_id": "C-3",
+      "name": "C-3: Riemannian MDM on BNCI2014_001",
+      "dataset": "BNCI2014_001",
+      "pipeline": "Covariances",
+      "evaluation": "CrossSessionEvaluation",
+      "mean_accuracy": 0.7991791003280215,
+      "std_accuracy": 0.16729184132035807,
+      "n_subjects": 9,
+      "n_folds": 18,
+      "execution_time_sec": 33.12548065185547,
+      "chance_level": 0.5,
+      "above_chance": true,
+      "subject_level_ci": [
+        0.684721682055129,
+        0.8943528202672799
+      ],
+      "permutation_p": 0.001996007984031936,
+      "all_data_checks_passed": true,
+      "all_leakage_checks_passed": true,
+      "all_repro_checks_passed": true,
+      "robustness_results": [
+        {
+          "name": "channel_dropout_20",
+          "type": "channel_dropout",
+          "severity": 0.2,
+          "baseline_accuracy": 0.7991791003280215,
+          "perturbed_accuracy": 0.7672119363149006,
+          "accuracy_drop": 0.03196716401312094,
+          "passed": true
+        },
+        {
+          "name": "white_noise_0.1",
+          "type": "white_noise",
+          "severity": 0.1,
+          "baseline_accuracy": 0.7991791003280215,
+          "perturbed_accuracy": 0.7831955183214611,
+          "accuracy_drop": 0.01598358200656047,
+          "passed": true
+        },
+        {
+          "name": "line_noise_50hz",
+          "type": "line_noise",
+          "severity": 0.5,
+          "baseline_accuracy": 0.7991791003280215,
+          "perturbed_accuracy": 0.7192611902952194,
+          "accuracy_drop": 0.07991791003280213,
+          "passed": true
+        }
+      ],
+      "robustness_mode": "real",
+      "evidence_hash": "16f8b0ac6e101ce746bae96293be07ec77fbcf30eb116a594cbf34f1f5501688",
+      "evidence_verified": true,
+      "vireon_classification": "V1",
+      "findings": [
+        {
+          "finding": "Additional characterization: Subject-level uncertainty quantification, Statistical significance testing, Robustness analysis, Cryptographic evidence bundle",
+          "evidence": "See validation profile",
+          "severity": "Info"
+        }
+      ],
+      "adjudication_status": "pending"
+    },
+    {
+      "experiment_id": "C-4",
+      "status": "execution_failed",
+      "error": "No datasets left after paradigm\n            and evaluation checks"
+    },
+    {
+      "experiment_id": "C-5",
+      "status": "execution_failed",
+      "error": "No datasets left after paradigm\n            and evaluation checks"
+    }
+  ],
+  "summary": {
+    "total": 5,
+    "v0": 0,
+    "v1": 3,
+    "v2": 0,
+    "failed": 2,
+    "adjudication_pending": 0
+  }
+}

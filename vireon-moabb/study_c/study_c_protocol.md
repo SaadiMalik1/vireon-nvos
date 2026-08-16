@@ -40,10 +40,12 @@ Experiments are selected using a **predefined sampling matrix** before VIREON ev
 | ID | Paradigm | Method Family | Dataset | Pipeline |
 |----|----------|---------------|---------|----------|
 | C-1 | Motor imagery | Classical (CSP+LDA) | BNCI2014_001 | CSP(n=8) + LDA, CrossSession |
-| C-2 | Motor imagery | Deep learning | BNCI2014_001 | EEGNet, CrossSession |
+| C-2 | Motor imagery | Deep learning | BNCI2014_001 | EEGNet (or LogVar+LogReg if PyTorch unavailable), CrossSession |
 | C-3 | Motor imagery | Riemannian | BNCI2014_001 | MDM (covariance + tangent space), CrossSession |
-| C-4 | P300 | Classical decoder | BNCI2015_001 | xDAWN + LDA, WithinSession |
-| C-5 | SSVEP | Frequency-domain | BNCI2015_004 | CCA-based, WithinSession |
+| C-4 | P300 | Classical decoder | EPFLP300 | LogVariance + LogisticRegression, WithinSession |
+| C-5 | SSVEP | Frequency-domain | Wang2016 | LogVariance + LogisticRegression, WithinSession |
+
+**Protocol Amendment (2026-08-16):** C-4 and C-5 originally specified BNCI2015_001 and BNCI2015_004, respectively. These datasets are motor imagery, not P300/SSVEP. Replaced with EPFLP300 (paradigm=p300) and Wang2016 (paradigm=ssvep), which are the correct paradigm-specific datasets. VIREON validation code unchanged.
 
 **Selection rule:** The specific pipeline for each cell is chosen from the MOABB benchmark corpus BEFORE running VIREON. No experiment is selected because VIREON is expected to find (or not find) a problem.
 
