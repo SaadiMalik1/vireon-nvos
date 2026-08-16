@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Study C Protocol — Blind Real-World Validation of VIREON</title>
+<style>
+@page {
+  size: A4;
+  margin: 18mm 16mm 18mm 16mm;
+  @bottom-center {
+    content: "Study C Protocol — Blind Real-World Validation of VIREON — Page " counter(page) " of " counter(pages);
+    font-family: 'Liberation Serif', serif;
+    font-size: 9pt;
+    color: #8e8b84;
+  }
+}
+@page :first {
+  margin: 0;
+  @bottom-center { content: ""; }
+}
+
+html, body {
+  margin: 0; padding: 0;
+  background: #ffffff;
+  color: #1e1d1b;
+  font-family: 'Liberation Serif', 'FreeSerif', 'Noto Serif', serif;
+  font-size: 10.5pt;
+  line-height: 1.55;
+  text-align: justify;
+}
+
+.cover {
+  page-break-after: always;
+  background: #1e1d1b;
+  color: #ffffff;
+  padding: 60mm 25mm 30mm 25mm;
+  min-height: 297mm;
+  box-sizing: border-box;
+  position: relative;
+}
+.cover .eyebrow {
+  color: #a18532;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 10pt;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8mm;
+}
+.cover h1 {
+  color: #ffffff;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 32pt;
+  line-height: 1.15;
+  margin: 0 0 6mm 0;
+  text-align: left;
+  border: none;
+  padding: 0;
+}
+.cover .subtitle {
+  color: #e8e2d3;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 13pt;
+  font-weight: normal;
+  margin: 0 0 18mm 0;
+  text-align: left;
+  line-height: 1.5;
+}
+.cover .meta {
+  color: #c8c0a8;
+  font-family: 'Liberation Mono', monospace;
+  font-size: 9pt;
+  line-height: 1.7;
+  text-align: left;
+  margin-top: 18mm;
+}
+.cover .meta strong {
+  color: #a18532;
+}
+.cover .accent-bar {
+  position: absolute;
+  top: 0; left: 0;
+  width: 12mm;
+  height: 100%;
+  background: #a18532;
+}
+.cover .score-block {
+  margin-top: 20mm;
+  padding: 8mm;
+  background: #2a2926;
+  border-left: 4px solid #a18532;
+}
+.cover .score-label {
+  color: #a18532;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 9pt;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.cover .score-value {
+  color: #ffffff;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 22pt;
+  font-weight: bold;
+  margin-top: 2mm;
+}
+.cover .score-value .max {
+  color: #c8c0a8;
+  font-size: 13pt;
+}
+.cover .verdict {
+  color: #e8e2d3;
+  font-size: 9.5pt;
+  margin-top: 4mm;
+  line-height: 1.5;
+}
+
+h1 {
+  color: #1e1d1b;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 19pt;
+  line-height: 1.2;
+  margin: 14mm 0 4mm 0;
+  padding-bottom: 2mm;
+  border-bottom: 2px solid #5d563e;
+  page-break-after: avoid;
+  text-align: left;
+}
+h2 {
+  color: #5d563e;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 14pt;
+  line-height: 1.3;
+  margin: 8mm 0 3mm 0;
+  page-break-after: avoid;
+  text-align: left;
+}
+h3 {
+  color: #1e1d1b;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 12pt;
+  line-height: 1.3;
+  margin: 6mm 0 2mm 0;
+  page-break-after: avoid;
+  text-align: left;
+}
+h4 {
+  color: #a18532;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 11pt;
+  line-height: 1.3;
+  margin: 5mm 0 2mm 0;
+  page-break-after: avoid;
+  text-align: left;
+}
+
+p {
+  margin: 0 0 3mm 0;
+  orphans: 3;
+  widows: 3;
+}
+
+strong { color: #1e1d1b; }
+em { color: #5d563e; }
+
+code {
+  font-family: 'Liberation Mono', 'DejaVu Sans Mono', monospace;
+  font-size: 9pt;
+  background: #f5f5f4;
+  padding: 0.5mm 1.5mm;
+  border-radius: 1.5mm;
+  color: #5d563e;
+  word-break: break-all;
+}
+
+pre {
+  background: #f5f5f4;
+  border: 1px solid #d7d2c4;
+  border-left: 4px solid #a18532;
+  border-radius: 2mm;
+  padding: 4mm 5mm;
+  margin: 4mm 0;
+  page-break-inside: avoid;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  font-size: 8.5pt;
+  line-height: 1.45;
+}
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #1e1d1b;
+  font-size: 8.5pt;
+  word-break: normal;
+}
+
+ul, ol {
+  margin: 2mm 0 4mm 0;
+  padding-left: 7mm;
+}
+li {
+  margin: 1mm 0;
+  line-height: 1.5;
+}
+li.nested {
+  list-style-type: circle;
+  margin-left: 5mm;
+}
+
+blockquote {
+  border-left: 4px solid #a18532;
+  background: #faf9f6;
+  padding: 3mm 5mm;
+  margin: 4mm 0;
+  color: #5d563e;
+  font-style: italic;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #d7d2c4;
+  margin: 6mm 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 4mm 0;
+  font-size: 9pt;
+  page-break-inside: avoid;
+}
+th {
+  background: #5d563e;
+  color: #ffffff;
+  font-family: 'Liberation Sans', sans-serif;
+  font-weight: bold;
+  text-align: left;
+  padding: 2mm 3mm;
+  border: 1px solid #5d563e;
+}
+td {
+  padding: 2mm 3mm;
+  border: 1px solid #d7d2c4;
+  vertical-align: top;
+}
+tr:nth-child(even) td {
+  background: #f5f5f4;
+}
+
+h2 + p, h3 + p {
+  page-break-before: avoid;
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="accent-bar"></div>
+  <div class="eyebrow">VIREON ENGINEERING INTEGRITY</div>
+  <h1>Study C Protocol — Blind Real-World Validation of VIREON</h1>
+  <div class="subtitle">Preregistered protocol. 5 experiments across 3 paradigms. Independent adjudication. V0-V3 classification.</div>
+  
+<div class="score-block">
+  <div class="score-label">PRIMARY ENDPOINT</div>
+  <div class="score-value">Proportion of V2/V3 findings independently confirmed</div>
+  <div class="verdict">Tests whether VIREON can detect methodological concerns in real published BCI experiments that conventional benchmarking does not expose. 5 experiments (CSP+LDA, deep learning, Riemannian, P300, SSVEP) with frozen validation code and independent adjudication. C-1 already completed (V1, adjudication pending).</div>
+</div>
+
+  <div class="meta">
+    <strong>Repository:</strong> github.com/SaadiMalik1/vireon-nvos<br/>
+    <strong>Audit Baseline:</strong> v1.0.3 (commit 774d7ed)<br/>
+    <strong>Target Release:</strong> v1.1.0-alpha<br/>
+    <strong>Estimated Duration:</strong> 4-6 weeks<br/>
+    <strong>Tasks:</strong> 9 gating tasks (P0 + P1 subset)<br/>
+    <strong>Reference:</strong> vireon_remediation_playbook.md (full details)<br/>
+  </div>
+</div>
+
+<h1>Study C Protocol — Blind Real-World Validation of VIREON</h1>
+<p><strong>Status:</strong> PREREGISTERED <strong>Date:</strong> 2026-08-16 <strong>Version:</strong> 1.0 (frozen — do not modify after first experiment) <strong>Principal Investigator:</strong> [To be filled] <strong>Independent Adjudicator:</strong> [To be filled — must not have built VIREON's validation logic]</p>
+<hr/>
+<h2>1. Research Question</h2>
+<blockquote><strong>Can an automated, execution-aware validation framework identify scientifically meaningful methodological concerns in computational neurotechnology experiments beyond conventional benchmark performance?</strong></blockquote>
+<h2>2. Primary Endpoint</h2>
+<blockquote><strong>The proportion of VIREON-generated V2/V3 findings that are independently adjudicated as genuine methodological concerns.</strong></blockquote>
+<h2>3. Secondary Endpoints</h2>
+<ol><li>Reproduction success rate: proportion of experiments where MOABB reconstruction matches the published result (±5%)</li><li>V1 rate: proportion of experiments where VIREON adds useful characterization without identifying concerns</li><li>V0 rate: proportion of experiments where VIREON confirms the benchmark with no additional concerns</li><li>False discovery rate: proportion of V2 findings that adjudicators reject</li><li>Sensitivity: proportion of known methodological issues (identified post-hoc by adjudicator) that VIREON independently flagged</li></ol>
+<h2>4. Study Population</h2>
+<p>Published computational BCI/neurotechnology experiments that:</p>
+<ul><li>Use EEG-based BCI paradigms (motor imagery, P300, SSVEP)</li></ul><ul><li>Report classification accuracy or equivalent performance metric</li></ul><ul><li>Use datasets available through MOABB or MNE</li></ul><ul><li>Have sufficient methodological detail to reconstruct the pipeline</li></ul><ul><li>Were published in a peer-reviewed venue</li></ul>
+<h2>5. Selection Criteria (Pre-specified)</h2>
+<p>Experiments are selected using a <strong>predefined sampling matrix</strong> before VIREON evaluates them:</p>
+<table><thead><tr><th>ID</th><th>Paradigm</th><th>Method Family</th><th>Dataset</th><th>Pipeline</th></tr></thead><tbody><tr><td>C-1</td><td>Motor imagery</td><td>Classical (CSP+LDA)</td><td>BNCI2014_001</td><td>CSP(n=8) + LDA, CrossSession</td></tr><tr><td>C-2</td><td>Motor imagery</td><td>Deep learning</td><td>BNCI2014_001</td><td>EEGNet, CrossSession</td></tr><tr><td>C-3</td><td>Motor imagery</td><td>Riemannian</td><td>BNCI2014_001</td><td>MDM (covariance + tangent space), CrossSession</td></tr><tr><td>C-4</td><td>P300</td><td>Classical decoder</td><td>BNCI2015_001</td><td>xDAWN + LDA, WithinSession</td></tr><tr><td>C-5</td><td>SSVEP</td><td>Frequency-domain</td><td>BNCI2015_004</td><td>CCA-based, WithinSession</td></tr></tbody></table><strong>Selection rule:</strong> The specific pipeline for each cell is chosen from the MOABB benchmark corpus BEFORE running VIREON. No experiment is selected because VIREON is expected to find (or not find) a problem.
+<h2>6. Exclusion Criteria</h2>
+<p>An experiment is excluded if:</p>
+<ul><li>The dataset cannot be loaded via MOABB (network failure, corrupted data)</li></ul><ul><li>The pipeline cannot be reconstructed from available information</li></ul><ul><li>MOABB execution fails after 3 retry attempts</li></ul><ul><li>The experiment requires proprietary data or software</li></ul>
+<p>Excluded experiments are replaced with the next available option from the same sampling matrix cell.</p>
+<h2>7. Reconstruction Protocol</h2>
+<p>For each experiment:</p>
+<ol><li>Identify the dataset, paradigm, pipeline, and evaluation strategy from published information</li><li>Reconstruct using MOABB's standard implementations (no custom code)</li><li>Record: accuracy per subject, mean accuracy, runtime, environment</li><li>Compare reproduced accuracy to published accuracy (±5% tolerance for reproduction success)</li></ol>
+<h2>8. VIREON Validation Protocol</h2>
+<p>For each experiment, run VIREON's validation layer with <strong>no modifications during the study</strong>:</p>
+<ol><li>Build ExperimentSpec with the reconstructed pipeline</li><li>Execute via MoabbExecutor (captures execution trace)</li><li>Run ValidationLayer (partition integrity, statistics, reproducibility)</li><li>Run robustness perturbations (3 types: channel dropout, white noise, line noise)</li><li>Generate EvidenceBundle with SHA-256</li><li>Produce Validation Profile</li></ol>
+<p><strong>Critical:</strong> VIREON's validation code is FROZEN for the duration of Study C. No changes to validation logic between experiments. If a bug is discovered, it is documented but not fixed until all 5 experiments are complete.</p>
+<h2>9. V0-V3 Finding Classification</h2>
+<h3>V0 — No additional concern</h3>
+<p>VIREON reproduces the benchmark and finds no substantive methodological issue. All validation checks pass. The evidence bundle confirms the result is reproducible and well-characterized.</p>
+<h3>V1 — Additional characterization</h3>
+<p>VIREON adds scientifically useful information (uncertainty quantification, statistical significance, robustness profile, provenance) without identifying an invalid method. The benchmark result is confirmed, and VIREON enriches it with additional evidence.</p>
+<h3>V2 — Potential methodological concern</h3>
+<p>VIREON flags something that warrants expert review. This includes:</p>
+<ul><li>Detected partition overlap (subject/session leakage)</li></ul><ul><li>Below-chance performance in any fold</li></ul><ul><li>Missing reproducibility metadata</li></ul><ul><li>Robustness degradation exceeding predefined threshold (>15% accuracy drop)</li></ul><ul><li>Statistical unit mismatch</li></ul><ul><li>Evidence integrity issues</li></ul>
+<p>VIREON does NOT declare the paper wrong — it flags the concern for adjudication.</p>
+<h3>V3 — Independently confirmed problem</h3>
+<p>An independent adjudicator examines the evidence and concludes the concern is genuine. This requires:</p>
+<ul><li>The VIREON finding is technically reproducible</li></ul><ul><li>The finding is scientifically meaningful (not an artifact of VIREON's implementation)</li></ul><ul><li>The issue would affect interpretation of the original result</li></ul>
+<p><strong>V3 is the key outcome for the research thesis.</strong></p>
+<h2>10. Adjudication Protocol</h2>
+<h3>Adjudicator requirements</h3>
+<ul><li>Must not have contributed to VIREON's validation logic</li></ul><ul><li>Must have domain expertise in BCI/EEG research</li></ul><ul><li>Reviews findings BLIND to VIREON's internal reasoning (sees only the evidence, not the implementation)</li></ul>
+<h3>Adjudication form (per finding)</h3>
+<pre><code>EXPERIMENT ID: C-__
+FINDING ID: F-__
+PAPER: [citation]
+DATASET: [name]
+PIPELINE: [description]
+
+VIREON FINDING:
+  [description of what VIREON detected]
+
+RELEVANT EVIDENCE:
+  [evidence bundle hash, execution trace excerpt, statistical output]
+
+QUESTIONS FOR ADJUDICATOR:
+
+1. Is the finding technically reproducible?
+   [ ] Yes  [ ] No  [ ] Insufficient evidence
+
+2. Is the finding scientifically meaningful?
+   [ ] Yes  [ ] No  [ ] Insufficient evidence
+
+3. Is it a genuine methodological concern?
+   [ ] Yes  [ ] No  [ ] Insufficient evidence
+
+4. Is the evidence sufficient to support the finding?
+   [ ] Yes  [ ] No  [ ] Insufficient evidence
+
+5. What is the severity?
+   [ ] Critical (invalidates the result)
+   [ ] Major (affects interpretation)
+   [ ] Minor (worth noting)
+   [ ] Not a concern
+
+6. Would the issue affect interpretation of the original result?
+   [ ] Yes  [ ] No  [ ] Uncertain
+
+ADJUDICATOR VERDICT:
+   [ ] Confirmed (genuine methodological issue)
+   [ ] Partially confirmed (issue exists but limited impact)
+   [ ] Not confirmed (not a genuine concern)
+   [ ] Insufficient evidence (cannot adjudicate)
+
+ADJUDICATOR COMMENTS:
+   [free text]
+</code></pre>
+<h3>Adjudication rules</h3>
+<ul><li>The adjudicator sees the <strong>evidence</strong> (execution trace, statistics, partition data) but NOT VIREON's source code or implementation details</li></ul><ul><li>The adjudicator may request additional information but may not re-run VIREON with modified parameters</li></ul><ul><li>If the adjudicator requests a re-run, it must use the SAME frozen VIREON version</li></ul><ul><li>Disagreements between VIREON's verdict and the adjudicator's verdict are recorded, not resolved by modifying VIREON</li></ul>
+<h2>11. Handling of Failed Reproductions</h2>
+<p>If MOABB reconstruction fails (accuracy differs from published by >5%):</p>
+<ol><li>Document the discrepancy</li><li>Check for: different preprocessing, different evaluation protocol, different data version</li><li>If the discrepancy cannot be resolved, classify as "reproduction failure" and note it</li><li>VIREON validation still runs on the reproduced result (even if it doesn't match the paper)</li><li>The adjudicator reviews the reproduction discrepancy as a potential finding</li></ol>
+<h2>12. Statistical Analysis</h2>
+<p>After all 5 experiments + adjudications:</p>
+<pre><code>Primary endpoint:
+  V3 rate = (number of V3-confirmed findings) / (total V2 findings)
+
+Secondary:
+  Reproduction rate = (experiments with &lt;5% accuracy difference) / 5
+  V0 rate = (experiments with no V1-V3 findings) / 5
+  V1 rate = (experiments with V1 findings only) / 5
+  V2 rate = (experiments with V2 findings) / 5
+  False discovery rate = (V2 findings rejected by adjudicator) / (total V2 findings)
+</code></pre>
+<p>With n=5, this is descriptive only — no inferential statistics. The study establishes feasibility and direction, not statistical significance.</p>
+<h2>13. Pre-registration Commitments</h2>
+<p>The following are frozen before C-2 begins:</p>
+<ol><li>Selection criteria (Section 5)</li><li>V0-V3 definitions (Section 9)</li><li>Adjudication protocol (Section 10)</li><li>VIREON validation code (no modifications between experiments)</li><li>Robustness thresholds (>15% drop = V2 concern)</li><li>Statistical unit (subject-level for all bootstrap/permutation)</li><li>Reproduction tolerance (±5% accuracy)</li></ol>
+<p><strong>These will not be modified because of results from any experiment.</strong></p>
+<p>If a modification is scientifically necessary (e.g., discovering that ±5% is too strict), it is documented as a protocol amendment with rationale, and all experiments are re-run with the new protocol.</p>
+<h2>14. Data Management</h2>
+<p>For each experiment:</p>
+<ul><li>Evidence bundle (JSON with SHA-256 hash)</li></ul><ul><li>Execution trace (complete MOABB output)</li></ul><ul><li>Validation profile (text report)</li></ul><ul><li>Adjudication form (completed)</li></ul><ul><li>Raw MOABB results (CSV)</li></ul>
+<p>All stored in <code>study_c/experiment_C-N/</code> with the evidence bundle as the canonical artifact.</p>
+<h2>15. Timeline</h2>
+<table><thead><tr><th>Phase</th><th>Activity</th><th>Duration</th></tr></thead><tbody><tr><td>1</td><td>Protocol finalization (this document)</td><td>Complete</td></tr><tr><td>2</td><td>Partition semantics fix (Study-C-blocking)</td><td>1 day</td></tr><tr><td>3</td><td>C-1 packaging (existing experiment)</td><td>1 day</td></tr><tr><td>4</td><td>C-2 through C-5 execution</td><td>1-2 weeks</td></tr><tr><td>5</td><td>Independent adjudication</td><td>1-2 weeks</td></tr><tr><td>6</td><td>Analysis and report</td><td>1 week</td></tr></tbody></table><h2>16. Expected Limitations</h2>
+<ol><li><strong>Small sample (n=5):</strong> This study establishes feasibility and direction, not statistical power. A larger corpus (n=20-50) would be needed for quantitative claims about detection rates.</li></ol>
+<ol><li><strong>Single adjudicator:</strong> Ideally, multiple adjudicators with inter-rater reliability. This study uses one for feasibility.</li></ol>
+<ol><li><strong>MOABB-only reconstruction:</strong> Only experiments reproducible via MOABB are included. Experiments requiring custom code or proprietary data are excluded.</li></ol>
+<ol><li><strong>VIREON version frozen:</strong> Bugs discovered during the study are documented but not fixed. This means VIREON's performance in this study is a lower bound on its potential performance.</li></ol>
+<ol><li><strong>No ground truth for "no problem":</strong> When VIREON says PASS, we cannot independently verify that no problem exists — we can only verify that VIREON didn't find one.</li></ol>
+
+</body>
+</html>

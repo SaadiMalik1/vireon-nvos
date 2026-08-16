@@ -1,0 +1,32 @@
+{
+  "experiment_id": "C-1",
+  "name": "C-1: CSP+LDA on BNCI2014_001",
+  "dataset": "BNCI2014_001",
+  "pipeline": "CSP + LDA",
+  "evaluation": "CrossSessionEvaluation",
+  "mean_accuracy": 0.8367519709799025,
+  "n_subjects": 9,
+  "n_folds": 18,
+  "evidence_hash": "afe0d37d882b2eabf5bc98c16bcaf7c94fbdf6e56fb793b75585c1d7ef2e8240",
+  "evidence_verified": true,
+  "vireon_classification": "V1",
+  "findings": [
+    {
+      "finding": "Subject-level 95% CI [72.9%, 92.2%] \u2014 benchmarks report point estimates without uncertainty",
+      "severity": "Info"
+    },
+    {
+      "finding": "Permutation test p=0.0020 \u2014 benchmarks do not test statistical significance",
+      "severity": "Info"
+    },
+    {
+      "finding": "Subject heterogeneity: 2/9 subjects near chance (<65%) while 2/9 near ceiling (>99%)",
+      "severity": "Info"
+    },
+    {
+      "finding": "Cryptographic evidence bundle (SHA-256) \u2014 benchmarks produce no machine-verifiable provenance",
+      "severity": "Info"
+    }
+  ],
+  "adjudication_status": "pending"
+}
