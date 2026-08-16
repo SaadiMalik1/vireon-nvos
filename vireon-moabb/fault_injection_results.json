@@ -1,0 +1,23 @@
+{
+  "experiment": "fault_injection",
+  "clean_accuracy": 0.8367519709799025,
+  "faults": {
+    "subject_leakage": {
+      "detected": true,
+      "expected": "FAIL"
+    },
+    "trial_level_statistics": {
+      "detected": true,
+      "expected": "FAIL"
+    },
+    "broken_robustness": {
+      "detected": true,
+      "expected": "INDETERMINATE"
+    },
+    "tampered_evidence": {
+      "detected": true,
+      "expected": "FAIL"
+    }
+  },
+  "summary": "4/4 faults detected"
+}
