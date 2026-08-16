@@ -1,0 +1,61 @@
+{
+  "study": "B_end_to_end_fault_detection",
+  "description": "Faults injected into raw execution trace. VIREON's actual ValidationLayer runs.",
+  "baseline_accuracy": 0.8367519709799025,
+  "results": [
+    {
+      "fault": "subject_leakage",
+      "injected_into": "execution_trace (partitions[0].train_subjects)",
+      "expected": "FAIL",
+      "vireon_verdict": "FAIL",
+      "detected": true,
+      "has_relevant_check": true,
+      "note": ""
+    },
+    {
+      "fault": "below_chance",
+      "injected_into": "execution_trace (fold_results[*].accuracy)",
+      "expected": "FAIL",
+      "vireon_verdict": "FAIL",
+      "detected": true,
+      "has_relevant_check": true,
+      "note": "Statistics layer compares mean accuracy to chance level"
+    },
+    {
+      "fault": "missing_seed",
+      "injected_into": "execution_trace (seed = None)",
+      "expected": "FAIL",
+      "vireon_verdict": "FAIL",
+      "detected": true,
+      "has_relevant_check": true,
+      "note": "Reproducibility layer checks for seed presence"
+    },
+    {
+      "fault": "missing_environment",
+      "injected_into": "execution_trace (environment.*_version = 'unknown')",
+      "expected": "FAIL",
+      "vireon_verdict": "FAIL",
+      "detected": true,
+      "has_relevant_check": true,
+      "note": "Environment check looks for moabb_version != 'unknown'"
+    },
+    {
+      "fault": "tampered_evidence",
+      "injected_into": "evidence_bundle (summary.mean_accuracy)",
+      "expected": "FAIL",
+      "vireon_verdict": "FAIL",
+      "detected": true,
+      "has_relevant_check": true,
+      "note": "SHA-256 hash verification detects content modification"
+    }
+  ],
+  "detection_rate": "5/5",
+  "missed_faults": [],
+  "detected_faults": [
+    "subject_leakage",
+    "below_chance",
+    "missing_seed",
+    "missing_environment",
+    "tampered_evidence"
+  ]
+}

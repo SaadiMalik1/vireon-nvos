@@ -143,15 +143,24 @@ class ValidationLayer:
         return checks
 
     def _check_leakage(self, trace: MoabbExecutionTrace) -> list[CheckResult]:
-        """Check for train/test leakage.
+        """Check for train/test leakage by inspecting actual partition membership.
 
-        MOABB's CrossSessionEvaluation: for each subject, train on N-1 sessions, test on 1.
-        No subject overlap between train and test by design.
-        But we verify this from the partitions.
+        FIXED in Study B: previously checked only the evaluation class name.
+        Now inspects actual train_subjects, test_subjects, train_sessions,
+        test_sessions from the execution trace partitions.
+
+        Evaluation design semantics:
+          CrossSubjectEvaluation: train_subjects ∩ test_subjects = ∅
+          CrossSessionEvaluation: for each subject, train_sessions ∩ test_sessions = ∅
+            (same subject CAN appear in train and test, but with different sessions)
+          WithinSessionEvaluation: same subject in train and test is expected (trial-level split)
+          LeaveOneSubjectOut: exactly one test subject, NOT in train
         """
         checks = []
 
-        # Check: each fold has a test subject
+        # ── Structural checks ──
+
+        # Each fold has a test subject
         folds_with_test = sum(1 for p in trace.partitions if p.test_subjects)
         checks.append(CheckResult(
             name="test_subjects_present",
@@ -160,7 +169,7 @@ class ValidationLayer:
             explanation="Every fold must have test subjects"
         ))
 
-        # Check: no empty partitions
+        # No empty partitions
         empty_folds = sum(1 for p in trace.partitions if p.n_test_trials == 0)
         checks.append(CheckResult(
             name="no_empty_folds",
@@ -169,7 +178,7 @@ class ValidationLayer:
             explanation="No fold should have zero test trials"
         ))
 
-        # Check: accuracy in valid range
+        # Accuracy in valid range
         bad_accs = sum(1 for r in trace.fold_results if r.accuracy < 0 or r.accuracy > 1)
         checks.append(CheckResult(
             name="accuracy_range_valid",
@@ -178,17 +187,106 @@ class ValidationLayer:
             explanation="Accuracy must be in [0, 1]"
         ))
 
-        # Note: MOABB's CrossSession/CrossSubject evaluations are designed to prevent leakage.
-        # We can't fully verify train/test isolation from MOABB's standard output,
-        # but we can flag that the evaluation design is sound.
+        # ── Partition integrity checks (NEW — the gap from Study B) ──
+
         eval_class = trace.spec.get("evaluation", {}).get("evaluation_class", "Unknown")
-        sound_evals = {"CrossSessionEvaluation", "CrossSubjectEvaluation", "WithinSessionEvaluation"}
+
+        # Check: evaluation design is known
+        sound_evals = {
+            "CrossSessionEvaluation", "CrossSubjectEvaluation",
+            "WithinSessionEvaluation", "LeaveOneSubjectOut"
+        }
         checks.append(CheckResult(
             name="evaluation_design_sound",
             passed=eval_class in sound_evals,
             value=eval_class,
             explanation=f"{'Known sound evaluation design' if eval_class in sound_evals else 'Unknown evaluation design — verify leakage manually'}"
         ))
+
+        # ── Subject-level isolation (CrossSubject / LeaveOneSubjectOut) ──
+        # For CrossSubject: train_subjects and test_subjects must NOT overlap
+        # For CrossSession: same subject CAN be in both (different sessions) — this is valid
+        # For WithinSession: same subject in both is expected (trial-level split)
+
+        if eval_class in ("CrossSubjectEvaluation", "LeaveOneSubjectOut"):
+            # Strict subject isolation required
+            subject_overlaps = []
+            for p in trace.partitions:
+                if p.train_subjects and p.test_subjects:
+                    overlap = set(p.train_subjects) & set(p.test_subjects)
+                    if overlap:
+                        subject_overlaps.append((p.fold_id, sorted(overlap)))
+
+            if subject_overlaps:
+                detail = "; ".join(f"fold {fid}: subjects {subs}" for fid, subs in subject_overlaps[:3])
+                checks.append(CheckResult(
+                    name="no_subject_overlap",
+                    passed=False,
+                    value=f"{len(subject_overlaps)} folds with subject overlap ({detail})",
+                    explanation=f"VIOLATION: {eval_class} requires strict subject isolation. "
+                               f"Train and test subjects must not overlap."
+                ))
+            else:
+                checks.append(CheckResult(
+                    name="no_subject_overlap",
+                    passed=True,
+                    value="0 folds with subject overlap",
+                    explanation=f"{eval_class}: train_subjects ∩ test_subjects = ∅ for all folds ✓"
+                ))
+
+        elif eval_class == "CrossSessionEvaluation":
+            # Same subject CAN be in train and test — but sessions must differ
+            # Check: for each subject in both train and test, train_sessions ∩ test_sessions = ∅
+            session_overlaps = []
+            for p in trace.partitions:
+                if p.train_subjects and p.test_subjects:
+                    # Check if same subject appears in both train and test
+                    shared_subjects = set(p.train_subjects) & set(p.test_subjects)
+                    if shared_subjects:
+                        # For shared subjects, sessions must not overlap
+                        if p.train_sessions and p.test_sessions:
+                            session_overlap = set(p.train_sessions) & set(p.test_sessions)
+                            if session_overlap:
+                                session_overlaps.append((p.fold_id, sorted(shared_subjects), sorted(session_overlap)))
+
+            if session_overlaps:
+                detail = "; ".join(f"fold {fid}: subjects {subs}, sessions {sess}" for fid, subs, sess in session_overlaps[:3])
+                checks.append(CheckResult(
+                    name="no_session_overlap",
+                    passed=False,
+                    value=f"{len(session_overlaps)} folds with session overlap ({detail})",
+                    explanation="VIOLATION: CrossSessionEvaluation allows same subject in train/test "
+                               "but sessions must not overlap."
+                ))
+            else:
+                checks.append(CheckResult(
+                    name="session_isolation_valid",
+                    passed=True,
+                    value="0 session overlaps detected",
+                    explanation="CrossSessionEvaluation: same subjects in train/test is valid, "
+                               "but sessions are properly isolated ✓"
+                ))
+
+            # Also check: subjects ARE shared between train and test (otherwise it's cross-subject, not cross-session)
+            shared_count = sum(1 for p in trace.partitions
+                             if p.train_subjects and p.test_subjects
+                             and set(p.train_subjects) & set(p.test_subjects))
+            checks.append(CheckResult(
+                name="cross_session_subject_sharing",
+                passed=True,  # Informational, not a failure
+                value=f"{shared_count}/{len(trace.partitions)} folds share subjects between train/test",
+                explanation="CrossSessionEvaluation: subject sharing between train/test is expected "
+                           "(different sessions of same subject)"
+            ))
+
+        elif eval_class == "WithinSessionEvaluation":
+            # Same subject in train and test is expected (trial-level split)
+            checks.append(CheckResult(
+                name="within_session_design",
+                passed=True,
+                value="WithinSession evaluation — subject sharing expected",
+                explanation="WithinSessionEvaluation: same subject in train and test is by design (trial-level split)"
+            ))
 
         return checks
 
