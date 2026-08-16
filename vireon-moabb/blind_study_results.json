@@ -1,0 +1,356 @@
+{
+  "study": "blind_validation_sensitivity",
+  "total_experiments": 20,
+  "correct": 20,
+  "accuracy": 1.0,
+  "sensitivity": 1.0,
+  "specificity": 1.0,
+  "false_positive_rate": 0.0,
+  "false_negative_rate": 0.0,
+  "true_positives": 17,
+  "false_negatives": 0,
+  "true_negatives": 3,
+  "false_positives": 0,
+  "results": [
+    {
+      "experiment_id": "E001",
+      "ground_truth_label": "clean",
+      "expected_verdict": "PASS",
+      "vireon_verdict": "PASS",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "PASS",
+        "statistical_validity": "PASS",
+        "reproducibility": "PASS",
+        "evidence_integrity": "PASS",
+        "overall": "PASS"
+      },
+      "description": "Known-good experiment \u2014 no faults",
+      "correct": true
+    },
+    {
+      "experiment_id": "E002",
+      "ground_truth_label": "clean",
+      "expected_verdict": "PASS",
+      "vireon_verdict": "PASS",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "PASS",
+        "statistical_validity": "PASS",
+        "reproducibility": "PASS",
+        "evidence_integrity": "PASS",
+        "overall": "PASS"
+      },
+      "description": "Clean experiment with different accuracy (75%)",
+      "correct": true
+    },
+    {
+      "experiment_id": "E003",
+      "ground_truth_label": "clean",
+      "expected_verdict": "PASS",
+      "vireon_verdict": "PASS",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "PASS",
+        "statistical_validity": "PASS",
+        "reproducibility": "PASS",
+        "evidence_integrity": "PASS",
+        "overall": "PASS"
+      },
+      "description": "Clean experiment with high accuracy (95%)",
+      "correct": true
+    },
+    {
+      "experiment_id": "E004",
+      "ground_truth_label": "fault:subject_leakage",
+      "expected_verdict": "FAIL",
+      "vireon_verdict": "FAIL",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "FAIL",
+        "statistical_validity": "PASS",
+        "reproducibility": "PASS",
+        "evidence_integrity": "PASS",
+        "overall": "FAIL"
+      },
+      "description": "Subject 1 in train and test",
+      "correct": true
+    },
+    {
+      "experiment_id": "E005",
+      "ground_truth_label": "fault:session_leakage",
+      "expected_verdict": "FAIL",
+      "vireon_verdict": "FAIL",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "FAIL",
+        "statistical_validity": "PASS",
+        "reproducibility": "PASS",
+        "evidence_integrity": "PASS",
+        "overall": "FAIL"
+      },
+      "description": "Session overlap detected",
+      "correct": true
+    },
+    {
+      "experiment_id": "E006",
+      "ground_truth_label": "fault:preprocessing_leakage",
+      "expected_verdict": "FAIL",
+      "vireon_verdict": "FAIL",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "FAIL",
+        "statistical_validity": "PASS",
+        "reproducibility": "PASS",
+        "evidence_integrity": "PASS",
+        "overall": "FAIL"
+      },
+      "description": "Filter fitted on full dataset",
+      "correct": true
+    },
+    {
+      "experiment_id": "E007",
+      "ground_truth_label": "fault:trial_duplication",
+      "expected_verdict": "FAIL",
+      "vireon_verdict": "FAIL",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "FAIL",
+        "methodological_validity": "PASS",
+        "statistical_validity": "PASS",
+        "reproducibility": "PASS",
+        "evidence_integrity": "PASS",
+        "overall": "FAIL"
+      },
+      "description": "Test trials duplicated in train",
+      "correct": true
+    },
+    {
+      "experiment_id": "E008",
+      "ground_truth_label": "fault:wrong_stat_unit",
+      "expected_verdict": "FAIL",
+      "vireon_verdict": "FAIL",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "PASS",
+        "statistical_validity": "FAIL (ci_too_narrow (width=0.010, n=9); wrong_stat_unit)",
+        "reproducibility": "PASS",
+        "evidence_integrity": "PASS",
+        "overall": "FAIL"
+      },
+      "description": "Trial-level bootstrap (pseudoreplication)",
+      "correct": true
+    },
+    {
+      "experiment_id": "E009",
+      "ground_truth_label": "fault:invalid_permutation_unit",
+      "expected_verdict": "FAIL",
+      "vireon_verdict": "FAIL",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "PASS",
+        "statistical_validity": "FAIL (invalid_permutation_unit)",
+        "reproducibility": "PASS",
+        "evidence_integrity": "PASS",
+        "overall": "FAIL"
+      },
+      "description": "Permutation at trial level",
+      "correct": true
+    },
+    {
+      "experiment_id": "E010",
+      "ground_truth_label": "fault:missing_seed",
+      "expected_verdict": "FAIL",
+      "vireon_verdict": "FAIL",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "PASS",
+        "statistical_validity": "PASS",
+        "reproducibility": "FAIL (seed_recorded)",
+        "evidence_integrity": "PASS",
+        "overall": "FAIL"
+      },
+      "description": "No random seed recorded",
+      "correct": true
+    },
+    {
+      "experiment_id": "E011",
+      "ground_truth_label": "fault:nondeterministic_execution",
+      "expected_verdict": "FAIL",
+      "vireon_verdict": "FAIL",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "PASS",
+        "statistical_validity": "PASS",
+        "reproducibility": "FAIL (deterministic_execution)",
+        "evidence_integrity": "PASS",
+        "overall": "FAIL"
+      },
+      "description": "BLAS unpinned, PyTorch unseeded",
+      "correct": true
+    },
+    {
+      "experiment_id": "E012",
+      "ground_truth_label": "fault:incorrect_chance_level",
+      "expected_verdict": "FAIL",
+      "vireon_verdict": "FAIL",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "PASS",
+        "statistical_validity": "FAIL (incorrect_chance_level)",
+        "reproducibility": "PASS",
+        "evidence_integrity": "PASS",
+        "overall": "FAIL"
+      },
+      "description": "Chance=0.25 for binary task",
+      "correct": true
+    },
+    {
+      "experiment_id": "E013",
+      "ground_truth_label": "fault:multiple_comparison_error",
+      "expected_verdict": "FAIL",
+      "vireon_verdict": "FAIL",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "PASS",
+        "statistical_validity": "PASS",
+        "reproducibility": "FAIL (multiple_comparison_correction)",
+        "evidence_integrity": "PASS",
+        "overall": "FAIL"
+      },
+      "description": "20 tests, no FDR correction",
+      "correct": true
+    },
+    {
+      "experiment_id": "E014",
+      "ground_truth_label": "fault:normalization_leakage",
+      "expected_verdict": "FAIL",
+      "vireon_verdict": "FAIL",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "FAIL",
+        "statistical_validity": "PASS",
+        "reproducibility": "PASS",
+        "evidence_integrity": "PASS",
+        "overall": "FAIL"
+      },
+      "description": "Scaler fitted on all data",
+      "correct": true
+    },
+    {
+      "experiment_id": "E015",
+      "ground_truth_label": "fault:below_chance",
+      "expected_verdict": "FAIL",
+      "vireon_verdict": "FAIL",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "PASS",
+        "statistical_validity": "FAIL (below_chance)",
+        "reproducibility": "PASS",
+        "evidence_integrity": "PASS",
+        "overall": "FAIL"
+      },
+      "description": "Accuracy 42% < chance 50%",
+      "correct": true
+    },
+    {
+      "experiment_id": "E016",
+      "ground_truth_label": "fault:broken_robustness",
+      "expected_verdict": "INDETERMINATE",
+      "vireon_verdict": "INDETERMINATE",
+      "vireon_dimensions": {
+        "execution_validity": "INDETERMINATE",
+        "data_integrity": "PASS",
+        "methodological_validity": "PASS",
+        "statistical_validity": "PASS",
+        "reproducibility": "PASS",
+        "evidence_integrity": "PASS",
+        "overall": "INDETERMINATE"
+      },
+      "description": "Robustness engine execution failed",
+      "correct": true
+    },
+    {
+      "experiment_id": "E017",
+      "ground_truth_label": "fault:tampered_modified_accuracy",
+      "expected_verdict": "FAIL",
+      "vireon_verdict": "FAIL",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "PASS",
+        "statistical_validity": "PASS",
+        "reproducibility": "PASS",
+        "evidence_integrity": "FAIL (hash mismatch)",
+        "overall": "FAIL"
+      },
+      "description": "Modified accuracy 0.837\u21920.99",
+      "correct": true
+    },
+    {
+      "experiment_id": "E018",
+      "ground_truth_label": "fault:tampered_modified_dataset",
+      "expected_verdict": "FAIL",
+      "vireon_verdict": "FAIL",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "PASS",
+        "statistical_validity": "PASS",
+        "reproducibility": "PASS",
+        "evidence_integrity": "FAIL (hash mismatch)",
+        "overall": "FAIL"
+      },
+      "description": "Modified dataset name",
+      "correct": true
+    },
+    {
+      "experiment_id": "E019",
+      "ground_truth_label": "fault:tampered_modified_hash_field",
+      "expected_verdict": "FAIL",
+      "vireon_verdict": "FAIL",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "PASS",
+        "statistical_validity": "PASS",
+        "reproducibility": "PASS",
+        "evidence_integrity": "FAIL (hash mismatch)",
+        "overall": "FAIL"
+      },
+      "description": "Replaced hash with zeros",
+      "correct": true
+    },
+    {
+      "experiment_id": "E020",
+      "ground_truth_label": "fault:tampered_deleted_provenance",
+      "expected_verdict": "FAIL",
+      "vireon_verdict": "FAIL",
+      "vireon_dimensions": {
+        "execution_validity": "PASS",
+        "data_integrity": "PASS",
+        "methodological_validity": "PASS",
+        "statistical_validity": "PASS",
+        "reproducibility": "PASS",
+        "evidence_integrity": "FAIL (hash mismatch)",
+        "overall": "FAIL"
+      },
+      "description": "Deleted environment provenance",
+      "correct": true
+    }
+  ]
+}
