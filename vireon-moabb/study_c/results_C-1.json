@@ -8,7 +8,7 @@
   "std_accuracy": 0.14804472065794055,
   "n_subjects": 9,
   "n_folds": 18,
-  "execution_time_sec": 18.080753803253174,
+  "execution_time_sec": 17.52981996536255,
   "chance_level": 0.5,
   "above_chance": true,
   "subject_level_ci": [
@@ -49,7 +49,7 @@
     }
   ],
   "robustness_mode": "real",
-  "evidence_hash": "6159278e32ffc866e7e1cdc097ba9b04173f20a2963acfa680e02ee2ee129ec0",
+  "evidence_hash": "54ed6279ed12dabb100c98578ac2e31c656d5710919a86044a09e3d1adc85600",
   "evidence_verified": true,
   "vireon_classification": "V1",
   "findings": [

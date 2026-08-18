@@ -72,7 +72,7 @@ REPRODUCIBILITY
 ────────────────────────────────────────
   ✓ seed_recorded: seed=42
   ✓ environment_captured: MOABB 1.5.0, MNE 1.12.1, Python 3.14.6
-  ✓ timestamps_recorded: started=2026-08-16T04:56:19.311889+00:00, finished=2026-08-16T04:56:52.437111+00:00
+  ✓ timestamps_recorded: started=2026-08-16T06:05:43.712055+00:00, finished=2026-08-16T06:05:59.722872+00:00
   ✓ dataset_identity_recorded: BNCI2014_001
 
 ENVIRONMENT
@@ -88,14 +88,14 @@ ENVIRONMENT
 
 EXECUTION
 ────────────────────────────────────────
-  Started:        2026-08-16T04:56:19.311889+00:00
-  Finished:       2026-08-16T04:56:52.437111+00:00
+  Started:        2026-08-16T06:05:43.712055+00:00
+  Finished:       2026-08-16T06:05:59.722872+00:00
 
 EVIDENCE
 ────────────────────────────────────────
-  Bundle ID:      vireon-16f8b0ac6e10
-  Evidence hash:  16f8b0ac6e101ce746bae96293be07ec77fbcf30eb116a594cbf34f1f5501688
-  Created:        2026-08-16T04:56:52.444412+00:00
+  Bundle ID:      vireon-b41f6f631d41
+  Evidence hash:  b41f6f631d41ffcb79e8210837b12ba58957612c281da32777e13b4fce42ab9f
+  Created:        2026-08-16T06:05:59.730055+00:00
   All checks passed: True
 
 PROVENANCE STATEMENT
@@ -111,7 +111,7 @@ PROVENANCE STATEMENT
 VERIFICATION
 ────────────────────────────────────────
   To verify this evidence:
-    1. Check the SHA-256 hash matches: 16f8b0ac6e101ce7...
+    1. Check the SHA-256 hash matches: b41f6f631d41ffcb...
     2. Re-run the experiment with the same spec and seed
     3. Compare the new hash to this one
 

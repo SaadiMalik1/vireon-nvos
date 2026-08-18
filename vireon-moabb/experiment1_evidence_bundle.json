@@ -1,10 +1,10 @@
 {
-  "bundle_id": "vireon-7107ed75476e",
-  "evidence_hash": "7107ed75476ec11838932f1144b8f7c17f6c7e7755d774c97cef98f82add264a",
-  "created_at": "2026-08-16T06:05:43.709846+00:00",
+  "bundle_id": "vireon-473a5280f0dd",
+  "evidence_hash": "473a5280f0dd81f70b1c79644c1dbd7488a3c48e4f98764666cebbcd95d2b28d",
+  "created_at": "2026-08-15T17:39:08.530869+00:00",
   "experiment_spec": {
-    "name": "C-2: EEGNet-equivalent on BNCI2014_001",
-    "goal": "Study C Experiment 2: Deep learning pipeline (or equivalent if PyTorch unavailable).",
+    "name": "VIREON Experiment 1: CSP+LDA on BNCI2014_001",
+    "goal": "Determine whether VIREON's validation layer discovers scientifically meaningful information that conventional benchmarking does not, using the canonical BCI baseline (CSP+LDA) on BCI Competition IV-2a.",
     "mode": "research",
     "dataset": {
       "dataset_class": "BNCI2014_001",
@@ -17,8 +17,7 @@
       "fmin": 8.0,
       "fmax": 32.0,
       "channels": null,
-      "resample": null,
-      "n_classes": null
+      "resample": null
     },
     "pipeline": {
       "steps": [
@@ -28,16 +27,16 @@
           "params": {},
           "factory_args": [
             {
-              "module": "moabb.pipelines.features",
-              "class": "LogVariance",
-              "params": {}
+              "module": "mne.decoding",
+              "class": "CSP",
+              "params": {
+                "n_components": 8
+              }
             },
             {
-              "module": "sklearn.linear_model",
-              "class": "LogisticRegression",
-              "params": {
-                "max_iter": 1000
-              }
+              "module": "sklearn.discriminant_analysis",
+              "class": "LinearDiscriminantAnalysis",
+              "params": {}
             }
           ]
         }
@@ -89,8 +88,8 @@
   },
   "execution_trace": {
     "spec": {
-      "name": "C-2: EEGNet-equivalent on BNCI2014_001",
-      "goal": "Study C Experiment 2: Deep learning pipeline (or equivalent if PyTorch unavailable).",
+      "name": "VIREON Experiment 1: CSP+LDA on BNCI2014_001",
+      "goal": "Determine whether VIREON's validation layer discovers scientifically meaningful information that conventional benchmarking does not, using the canonical BCI baseline (CSP+LDA) on BCI Competition IV-2a.",
       "mode": "research",
       "dataset": {
         "dataset_class": "BNCI2014_001",
@@ -103,8 +102,7 @@
         "fmin": 8.0,
         "fmax": 32.0,
         "channels": null,
-        "resample": null,
-        "n_classes": null
+        "resample": null
       },
       "pipeline": {
         "steps": [
@@ -114,16 +112,16 @@
             "params": {},
             "factory_args": [
               {
-                "module": "moabb.pipelines.features",
-                "class": "LogVariance",
-                "params": {}
+                "module": "mne.decoding",
+                "class": "CSP",
+                "params": {
+                  "n_components": 8
+                }
               },
               {
-                "module": "sklearn.linear_model",
-                "class": "LogisticRegression",
-                "params": {
-                  "max_iter": 1000
-                }
+                "module": "sklearn.discriminant_analysis",
+                "class": "LinearDiscriminantAnalysis",
+                "params": {}
               }
             ]
           }
@@ -251,14 +249,14 @@
       {
         "fold_id": 0,
         "subject": 1,
-        "session": 555,
+        "session": 470,
         "train_subjects": [],
         "test_subjects": [
           1
         ],
         "train_sessions": [],
         "test_sessions": [
-          555
+          470
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -266,14 +264,14 @@
       {
         "fold_id": 1,
         "subject": 1,
-        "session": 163,
+        "session": 883,
         "train_subjects": [],
         "test_subjects": [
           1
         ],
         "train_sessions": [],
         "test_sessions": [
-          163
+          883
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -281,14 +279,14 @@
       {
         "fold_id": 2,
         "subject": 2,
-        "session": 555,
+        "session": 470,
         "train_subjects": [],
         "test_subjects": [
           2
         ],
         "train_sessions": [],
         "test_sessions": [
-          555
+          470
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -296,14 +294,14 @@
       {
         "fold_id": 3,
         "subject": 2,
-        "session": 163,
+        "session": 883,
         "train_subjects": [],
         "test_subjects": [
           2
         ],
         "train_sessions": [],
         "test_sessions": [
-          163
+          883
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -311,14 +309,14 @@
       {
         "fold_id": 4,
         "subject": 3,
-        "session": 555,
+        "session": 470,
         "train_subjects": [],
         "test_subjects": [
           3
         ],
         "train_sessions": [],
         "test_sessions": [
-          555
+          470
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -326,14 +324,14 @@
       {
         "fold_id": 5,
         "subject": 3,
-        "session": 163,
+        "session": 883,
         "train_subjects": [],
         "test_subjects": [
           3
         ],
         "train_sessions": [],
         "test_sessions": [
-          163
+          883
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -341,14 +339,14 @@
       {
         "fold_id": 6,
         "subject": 4,
-        "session": 555,
+        "session": 470,
         "train_subjects": [],
         "test_subjects": [
           4
         ],
         "train_sessions": [],
         "test_sessions": [
-          555
+          470
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -356,14 +354,14 @@
       {
         "fold_id": 7,
         "subject": 4,
-        "session": 163,
+        "session": 883,
         "train_subjects": [],
         "test_subjects": [
           4
         ],
         "train_sessions": [],
         "test_sessions": [
-          163
+          883
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -371,14 +369,14 @@
       {
         "fold_id": 8,
         "subject": 5,
-        "session": 555,
+        "session": 470,
         "train_subjects": [],
         "test_subjects": [
           5
         ],
         "train_sessions": [],
         "test_sessions": [
-          555
+          470
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -386,14 +384,14 @@
       {
         "fold_id": 9,
         "subject": 5,
-        "session": 163,
+        "session": 883,
         "train_subjects": [],
         "test_subjects": [
           5
         ],
         "train_sessions": [],
         "test_sessions": [
-          163
+          883
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -401,14 +399,14 @@
       {
         "fold_id": 10,
         "subject": 6,
-        "session": 555,
+        "session": 470,
         "train_subjects": [],
         "test_subjects": [
           6
         ],
         "train_sessions": [],
         "test_sessions": [
-          555
+          470
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -416,14 +414,14 @@
       {
         "fold_id": 11,
         "subject": 6,
-        "session": 163,
+        "session": 883,
         "train_subjects": [],
         "test_subjects": [
           6
         ],
         "train_sessions": [],
         "test_sessions": [
-          163
+          883
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -431,14 +429,14 @@
       {
         "fold_id": 12,
         "subject": 7,
-        "session": 555,
+        "session": 470,
         "train_subjects": [],
         "test_subjects": [
           7
         ],
         "train_sessions": [],
         "test_sessions": [
-          555
+          470
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -446,14 +444,14 @@
       {
         "fold_id": 13,
         "subject": 7,
-        "session": 163,
+        "session": 883,
         "train_subjects": [],
         "test_subjects": [
           7
         ],
         "train_sessions": [],
         "test_sessions": [
-          163
+          883
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -461,14 +459,14 @@
       {
         "fold_id": 14,
         "subject": 8,
-        "session": 555,
+        "session": 470,
         "train_subjects": [],
         "test_subjects": [
           8
         ],
         "train_sessions": [],
         "test_sessions": [
-          555
+          470
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -476,14 +474,14 @@
       {
         "fold_id": 15,
         "subject": 8,
-        "session": 163,
+        "session": 883,
         "train_subjects": [],
         "test_subjects": [
           8
         ],
         "train_sessions": [],
         "test_sessions": [
-          163
+          883
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -491,14 +489,14 @@
       {
         "fold_id": 16,
         "subject": 9,
-        "session": 555,
+        "session": 470,
         "train_subjects": [],
         "test_subjects": [
           9
         ],
         "train_sessions": [],
         "test_sessions": [
-          555
+          470
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -506,14 +504,14 @@
       {
         "fold_id": 17,
         "subject": 9,
-        "session": 163,
+        "session": 883,
         "train_subjects": [],
         "test_subjects": [
           9
         ],
         "train_sessions": [],
         "test_sessions": [
-          163
+          883
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -523,7 +521,7 @@
       {
         "fold_id": 0,
         "subject": 1,
-        "accuracy": 0.8234953880310059,
+        "accuracy": 0.9317129850387573,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -531,7 +529,7 @@
       {
         "fold_id": 1,
         "subject": 1,
-        "accuracy": 0.7401620149612427,
+        "accuracy": 0.9554398059844971,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -539,7 +537,7 @@
       {
         "fold_id": 2,
         "subject": 2,
-        "accuracy": 0.5841049551963806,
+        "accuracy": 0.5271990895271301,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -547,7 +545,7 @@
       {
         "fold_id": 3,
         "subject": 2,
-        "accuracy": 0.5864197611808777,
+        "accuracy": 0.6462191343307495,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -555,7 +553,7 @@
       {
         "fold_id": 4,
         "subject": 3,
-        "accuracy": 0.9373071193695068,
+        "accuracy": 0.9938271641731262,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -563,7 +561,7 @@
       {
         "fold_id": 5,
         "subject": 3,
-        "accuracy": 0.9371141791343689,
+        "accuracy": 0.9963348507881165,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -571,7 +569,7 @@
       {
         "fold_id": 6,
         "subject": 4,
-        "accuracy": 0.6502700448036194,
+        "accuracy": 0.8288965821266174,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -579,7 +577,7 @@
       {
         "fold_id": 7,
         "subject": 4,
-        "accuracy": 0.658178985118866,
+        "accuracy": 0.8287037014961243,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -587,7 +585,7 @@
       {
         "fold_id": 8,
         "subject": 5,
-        "accuracy": 0.48726850748062134,
+        "accuracy": 0.6209490895271301,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -595,7 +593,7 @@
       {
         "fold_id": 9,
         "subject": 5,
-        "accuracy": 0.4926697611808777,
+        "accuracy": 0.5719521641731262,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -603,7 +601,7 @@
       {
         "fold_id": 10,
         "subject": 6,
-        "accuracy": 0.7511574029922485,
+        "accuracy": 0.8177083134651184,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -611,7 +609,7 @@
       {
         "fold_id": 11,
         "subject": 6,
-        "accuracy": 0.6657021641731262,
+        "accuracy": 0.776813268661499,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -619,7 +617,7 @@
       {
         "fold_id": 12,
         "subject": 7,
-        "accuracy": 0.6766975522041321,
+        "accuracy": 0.8871527910232544,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -627,7 +625,7 @@
       {
         "fold_id": 13,
         "subject": 7,
-        "accuracy": 0.6132330298423767,
+        "accuracy": 0.9008487462997437,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -635,7 +633,7 @@
       {
         "fold_id": 14,
         "subject": 8,
-        "accuracy": 0.7152777910232544,
+        "accuracy": 0.9953703880310059,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -643,7 +641,7 @@
       {
         "fold_id": 15,
         "subject": 8,
-        "accuracy": 0.8092206716537476,
+        "accuracy": 0.9870756268501282,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -651,7 +649,7 @@
       {
         "fold_id": 16,
         "subject": 9,
-        "accuracy": 0.6664737462997437,
+        "accuracy": 0.8404706716537476,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -659,7 +657,7 @@
       {
         "fold_id": 17,
         "subject": 9,
-        "accuracy": 0.9124228358268738,
+        "accuracy": 0.9548611044883728,
         "n_test_trials": 144,
         "predicted_labels": [],
         "true_labels": []
@@ -674,11 +672,11 @@
       "sklearn_version": "1.9.0",
       "pyriemann_version": "0.12",
       "platform": "Linux-7.1.6-1-cachyos-x86_64-with-glibc2.44",
-      "captured_at": "2026-08-16T06:05:28.074481+00:00"
+      "captured_at": "2026-08-15T17:38:52.417204+00:00"
     },
     "seed": 42,
-    "execution_started_at": "2026-08-16T06:05:28.073175+00:00",
-    "execution_finished_at": "2026-08-16T06:05:43.702823+00:00",
+    "execution_started_at": "2026-08-15T17:38:52.356247+00:00",
+    "execution_finished_at": "2026-08-15T17:39:08.509103+00:00",
     "moabb_warnings": []
   },
   "validation_results": {
@@ -738,28 +736,16 @@
         "passed": true,
         "value": "CrossSessionEvaluation",
         "explanation": "Known sound evaluation design"
-      },
-      {
-        "name": "session_isolation_valid",
-        "passed": true,
-        "value": "0 session overlaps detected",
-        "explanation": "CrossSessionEvaluation: same subjects in train/test is valid, but sessions are properly isolated \u2713"
-      },
-      {
-        "name": "cross_session_subject_sharing",
-        "passed": true,
-        "value": "0/18 folds share subjects between train/test",
-        "explanation": "CrossSessionEvaluation: subject sharing between train/test is expected (different sessions of same subject)"
       }
     ],
     "statistics": {
-      "mean_accuracy": 0.7059542172484927,
-      "std_accuracy": 0.13288119916006372,
+      "mean_accuracy": 0.8367519709799025,
+      "std_accuracy": 0.14804472065794055,
       "chance_level": 0.5,
       "chance_level_passed": true,
       "subject_level_ci": [
-        0.6199360775450866,
-        0.7816505353483889
+        0.7287921174532838,
+        0.9216812930173344
       ],
       "ci_level": 0.95,
       "permutation_p_value": 0.001996007984031936,
@@ -784,7 +770,7 @@
       {
         "name": "timestamps_recorded",
         "passed": true,
-        "value": "started=2026-08-16T06:05:28.073175+00:00, finished=2026-08-16T06:05:43.702823+00:00",
+        "value": "started=2026-08-15T17:38:52.356247+00:00, finished=2026-08-15T17:39:08.509103+00:00",
         "explanation": "Execution timestamps must be recorded"
       },
       {
@@ -796,13 +782,13 @@
     ]
   },
   "summary": {
-    "experiment_name": "C-2: EEGNet-equivalent on BNCI2014_001",
-    "experiment_goal": "Study C Experiment 2: Deep learning pipeline (or equivalent if PyTorch unavailable).",
+    "experiment_name": "VIREON Experiment 1: CSP+LDA on BNCI2014_001",
+    "experiment_goal": "Determine whether VIREON's validation layer discovers scientifically meaningful information that conventional benchmarking does not, using the canonical BCI baseline (CSP+LDA) on BCI Competition IV-2a.",
     "mode": "research",
     "dataset": "BNCI2014_001",
     "n_subjects": 9,
     "n_folds": 18,
-    "mean_accuracy": 0.7059542172484927,
+    "mean_accuracy": 0.8367519709799025,
     "chance_level": 0.5,
     "all_validation_passed": true,
     "moabb_version": "1.5.0",

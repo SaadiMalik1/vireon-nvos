@@ -1,7 +1,7 @@
 {
-  "bundle_id": "vireon-6159278e32ff",
-  "evidence_hash": "6159278e32ffc866e7e1cdc097ba9b04173f20a2963acfa680e02ee2ee129ec0",
-  "created_at": "2026-08-16T04:55:49.793446+00:00",
+  "bundle_id": "vireon-54ed6279ed12",
+  "evidence_hash": "54ed6279ed12dabb100c98578ac2e31c656d5710919a86044a09e3d1adc85600",
+  "created_at": "2026-08-16T06:05:28.071024+00:00",
   "experiment_spec": {
     "name": "C-1: CSP+LDA on BNCI2014_001",
     "goal": "Study C Experiment 1: Classical CSP+LDA baseline on motor imagery.",
@@ -17,7 +17,8 @@
       "fmin": 8.0,
       "fmax": 32.0,
       "channels": null,
-      "resample": null
+      "resample": null,
+      "n_classes": null
     },
     "pipeline": {
       "steps": [
@@ -102,7 +103,8 @@
         "fmin": 8.0,
         "fmax": 32.0,
         "channels": null,
-        "resample": null
+        "resample": null,
+        "n_classes": null
       },
       "pipeline": {
         "steps": [
@@ -249,14 +251,14 @@
       {
         "fold_id": 0,
         "subject": 1,
-        "session": 458,
+        "session": 555,
         "train_subjects": [],
         "test_subjects": [
           1
         ],
         "train_sessions": [],
         "test_sessions": [
-          458
+          555
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -264,14 +266,14 @@
       {
         "fold_id": 1,
         "subject": 1,
-        "session": 966,
+        "session": 163,
         "train_subjects": [],
         "test_subjects": [
           1
         ],
         "train_sessions": [],
         "test_sessions": [
-          966
+          163
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -279,14 +281,14 @@
       {
         "fold_id": 2,
         "subject": 2,
-        "session": 458,
+        "session": 555,
         "train_subjects": [],
         "test_subjects": [
           2
         ],
         "train_sessions": [],
         "test_sessions": [
-          458
+          555
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -294,14 +296,14 @@
       {
         "fold_id": 3,
         "subject": 2,
-        "session": 966,
+        "session": 163,
         "train_subjects": [],
         "test_subjects": [
           2
         ],
         "train_sessions": [],
         "test_sessions": [
-          966
+          163
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -309,14 +311,14 @@
       {
         "fold_id": 4,
         "subject": 3,
-        "session": 458,
+        "session": 555,
         "train_subjects": [],
         "test_subjects": [
           3
         ],
         "train_sessions": [],
         "test_sessions": [
-          458
+          555
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -324,14 +326,14 @@
       {
         "fold_id": 5,
         "subject": 3,
-        "session": 966,
+        "session": 163,
         "train_subjects": [],
         "test_subjects": [
           3
         ],
         "train_sessions": [],
         "test_sessions": [
-          966
+          163
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -339,14 +341,14 @@
       {
         "fold_id": 6,
         "subject": 4,
-        "session": 458,
+        "session": 555,
         "train_subjects": [],
         "test_subjects": [
           4
         ],
         "train_sessions": [],
         "test_sessions": [
-          458
+          555
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -354,14 +356,14 @@
       {
         "fold_id": 7,
         "subject": 4,
-        "session": 966,
+        "session": 163,
         "train_subjects": [],
         "test_subjects": [
           4
         ],
         "train_sessions": [],
         "test_sessions": [
-          966
+          163
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -369,14 +371,14 @@
       {
         "fold_id": 8,
         "subject": 5,
-        "session": 458,
+        "session": 555,
         "train_subjects": [],
         "test_subjects": [
           5
         ],
         "train_sessions": [],
         "test_sessions": [
-          458
+          555
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -384,14 +386,14 @@
       {
         "fold_id": 9,
         "subject": 5,
-        "session": 966,
+        "session": 163,
         "train_subjects": [],
         "test_subjects": [
           5
         ],
         "train_sessions": [],
         "test_sessions": [
-          966
+          163
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -399,14 +401,14 @@
       {
         "fold_id": 10,
         "subject": 6,
-        "session": 458,
+        "session": 555,
         "train_subjects": [],
         "test_subjects": [
           6
         ],
         "train_sessions": [],
         "test_sessions": [
-          458
+          555
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -414,14 +416,14 @@
       {
         "fold_id": 11,
         "subject": 6,
-        "session": 966,
+        "session": 163,
         "train_subjects": [],
         "test_subjects": [
           6
         ],
         "train_sessions": [],
         "test_sessions": [
-          966
+          163
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -429,14 +431,14 @@
       {
         "fold_id": 12,
         "subject": 7,
-        "session": 458,
+        "session": 555,
         "train_subjects": [],
         "test_subjects": [
           7
         ],
         "train_sessions": [],
         "test_sessions": [
-          458
+          555
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -444,14 +446,14 @@
       {
         "fold_id": 13,
         "subject": 7,
-        "session": 966,
+        "session": 163,
         "train_subjects": [],
         "test_subjects": [
           7
         ],
         "train_sessions": [],
         "test_sessions": [
-          966
+          163
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -459,14 +461,14 @@
       {
         "fold_id": 14,
         "subject": 8,
-        "session": 458,
+        "session": 555,
         "train_subjects": [],
         "test_subjects": [
           8
         ],
         "train_sessions": [],
         "test_sessions": [
-          458
+          555
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -474,14 +476,14 @@
       {
         "fold_id": 15,
         "subject": 8,
-        "session": 966,
+        "session": 163,
         "train_subjects": [],
         "test_subjects": [
           8
         ],
         "train_sessions": [],
         "test_sessions": [
-          966
+          163
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -489,14 +491,14 @@
       {
         "fold_id": 16,
         "subject": 9,
-        "session": 458,
+        "session": 555,
         "train_subjects": [],
         "test_subjects": [
           9
         ],
         "train_sessions": [],
         "test_sessions": [
-          458
+          555
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -504,14 +506,14 @@
       {
         "fold_id": 17,
         "subject": 9,
-        "session": 966,
+        "session": 163,
         "train_subjects": [],
         "test_subjects": [
           9
         ],
         "train_sessions": [],
         "test_sessions": [
-          966
+          163
         ],
         "n_train_trials": 0,
         "n_test_trials": 144
@@ -672,11 +674,11 @@
       "sklearn_version": "1.9.0",
       "pyriemann_version": "0.12",
       "platform": "Linux-7.1.6-1-cachyos-x86_64-with-glibc2.44",
-      "captured_at": "2026-08-16T04:55:33.674412+00:00"
+      "captured_at": "2026-08-16T06:05:12.103970+00:00"
     },
     "seed": 42,
-    "execution_started_at": "2026-08-16T04:55:33.665286+00:00",
-    "execution_finished_at": "2026-08-16T04:55:49.783198+00:00",
+    "execution_started_at": "2026-08-16T06:05:12.097755+00:00",
+    "execution_finished_at": "2026-08-16T06:05:28.062426+00:00",
     "moabb_warnings": []
   },
   "validation_results": {
@@ -782,7 +784,7 @@
       {
         "name": "timestamps_recorded",
         "passed": true,
-        "value": "started=2026-08-16T04:55:33.665286+00:00, finished=2026-08-16T04:55:49.783198+00:00",
+        "value": "started=2026-08-16T06:05:12.097755+00:00, finished=2026-08-16T06:05:28.062426+00:00",
         "explanation": "Execution timestamps must be recorded"
       },
       {

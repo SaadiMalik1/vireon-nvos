@@ -13,7 +13,7 @@
       "std_accuracy": 0.14804472065794055,
       "n_subjects": 9,
       "n_folds": 18,
-      "execution_time_sec": 18.080753803253174,
+      "execution_time_sec": 17.52981996536255,
       "chance_level": 0.5,
       "above_chance": true,
       "subject_level_ci": [
@@ -54,7 +54,7 @@
         }
       ],
       "robustness_mode": "real",
-      "evidence_hash": "6159278e32ffc866e7e1cdc097ba9b04173f20a2963acfa680e02ee2ee129ec0",
+      "evidence_hash": "54ed6279ed12dabb100c98578ac2e31c656d5710919a86044a09e3d1adc85600",
       "evidence_verified": true,
       "vireon_classification": "V1",
       "findings": [
@@ -76,7 +76,7 @@
       "std_accuracy": 0.13288119916006372,
       "n_subjects": 9,
       "n_folds": 18,
-      "execution_time_sec": 29.506529331207275,
+      "execution_time_sec": 15.629903078079224,
       "chance_level": 0.5,
       "above_chance": true,
       "subject_level_ci": [
@@ -117,7 +117,7 @@
         }
       ],
       "robustness_mode": "real",
-      "evidence_hash": "03e72cfe7d2693e832dd07045b37f412cb4f3cab7bfec388500a0342a43b5dea",
+      "evidence_hash": "7107ed75476ec11838932f1144b8f7c17f6c7e7755d774c97cef98f82add264a",
       "evidence_verified": true,
       "vireon_classification": "V1",
       "findings": [
@@ -139,7 +139,7 @@
       "std_accuracy": 0.16729184132035807,
       "n_subjects": 9,
       "n_folds": 18,
-      "execution_time_sec": 33.12548065185547,
+      "execution_time_sec": 16.011091470718384,
       "chance_level": 0.5,
       "above_chance": true,
       "subject_level_ci": [
@@ -180,7 +180,7 @@
         }
       ],
       "robustness_mode": "real",
-      "evidence_hash": "16f8b0ac6e101ce746bae96293be07ec77fbcf30eb116a594cbf34f1f5501688",
+      "evidence_hash": "b41f6f631d41ffcb79e8210837b12ba58957612c281da32777e13b4fce42ab9f",
       "evidence_verified": true,
       "vireon_classification": "V1",
       "findings": [
@@ -195,12 +195,12 @@
     {
       "experiment_id": "C-4",
       "status": "execution_failed",
-      "error": "No datasets left after paradigm\n            and evaluation checks"
+      "error": "('Connection broken: IncompleteRead(4338116 bytes read, 262537824 more expected)', IncompleteRead(4338116 bytes read, 262537824 more expected))"
     },
     {
       "experiment_id": "C-5",
       "status": "execution_failed",
-      "error": "No datasets left after paradigm\n            and evaluation checks"
+      "error": "('Connection broken: IncompleteRead(4046640 bytes read, 101852555 more expected)', IncompleteRead(4046640 bytes read, 101852555 more expected))"
     }
   ],
   "summary": {
