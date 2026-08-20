@@ -1,7 +1,7 @@
 # ADR 0001: Validation Not Simulation
 
 **Date:** 2026-07-30
-**Status:** Accepted
+**Status:** Refined by ADR 0008 (VIREON x MOABB Integration)
 
 ## Context
 A major challenge in neurotechnology development is proving that software (like decoders) will work on real human subjects before invasive implantation. Traditionally, developers have relied on "simulation"—attempting to build physiologically perfect computational models of the brain to test their algorithms. 

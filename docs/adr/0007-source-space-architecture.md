@@ -1,7 +1,7 @@
 # ADR 0007: Source Space Architecture
 
 **Date:** 2026-07-30
-**Status:** Accepted
+**Status:** Refined by ADR 0008 (VIREON x MOABB Integration)
 
 ## Context
 Modeling brain activity requires a decision on where the signal originates. Sensor-space modeling (e.g., generating noise directly at the EEG electrode) is computationally cheap but physiologically implausible. True physiological artifacts (like eye blinks or muscle twitches) project across the scalp through volume conduction.

@@ -26,6 +26,11 @@ def cohens_d(group1: np.ndarray, group2: np.ndarray, pooled: bool = True) -> flo
     return float((m1 - m2) / pooled_std)
 
 
+def compute_cohens_d(group1: np.ndarray, group2: np.ndarray) -> float:
+    """Compute Cohen's d for two groups."""
+    return cohens_d(group1, group2)
+
+
 def hedges_g(group1: np.ndarray, group2: np.ndarray) -> float:
     """Hedges' g — Cohen's d with small-sample bias correction.
 

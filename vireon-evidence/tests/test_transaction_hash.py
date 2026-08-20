@@ -28,7 +28,10 @@ def test_different_bundles_different_hashes():
 
 def test_same_bundle_same_hash():
     b = create_bundle()
+    # Reset sequence counter so both transactions get the same sequence number
+    EvidenceTransaction._sequence_counter = 0
     t1 = EvidenceTransaction(bundle=b, message="m")
+    EvidenceTransaction._sequence_counter = 0
     t2 = EvidenceTransaction(bundle=b, message="m")
     assert t1.transaction_hash == t2.transaction_hash
 

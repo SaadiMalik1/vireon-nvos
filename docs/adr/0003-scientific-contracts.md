@@ -1,7 +1,7 @@
 # ADR 0003: Scientific Contracts
 
 **Date:** 2026-07-30
-**Status:** Accepted
+**Status:** Refined by ADR 0008 (VIREON x MOABB Integration)
 
 ## Context
 "Garbage In, Garbage Out" is the cardinal sin of scientific computing. Frequently, algorithms are applied to data that violate their mathematical assumptions (e.g., using Independent Component Analysis on highly non-stationary data, or computing Welch's PSD on a transient signal). Standard type-checking (e.g., ensuring an argument is a `float` or a `numpy.ndarray`) is insufficient to catch scientific errors.

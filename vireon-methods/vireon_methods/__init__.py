@@ -20,7 +20,7 @@ from vireon_methods.connectivity.vireon_mutual_information import VireonMutualIn
 from vireon_methods.time_frequency.vireon_emd import VireonEMD
 from vireon_methods.signal_processing.vireon_convolution import VireonConvolution
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 __all__ = [
     "VireonWelch", "VireonFFT", "VireonSTFT", "VireonWavelet", "VireonMultitaper",
     "VireonFIR", "VireonIIR", "VireonICA", "VireonCSP", "VireonRiemannianMDM",

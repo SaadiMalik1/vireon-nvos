@@ -4,17 +4,17 @@
 [![Documentation Status](https://img.shields.io/badge/docs-latest-blue.svg)](https://github.com/SaadiMalik1/vireon-nvos)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-VIREON is an open scientific infrastructure designed for reproducible neurotechnology validation, digital twins, evidence generation, and independent verification. 
+VIREON is an open scientific infrastructure designed for automated, machine-checkable neurotechnology validation across execution validity, methodological validity, statistical validity, robustness, reproducibility, and evidence integrity.
 
-Unlike traditional "simulation" frameworks, VIREON intentionally generates *Adversarial Digital Twins* to stress-test decoders, hardware models, and artifact generators under mathematically bounded constraints.
+VIREON focuses on rigorous validation and stress-testing of decoders, pipelines, and signal processing methods under mathematically bounded constraints.
 
-## 🚀 The Paradigm: Validation, Not Simulation
+## 🚀 The Paradigm: Automated Validation
 
-Traditional black-box decoders often fail to generalize to real-world environments because validation datasets lack realistic artifacts (e.g., telemetry packet loss, electrode pops). 
+Traditional black-box decoders often fail to generalize to real-world environments because validation workflows lack rigorous statistical unit checking, perturbation testing, or cryptographic execution provenance.
 
 VIREON abstracts the complexities of experimental neurophysiology into a **capability-based kernel**. 
 - **Scientific Contracts**: Every plugin explicitly declares its mathematical, statistical, and physiological assumptions. If data violates these assumptions (e.g., applying stationary methods to transient event-related potentials), the kernel halts.
-- **Evidence Engine**: Instead of just producing numerical results, VIREON produces immutable `IEvidence` JSON-LD bundles. It tracks provenance, random seeds, and exact Git hashes to solve the reproducibility crisis.
+- **Evidence Engine**: Instead of just producing numerical results, VIREON produces immutable `IEvidence` JSON-LD bundles. It tracks provenance, random seeds, environment fingerprints, and exact Git hashes to provide machine-verifiable reproducibility mechanisms.
 
 ## 📦 Installation
 

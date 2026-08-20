@@ -57,6 +57,17 @@ def permutation_test(
     }
 
 
+def compute_permutation_test(
+    group1: np.ndarray,
+    group2: np.ndarray,
+    n_permutations: int = 1000,
+    seed: int = 42
+) -> float:
+    """Compute permutation test p-value between two groups."""
+    res = permutation_test(group1, group2, n_permutations=n_permutations, seed=seed)
+    return res["p_value"]
+
+
 def max_stat_permutation_test(
     data: np.ndarray,
     labels: np.ndarray,

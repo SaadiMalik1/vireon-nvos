@@ -1,7 +1,7 @@
 # ADR 0002: Plugin-First Kernel
 
 **Date:** 2026-07-30
-**Status:** Accepted
+**Status:** Refined by ADR 0008 (VIREON x MOABB Integration)
 
 ## Context
 Neurotechnology research code often devolves into massive "God classes" (e.g., `ExperimentRunner` or `EEGSimulator`) where data loading, preprocessing, signal extraction, and statistical testing are tightly coupled. This makes code reuse impossible and independent validation exceptionally difficult.

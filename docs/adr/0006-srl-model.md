@@ -1,7 +1,7 @@
 # ADR 0006: Scientific Readiness Level (SRL) Model
 
 **Date:** 2026-07-30
-**Status:** Accepted
+**Status:** Refined by ADR 0008 (VIREON x MOABB Integration)
 
 ## Context
 Not all code in a research repository is equally trustworthy. A newly implemented artifact generator might compile and run without throwing errors, but it might lack any physiological justification. Users need a metric to trust the components they include in their execution DAGs.

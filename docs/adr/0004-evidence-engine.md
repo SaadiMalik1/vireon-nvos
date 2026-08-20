@@ -1,7 +1,7 @@
 # ADR 0004: Evidence Engine
 
 **Date:** 2026-07-30
-**Status:** Accepted
+**Status:** Refined by ADR 0008 (VIREON x MOABB Integration)
 
 ## Context
 When a commercial BCI company submits validation data to a regulatory body, or an academic lab publishes a paper, the final output is usually a PDF or a static CSV file. The provenance of that data—the exact sequence of steps, code versions, and mathematical assumptions used to generate it—is lost.

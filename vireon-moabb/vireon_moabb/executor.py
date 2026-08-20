@@ -74,6 +74,7 @@ class EnvironmentFingerprint:
     pyriemann_version: str
     platform: str
     captured_at: str
+    git_commit: Optional[str] = None
 
 
 @dataclass
@@ -277,6 +278,15 @@ class MoabbExecutor:
             except (ImportError, AttributeError):
                 versions[pkg] = "unknown"
 
+        git_commit = "unknown"
+        try:
+            import subprocess
+            res = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, timeout=5)
+            if res.returncode == 0:
+                git_commit = res.stdout.strip()
+        except Exception:
+            pass
+
         return EnvironmentFingerprint(
             python_version=sys.version.split()[0],
             numpy_version=versions.get("numpy", "unknown"),
@@ -287,6 +297,7 @@ class MoabbExecutor:
             pyriemann_version=versions.get("pyriemann", "unknown"),
             platform=platform.platform(),
             captured_at=datetime.now(timezone.utc).isoformat(),
+            git_commit=git_commit,
         )
 
     def _capture_dataset_metadata(self, dataset, paradigm, subject_list) -> DatasetMetadata:

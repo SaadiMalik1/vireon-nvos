@@ -1,7 +1,7 @@
 # ADR 0005: Knowledge Graph
 
 **Date:** 2026-07-30
-**Status:** Accepted
+**Status:** Refined by ADR 0008 (VIREON x MOABB Integration)
 
 ## Context
 When a `ScientificContract` declares that it assumes "Wide-Sense Stationarity", that string is semantically meaningless to a standard python runtime. Without a semantic mapping, the system cannot deduce that a transient event (like an electrode pop) violates Wide-Sense Stationarity.
