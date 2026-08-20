@@ -8,8 +8,12 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.hypothesis/
 .coverage
+.coverage.*
 htmlcov/
+coverage.xml
+*.whl
 .venv/
 venv/
 env/
@@ -24,10 +28,14 @@ node_modules/
 dist/
 build/
 
-# IDE
+# IDE & Editors
 .vscode/
 .idea/
 *.swp
+*~
+*.bak
+*.tmp
+*.save
 
 # OS
 .DS_Store
@@ -36,17 +44,22 @@ Thumbs.db
 # Environment
 .env
 .env.*
+config.local.*
 
-# Logs
+# Logs & Dumps
 *.log
+log_*.txt
+*_log.txt
+*.out
 
-# Data
+# Data & Caches
 datasets/
 downloads/
 cache/
 tmp/
+workspace/
 
-# Generated results
+# Generated results & Artifacts
 results/
 artifacts/
 reports/
@@ -55,46 +68,48 @@ output/
 evidence_output/
 benchmarks/output/
 examples/*/output/
-*.db
+evidence/
 site/
 
-# PR Descriptions
+# Databases
+*.db
+*.db-journal
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Patches & Archives
+*.patch
+*.diff
+*.rej
+*.orig
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+*.rar
+*.tar.bz2
+
+# PR Descriptions & Implementation Scratch
 pr_descriptions/
 pr_desc/
 pr-desc/
 pr_desc*.md
-
-# Jupyter
-.ipynb_checkpoints/
-
-# MNE / FreeSurfer
-subjects/
-freesurfer/
-*.fif
-*.edf
-
-# LSL recordings
-*.xdf
-
-# Coverage
-coverage.xml
-
-# Python wheels
-*.whl
-
-# Local configs
-config.local.*
-
-# NVOS Implementation
 nvos-imp/
 nvos\ -imp/
-imp2/
-imp3/
-inp3/
-imp4/
-inp4/
+imp*/
+inp*/
 
 # Trackers
 *TRACKER*.md
 *tracker*.md
-evidence/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# MNE / FreeSurfer / Electrophysiology
+subjects/
+freesurfer/
+*.fif
+*.edf
+*.xdf
