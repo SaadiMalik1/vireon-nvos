@@ -209,13 +209,19 @@ def test_no_fake_hashes():
 
 
 def test_no_scratch_files():
-    """Test that scratch files with /home/ronin paths are removed."""
+    """Test that scratch, patch, log, and deprecated runner files are removed."""
     from pathlib import Path
     repo_root = Path(__file__).resolve().parent.parent.parent
     assert not (repo_root / "scratch_bids.py").exists()
     assert not (repo_root / "parse_phase_c.py").exists()
     assert not (repo_root / "parse_transcript.py").exists()
     assert not (repo_root / "test_bem.py").exists()
+    assert not (repo_root / "apply_playbook_dx.sh").exists()
+    assert not (repo_root / "log_ubuntu_311.txt").exists()
+    assert not (repo_root / "vireon_dx.patch").exists()
+    assert not (repo_root / "vireon_dx_content_only.patch").exists()
+    assert not (repo_root / "vireon_dx_new_files.tar.gz").exists()
+    assert not (repo_root / "vireon_validation" / "run_regression_suite.py").exists()
 
 
 def test_version_synced():
