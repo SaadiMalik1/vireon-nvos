@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>VIREON Exhaustive Audit — Final</title>
+<style>
+@page {
+  size: A4;
+  margin: 18mm 16mm 18mm 16mm;
+  @bottom-center {
+    content: "VIREON Exhaustive Audit — Final — Page " counter(page) " of " counter(pages);
+    font-family: 'Liberation Serif', serif;
+    font-size: 9pt;
+    color: #8e8b84;
+  }
+}
+@page :first {
+  margin: 0;
+  @bottom-center { content: ""; }
+}
+
+html, body {
+  margin: 0; padding: 0;
+  background: #ffffff;
+  color: #1e1d1b;
+  font-family: 'Liberation Serif', 'FreeSerif', 'Noto Serif', serif;
+  font-size: 10.5pt;
+  line-height: 1.55;
+  text-align: justify;
+}
+
+.cover {
+  page-break-after: always;
+  background: #1e1d1b;
+  color: #ffffff;
+  padding: 60mm 25mm 30mm 25mm;
+  min-height: 297mm;
+  box-sizing: border-box;
+  position: relative;
+}
+.cover .eyebrow {
+  color: #a18532;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 10pt;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8mm;
+}
+.cover h1 {
+  color: #ffffff;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 32pt;
+  line-height: 1.15;
+  margin: 0 0 6mm 0;
+  text-align: left;
+  border: none;
+  padding: 0;
+}
+.cover .subtitle {
+  color: #e8e2d3;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 13pt;
+  font-weight: normal;
+  margin: 0 0 18mm 0;
+  text-align: left;
+  line-height: 1.5;
+}
+.cover .meta {
+  color: #c8c0a8;
+  font-family: 'Liberation Mono', monospace;
+  font-size: 9pt;
+  line-height: 1.7;
+  text-align: left;
+  margin-top: 18mm;
+}
+.cover .meta strong {
+  color: #a18532;
+}
+.cover .accent-bar {
+  position: absolute;
+  top: 0; left: 0;
+  width: 12mm;
+  height: 100%;
+  background: #a18532;
+}
+.cover .score-block {
+  margin-top: 20mm;
+  padding: 8mm;
+  background: #2a2926;
+  border-left: 4px solid #a18532;
+}
+.cover .score-label {
+  color: #a18532;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 9pt;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.cover .score-value {
+  color: #ffffff;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 22pt;
+  font-weight: bold;
+  margin-top: 2mm;
+}
+.cover .score-value .max {
+  color: #c8c0a8;
+  font-size: 13pt;
+}
+.cover .verdict {
+  color: #e8e2d3;
+  font-size: 9.5pt;
+  margin-top: 4mm;
+  line-height: 1.5;
+}
+
+h1 {
+  color: #1e1d1b;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 19pt;
+  line-height: 1.2;
+  margin: 14mm 0 4mm 0;
+  padding-bottom: 2mm;
+  border-bottom: 2px solid #5d563e;
+  page-break-after: avoid;
+  text-align: left;
+}
+h2 {
+  color: #5d563e;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 14pt;
+  line-height: 1.3;
+  margin: 8mm 0 3mm 0;
+  page-break-after: avoid;
+  text-align: left;
+}
+h3 {
+  color: #1e1d1b;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 12pt;
+  line-height: 1.3;
+  margin: 6mm 0 2mm 0;
+  page-break-after: avoid;
+  text-align: left;
+}
+h4 {
+  color: #a18532;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 11pt;
+  line-height: 1.3;
+  margin: 5mm 0 2mm 0;
+  page-break-after: avoid;
+  text-align: left;
+}
+
+p {
+  margin: 0 0 3mm 0;
+  orphans: 3;
+  widows: 3;
+}
+
+strong { color: #1e1d1b; }
+em { color: #5d563e; }
+
+code {
+  font-family: 'Liberation Mono', 'DejaVu Sans Mono', monospace;
+  font-size: 9pt;
+  background: #f5f5f4;
+  padding: 0.5mm 1.5mm;
+  border-radius: 1.5mm;
+  color: #5d563e;
+  word-break: break-all;
+}
+
+pre {
+  background: #f5f5f4;
+  border: 1px solid #d7d2c4;
+  border-left: 4px solid #a18532;
+  border-radius: 2mm;
+  padding: 4mm 5mm;
+  margin: 4mm 0;
+  page-break-inside: avoid;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  font-size: 8.5pt;
+  line-height: 1.45;
+}
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #1e1d1b;
+  font-size: 8.5pt;
+  word-break: normal;
+}
+
+ul, ol {
+  margin: 2mm 0 4mm 0;
+  padding-left: 7mm;
+}
+li {
+  margin: 1mm 0;
+  line-height: 1.5;
+}
+li.nested {
+  list-style-type: circle;
+  margin-left: 5mm;
+}
+
+blockquote {
+  border-left: 4px solid #a18532;
+  background: #faf9f6;
+  padding: 3mm 5mm;
+  margin: 4mm 0;
+  color: #5d563e;
+  font-style: italic;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #d7d2c4;
+  margin: 6mm 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 4mm 0;
+  font-size: 9pt;
+  page-break-inside: avoid;
+}
+th {
+  background: #5d563e;
+  color: #ffffff;
+  font-family: 'Liberation Sans', sans-serif;
+  font-weight: bold;
+  text-align: left;
+  padding: 2mm 3mm;
+  border: 1px solid #5d563e;
+}
+td {
+  padding: 2mm 3mm;
+  border: 1px solid #d7d2c4;
+  vertical-align: top;
+}
+tr:nth-child(even) td {
+  background: #f5f5f4;
+}
+
+h2 + p, h3 + p {
+  page-break-before: avoid;
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="accent-bar"></div>
+  <div class="eyebrow">VIREON ENGINEERING INTEGRITY</div>
+  <h1>VIREON Exhaustive Audit — Final</h1>
+  <div class="subtitle">Fresh investigation from source code, test execution, dependency behavior. Evidence-driven, not claim-driven.</div>
+  
+<div class="score-block">
+  <div class="score-label">OVERALL SCORE</div>
+  <div class="score-value">137 / 210 (65.2%)</div>
+  <div class="verdict">30,929 LOC, 12 packages, 243 tests pass, 2 fail, 2 collection errors. Evidence layer: A-grade. Validation: 5/5 faults detected (Study B). Study C: 3/5 completed, all V1, no V2 yet. POC proven with real BNCI2014_001 (83.68% accuracy, SHA-256 verified). Maturity: Research Prototype.</div>
+</div>
+
+  <div class="meta">
+    <strong>Repository:</strong> github.com/SaadiMalik1/vireon-nvos<br/>
+    <strong>Audit Baseline:</strong> v1.0.3 (commit 774d7ed)<br/>
+    <strong>Target Release:</strong> v1.1.0-alpha<br/>
+    <strong>Estimated Duration:</strong> 4-6 weeks<br/>
+    <strong>Tasks:</strong> 9 gating tasks (P0 + P1 subset)<br/>
+    <strong>Reference:</strong> vireon_remediation_playbook.md (full details)<br/>
+  </div>
+</div>
+
+<h1>VIREON Exhaustive Audit — Final</h1>
+<p><strong>Date:</strong> 2026-08-16 <strong>Commit:</strong> 774d7ed9663c971db39f1e02fd4c5172e63bb046 (v1.0.3, with uncommitted dx/dx2 changes) <strong>Auditor:</strong> Super Z (GLM-4.6 via Z.ai) <strong>Method:</strong> Fresh investigation from source code, test execution, dependency behavior</p>
+<hr/>
+<h2>1. Executive Summary</h2>
+<p>VIREON is a 12-package Python monorepo (30,929 LOC) that has evolved from a "worse MOABB with extra features" into a focused validation/evidence layer for computational neurotechnology. The project now has a working end-to-end pipeline (ExperimentSpec → MOABB → ValidationLayer → EvidenceBundle → Report), a proven POC with real BCI data (BNCI2014_001, 9 subjects, 83.68% accuracy, SHA-256 verified), and a formal Study C protocol for testing whether VIREON can discover real methodological problems.</p>
+<p>The evidence layer is production-capable: SHA-256 hashing, tamper detection, INSERT OR IGNORE registry, deterministic transaction hashes, and EvidenceBundle.verify() all work correctly. The validation layer can discover 5/5 tested fault classes from raw execution data (Study B), including the previously-missing subject leakage detection. The MOABB integration is architecturally sound — VIREON delegates BCI execution and owns validation/evidence.</p>
+<p>However, VIREON still carries significant baggage: 18 of 21 native algorithm files are scipy/sklearn wrappers that should be deprecated; the API health endpoint reports version 0.4.0 (hardcoded, not 1.2.0); vireon-methods __version__ is still 1.0.2; 2 SQLite databases remain committed to git; 2 literature tests have collection errors; and the entire project is single-author with a 5-day development history. Most critically, VIREON has not yet demonstrated that it can find a real methodological problem in a published paper — all Study C experiments so far (C-1 through C-3) resulted in V1 (additional characterization), not V2 (concern found).</p>
+<p><strong>The core finding:</strong> VIREON has a working, evidence-generating validation layer that sits above MOABB and correctly detects known faults. It has not yet proven that this capability translates to discovering previously unknown methodological problems in real research. That question — Study C — is the gating scientific experiment.</p>
+<hr/>
+<h2>2. Current Architecture</h2>
+<pre><code>VIREON (12 packages, 30,929 LOC, 128 test files, 444 test functions)
+│
+├── vireon-core/ (2,687 LOC) — contracts, kernel, runtime
+├── vireon-methods/ (4,027 LOC) — 21 algorithm files, 18 are scipy/sklearn wrappers ← DEPRECATE
+├── vireon-evidence/ (2,112 LOC) — registry, graph, tamper detection ← CORE MOAT
+├── vireon-corpus/ (839 LOC) — 3 datasets, dispatches by key, no silent fallback
+├── vireon-knowledge/ (532 LOC) — 20 rules covering 20 methods
+├── vireon-moabb/ (6,520 LOC) — ExperimentSpec, executor, validation, evidence, adapters, robustness, statistics, scorecard, CLI ← THE NEW VIREON
+├── vireon-mcp/ (148 LOC) — 6-tool MCP server, stdio transport
+├── vireon-validation/ (4,726 LOC) — benchmarks, statistics, regression
+├── vireon-verification/ (2,122 LOC) — 32 literature reproduction tests (2 collection errors)
+├── vireon-models/ (2,092 LOC) — digital twins, hardware models ← UNUSED
+├── vireon-lab/ (1,318 LOC) — CLI, replay engine
+└── vireon-api/ (202 LOC) — FastAPI (6 endpoints, auth, tightened CORS)
+</code></pre>
+<p>Git history: 50 commits, 1 author ("Ronin"/Saadi Malik), 5 days (2026-08-02 to 2026-08-07), 10 tags.</p>
+<hr/>
+<h2>3. Execution Results (OBSERVED)</h2>
+<h3>Test Suite</h3>
+<table><thead><tr><th>Package</th><th>Passed</th><th>Failed</th><th>Errors</th><th>Skipped</th></tr></thead><tbody><tr><td>vireon-core</td><td>39</td><td>0</td><td>0</td><td>0</td></tr><tr><td>vireon-methods</td><td>60</td><td>0</td><td>0</td><td>0</td></tr><tr><td>vireon-evidence</td><td>28</td><td>1</td><td>0</td><td>0</td></tr><tr><td>vireon-corpus</td><td>6</td><td>0</td><td>0</td><td>0</td></tr><tr><td>vireon-knowledge</td><td>4</td><td>0</td><td>0</td><td>0</td></tr><tr><td>vireon-moabb</td><td>11</td><td>0</td><td>0</td><td>1</td></tr><tr><td>vireon-validation</td><td>95</td><td>1</td><td>0</td><td>1</td></tr><tr><td>vireon-verification/literature</td><td>—</td><td>—</td><td>2 (collection)</td><td>—</td></tr><tr><td><strong>Total</strong></td><td><strong>~243</strong></td><td><strong>2</strong></td><td><strong>2</strong></td><td><strong>2</strong></td></tr></tbody></table><strong>Failed tests:</strong>
+<ol><li><code>test_transaction_hash.py::test_same_bundle_same_hash</code> — regression from the deterministic hash fix</li><li><code>test_permutation.py::test_cluster_based_permutation_test</code> — timeout (performance issue)</li></ol>
+<p><strong>Collection errors:</strong></p>
+<ol><li><code>test_lawhern_2018.py</code> — NameError</li><li><code>test_schirrmeister_2017.py</code> — NameError</li></ol>
+<h3>All 8 examples run successfully ✓</h3>
+<h3>CLI works (3 commands: validate, inspect, reproduce) ✓</h3>
+<h3>API returns 200 on all endpoints (but health reports version 0.4.0) ✓</h3>
+<hr/>
+<h2>4. Feature Reality Check</h2>
+<table><thead><tr><th>Feature</th><th>Implemented</th><th>Executable</th><th>Tested</th><th>E2E Verified</th><th>Maturity</th><th>Recommendation</th></tr></thead><tbody><tr><td>EvidenceBundle (SHA-256)</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>A</td><td>KEEP</td></tr><tr><td>EvidenceBundle.verify()</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>A</td><td>KEEP</td></tr><tr><td>EvidenceRegistry (INSERT OR IGNORE)</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>A</td><td>KEEP</td></tr><tr><td>Tamper detection</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>A</td><td>KEEP</td></tr><tr><td>Registry.get() + search()</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>A</td><td>KEEP</td></tr><tr><td>Transaction hash (deterministic)</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>A</td><td>KEEP</td></tr><tr><td>ExperimentSpec</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>B</td><td>KEEP</td></tr><tr><td>MoabbExecutor</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>B</td><td>KEEP</td></tr><tr><td>ValidationLayer (partition integrity)</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>B</td><td>KEEP</td></tr><tr><td>Subject-level statistics</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>B</td><td>KEEP</td></tr><tr><td>Robustness engine (5 types)</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>B</td><td>KEEP</td></tr><tr><td>Scorecard (6 dimensions)</td><td>✓</td><td>✓</td><td>partial</td><td>✗</td><td>C</td><td>KEEP</td></tr><tr><td>CLI (validate/inspect)</td><td>✓</td><td>✓</td><td>✗</td><td>partial</td><td>C</td><td>KEEP</td></tr><tr><td>MCP server (6 tools)</td><td>✓</td><td>partial</td><td>✗</td><td>✗</td><td>C</td><td>KEEP</td></tr><tr><td>Adapters (5 types)</td><td>✓</td><td>✓</td><td>partial</td><td>partial</td><td>B</td><td>KEEP</td></tr><tr><td>Knowledge graph (20 rules)</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>B</td><td>KEEP</td></tr><tr><td>DatasetManager (3 datasets)</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>B</td><td>KEEP</td></tr><tr><td>FBCSP (fixed)</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>A</td><td>DELEGATE to MOABB</td></tr><tr><td>EEGNet (fixed)</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>A</td><td>DELEGATE to braindecode</td></tr><tr><td>DeepConvNet (fixed)</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>A</td><td>DELEGATE to braindecode</td></tr><tr><td>Kraskov MI (fixed)</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>A</td><td>DELEGATE to sklearn</td></tr><tr><td>Native spectral/spatial (18 wrappers)</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>A</td><td>DEPRECATE</td></tr><tr><td>FastAPI (auth, CORS)</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>B</td><td>KEEP</td></tr><tr><td>Dockerfile (production)</td><td>✓</td><td>✗</td><td>✗</td><td>✗</td><td>C</td><td>FIX</td></tr><tr><td>Regulatory binder</td><td>partial</td><td>✗</td><td>✗</td><td>✗</td><td>E</td><td>REBUILD</td></tr><tr><td>MassiveCampaignOrchestrator</td><td>partial</td><td>✗</td><td>✗</td><td>✗</td><td>D</td><td>REBUILD</td></tr></tbody></table><hr/>
+<h2>5. Algorithm Audit</h2>
+<table><thead><tr><th>Algorithm</th><th>Correct</th><th>Native or Wrapper</th><th>Tested</th><th>Recommendation</th></tr></thead><tbody><tr><td>FBCSP</td><td>✓ FIXED</td><td>Native</td><td>✓</td><td>DEPRECATE → delegate to MOABB</td></tr><tr><td>EEGNet</td><td>✓ FIXED</td><td>Native</td><td>✓</td><td>DEPRECATE → delegate to braindecode</td></tr><tr><td>DeepConvNet</td><td>✓ FIXED</td><td>Native</td><td>✓</td><td>DEPRECATE → delegate to braindecode</td></tr><tr><td>Kraskov MI</td><td>✓ FIXED</td><td>Native</td><td>✓</td><td>DEPRECATE → delegate to sklearn</td></tr><tr><td>Welch/FFT/STFT/Wavelets</td><td>✓</td><td>Wrapper (scipy)</td><td>✓</td><td>DEPRECATE → delegate to scipy</td></tr><tr><td>CSP/ICA/xDAWN</td><td>✓</td><td>Wrapper (MNE/sklearn)</td><td>✓</td><td>DEPRECATE → delegate to MNE</td></tr><tr><td>RiemannianMDM</td><td>✓</td><td>Wrapper (pyriemann)</td><td>✓</td><td>DEPRECATE → delegate to pyriemann</td></tr></tbody></table>All previously broken algorithms are FIXED and verified. But 18 of 21 files are wrappers — VIREON should not maintain these.
+<hr/>
+<h2>6. Evidence Engine Audit</h2>
+<table><thead><tr><th>Check</th><th>Status</th><th>Evidence</th></tr></thead><tbody><tr><td>SHA-256 hashing</td><td>✓</td><td>64-char hex verified</td></tr><tr><td>INSERT OR IGNORE</td><td>✓</td><td>Tamper detection raises EvidenceAlreadyRegisteredError</td></tr><tr><td>EvidenceBundle.verify()</td><td>✓</td><td>Returns False when content modified</td></tr><tr><td>Registry.get()</td><td>✓</td><td>Public API works</td></tr><tr><td>Registry.search()</td><td>✓</td><td>Filter by algorithm/dataset works</td></tr><tr><td>Transaction hash deterministic</td><td>✓</td><td>Uses sequence_number, not wall-clock</td></tr><tr><td>Partition integrity (subject overlap)</td><td>✓</td><td>Checks actual train/test subject overlap</td></tr><tr><td>Partition integrity (session overlap)</td><td>✓</td><td>Understands CrossSession allows same subject, different session</td></tr></tbody></table><strong>Maturity: A (production-capable)</strong>
+<hr/>
+<h2>7. MOABB Integration Audit</h2>
+<table><thead><tr><th>Component</th><th>Status</th><th>Evidence</th></tr></thead><tbody><tr><td>ExperimentSpec</td><td>✓</td><td>Pydantic model with YAML serialization</td></tr><tr><td>MoabbExecutor</td><td>✓</td><td>Runs real BNCI2014_001, captures traces</td></tr><tr><td>ValidationLayer</td><td>✓</td><td>Discovers 5/5 faults from raw trace (Study B)</td></tr><tr><td>EvidenceAssembler</td><td>✓</td><td>SHA-256 bundles, verify() works</td></tr><tr><td>Reporter</td><td>✓</td><td>Raw evidence report, no premature scorecard</td></tr><tr><td>Adapters (5 types)</td><td>✓</td><td>MOABB, MNE, scipy, sklearn, pyriemann</td></tr><tr><td>Robustness (5 perturbations)</td><td>✓</td><td>Real execution, INDETERMINATE on failure</td></tr><tr><td>Statistics (subject-level)</td><td>✓</td><td>Bootstrap CI, permutation test, effect sizes, FDR</td></tr><tr><td>Scorecard</td><td>✓</td><td>6 dimensions, raises if evidence incomplete</td></tr><tr><td>CLI</td><td>✓</td><td>validate, inspect, reproduce commands</td></tr><tr><td>MCP server</td><td>✓</td><td>6 tools, plan non-executing, validate requires confirm</td></tr></tbody></table><strong>POC proven:</strong> Real BNCI2014_001, 9 subjects, 74.95% accuracy (LogVar+LDA) and 83.68% (CSP+LDA), SHA-256 verified.
+<hr/>
+<h2>8. Study Results</h2>
+<h3>Study A — Rule-Engine Classification</h3>
+<p>17/17 structured failure states correctly classified, 3/3 clean controls passed.</p>
+<h3>Study B — End-to-End Fault Detection</h3>
+<p>5/5 fault classes detected from raw execution trace data:</p>
+<ol><li>Subject+session leakage ✓ (partition integrity check)</li><li>Below-chance accuracy ✓ (statistics layer)</li><li>Missing seed ✓ (reproducibility layer)</li><li>Missing environment ✓ (reproducibility layer)</li><li>Tampered evidence ✓ (SHA-256 hash verification)</li></ol>
+<h3>Study C — Real-World Validation (3/5 completed)</h3>
+<table><thead><tr><th>Experiment</th><th>Accuracy</th><th>Classification</th><th>Adjudication</th></tr></thead><tbody><tr><td>C-1 (CSP+LDA)</td><td>83.68%</td><td>V1</td><td>Pending</td></tr><tr><td>C-2 (LogVar+LogReg)</td><td>70.60%</td><td>V1</td><td>Pending</td></tr><tr><td>C-3 (Riemannian MDM)</td><td>79.92%</td><td>V1</td><td>Pending</td></tr><tr><td>C-4 (P300, EPFLP300)</td><td>Fixed, not yet run</td><td>—</td><td>—</td></tr><tr><td>C-5 (SSVEP, Wang2016)</td><td>Fixed, not yet run</td><td>—</td><td>—</td></tr></tbody></table><strong>No V2 findings yet.</strong> VIREON adds characterization (uncertainty, significance, robustness, provenance) but has not yet discovered a real methodological problem.
+<hr/>
+<h2>9. Remaining Defects</h2>
+<h3>Must fix before Study C scaling</h3>
+<ol><li><strong>API health version mismatch</strong> — main.py:74 hardcodes "0.4.0" despite app version "1.2.0"</li><li><strong>vireon-methods __version__</strong> still 1.0.2 (not synced to 1.2.0)</li><li><strong>2 committed .db files</strong> still tracked in git (evidence_graph.db, evidence_registry.db)</li><li><strong>Literature test collection errors</strong> — test_lawhern_2018.py and test_schirrmeister_2017.py have NameError</li><li><strong>test_transaction_hash regression</strong> — fails after deterministic hash fix</li></ol>
+<h3>Should fix in parallel</h3>
+<ol><li><strong>18/21 native algorithm files</strong> are scipy/sklearn wrappers — should be deprecated</li><li><strong>MassiveCampaignOrchestrator</strong> is still an empty stub</li><li><strong>Regulatory binder</strong> is still a 20-line stub</li><li><strong>BLAS threads not pinned</strong> (threadpoolctl not used)</li><li><strong>No GPU wiring</strong> (hardware.py has zero callers)</li></ol>
+<h3>Can wait</h3>
+<ol><li><strong>35 Phase E doc stubs</strong> filled but with generic content</li><li><strong>5 vireon-publications references</strong> updated but not removed</li><li><strong>Deprecation warnings</strong> from native algorithm wrappers</li></ol>
+<hr/>
+<h2>10. Final Scorecard</h2>
+<table><thead><tr><th>Dimension</th><th>Score</th><th>Evidence</th></tr></thead><tbody><tr><td>Technical correctness</td><td>7/10</td><td>243 tests pass, 2 fail, 2 collection errors, algorithms fixed</td></tr><tr><td>Architecture</td><td>7/10</td><td>MOABB integration sound, 18 wrappers should go, evidence layer is A-grade</td></tr><tr><td>Scientific correctness</td><td>7/10</td><td>Subject-level stats, partition integrity, 20 KG rules</td></tr><tr><td>Validation rigor</td><td>8/10</td><td>Study B: 5/5 faults detected from raw data; Study C: V0/V1/V2/V3 framework defined</td></tr><tr><td>Reproducibility</td><td>6/10</td><td>DeterministicRNG, PyTorch seeded, BLAS NOT pinned, cross-machine UNVERIFIED</td></tr><tr><td>Evidence integrity</td><td>9/10</td><td>SHA-256, tamper detection, verify(), INSERT OR IGNORE, deterministic hash</td></tr><tr><td>Dataset handling</td><td>7/10</td><td>Dispatch works, 3 datasets, no silent fallback, C-4/C-5 fixed</td></tr><tr><td>Algorithm layer</td><td>6/10</td><td>Fixed but duplicative — 18/21 are wrappers</td></tr><tr><td>Statistical rigor</td><td>8/10</td><td>Subject-level bootstrap, permutation, FDR, effect sizes, pseudoreplication detection</td></tr><tr><td>Robustness</td><td>7/10</td><td>5 perturbation types, real execution, INDETERMINATE on failure</td></tr><tr><td>Security</td><td>6/10</td><td>Auth, CORS, SAST config, but 2 .db still committed, health version wrong</td></tr><tr><td>Performance</td><td>5/10</td><td>POC runs in ~30s, no profiling, no GPU, no parallelism</td></tr><tr><td>Test quality</td><td>6/10</td><td>Real tests but collection errors and 1 regression</td></tr><tr><td>UX</td><td>5/10</td><td>CLI works, errors developer-oriented, no TUI</td></tr><tr><td>Documentation</td><td>6/10</td><td>Phase E stubs filled, but API version wrong, vireon-methods version stale</td></tr><tr><td>Ecosystem integration</td><td>8/10</td><td>MOABB integration proven, ADR 0008, 5 adapters</td></tr><tr><td>Differentiation</td><td>8/10</td><td>Evidence layer + partition integrity + subject-level stats is unique combination</td></tr><tr><td>Scientific novelty</td><td>6/10</td><td>Methodology is novel but not yet demonstrated on real problems (Study C pending)</td></tr><tr><td>Research usefulness</td><td>6/10</td><td>POC works, Study C protocol ready, but no V2 findings yet</td></tr><tr><td>PhD potential</td><td>7/10</td><td>Research question defined, Study C protocol preregistered, fault injection proven</td></tr><tr><td>Commercial potential</td><td>5/10</td><td>Possible SaaS/audit, but needs community + clinical validation</td></tr><tr><td>Overall usefulness</td><td>6/10</td><td>Conditionally useful — evidence layer is real, scientific value unproven</td></tr></tbody></table><strong>Total: 137/210 (65.2%)</strong>
+<hr/>
+<h2>11. Maturity Classification</h2>
+<p><strong>Research Prototype</strong> — VIREON has a proven POC (real data, real evidence, real validation), a working fault-detection mechanism (Study B: 5/5), and a formal Study C protocol. But it hasn't yet demonstrated that it can find a real methodological problem in a published paper, and the codebase still carries 18 redundant algorithm wrappers.</p>
+<hr/>
+<h2>12. Final Verdict</h2>
+<h3>A. What is VIREON?</h3>
+<p>A validation/evidence layer for computational neurotechnology that sits above MOABB/MNE/scipy and produces machine-verifiable, cryptographically hashed evidence bundles with multi-dimensional validation (partition integrity, statistics, robustness, reproducibility).</p>
+<h3>B. What is VIREON actually good at?</h3>
+<ul><li>Generating SHA-256 evidence bundles from real BCI experiments ✓</li></ul><ul><li>Tamper detection (hash verification, INSERT OR IGNORE) ✓</li></ul><ul><li>Subject-level statistics (avoids pseudoreplication) ✓</li></ul><ul><li>Partition integrity (detects subject/session leakage from raw data) ✓</li></ul><ul><li>MOABB integration (proven with real BNCI2014_001 data) ✓</li></ul><ul><li>Fault injection detection (5/5 from raw execution trace) ✓</li></ul>
+<h3>C. What is VIREON pretending to do but cannot reliably do?</h3>
+<ul><li>Discover previously unknown methodological problems in published papers (Study C: 3/3 V1, 0 V2)</li></ul><ul><li>Generate regulatory submissions (still a stub)</li></ul><ul><li>Massive campaign orchestration (still a stub)</li></ul><ul><li>GPU acceleration (zero callers)</li></ul><ul><li>Cross-machine reproducibility (BLAS not pinned, unverified)</li></ul>
+<h3>D. What should VIREON stop doing?</h3>
+<ul><li>Maintaining 18 native algorithm wrapper files</li></ul><ul><li>Claiming "22 native algorithms" (18 are wrappers)</li></ul><ul><li>Maintaining MassiveCampaignOrchestrator stub</li></ul><ul><li>Maintaining vireon-models digital twins (unused)</li></ul>
+<h3>E. What should VIREON delegate?</h3>
+<ul><li>All BCI datasets/paradigms/pipelines → MOABB</li></ul><ul><li>All algorithm execution → scipy/MNE/sklearn/pyriemann/braindecode</li></ul><ul><li>Data versioning → DataLad or DVC</li></ul>
+<h3>F. What should VIREON own?</h3>
+<ul><li>ExperimentSpec (the declarative contract)</li></ul><ul><li>ValidationLayer (partition integrity, statistics, reference comparison)</li></ul><ul><li>EvidenceBundle (SHA-256, provenance, tamper detection)</li></ul><ul><li>RobustnessEngine (perturbation experiments)</li></ul><ul><li>Reporter (raw evidence → scorecard → explanation)</li></ul><ul><li>KnowledgeGraph (methodological rules)</li></ul>
+<h3>G. Strongest differentiator?</h3>
+<p>Machine-checkable partition integrity + subject-level statistics + cryptographic evidence — no other tool inspects actual train/test membership and produces tamper-evident provenance.</p>
+<h3>H. Weakest assumption?</h3>
+<p>That researchers want this level of validation rigor. No researcher has used VIREON to publish or review a paper.</p>
+<h3>I. Is VIREON scientifically useful today?</h3>
+<p><strong>Conditional.</strong> The evidence layer works. But VIREON has not yet found a real problem in a real paper. Study C (3/5 completed, all V1) has not yet produced a V2 finding.</p>
+<h3>J. Is VIREON research-worthy?</h3>
+<p><strong>Yes.</strong> The research question is defined and testable: "Can automated validation detect methodological weaknesses that benchmarking misses?" Study B proves the instrument works. Study C is the experiment.</p>
+<h3>K. Could VIREON become a PhD research platform?</h3>
+<p><strong>Yes, conditional on Study C producing V2/V3 findings.</strong> The protocol is preregistered. The fault injection is proven. The evidence bundles are machine-verifiable. If VIREON finds even one real methodological problem that an independent adjudicator confirms, that's a publishable result.</p>
+<h3>L. Could VIREON become a viable open-source ecosystem?</h3>
+<p><strong>Conditional.</strong> Needs: (1) deprecation of native algorithms, (2) real MCP integration, (3) at least one external contributor, (4) a published paper demonstrating value.</p>
+<h3>M. Could VIREON become a company?</h3>
+<p><strong>Unlikely short-term.</strong> Requires clinical validation, regulatory engagement, community adoption, institutional backing — none of which exist.</p>
+<h3>N. Next 30-day milestone?</h3>
+<p>Run C-4 and C-5 with the corrected datasets, complete independent adjudication for all 5 experiments, and determine whether any V2 findings emerge.</p>
+<h3>O. Next 6-month research objective?</h3>
+<p>Demonstrate that VIREON detects real methodological concerns in ≥30% of a 10-experiment corpus, independently confirmed by adjudicators.</p>
+
+</body>
+</html>

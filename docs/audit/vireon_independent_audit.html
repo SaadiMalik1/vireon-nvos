@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>VIREON — Comprehensive Independent Scientific Audit</title>
+<style>
+@page {
+  size: A4;
+  margin: 18mm 16mm 18mm 16mm;
+  @bottom-center {
+    content: "VIREON — Comprehensive Independent Scientific Audit — Page " counter(page) " of " counter(pages);
+    font-family: 'Liberation Serif', serif;
+    font-size: 9pt;
+    color: #8e8b84;
+  }
+}
+@page :first {
+  margin: 0;
+  @bottom-center { content: ""; }
+}
+
+html, body {
+  margin: 0; padding: 0;
+  background: #ffffff;
+  color: #1e1d1b;
+  font-family: 'Liberation Serif', 'FreeSerif', 'Noto Serif', serif;
+  font-size: 10.5pt;
+  line-height: 1.55;
+  text-align: justify;
+}
+
+.cover {
+  page-break-after: always;
+  background: #1e1d1b;
+  color: #ffffff;
+  padding: 60mm 25mm 30mm 25mm;
+  min-height: 297mm;
+  box-sizing: border-box;
+  position: relative;
+}
+.cover .eyebrow {
+  color: #a18532;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 10pt;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8mm;
+}
+.cover h1 {
+  color: #ffffff;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 32pt;
+  line-height: 1.15;
+  margin: 0 0 6mm 0;
+  text-align: left;
+  border: none;
+  padding: 0;
+}
+.cover .subtitle {
+  color: #e8e2d3;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 13pt;
+  font-weight: normal;
+  margin: 0 0 18mm 0;
+  text-align: left;
+  line-height: 1.5;
+}
+.cover .meta {
+  color: #c8c0a8;
+  font-family: 'Liberation Mono', monospace;
+  font-size: 9pt;
+  line-height: 1.7;
+  text-align: left;
+  margin-top: 18mm;
+}
+.cover .meta strong {
+  color: #a18532;
+}
+.cover .accent-bar {
+  position: absolute;
+  top: 0; left: 0;
+  width: 12mm;
+  height: 100%;
+  background: #a18532;
+}
+.cover .score-block {
+  margin-top: 20mm;
+  padding: 8mm;
+  background: #2a2926;
+  border-left: 4px solid #a18532;
+}
+.cover .score-label {
+  color: #a18532;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 9pt;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.cover .score-value {
+  color: #ffffff;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 22pt;
+  font-weight: bold;
+  margin-top: 2mm;
+}
+.cover .score-value .max {
+  color: #c8c0a8;
+  font-size: 13pt;
+}
+.cover .verdict {
+  color: #e8e2d3;
+  font-size: 9.5pt;
+  margin-top: 4mm;
+  line-height: 1.5;
+}
+
+h1 {
+  color: #1e1d1b;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 19pt;
+  line-height: 1.2;
+  margin: 14mm 0 4mm 0;
+  padding-bottom: 2mm;
+  border-bottom: 2px solid #5d563e;
+  page-break-after: avoid;
+  text-align: left;
+}
+h2 {
+  color: #5d563e;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 14pt;
+  line-height: 1.3;
+  margin: 8mm 0 3mm 0;
+  page-break-after: avoid;
+  text-align: left;
+}
+h3 {
+  color: #1e1d1b;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 12pt;
+  line-height: 1.3;
+  margin: 6mm 0 2mm 0;
+  page-break-after: avoid;
+  text-align: left;
+}
+h4 {
+  color: #a18532;
+  font-family: 'Liberation Sans', sans-serif;
+  font-size: 11pt;
+  line-height: 1.3;
+  margin: 5mm 0 2mm 0;
+  page-break-after: avoid;
+  text-align: left;
+}
+
+p {
+  margin: 0 0 3mm 0;
+  orphans: 3;
+  widows: 3;
+}
+
+strong { color: #1e1d1b; }
+em { color: #5d563e; }
+
+code {
+  font-family: 'Liberation Mono', 'DejaVu Sans Mono', monospace;
+  font-size: 9pt;
+  background: #f5f5f4;
+  padding: 0.5mm 1.5mm;
+  border-radius: 1.5mm;
+  color: #5d563e;
+  word-break: break-all;
+}
+
+pre {
+  background: #f5f5f4;
+  border: 1px solid #d7d2c4;
+  border-left: 4px solid #a18532;
+  border-radius: 2mm;
+  padding: 4mm 5mm;
+  margin: 4mm 0;
+  page-break-inside: avoid;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  font-size: 8.5pt;
+  line-height: 1.45;
+}
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #1e1d1b;
+  font-size: 8.5pt;
+  word-break: normal;
+}
+
+ul, ol {
+  margin: 2mm 0 4mm 0;
+  padding-left: 7mm;
+}
+li {
+  margin: 1mm 0;
+  line-height: 1.5;
+}
+li.nested {
+  list-style-type: circle;
+  margin-left: 5mm;
+}
+
+blockquote {
+  border-left: 4px solid #a18532;
+  background: #faf9f6;
+  padding: 3mm 5mm;
+  margin: 4mm 0;
+  color: #5d563e;
+  font-style: italic;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #d7d2c4;
+  margin: 6mm 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 4mm 0;
+  font-size: 9pt;
+  page-break-inside: avoid;
+}
+th {
+  background: #5d563e;
+  color: #ffffff;
+  font-family: 'Liberation Sans', sans-serif;
+  font-weight: bold;
+  text-align: left;
+  padding: 2mm 3mm;
+  border: 1px solid #5d563e;
+}
+td {
+  padding: 2mm 3mm;
+  border: 1px solid #d7d2c4;
+  vertical-align: top;
+}
+tr:nth-child(even) td {
+  background: #f5f5f4;
+}
+
+h2 + p, h3 + p {
+  page-break-before: avoid;
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="accent-bar"></div>
+  <div class="eyebrow">VIREON ENGINEERING INTEGRITY</div>
+  <h1>VIREON — Comprehensive Independent Scientific Audit</h1>
+  <div class="subtitle">Hostile-but-fair, evidence-driven. Software correctness separated from methodological validity separated from external validation.</div>
+  
+<div class="score-block">
+  <div class="score-label">RESEARCH READINESS</div>
+  <div class="score-value">3. Research Prototype</div>
+  <div class="verdict">30,929 LOC, 12 packages, 242 tests pass, 3 fail, 2 collection errors. Evidence layer: production-capable (A-grade). Validation: 5/5 faults detected from raw data (Study B). Study C: 3/5 completed, all V1, 0 V2. No independent researcher has used VIREON. Documentation significantly drifted. README claims overstated.</div>
+</div>
+
+  <div class="meta">
+    <strong>Repository:</strong> github.com/SaadiMalik1/vireon-nvos<br/>
+    <strong>Audit Baseline:</strong> v1.0.3 (commit 774d7ed)<br/>
+    <strong>Target Release:</strong> v1.1.0-alpha<br/>
+    <strong>Estimated Duration:</strong> 4-6 weeks<br/>
+    <strong>Tasks:</strong> 9 gating tasks (P0 + P1 subset)<br/>
+    <strong>Reference:</strong> vireon_remediation_playbook.md (full details)<br/>
+  </div>
+</div>
+
+<h1>VIREON — Comprehensive Independent Scientific, Engineering, Documentation, Architecture, and Research-Rigor Audit</h1>
+<p><strong>Date:</strong> 2026-08-16 <strong>Commit:</strong> 774d7ed9663c971db39f1e02fd4c5172e63bb046 (v1.0.3 with uncommitted dx/dx2 changes) <strong>Auditor:</strong> Super Z (GLM-4.6 via Z.ai) <strong>Method:</strong> Fresh investigation from source code, test execution, dependency behavior</p>
+<hr/>
+<h2>A. Executive Summary</h2>
+<p>VIREON is a 12-package Python monorepo (30,929 LOC, 1 author, 5-day history) that has evolved from a "Neurotechnology Validation Operating System" concept into a focused validation/evidence layer above MOABB. Its strongest capability is a cryptographically verifiable evidence chain (SHA-256 bundles, tamper detection, partition integrity checking) that has been proven end-to-end with real BCI data (BNCI2014_001, 9 subjects, 83.68% accuracy). Its validation layer can independently discover 5 of 5 tested fault classes from raw execution traces (Study B), including subject/session leakage, below-chance performance, missing reproducibility metadata, and evidence tampering.</p>
+<p><strong>However, VIREON is internally evaluated but independently unvalidated.</strong> No external researcher has used it. No independent publication has reproduced its results. No independent group has evaluated the system. The README claims VIREON "solves the reproducibility crisis" — this is overstated. VIREON provides mechanisms intended to improve computational reproducibility; independent scientific reproduction has not been demonstrated.</p>
+<p>The most serious weakness is that VIREON has not yet found a real methodological problem in a published paper. Study C (3 of 5 experiments completed) produced only V1 findings (additional characterization) — 0 V2 findings (potential concerns). The project may be checking a narrow set of generic invariants that are insufficient to generate V2 findings on real research.</p>
+<p><strong>Documentation is significantly drifted.</strong> The API health endpoint reports version 0.4.0 (hardcoded) despite pyproject.toml being 1.2.0. vireon-methods __version__ is 1.0.2. The README claims "Adversarial Digital Twins" which are 33 lines of ABCs. The README claims "22 native algorithms" but 18 of 21 are scipy/sklearn wrappers. ADRs 0001-0007 predate the MOABB pivot and describe an architecture that ADR 0008 has superseded but not formally deprecated.</p>
+<p><strong>Overall research readiness: Research Prototype.</strong> The architecture is sound, the evidence layer works, the fault detection is proven, but the scientific value is unproven and the documentation is not trustworthy.</p>
+<hr/>
+<h2>B. Current Architecture Map</h2>
+<pre><code>VIREON (12 packages, 30,929 LOC)
+│
+├── vireon-core/ (2,687 LOC) — contracts, kernel, runtime
+│   ├── contracts/evidence.py — EvidenceBundle, RegulatoryProfile
+│   ├── contracts/plugin.py — ContractValidator, ScientificContractViolation
+│   ├── kernel/execution_engine.py — DAG executor, environment fingerprint
+│   └── runtime/ — DeterministicRNG, hardware, clock
+│
+├── vireon-methods/ (4,027 LOC) — 21 algorithm files, 18 are wrappers ← SHOULD DEPRECATE
+│   ├── spectral/ (7 files) — Welch, FFT, STFT, Wavelets, Multitaper, Bandpower
+│   ├── spatial/ (7 files) — CSP, ICA, FBCSP, xDAWN, Riemannian
+│   ├── deep_learning/ (2 files) — EEGNet, DeepConvNet
+│   ├── connectivity/ (5 files) — PLV, PLI, wPLI, MI, TransferEntropy
+│   └── filtering/ (2 files) — IIR, FIR
+│
+├── vireon-evidence/ (2,112 LOC) — registry, graph, tamper detection ← CORE
+│   ├── registry/core.py — SQLite, INSERT OR IGNORE, get(), search()
+│   ├── graph/transactions.py — deterministic hash (sequence_number)
+│   └── graph/core.py — NetworkX DAG
+│
+├── vireon-corpus/ (839 LOC) — 3 datasets, dispatches by key
+│   ├── dataset_manager.py — _load_physionet_bci, _load_sleep_edf
+│   └── exceptions.py — UnknownDatasetError, DatasetDownloadError
+│
+├── vireon-knowledge/ (532 LOC) — 20 rules covering 20 methods
+│   └── validation_rules/rules.jsonld
+│
+├── vireon-moabb/ (6,520 LOC) — THE NEW VIREON
+│   ├── spec.py — ExperimentSpec
+│   ├── executor.py — MoabbExecutor
+│   ├── validation.py — ValidationLayer (partition integrity, statistics)
+│   ├── evidence.py — EvidenceBundle + verify()
+│   ├── report.py — Reporter
+│   ├── adapters/ — MOABB, MNE, scipy, sklearn, pyriemann
+│   ├── robustness/ — 5 perturbation types
+│   ├── statistics/ — subject-level bootstrap, permutation, FDR
+│   ├── scorecard.py — 6 dimensions
+│   ├── cli.py — validate, inspect, reproduce
+│   ├── study_c/ — Study C protocol + C-1 results
+│   └── tests/ — 12 tests
+│
+├── vireon-mcp/ (148 LOC) — 6-tool MCP server (stdio)
+├── vireon-validation/ (4,726 LOC) — benchmarks, statistics, regression
+├── vireon-verification/ (2,122 LOC) — 32 literature tests (2 collection errors)
+├── vireon-models/ (2,092 LOC) — digital twins, hardware ← UNUSED
+├── vireon-lab/ (1,318 LOC) — CLI, replay engine
+└── vireon-api/ (202 LOC) — FastAPI (auth, CORS, 6 endpoints)
+</code></pre>
+<p><strong>Architecture drift from documentation:</strong></p>
+<ul><li>README describes "Adversarial Digital Twins" — code is 33 lines of ABCs</li></ul><ul><li>README claims "22 native algorithms" — 18 are wrappers</li></ul><ul><li>ADRs 0001-0007 describe pre-MOABB architecture — ADR 0008 supersedes but doesn't formally deprecate</li></ul><ul><li>API health endpoint reports 0.4.0 — actual version is 1.2.0</li></ul>
+<hr/>
+<h2>C. Documentation Drift Report</h2>
+<table><thead><tr><th>Document</th><th>Claim</th><th>Current reality</th><th>Status</th><th>Required correction</th></tr></thead><tbody><tr><td>README.md</td><td>"Adversarial Digital Twins"</td><td>33 lines of ABCs in vireon-models</td><td>OVERSTATED</td><td>Remove or qualify</td></tr><tr><td>README.md</td><td>"22 native algorithms"</td><td>18 of 21 are scipy/sklearn wrappers</td><td>OVERSTATED</td><td>Change to "delegates to scipy/MNE/sklearn"</td></tr><tr><td>README.md</td><td>"solves the reproducibility crisis"</td><td>No independent researcher has used VIREON</td><td>OVERSTATED</td><td>Change to "provides mechanisms intended to improve reproducibility"</td></tr><tr><td>API health</td><td>version="0.4.0"</td><td>pyproject.toml says 1.2.0</td><td>FALSE</td><td>Fix main.py:74</td></tr><tr><td>vireon-methods __init__</td><td>__version__="1.0.2"</td><td>pyproject.toml says 1.2.0</td><td>OUTDATED</td><td>Sync to 1.2.0</td></tr><tr><td>ADRs 0001-0007</td><td>"Validation Not Simulation" architecture</td><td>ADR 0008 supersedes with MOABB integration</td><td>PARTIALLY CURRENT</td><td>Add "Superseded by ADR 0008" to 0001-0007</td></tr><tr><td>CHANGELOG</td><td>Stops at v1.0.0 (original)</td><td>v1.2.0 entry added</td><td>PARTIALLY ACCURATE</td><td>Missing v1.0.1, v1.0.2, v1.0.3 entries</td></tr><tr><td>.gitignore</td><td>Has *.db rule</td><td>2 .db files still tracked</td><td>INCONSISTENT</td><td>git rm --cached</td></tr><tr><td>Study C protocol</td><td>"5 experiments across 3 paradigms"</td><td>3 completed (all motor imagery), 2 fixed but not run</td><td>OVERSTATED</td><td>State "3 completed, 2 pending"</td></tr></tbody></table><hr/>
+<h2>D. ADR Audit Report</h2>
+<table><thead><tr><th>ADR</th><th>Decision</th><th>Current implementation</th><th>Status</th><th>Evidence</th><th>Recommended action</th></tr></thead><tbody><tr><td>0001</td><td>Validation not simulation</td><td>MOABB integration delegates execution</td><td>SUPERSEDED by 0008</td><td>ADR 0008 refines it</td><td>Mark as "Refined by ADR 0008"</td></tr><tr><td>0002</td><td>Plugin-first kernel</td><td>Plugin system exists but is unused in vireon-moabb</td><td>PARTIALLY CURRENT</td><td>vireon-methods still uses IPlugin</td><td>Evaluate whether plugin system is still needed</td></tr><tr><td>0003</td><td>Scientific contracts</td><td>ContractValidator exists, runs ADF test</td><td>CURRENT</td><td>plugin.py:103-125</td><td>KEEP</td></tr><tr><td>0004</td><td>Evidence engine</td><td>EvidenceBundle + Registry + Graph</td><td>CURRENT</td><td>All verified working</td><td>KEEP</td></tr><tr><td>0005</td><td>Knowledge graph</td><td>20 rules, AST evaluator</td><td>CURRENT</td><td>rules.jsonld has 20 rules</td><td>KEEP</td></tr><tr><td>0006</td><td>SRL model</td><td>Not implemented in code</td><td>UNIMPLEMENTED</td><td>No SRL code found</td><td>Create ADR or remove</td></tr><tr><td>0007</td><td>Source space architecture</td><td>vireon-models exists but unused</td><td>OBSOLETE</td><td>2,092 LOC, zero callers</td><td>Deprecate</td></tr><tr><td>0008</td><td>MOABB integration</td><td>vireon-moabb package built, POC proven</td><td>CURRENT</td><td>6,520 LOC, real evidence</td><td>KEEP</td></tr></tbody></table><hr/>
+<h2>E. Scientific Validity Report</h2>
+<h3>Algorithmic correctness</h3>
+<ul><li>FBCSP: FIXED ✓ (applies band-pass per band)</li></ul><ul><li>EEGNet: FIXED ✓ (BatchNorm, ELU, AvgPool, Dropout — matches Lawhern 2018)</li></ul><ul><li>DeepConvNet: FIXED ✓ (4 conv blocks, AdaptiveAvgPool — matches Schirrmeister 2017)</li></ul><ul><li>MI: FIXED ✓ (real Kraskov k-NN via cKDTree)</li></ul><ul><li><strong>BUT</strong>: 18/21 files are wrappers — VIREON should not claim "native implementations"</li></ul>
+<h3>Experimental correctness</h3>
+<ul><li>Partition integrity: ✓ (checks actual train/test subject/session overlap)</li></ul><ul><li>CrossSession semantics: ✓ (same subject in train/test is valid, different sessions)</li></ul><ul><li>CrossSubject semantics: ✓ (strict subject isolation enforced)</li></ul><ul><li>Subject-level statistics: ✓ (bootstrap over subjects, not trials — avoids pseudoreplication)</li></ul>
+<h3>Statistical correctness</h3>
+<ul><li>Subject-level bootstrap CI: ✓ (resamples 9 subjects, not 2592 trials)</li></ul><ul><li>Permutation test: ✓ (subject-level, p=0.002 for CSP+LDA)</li></ul><ul><li>Pseudoreplication detection: ✓ (CI width analysis catches trial-level bootstrap)</li></ul><ul><li><strong>GAP</strong>: No multiple-comparison correction in the standard pipeline (FDR exists but not wired)</li></ul>
+<h3>Evidence validity</h3>
+<ul><li>SHA-256 hashing: ✓ (integrity)</li></ul><ul><li>Tamper detection: ✓ (INSERT OR IGNORE, EvidenceAlreadyRegisteredError)</li></ul><ul><li>EvidenceBundle.verify(): ✓ (returns False when content modified)</li></ul><ul><li><strong>BUT</strong>: Hash proves integrity, not validity. A hash of a wrong result is still a valid hash.</li></ul>
+<h3>Reproducibility</h3>
+<ul><li>DeterministicRNG: ✓ (PCG64, seed=42)</li></ul><ul><li>PyTorch determinism: ✓ (manual_seed, cudnn.deterministic)</li></ul><ul><li>Transaction hash: ✓ (sequence_number, not wall-clock)</li></ul><ul><li>BLAS threads: ✗ NOT PINNED (threadpoolctl not used)</li></ul><ul><li>Cross-machine: UNVERIFIED (only tested on one machine)</li></ul><ul><li>Git commit in evidence bundle: ✗ NOT CAPTURED</li></ul>
+<h3>External validation</h3>
+<p><strong>STATUS: NONE</strong></p>
+<ul><li>No external researcher has used VIREON</li></ul><ul><li>No independent publication has reproduced results</li></ul><ul><li>No independent group has evaluated the system</li></ul><ul><li><strong>Classification: internally evaluated but independently unvalidated</strong></li></ul>
+<hr/>
+<h2>F. Test and Validation Report</h2>
+<h3>Test inventory (OBSERVED)</h3>
+<table><thead><tr><th>Package</th><th>Passed</th><th>Failed</th><th>Errors</th><th>Skipped</th></tr></thead><tbody><tr><td>vireon-core</td><td>39</td><td>0</td><td>0</td><td>0</td></tr><tr><td>vireon-methods</td><td>60</td><td>0</td><td>0</td><td>0</td></tr><tr><td>vireon-evidence</td><td>28</td><td>1</td><td>0</td><td>0</td></tr><tr><td>vireon-corpus</td><td>5</td><td>1</td><td>0</td><td>0</td></tr><tr><td>vireon-knowledge</td><td>4</td><td>0</td><td>0</td><td>0</td></tr><tr><td>vireon-moabb</td><td>11</td><td>0</td><td>0</td><td>1</td></tr><tr><td>vireon-validation</td><td>95</td><td>1</td><td>0</td><td>1</td></tr><tr><td>literature</td><td>—</td><td>—</td><td>2</td><td>—</td></tr><tr><td><strong>Total</strong></td><td><strong>~242</strong></td><td><strong>3</strong></td><td><strong>2</strong></td><td><strong>2</strong></td></tr></tbody></table><h3>Failed tests</h3>
+<ol><li><code>test_transaction_hash.py::test_same_bundle_same_hash</code> — regression from deterministic hash fix</li><li><code>test_bids_conversion.py::test_convert_to_bids_structure</code> — BIDS conversion failure</li><li><code>test_permutation.py::test_cluster_based_permutation_test</code> — timeout (performance)</li></ol>
+<h3>Collection errors</h3>
+<ol><li><code>test_lawhern_2018.py</code> — NameError</li><li><code>test_schirrmeister_2017.py</code> — NameError</li></ol>
+<h3>Test quality assessment</h3>
+<ul><li>vireon-moabb tests: REAL — verify FBCSP filtering, EEGNet architecture, MI Kraskov, registry tamper detection, dataset dispatch, transaction hash determinism. These are meaningful scientific tests.</li></ul><ul><li>vireon-methods tests: Real cross-validation against scipy/MNE at 1e-7 tolerance.</li></ul><ul><li>Literature tests: 2 collection errors (NameError) — these tests cannot even be collected, let alone run.</li></ul><ul><li><strong>Does the test suite provide evidence of scientific correctness?</strong> Partially. The dx tests verify the fixes are real. But the collection errors and regression indicate infrastructure issues.</li></ul>
+<h3>Study B results</h3>
+<p>5/5 fault classes detected from raw execution trace. This is the strongest evidence of validation capability.</p>
+<h3>Study C results</h3>
+<p>3/5 completed. All V1 (additional characterization). 0 V2 (concerns). This means VIREON has not yet found a real methodological problem.</p>
+<hr/>
+<h2>G. Claims Audit</h2>
+<table><thead><tr><th>Claim</th><th>Source</th><th>Evidence grade</th><th>Risk of overclaiming</th><th>Correction</th></tr></thead><tbody><tr><td>"Solves the reproducibility crisis"</td><td>README</td><td>E1 (code exists)</td><td>CRITICAL</td><td>Change to "provides mechanisms intended to improve reproducibility"</td></tr><tr><td>"22 native algorithms"</td><td>README</td><td>E1 (code exists)</td><td>HIGH</td><td>18/21 are wrappers; change to "delegates to scipy/MNE/sklearn"</td></tr><tr><td>"Adversarial Digital Twins"</td><td>README</td><td>E1 (code exists)</td><td>HIGH</td><td>33 lines of ABCs; remove or qualify as "planned"</td></tr><tr><td>"Cryptographic evidence bundles"</td><td>README</td><td>E4 (end-to-end validated)</td><td>LOW</td><td>Accurate — SHA-256 verified</td></tr><tr><td>"Tamper detection"</td><td>README</td><td>E4 (end-to-end validated)</td><td>LOW</td><td>Accurate — EvidenceAlreadyRegisteredError fires</td></tr><tr><td>"Subject-level statistics"</td><td>ADR 0008</td><td>E4 (end-to-end validated)</td><td>LOW</td><td>Accurate — bootstrap over subjects</td></tr><tr><td>"Partition integrity"</td><td>Study B</td><td>E4 (end-to-end validated)</td><td>LOW</td><td>Accurate — detects subject/session overlap</td></tr><tr><td>"Research-ready"</td><td>Implied by v1.0.3 tag</td><td>E2 (tests pass)</td><td>CRITICAL</td><td>Not independently validated</td></tr><tr><td>"Production/Stable"</td><td>pyproject.toml classifier</td><td>E1 (code exists)</td><td>HIGH</td><td>Change to "Development Status :: 4 - Beta"</td></tr><tr><td>"Validated by tests"</td><td>Implied</td><td>E2 (tests pass)</td><td>HIGH</td><td>Tests prove software correctness, not scientific validity</td></tr></tbody></table><hr/>
+<h2>H. Risk Register</h2>
+<table><thead><tr><th>ID</th><th>Finding</th><th>Category</th><th>Severity</th><th>Evidence</th><th>Impact</th><th>Recommended action</th></tr></thead><tbody><tr><td>R01</td><td>No independent researcher has used VIREON</td><td>VALIDATION GAP</td><td>CRITICAL</td><td>No external publications, no external users</td><td>Cannot claim research validation</td><td>Execute Study C with independent adjudication</td></tr><tr><td>R02</td><td>0 V2 findings in Study C (3/5 completed)</td><td>VALIDATION GAP</td><td>HIGH</td><td>C-1/C-2/C-3 all V1</td><td>VIREON may be too conservative to detect real problems</td><td>Complete C-4/C-5 and adjudicate</td></tr><tr><td>R03</td><td>API health reports version 0.4.0</td><td>DOCUMENTATION DEFECT</td><td>MEDIUM</td><td>main.py:74</td><td>Users see wrong version</td><td>Fix to 1.2.0</td></tr><tr><td>R04</td><td>2 .db files committed to git</td><td>SECURITY DEFECT</td><td>MEDIUM</td><td>git ls-files shows .db</td><td>Binary state in git, integrity concern</td><td>git rm --cached</td></tr><tr><td>R05</td><td>2 literature test collection errors</td><td>SOFTWARE BUG</td><td>MEDIUM</td><td>NameError in test files</td><td>Cannot verify literature reproductions</td><td>Fix import errors</td></tr><tr><td>R06</td><td>18/21 algorithm files are wrappers</td><td>ARCHITECTURAL DEFECT</td><td>MEDIUM</td><td>grep shows scipy/sklearn imports</td><td>Maintenance burden, duplication</td><td>Deprecate to reference/deprecated/</td></tr><tr><td>R07</td><td>BLAS threads not pinned</td><td>REPRODUCIBILITY DEFECT</td><td>MEDIUM</td><td>No threadpoolctl usage</td><td>Cross-machine hash instability</td><td>Add pinned_blas_threads context manager</td></tr><tr><td>R08</td><td>README claims "solves reproducibility crisis"</td><td>CLAIM/COMMUNICATION PROBLEM</td><td>HIGH</td><td>README.md</td><td>Overstated claim</td><td>Rewrite to "provides mechanisms intended to improve reproducibility"</td></tr><tr><td>R09</td><td>vireon-models unused (2,092 LOC)</td><td>ARCHITECTURAL DEFECT</td><td>LOW</td><td>Zero callers</td><td>Dead code</td><td>Remove or deprecate</td></tr><tr><td>R10</td><td>ADRs 0001-0007 not formally superseded</td><td>GOVERNANCE/ADR DEFECT</td><td>LOW</td><td>No "Superseded" marker</td><td>Architectural confusion</td><td>Add "Refined by ADR 0008" to 0001-0007</td></tr><tr><td>R11</td><td>MassiveCampaignOrchestrator is stub</td><td>SOFTWARE BUG</td><td>LOW</td><td>Empty loop body</td><td>Misleading if users call it</td><td>Remove or implement</td></tr><tr><td>R12</td><td>Transaction hash test regression</td><td>SOFTWARE BUG</td><td>MEDIUM</td><td>test_same_bundle_same_hash fails</td><td>Test suite not clean</td><td>Fix test to match new deterministic hash</td></tr><tr><td>R13</td><td>Git commit not captured in evidence bundle</td><td>REPRODUCIBILITY DEFECT</td><td>MEDIUM</td><td>No git rev-parse in bundle</td><td>Cannot trace evidence to code version</td><td>Add git commit hash to environment fingerprint</td></tr><tr><td>R14</td><td>vireon-methods __version__ = 1.0.2</td><td>DOCUMENTATION DEFECT</td><td>LOW</td><td>Not synced to 1.2.0</td><td>Version confusion</td><td>Sync to 1.2.0</td></tr></tbody></table><hr/>
+<h2>I. Research-Readiness Verdict</h2>
+<h3>Classification: 3. Research Prototype</h3>
+<p><strong>Justification:</strong></p>
+<p>VIREON has a working end-to-end pipeline (ExperimentSpec → MOABB → ValidationLayer → EvidenceBundle → Report) that has been demonstrated with real BCI data. Its evidence layer is production-capable (SHA-256, tamper detection, INSERT OR IGNORE, deterministic hashes). Its validation layer can independently discover 5/5 tested fault classes from raw execution traces (Study B).</p>
+<p><strong>However, it is NOT Research-Ready (4) because:</strong></p>
+<ol><li>No independent researcher has used it (Level 5 reproducibility not achieved)</li><li>Study C has not produced any V2 findings (VIREON has not yet found a real problem)</li><li>Documentation is significantly drifted (API version, README claims, ADR status)</li><li>Test suite has 3 failures and 2 collection errors</li><li>18/21 algorithm files are wrappers that should be deprecated</li><li>BLAS threads not pinned, git commit not captured in evidence</li></ol>
+<p><strong>It is NOT merely an Engineering Prototype (2) because:</strong></p>
+<ol><li>The evidence layer is production-capable (A-grade)</li><li>Study B proves the validation layer can discover faults from raw data</li><li>The MOABB integration is architecturally sound and proven with real data</li><li>Study C protocol is preregistered and scientifically rigorous</li></ol>
+<hr/>
+<h2>J. What Would an Independent Researcher Experience?</h2>
+<p>A researcher cloning the repository tomorrow would:</p>
+<ol><li><strong>Clone and install:</strong> Follow README instructions. <code>pip install -e .</code> would work. They would see 10 packages plus the new vireon-moabb and vireon-mcp.</li></ol>
+<ol><li><strong>Read the README:</strong> See claims about "Adversarial Digital Twins," "22 native algorithms," and "solving the reproducibility crisis." They would be impressed but confused when they discover that digital twins are 33 lines of ABCs, 18/21 algorithms are wrappers, and no independent validation exists.</li></ol>
+<ol><li><strong>Try the CLI:</strong> Run <code>vireon validate BNCI2014_001</code> — this might work if MOABB is installed and data is downloaded, but they would need to discover that the CLI is in <code>vireon_moabb.cli</code>, not <code>vireon_lab.cli</code>. The README doesn't mention vireon-moabb.</li></ol>
+<ol><li><strong>Check the API:</strong> Start the FastAPI server (if they figure out the Dockerfile runs uvicorn). The health endpoint would report version 0.4.0. They would see auth and CORS configured but wouldn't know to set VIREON_API_KEY.</li></ol>
+<ol><li><strong>Examine evidence:</strong> Find the POC evidence bundle (hash 17d03af8...) and verify it. This would work — EvidenceBundle.verify() returns True. They would be impressed by the cryptographic provenance.</li></ol>
+<ol><li><strong>Run Study C:</strong> Find the protocol, try to run experiments. C-1 would work (data cached). C-4 and C-5 would require downloading EPFLP300 and Wang2016 data. They might encounter timeout issues.</li></ol>
+<ol><li><strong>Read the ADRs:</strong> See 8 ADRs. ADRs 0001-0007 describe a pre-MOABB architecture. ADR 0008 describes the MOABB integration. They would be confused about which architecture is current.</li></ol>
+<ol><li><strong>Examine the validation layer:</strong> Discover that VIREON checks partition integrity, subject-level statistics, robustness, and evidence integrity. They would be impressed by Study B (5/5 faults detected). They would be concerned that Study C produced 0 V2 findings.</li></ol>
+<ol><li><strong>Try to adjudicate:</strong> Find the adjudication form template. Realize they need to be the independent adjudicator but they're also the person running the experiments. This is a conflict of interest.</li></ol>
+<ol><li><strong>Overall experience:</strong> Impressed by the evidence layer and fault detection capability. Confused by documentation drift. Frustrated by the gap between claims and reality. Uncertain whether VIREON actually adds scientific value beyond benchmarking.</li></ol>
+<hr/>
+<h2>27. Final Reviewer Question</h2>
+<blockquote><strong>If a skeptical neurotechnology researcher encountered VIREON for the first time today, what could they safely trust, what could they not yet trust, and what evidence would be required to move VIREON to the next level of scientific credibility?</strong></blockquote>
+<h3>What they could safely trust:</h3>
+<ul><li>The SHA-256 evidence bundles are cryptographically sound (verified by execution)</li></ul><ul><li>The tamper detection works (EvidenceAlreadyRegisteredError fires on content mismatch)</li></ul><ul><li>The partition integrity checks inspect actual train/test membership (not just evaluation class names)</li></ul><ul><li>The subject-level statistics avoid pseudoreplication (bootstrap over 9 subjects, not 2592 trials)</li></ul><ul><li>The MOABB integration works end-to-end (proven with real BNCI2014_001 data at 83.68% accuracy)</li></ul><ul><li>Study B demonstrates 5/5 fault detection from raw execution traces</li></ul>
+<h3>What they could not yet trust:</h3>
+<ul><li>That VIREON can find real methodological problems in published papers (Study C: 0 V2 findings in 3 experiments)</li></ul><ul><li>That VIREON is reproducible across machines (BLAS not pinned, cross-machine unverified)</li></ul><ul><li>That the README claims are accurate ("solves the reproducibility crisis," "22 native algorithms," "Adversarial Digital Twins")</li></ul><ul><li>That the evidence bundle captures all necessary provenance (git commit not captured, BLAS not pinned)</li></ul><ul><li>That the scorecard is scientifically validated (weights are heuristic, no empirical justification)</li></ul><ul><li>That the MCP server works with real AI clients (untested with Claude Desktop/Cursor)</li></ul><ul><li>That the regulatory binder generates valid submissions (still a stub)</li></ul>
+<h3>Evidence required to move VIREON to the next level:</h3>
+<ol><li><strong>At least one V3 finding</strong> (VIREON detects a real methodological problem, independently confirmed by an adjudicator who didn't build VIREON)</li><li><strong>Cross-machine reproduction</strong> (same spec + seed on two different machines → same SHA-256 hash)</li><li><strong>External researcher usage</strong> (at least one researcher who is not the author successfully uses VIREON and publishes results)</li><li><strong>Documentation accuracy</strong> (README, API health, ADR status, version strings all match implementation)</li><li><strong>Deprecation of redundant code</strong> (18 wrapper algorithm files moved to deprecated/)</li><li><strong>Peer review</strong> (the Study C protocol and results submitted to a venue like Journal of Neural Engineering or NeuroImage)</li></ol>
+<p>Until these are achieved, VIREON is a promising research prototype with a working evidence layer and demonstrated fault-detection capability, but it is not yet a validated research instrument.</p>
+
+</body>
+</html>
